@@ -1,0 +1,15 @@
+nav ul{
+    display: flex;
+    padding: 0;
+    flex-wrap: wrap;
+}
+nav li {
+  flex: 1;
+}
+nav li a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}   

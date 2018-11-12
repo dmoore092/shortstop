@@ -1,0 +1,128 @@
+/*ITCSS CSS layered from general to specific */
+
+/*GENERIC LAYER */
+*{
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*ELEMENTS LAYER - HTML Tags*/
+body{
+    background-image: url(https://cdn4.sportngin.com/attachments/background_graphic/9705/8030/siteBackground.jpg);
+    background-position: 50% 9%;
+    font-family: "Arial", Helvetica, sans-serif;
+    position:absolute;
+    min-height: 100%;
+}
+
+input, button, select{
+    width: 100%;
+    border: 2px solid;
+    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+h3{
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+ul{
+    width: 100%;
+}
+li{
+    display: inline-block;
+    margin: 0 0 0 0;
+    margin-top: 10px;
+}
+
+li > a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+
+}
+a:hover{
+    background-color: #bb0a1e;
+}
+#nav{
+    height: 37px;
+    background: rgba(0, 0, 0, 0.8);
+}
+#nav ul{
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    text-align: center;
+    margin-right: 10px;
+    padding-right: 20px;
+}
+#nav li{
+    margin-bottom: 15px;
+    border-right: 1px solid #bbb;
+}
+#current{
+    text-decoration: underline;
+}
+footer{
+    clear: both;
+}
+/*COMPONENTS LAYER CSS ID's and Classes*/
+.span:first-of-type{/*form labels*/
+    display: inline-block;
+    width: 180px;
+}
+.button{
+    background-color: #bb0a1e;
+    color: white;
+}
+
+#logo{
+    clear: both;
+    margin-left: 5.5%;
+}
+#top-bar{
+    background-color: #23282b;
+    border-bottom: 2px solid red;
+    height: 39px;
+}
+#move-login{
+    float: right;
+    position: relative;
+    bottom: 28px;
+    right: 20px;
+}
+#center-area{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+#content, footer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 56%;
+    padding: 25px;
+    margin-left: 2%;
+}
+#body-main{
+    background-color: white;
+    padding: 15px;
+    width: 77%;
+    margin-left: 11%;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+section{
+    margin-bottom: 30px;
+}
+aside{
+    float: right;
+    margin-right: 4%;
+    margin-top: 20px;
+}
+

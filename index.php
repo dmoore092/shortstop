@@ -7,7 +7,7 @@
 <html lang="en">
     <head>
         <title>Athletic Prospects</title>
-        <link rel="stylesheet" type="text/css" href="main.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -47,9 +47,9 @@
                     <p> ARTICLE - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur quis risus nec accumsan. Curabitur varius sapien quam, fringilla tristique leo pellentesque et. In lorem neque, ultrices at egestas quis, interdum nec purus. Nunc commodo tincidunt arcu et consectetur. Morbi iaculis posuere odio vel aliquet. In porta mattis consectetur. Donec vehicula, ante eu cursus gravida, libero sapien placerat neque, quis luctus ipsum est eget felis. Morbi efficitur nisl nec odio euismod, nec varius lorem suscipit. Sed erat lectus, sagittis nec velit eu, bibendum luctus magna. Etiam vehicula enim vel odio cursus commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur quis risus nec accumsan. Curabitur varius sapien quam, fringilla tristique leo pellentesque et. In lorem neque, ultrices at egestas quis, interdum nec purus. Nunc commodo tincidunt arcu et consectetur.</p>
                 </article>
                 </div><!-- end of #content -->
-            </div><!-- end of #body-main -->
-    </body>
-    <footer>
+            <footer>
         <p>&copy; 2018 Athletic Prospects</p>
     </footer>
+            </div><!-- end of #body-main -->
+    </body>
 </html

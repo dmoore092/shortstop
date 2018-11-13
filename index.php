@@ -28,13 +28,18 @@
                         }
                     }
                 </script>
-            <div id="search">
+            <div id="big-login">
+                <ul>
+                    <li id="big-login-button"><a href="login.php">Login</a></li>
+                </ul>
+            </div><!--
+    -->     <div id="search">
                 <input id="textbox" type="text" size="30">
                 <input id="button" type="button" value="Search">
             </div>
                 <div class="nav">
                     <ul>
-                        <li id="login"><a href="login.php">Login</a></li>
+                        <li id="mobile-login"><a href="login.php">Login</a></li>
                         <li id="current"><a href="#">Home</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Male Athletes</a></li>
@@ -43,7 +48,7 @@
                         <li><a href="createaccount.php">Registration</a></li>
                     </ul><!-- end of #top-bar -->
                 </div>
-            <div id="logo"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo"></div>
+            <div id="logo"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo-img"></div>
         </header>
         <div id="body-main">
             <div id="center-area">
@@ -57,11 +62,11 @@
                 </section>
                 <article>
                     <p> ARTICLE - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur quis risus nec accumsan. Curabitur varius sapien quam, fringilla tristique leo pellentesque et. In lorem neque, ultrices at egestas quis, interdum nec purus. Nunc commodo tincidunt arcu et consectetur. Morbi iaculis posuere odio vel aliquet. In porta mattis consectetur. Donec vehicula, ante eu cursus gravida, libero sapien placerat neque, quis luctus ipsum est eget felis. Morbi efficitur nisl nec odio euismod, nec varius lorem suscipit. Sed erat lectus, sagittis nec velit eu, bibendum luctus magna. Etiam vehicula enim vel odio cursus commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras efficitur quis risus nec accumsan. Curabitur varius sapien quam, fringilla tristique leo pellentesque et. In lorem neque, ultrices at egestas quis, interdum nec purus. Nunc commodo tincidunt arcu et consectetur.</p>
-                </article>
-                </div><!-- end of #content -->
+                </article>   
+            </div><!-- end of #content -->
             <aside>
                     <img src="https://via.placeholder.com/300x500" >
-                </aside>
+                </aside> 
             <footer>
                 <p>&copy; 2018 Athletic Prospects</p>
             </footer>

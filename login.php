@@ -5,16 +5,8 @@
       $templinkpath = "";
       session_start();
 ?>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="main.css" />
-        <meta http-equiv="content-type" content="text/php; charset=utf-8" />
-
-        <title>Sign Up</title>
-    </head>
-    <body>
-        <div id="header"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo"></div>
-        <div id="main-body">
+<?php include('assets/inc/header.inc.php'); ?>
+        <div id="body-main">
             <form id="player-form"
                          method = "POST"
                          action= ""
@@ -83,6 +75,4 @@
                 }
             ?> <!-- sets username in a session variable for use in other pages-->
             </form>
-        </div><!-- end of #main-body -->        
-    </body>
-</html>
+            <?php include('assets/inc/footer.inc.php'); ?>

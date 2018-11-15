@@ -4,16 +4,8 @@
       $linkpath = "";
       $templinkpath = "";
 ?>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="main.css" />
-        <meta http-equiv="content-type" content="text/php; charset=utf-8" />
-
-        <title>Create your Account</title>
-    </head>
-    <body>
-        <div id="header"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo"></div>
-        <div id="main-body">
+<?php include("assets/inc/header.inc.php"); ?>
+        <div id="body-main">
             <form id="player-form"
                          method = "POST"
                          action= ""
@@ -24,8 +16,8 @@
                             <input type="text"
                                    id = "username"
                                    name= "username"
-                                   size = "50"
-                                   maxlength = "50"
+                                   size = "31"
+                                   maxlength = "150"
                                    placeholder = "Choose a username"
                                    value="samiam"
                                    onclick="" />
@@ -33,10 +25,10 @@
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="password"
-                                   id = "password"
+                                   class = "btn-password"
                                    name= "password"
-                                   size = "50"
-                                   maxlength = "50"
+                                   size = "31"
+                                   maxlength = "150"
                                    placeholder = "password"
                                    value="samiam"
                                    onclick="" />
@@ -44,9 +36,9 @@
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="password"
-                                   id = "retypepassword"
+                                   class = "btn-password"
                                    name= "retypepassword"
-                                   size = "50"
+                                   size = "31"
                                    maxlength = "50"
                                    placeholder = "Retype Your Password"
                                    value="samiam"
@@ -56,9 +48,9 @@
                                value="Create Account"
                                name = "btnCreate"
                                class="button"
-                               id="btnCreate"/>
+                               id="btn-create-account"/>
                 <?php
-                    $mysqli = mysqli_connect("127.0.0.1", "root", "", "sports");
+                    $mysqli = mysqli_connect("localhost", "root", "root", "sports");
                     //CONNECT TO DATABASE
                     if(!$mysqli){
                         echo "connection error: " . mysqli_connect_error();

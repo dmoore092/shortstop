@@ -99,7 +99,32 @@ ul{
     /* white navicon */
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHMAAABkCAMAAACCTv/3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////5ubmueBsSwAAAAJ0Uk5T/wDltzBKAAAAPklEQVR42uzYQQ0AAAgDseHfNC4IyVoD912WAACUm3uampqampqamq+aAAD+IVtTU1NTU1NT0z8EAFBsBRgAX+kR+Qam138AAAAASUVORK5CYII=);
 }
-
+/*login.php part*/
+#player-form{
+    width: 70%;
+    margin: auto;
+  /*  background-color: #bb0a1e; */
+    padding: 60px;
+    border: 2px solid black;
+    border-radius: 5px;
+    
+}
+#username, .btn-password{ /*login.php*/
+    height: 30px;
+    border-radius: 5px;
+    font-size: 1.4em;
+    margin: 15px 0px;
+    padding-left: 10px;
+}
+#btn-login, #btn-create-account, #btn-register{
+    padding:10px 25px; 
+    background:#fff; 
+    border: 2px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+/*end login.php part*/
 @media only screen and (min-width: 520px) {
     .navicon {display: none;}
     .nav{
@@ -183,6 +208,12 @@ ul{
         top: 10px;
         right: 20px;
     }
+    /*login.php part*/
+    #player-form{
+        max-width: 35%;
+        margin: auto;
+    }
+    /*end of login.php part*/
 
 } /* END OF min-width 520px @media */
 @media only screen and (min-width: 790px) {

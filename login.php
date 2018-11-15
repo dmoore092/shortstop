@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php $relpath= ""; $title="signup"; $page="signup";
+<?php $relpath= ""; $title="Login"; $page="login";
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
@@ -11,14 +11,14 @@
                          method = "POST"
                          action= ""
                          onsubmit = "" >
-                        <h3>Login</h3>
+                        <h2>Login</h2>
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="text"
                                    id = "username"
                                    name= "username"
-                                   size = "50"
-                                   maxlength = "50"
+                                   size = "25"
+                                   maxlength = "150"
                                    placeholder = "Enter Your Username"
                                    value="dmoore"
                                    onclick="" />
@@ -28,8 +28,8 @@
                             <input type="password"
                                    id = "password"
                                    name= "password"
-                                   size = "50"
-                                   maxlength = "50"
+                                   size = "25"
+                                   maxlength = "150"
                                    placeholder = "Password"
                                    value="1234"
                                    onclick="" />
@@ -39,19 +39,19 @@
                                name = "login"
                                class="button"
                                id="btn-login"/>
-                        <button class="button" onclick="location.href = 'createaccount.php';">Create Account</button>
+                        <button class="button" id="btn-register" onclick="location.href = 'createaccount.php';">Create Account</button>
                 <?php 
                   $_SESSION["username"] = $_POST["username"]; 
                   $password = $_POST['password'];
                   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                   
-                  $mysqli = mysqli_connect("127.0.0.1", "root", "", "sports");
+                  $mysqli = mysqli_connect("localhost", "root", "root", "sports");
                  //CONNECT TO DATABASE
                   if(!$mysqli){
                     echo "connection error: " . mysqli_connect_error();
                     die();
-                  }
-                //QUERY THE DATABASE for players to display
+                 }
+                //QUERY THE DATABASE for login
                 if(isset($_POST["login"])){
                     $query = "SELECT username, pass
                              FROM players;";
@@ -64,7 +64,7 @@
                             
                             if($row["username"] == $_SESSION["username"] && password_verify($password, $hashed_password)){
                                 //echo "<div id='comments'><p>Success!</p></div>";
-                                echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
+                                echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
                             }
                             else{
                                 echo "<div id='comments'><p>Nope</p></div>";

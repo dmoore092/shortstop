@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Athletic Prospects | <?php echo $title ?></title>
+        <title><?php echo $title ?> | Athletic Prospects</title>
       <!--  <link rel="stylesheet" type="text/css" href="assets/css/main.css" /> -->
         <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />

@@ -25,11 +25,13 @@
                     }
                 </script>
             <div id="big-login">
+                <a href="http://www.facebook.com" target="_blank"><img src="assets/img/fbbutton.png" alt="facebook" id="fb"></a>
+                <a href="http://www.twitter.com" target="_blank"><img src="assets/img/twitterbutton.png" alt="twitter" id="twit"></a>
                 <ul>
                     <li id="big-login-button"><a href="login.php">Login</a></li>
                 </ul>
-            </div><!--
-    -->     <div id="search">
+            </div><!-- #big-login end
+           --><div id="search">
                 <div id="search-container">
                     <input id="textbox" type="text" size="30">
                     <input id="button" type="button" value="Search">
@@ -38,12 +40,12 @@
                 <div class="nav">
                     <ul>
                         <li id="mobile-login"><a href="login.php">Login</a></li>
-                        <li id="current"><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Male Athletes</a></li>
-                        <li><a href="#">Female Athletes</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="createaccount.php">Registration</a></li>
+                        <li id="current"><a href="index.php">Home</a></li>
+                        <li><a href="about.php">About Us</a></li>
+                        <li><a href="mathletes.php">Male Athletes</a></li>
+                        <li><a href="fathletes.php">Female Athletes</a></li>
+                        <li><a href="services.php">Services</a></li>
+                        <li><a href="register.php">Register</a></li>
                     </ul><!-- end of #top-bar -->
                 </div>
             <div id="logo"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo-img"></div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php $relpath= ""; $title="createaccount"; $page="createaccount";
+<?php $relpath= ""; $title="Register"; $page="register";
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
@@ -10,7 +10,7 @@
                          method = "POST"
                          action= ""
                          onsubmit = "" >
-                        <h3>Create an Account</h3>
+                        <h2>Create an Account</h2>
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="text"
@@ -25,7 +25,7 @@
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="password"
-                                   class = "btn-password"
+                                   class = "password"
                                    name= "password"
                                    size = "31"
                                    maxlength = "150"
@@ -36,7 +36,7 @@
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="password"
-                                   class = "btn-password"
+                                   class = "password"
                                    name= "retypepassword"
                                    size = "31"
                                    maxlength = "50"

@@ -17,7 +17,7 @@
                             <input type="text"
                                    id = "username"
                                    name= "username"
-                                   size = "25"
+                                   size = "28"
                                    maxlength = "150"
                                    placeholder = "Enter Your Username"
                                    value="dmoore"
@@ -26,9 +26,9 @@
                         <p>
                             <!-- <span class="span">First Name:* &nbsp; </span> -->
                             <input type="password"
-                                   id = "password"
+                                   class = "password"
                                    name= "password"
-                                   size = "25"
+                                   size = "28"
                                    maxlength = "150"
                                    placeholder = "Password"
                                    value="1234"
@@ -39,7 +39,7 @@
                                name = "login"
                                class="button"
                                id="btn-login"/>
-                        <button class="button" id="btn-register" onclick="location.href = 'createaccount.php';">Create Account</button>
+                        <button class="button" id="btn-register" onclick="location.href = 'register.php';">Create Account</button>
                 <?php 
                   $_SESSION["username"] = $_POST["username"]; 
                   $password = $_POST['password'];

@@ -45,7 +45,7 @@
                   $password = $_POST['password'];
                   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
                   
-                  $mysqli = mysqli_connect("localhost", "root", "root", "sports");
+                  $mysqli = mysqli_connect("localhost", "root", "", "sports");
                  //CONNECT TO DATABASE
                   if(!$mysqli){
                     echo "connection error: " . mysqli_connect_error();

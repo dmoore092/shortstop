@@ -1,0 +1,35 @@
+/*ITCSS CSS layered from general to specific */
+/*APPLIES TO profile.php*/
+/*GENERIC LAYER */
+
+#services-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+} 
+.services{
+    width: 100%;
+}
+.services li{
+    margin-top: 15px;
+    border-bottom: 1px solid black;
+}
+h3{
+    margin-top: 25px;
+}
+#btn-create-account{
+    padding:10px 25px; 
+    background:#fff; 
+    border: 2px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 40%;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+@media only screen and (min-width: 520px){
+    .services{
+        width: 33%;
+    }
+}

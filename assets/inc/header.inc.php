@@ -4,7 +4,9 @@
     <head>
         <title><?php echo $title ?> | Athletic Prospects</title>
       <!--  <link rel="stylesheet" type="text/css" href="assets/css/main.css" /> -->
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/<?php echo $page ?>.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--icon library -->
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Dale Moore">
@@ -12,7 +14,7 @@
     <body>
 <header>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-            <div style="background-color:black;"><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
+            <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
                 <script>
                     function openNav(){
                         var nav = document.querySelector('.nav');
@@ -25,8 +27,12 @@
                     }
                 </script>
             <div id="big-login">
-                <a href="http://www.facebook.com" target="_blank"><img src="assets/img/fbbutton.png" alt="facebook" id="fb"></a>
-                <a href="http://www.twitter.com" target="_blank"><img src="assets/img/twitterbutton.png" alt="twitter" id="twit"></a>
+                <div id="social-media">
+                    <span id="followUS">Follow US </span>
+                     <a href="http://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+                    <a href="http://www.twitter.com" target="_blank" class="fa fa-twitter"</a>
+                    <a href="http://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
+                </div>
                 <ul>
                     <li id="big-login-button"><a href="login.php">Login</a></li>
                 </ul>

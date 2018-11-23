@@ -1,122 +1,299 @@
 /*ITCSS CSS layered from general to specific */
-
+/*APPLIES TO ALL PAGES*/
 /*GENERIC LAYER */
 *{
     margin: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+    padding: 0;
 }
+
 /*ELEMENTS LAYER - HTML Tags*/
+
+/* Mobile First */
+header{
+    width: 100%;
+}
 body{
     background-image: url(https://cdn4.sportngin.com/attachments/background_graphic/9705/8030/siteBackground.jpg);
-    background-position: 50% 9%;
+    background-position: 50% 1.5%;
     font-family: "Arial", Helvetica, sans-serif;
     position:absolute;
     min-height: 100%;
-}
-
-footer{
-    clear: both;
-}
-input, button, select{
-    width: 100%;
-    border: 2px solid;
-    border-radius: 4px;
-    padding: 12px;
-    margin-bottom: 10px;
-    font-size: 1em;
-}
-
-h3{
-    font-size: 2em;
-    margin-bottom: 10px;
-    text-align: center;
+    width: 100vw;
 }
 ul{
-    width: 100%;
+    list-style-type: none;
 }
-li{
-    display: inline-block;
-    margin: 0 0 0 0;
-    margin-top: 10px;
+hr{
+    margin: 15px 0;
+}
+#body-main{
+    background-color: white;
+    padding: 15px;
+    width: 93%;
+    margin: auto;
+    margin-bottom: 20px;
+    height: 100%;
+}
+#center-area img{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 15px;
+}
+#big-login{
+    display: none;
+}
+.nav{
+    display: none;
+    overflow: hidden;
+    background-color: white;
+    position: relative; 
+    border-bottom: 2px solid #bb0a1e;
 }
 
-li > a{
+.nav li{
+    background-color: black;
+    text-align: left;
+    padding-left: 10px;
+    
+}
+.nav a{
+  color: white;
+  padding: 14px 0px;
+  text-decoration: none;
+  font-size: 17px;
+  display: inline-block;
+}
+#search{
+    background-color: black;
+    border-bottom: 2px solid #bb0a1e;
+}
+#search #textbox{
+    width: 76%;
+}
+#search #button{
+    color: white;
+    background-color: black;
+    padding: 0px;
+    text-align: left;
+    width: 20%;
+    border: none;
+    
+}
+#textbox, #button{
+    height: 30px;
+    font-size: 17px;
+}
+.navicon {
+    position: relative;
+    font-family: sans-serif;
     color: white;
     text-decoration: none;
-    text-align: center;
-    padding: 10px;
-
-}
-a:hover{
-    background-color: #bb0a1e;
-}
-section{
-    margin-bottom: 30px;
-}
-aside{
-    float: right;
-    margin-right: 4%;
-    margin-top: 20px;
-}
-#nav{
-    height: 37px;
-    background: rgba(0, 0, 0, 0.8);
-}
-#nav ul{
-    display: flex;
-    justify-content: flex-start;
-    overflow: hidden;
-    text-align: center;
-    margin-right: 10px;
-    padding-right: 20px;
-}
-#nav li{
-    margin-bottom: 15px;
-    border-right: 1px solid #bbb;
-}
-#current{
-    text-decoration: underline;
-}
-/*COMPONENTS LAYER CSS ID's and Classes*/
-.span:first-of-type{/*form labels*/
+    background: black;
+    border-radius: 4px;
+    padding: .5em 0 .5em 2em;
     display: inline-block;
-    width: 180px;
 }
-.button{
-    background-color: #bb0a1e;
-    color: white;
-}
-
-#logo{
-    clear: both;
-    margin-left: 5.5%;
-}
-#top-bar{
-    background-color: #23282b;
-    border-bottom: 2px solid red;
-    height: 39px;
-}
-#move-login{
-    float: right;
-    position: relative;
-    bottom: 28px;
-    right: 20px;
-}
-#center-area{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-#content{
-    display: flex;
-    flex-wrap: wrap;
-    width: 56%;
-    padding: 25px;
-    margin-left: 2%;
-    float: left;
+.navicon:before {
+    position: absolute;
+    top: 50%;
+    left: .75em;
+    width: .8em;
+    height: .8em;
+    margin-top: -.4em;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    /* white navicon */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHMAAABkCAMAAACCTv/3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////5ubmueBsSwAAAAJ0Uk5T/wDltzBKAAAAPklEQVR42uzYQQ0AAAgDseHfNC4IyVoD912WAACUm3uampqampqamq+aAAD+IVtTU1NTU1NT0z8EAFBsBRgAX+kR+Qam138AAAAASUVORK5CYII=);
 }
 
+@media only screen and (min-width: 520px) {
+    .navicon {display: none;}
+    #body-main, #big-login>ul, #search-container, .nav>ul{
+      /*  width: 86vw; */
+        max-width: 1000px;
+        margin: auto;
+    }
+    #social-media{
+        width: 1000px;
+        margin: auto;
+    }
+    #followUS{
+        color: white;
+        margin-left: 15px;
+    }
+    .fa{
+        padding: 11px;
+        font-size: 30px;
+        width: 30px;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 3px;
+    }
+    .fa-facebook{
+        background: #3b5998;
+        color: white;
+    }
+    .fa-twitter{
+        background: #55ACEE;
+        color: white;
+    }
+    .fa-instagram{
+        background: #125688;
+        color: white;
+    }
+    #search-container{
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        margin-right: -70px;
+    }
+    #search{
+        display: block;
+        background-color: #bb0a1e;
+        padding: 5px 0;
+    }
 
+    #search #button{
+        background-color: black;
+        color: white;
+        width: auto;
+        padding: 0px 10px;
+        border-radius: 0px 4px 4px 0px;
+        border-color: black;
+    }
+    #search #textbox{
+        width: 30%;
+        border-radius: 4px 0 0 4px;
+        border-color: #bb0a1e;
+    }
+    .nav{
+        clear: both;
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.8);
+        width: 100%;
+        height: auto;
+        padding: 0;
+    }
+    .nav ul{
+        display: flex;
+        justify-content: flex-start;
+
+    }
+    .nav li{
+        word-wrap: break-word;
+        white-space: normal;
+      /*  border-right: 1px solid #bbb; */
+        font-size: 10px;
+        text-align: center;
+        padding-right: 10px;
+    }
+    .nav a{
+        padding: 10px 6px;
+    }
+    .nav a:hover{
+        background-color: #bb0a1e;
+    }
+    #center-area img{
+        width: 40%;
+        height: 40%;
+        margin-bottom: 15px;
+    }
+    section, #center-area{
+        width: 70%;
+        margin: auto;
+    }
+    #mobile-login{
+        display: none;
+    }
+    #big-login{
+        height: 40px;
+        width: 100%;
+        background-color: #36454f;
+        display: block;
+        
+    }
+    #big-login a{
+        color: white;
+        text-decoration: none;  
+        font-size: 17px;
+        margin-left: 15px;
+    }
+    #fb{
+        clear:both;
+        margin-left: 10%;
+    }
+    #big-login-button{
+        float: right;
+        position: relative;
+        bottom: 27px;
+    }
+
+} /* END OF min-width 520px @media */
+@media only screen and (min-width: 790px) {
+    
+    .nav li{
+        border-right: none;
+    }
+    
+    .nav li:after { /*Creates the vertical line next to nav elements*/
+        content: ""; /* This is necessary for the pseudo element to work. */ 
+        display: inline; /* This will put the pseudo element on its own line. */
+        margin-right: 0 auto; /* This will center the border. */
+        width: 80%; /* Change this to whatever width you want. */
+        padding-right: 10px; /* This creates some space between the element and the border. */
+        border-right: 1px solid #bbb; /* This creates the border. Replace black with whatever color you want. */
+    }
+}/* END OF min-width 790px @media */
+
+@media only screen and (min-width: 1000px) {
+
+    #center-area{
+        display:block;
+        justify-content: space-evenly;
+        width: 100%;
+        margin-left: 0;
+    }
+    #content{
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+    }
+    #logo{
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+    }
+    section, article{
+        width: 100%;
+        margin: 15px 0px;
+        
+
+    }
+    aside{
+        float: right;
+        max-width: 30%;
+        max-height: 30%;
+        margin-right: 9.5%;
+        margin-top: 10px;
+    }
+    footer{
+        clear: both;
+    }
+    #center-area, #content{
+        padding-left: 10%;
+    }
+
+}/* END OF min-width 1000px @media */
+
+
+/*COMPONENTS LAYER CSS ID's and Classes*/
+    
+#logo, img{
+    max-width: 100%;
+    max-height: 100%;
+}
+section, article{
+    margin-bottom: 10px;
+}

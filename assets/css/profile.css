@@ -1,0 +1,53 @@
+/*ITCSS CSS layered from general to specific */
+/*APPLIES TO profile.php*/
+/*GENERIC LAYER */
+ .info-box li, #reference-container li{
+        margin: 10px 0;
+        list-style-type: none;
+    }
+.attributes{
+    color: #bb0a1e;
+}
+.references{
+    border-bottom: 1px solid black;
+}
+@media only screen and (min-width: 520px) {
+    #profile-area{
+        display:flex;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+        figure{
+        float: left;
+        width: 35%;
+        height: 35%;
+    }
+    h3{
+        margin-top: 15px;
+    }
+    #info-box-container{
+        clear: both;
+        float: right;
+        display: flex;
+        width: 60%;
+        margin-left: 2%;
+    }
+    .info-box, .references{
+        max-width: 50%;
+        margin: 0 25px 0 0;
+    }
+
+    #videos{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
+    #reference-container{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .references{
+    border-bottom: none;
+}
+}

@@ -1,0 +1,36 @@
+/*ITCSS CSS layered from general to specific */
+/*APPLIES TO login.php*/
+/*GENERIC LAYER */
+
+/*login.php part*/
+#player-form{
+    width: 70%;
+    margin: auto;
+    padding: 60px;
+   /* border: 2px solid black; */
+    border-radius: 5px;   
+}
+#username, .password{ /*login.php*/
+    height: 30px;
+    border-radius: 5px;
+    font-size: 1.4em;
+    margin: 15px 0px;
+    padding-left: 10px;
+}
+#player-form>h2{
+    text-align: center;
+}
+#btn-login, #btn-create-account, #btn-register{
+    padding:10px 25px; 
+    background:#fff; 
+    border: 2px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+@media only screen and (min-width: 520px) {
+        #player-form{
+        max-width: 35%;
+        margin: auto;
+    }
+}

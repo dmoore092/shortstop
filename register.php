@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<?php $relpath= ""; $title="Register"; $page="register";
+
+<?php $relpath= ""; $title="Register"; $page="login";
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
+    //$page is labelled login for linking purposes for css
 ?>
 <?php include("assets/inc/header.inc.php"); ?>
         <div id="body-main">

@@ -3,7 +3,8 @@
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
-      session_start();
+      
+      //session_start();
 ?>
 <?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">
@@ -44,10 +45,12 @@
                   $_SESSION["username"] = $_POST["username"]; 
                   $password = $_POST['password'];
                   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                  
+                  //$password = '1234';
+                  //var_dump($password);
+                  //var_dump($hashed_password);
                   $mysqli = mysqli_connect("localhost", "root", "root", "sports");
-                //password on prod is 1234
-                //paswword on laptop is root
+                //DB password on prod is 1234
+                //DB paswword on laptop is root
                  //CONNECT TO DATABASE
                   if(!$mysqli){
                     echo "connection error: " . mysqli_connect_error();
@@ -58,19 +61,20 @@
                     $query = "SELECT username, pass
                              FROM players;";
                     $result = mysqli_query($mysqli, $query);
-                    echo "<div id='display-players'>";
                     if($result > 0){
                         while($row = mysqli_fetch_assoc($result)){
                             //$passwordCheck = $row["pass"];
-                            echo "<div id='comments'><p>".$_SESSION["username"]."</p></div>";
+                            //echo "<div><p>".$_SESSION["username"]."</p><p>".$_POST["password"]."</p></div>";
                             
-                            if($row["username"] == $_SESSION["username"] && password_verify($password, $hashed_password)){
-                                //echo "<div id='comments'><p>Success!</p></div>";
-                                echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
+                            if($row["username"] == $_SESSION["username"] && password_verify($password, $row['pass'])){
+                                echo "<div id='comments'><p>Success!</p></div>";
+                                //echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
                             }
                             else{
                                 echo "<div id='comments'><p>Nope</p></div>";
-                                var_dump(password_verify("1234", $hashed_password));
+                                echo password_verify($row['pass'], $hashed_password);
+
+                                //var_dump(password_verify("1234", $hashed_password));
                             }
                         }
                     }

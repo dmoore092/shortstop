@@ -36,8 +36,8 @@
                 $state      =  htmlentities(strip_tags(trim($_POST["state"])));
                 $zip        =  htmlentities(strip_tags(trim($_POST["zip"])));
                 $highschool = htmlentities(strip_tags(trim($_POST["highschool"])));
-                $height     =  htmlentities(strip_tags(trim($_POST["height"])));
                 $weight     =  htmlentities(strip_tags(trim($_POST["weight"])));
+                $height     =  htmlentities(strip_tags(trim($_POST["height"])));
                 $gradyear   =  htmlentities(strip_tags(trim($_POST["grad-year"])));
                 $sport      =  htmlentities(strip_tags(trim($_POST["sport"])));
                 $primaryposition    =  htmlentities(strip_tags(trim($_POST["primary-position"])));

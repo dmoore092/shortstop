@@ -70,6 +70,7 @@ hr{
 #search{
     background-color: black;
     border-bottom: 2px solid #bb0a1e;
+    margin-left: 12px;
 }
 #search #textbox{
     width: 76%;
@@ -233,6 +234,7 @@ hr{
         position: relative;
         bottom: 27px;
     }
+
 
 } /* END OF min-width 520px @media */
 @media only screen and (min-width: 790px) {

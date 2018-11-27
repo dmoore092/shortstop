@@ -10,8 +10,8 @@
                   method = "POST"
                   action= ""
                   onsubmit = "" >
-                <div id="test">
-                <h3>Player Info</h3>
+                <h1>Player Info</h1>
+                <div id="refs-container">
                 <p>
                 <!-- <span class="span">First Name:* &nbsp; </span> -->
                     <input type="text"
@@ -161,7 +161,6 @@
                            value="<?= $_POST['zip']  ?>"
                            onclick="" />
                 </p>
-                </div><!-- end of test -->
                 <p>
                   <!--  <span class="span">High School:* &nbsp; </span> -->
                     <input type="text"
@@ -174,17 +173,6 @@
                            onclick="" />
                 </p>
                 <p>
-                  <!--  <span class="span">Height:* &nbsp; </span> -->
-                    <input type="text"
-                           id = "height"
-                           name= "height"
-                           size = "35"
-                           maxlength = "50"
-                           placeholder = "Your Height*"
-                           value="<?= $_POST['height']  ?>"
-                           onclick="" />
-                </p>
-                <p>
                   <!--  <span class="span">Weight:* &nbsp; </span> -->
                     <input type="text"
                            id = "weight"
@@ -193,6 +181,17 @@
                            maxlength = "50"
                            placeholder = "Your Weight*"
                            value="<?= $_POST['weight']  ?>"
+                           onclick="" />
+                </p>
+                <p>
+                  <!--  <span class="span">Height:* &nbsp; </span> -->
+                    <input type="text"
+                           id = "height"
+                           name= "height"
+                           size = "35"
+                           maxlength = "50"
+                           placeholder = "Your Height*"
+                           value="<?= $_POST['height']  ?>"
                            onclick="" />
                 </p>
                 <p>
@@ -283,18 +282,27 @@
                            value="<?= $_POST['act']  ?>"
                            onclick="" />
                 </p>
+                                    </div><!-- end of test -->
                 <hr/>
                 <h3>Player Image and Video</h3>
-                <p>
-                    <span class="span">Upload Player Profile: &nbsp; </span>
-                    <input type="file" name="profile-pic" accept="image/*">
-                </p>
-                <p>
-                    <span class="span">Upload Video(Showcase): &nbsp; </span>
-                    <input type="file" name="showcase-vid" accept="videos/*">
-                </p>
+                <div id="refs">
+                    <p>
+                        <span class="span">Upload Player Profile Picture: &nbsp; </span>
+                        <input type="file" name="profile-pic" accept="image/*">
+                    </p>
+                    <p>
+                        <span class="span">Upload Video(Showcase): &nbsp; </span>
+                        <input type="file" name="showcase-vid" accept="videos/*">
+                    </p>
+                    <p>
+                        <span class="span">Upload Video(Showcase): &nbsp; </span>
+                        <input type="file" name="showcase-vid" accept="videos/*">
+                    </p>
+                </div><!-- end of refs -->
                 <hr/>
                 <h3>References</h3>
+                <div id="refs-container">
+                <div id="refs">
                 <p>Reference 1(Optional)</p>
                     <p>
                       <!--  <span class="span">First Name: &nbsp; </span> -->
@@ -351,6 +359,8 @@
                                value="<?= $_POST['ref1-phone']  ?>"
                                onclick="" />
                     </p>
+                    </div><!-- end of refs -->
+                <div id="refs">
                 <p>Reference 2(Optional)</p>
                     <p>
                       <!--  <span class="span">First Name: &nbsp; </span> -->
@@ -407,6 +417,9 @@
                                value="<?= $_POST['ref2-phone']  ?>"
                                onclick="" />
                     </p>
+                    </div><!-- end of refs -->
+                
+                <div id="refs">
                 <p>Reference 3(Optional)</p>
                     <p>
                      <!--   <span class="span">First Name: &nbsp; </span> -->
@@ -476,6 +489,66 @@
                         <option value="mentor1yr">Mentor Program 1 year - $1099</option>
                         <option value="mentor6mo">Mentor Program 6 months - $650</option>
                     </select>
+                </div><!-- end of refs -->
+                    <div id="refs" class="hide">
+                        <p>Reference 4(Optional)</p>
+                    <p>
+                     <!--   this whole section below is hidden forever -->
+                        <input type="text"
+                               id = "ref3-first-name"
+                               name = "ref3-first-name"
+                               size = "35"
+                               maxlength = "50"
+                               placeholder = "Reference 3 First Name"
+                               value="<?= $_POST['ref3-first-name']  ?>"
+                               onclick="" />
+                    </p>
+                    <p>
+                      <!--  <span class="span">Last Name: &nbsp; </span> -->
+                        <input type="text"
+                               id = "ref3-last-name"
+                               name = "ref3-last-name"
+                               size = "35"
+                               maxlength = "50"
+                               placeholder = "Reference 3 Last Name"
+                               value="<?= $_POST['ref3-last-name']  ?>"
+                               onclick="" />
+                    </p>
+                    <p>
+                      <!--  <span class="span">Job Title: &nbsp; </span> -->
+                        <input type="text"
+                               id = "ref3-job-title"
+                               name = "ref3-job-title"
+                               size = "35"
+                               maxlength = "50"
+                               placeholder = "Reference 3 Job Title"
+                               value="<?= $_POST['ref3-job-title']  ?>"
+                               onclick="" />
+                    </p>
+                    <p>
+                      <!--  <span class="span">Email: &nbsp; </span> -->
+                        <input type="email"
+                               id = "ref3-email"
+                               name = "ref3-email"
+                               size = "35"
+                               maxlength = "50"
+                               placeholder = "Reference 3 Email"
+                               value="<?= $_POST['ref3-email']  ?>"
+                               onclick="" />
+                    </p>
+                    <p>
+                        <!-- <span class="span">Phone Number: &nbsp; </span> -->
+                        <input type="text"
+                               id = "ref3-phone"
+                               name = "ref3-phone"
+                               size = "35"
+                               maxlength = "50"
+                               placeholder = "Reference 3 Phone Number"
+                               value="<?= $_POST['ref3-phone']  ?>"
+                               onclick="" />
+                    </p>
+                    </div><!-- end of hidden part -->
+                    </div><!-- end of test-container -->
                 <input type="submit"
                        value="Submit Form"
                        name = "submit"

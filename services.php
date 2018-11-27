@@ -5,52 +5,76 @@
 ?>
 <?php include("assets/inc/header.inc.php") ?>
         <div id="body-main">    
-            <h2>Services</h2>
+            <h1>Services</h1>
             <hr/>
             <div id="services-container">
-                <div class="services">
-                     <h3>Free Player Profile:</h3>
-                     <h4>Cost: Free</h4>
-                    <ul>
-                        <li>Upload Stats and References</li>
-                        <li>Unlimited Video Uploads</li>
-                        <li>Personal Statement</li>
-                        <li>Customized Player Profile</li>
-                    </ul>
-                </div>
-                <div class="services">
-                    <h3>HS/JUCO Athlete Profile</h3>
-                    <h4>Cost: $100/yr</h4>
-                    <ul>
-                        <li>Upload Stats and References</li>
-                        <li>Unlimited Video Uploads</li>
-                        <li>Personal Statement</li>
-                        <li>Customized Player Profile</li>
-                        <li>Recruiting Articles</li>
-                        <li>Bi-weekly Emails</li>
-                        <li>Communication Support(emails)</li>
-                        <li>Organization Tools</li>
-                        <li>Communication Tools</li>
-                    </ul>
-                </div>
-                <div class="services">
-                    <h3>Mentoring Program:</h3>
-                    <h4>Cost: $1099/yr or $650/ 6 months</h4>
-                    <ul>
-                        <li>Upload Stats and References</li>
-                        <li>Unlimited Video Uploads</li>
-                        <li>Personal Statement</li>
-                        <li>Customized Player Profile</li>
-                        <li>Recruiting Articles</li>
-                        <li>Bi-weekly Emails</li>
-                        <li>Communication Support(emails)</li>
-                        <li>Organization Tools</li>
-                        <li>Communication Tools</li>
-                        <li>Social Media Exposure</li>
-                        <li>Recruiting Articles</li>
-                        <li>Mentor Will Research Colleges/Athletic Information</li>
-                    </ul>
-                </div>
+                <table class="services">
+                    <tr>
+                        <th>Free Player Profile:<br/>Cost: Free</th>
+                        <th>HS/JUCO Athlete Profile<br/>Cost: $100/yr</th>
+                        <th>Mentoring Program:<br/>Cost: $1099/yr or $650/ 6 months</th>
+                    </tr> 
+                    <tr>
+                        <td>Upload Stats and References</td>
+                        <td>Upload Stats and References</td>
+                        <td>Upload Stats and References</td>
+                    </tr>
+                    <tr>
+                        <td>Unlimited Video Uploads</td>
+                        <td>Unlimited Video Uploads</td>
+                        <td>Unlimited Video Uploads</td>
+                    </tr>
+                    <tr>
+                        <td>Personal Statement</td>
+                        <td>Personal Statement</td>
+                        <td>Personal Statement</td>
+                    </tr>
+                    <tr>
+                        <td>Customized Player Profile</td>
+                        <td>Customized Player Profile</td>
+                        <td>Customized Player Profile</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Recruiting Articles</td>
+                        <td>Recruiting Articles</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Bi-weekly Emails</td>
+                        <td>Bi-weekly Emails</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Communication Support(emails)</td>
+                        <td>Communication Support(emails)</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Organization Tools</td>
+                        <td>Organization Tools</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Communication Tools</td>
+                        <td>Communication Tools</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Social Media Exposure</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Recruiting Articles</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Mentor Will Research Colleges/Athletic Information</td>
+                    </tr>
+            </table>
             </div><!-- end of #services-container -->
             <button id="btn-create-account" onclick="location.href='register.php'">Register</button>
 

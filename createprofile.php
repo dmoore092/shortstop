@@ -4,30 +4,20 @@
       $linkpath = "";
       $templinkpath = "";
 ?>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="/main.css" />
-        <meta http-equiv="content-type" content="text/php; charset=utf-8" />
-
-        <title>Sign Up</title>
-    </head>
-    <body>
-        <div id="header">
-            <img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo">
-        </div>
-        <div id="main-body">
+<?php include('assets/inc/header.inc.php'); ?>
+        <div id="body-main">
             <form id="player-form"
                   method = "POST"
                   action= ""
                   onsubmit = "" >
-                    
+                <div id="test">
                 <h3>Player Info</h3>
                 <p>
                 <!-- <span class="span">First Name:* &nbsp; </span> -->
                     <input type="text"
                            id = "firstname"
                            name= "firstname"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your First Name*"
                            value="<?= $_POST['firstname']  ?>"
@@ -38,7 +28,7 @@
                     <input type="text"
                            id = "lastname"
                            name= "lastname"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Last Name*"
                            value="<?= $_POST['lastname']  ?>"
@@ -49,7 +39,7 @@
                     <input type="email"
                            id = "email"
                            name= "email"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Email*"
                            value="<?= $_POST['email']  ?>"
@@ -60,7 +50,7 @@
                     <input type="text"
                            id = "cellphone"
                            name= "cellphone"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Cellphone*"
                            value="<?= $_POST['cellphone']  ?>"
@@ -71,7 +61,7 @@
                     <input type="text"
                            id = "homephone"
                            name= "homephone"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Home Phone*"
                            value="<?= $_POST['homephone']  ?>"
@@ -82,7 +72,7 @@
                     <input type="text"
                            id = "address"
                            name= "address"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Address*"
                            value="<?= $_POST['address']  ?>"
@@ -93,7 +83,7 @@
                     <input type="text"
                            id = "city"
                            name= "city"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your City*"
                            value="<?= $_POST['city']  ?>"
@@ -165,18 +155,19 @@
                     <input type="text"
                            id = "zip"
                            name= "zip"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Zip*"
                            value="<?= $_POST['zip']  ?>"
                            onclick="" />
                 </p>
+                </div><!-- end of test -->
                 <p>
                   <!--  <span class="span">High School:* &nbsp; </span> -->
                     <input type="text"
                            id = "highschool"
                            name= "highschool"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Highschool*"
                            value="<?= $_POST['highschool']  ?>"
@@ -187,7 +178,7 @@
                     <input type="text"
                            id = "height"
                            name= "height"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Height*"
                            value="<?= $_POST['height']  ?>"
@@ -198,7 +189,7 @@
                     <input type="text"
                            id = "weight"
                            name= "weight"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Weight*"
                            value="<?= $_POST['weight']  ?>"
@@ -209,7 +200,7 @@
                     <input type="text"
                            id = "grad-year"
                            name= "grad-year"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Graduation Year*"
                            value="<?= $_POST['grad-year']  ?>"
@@ -220,7 +211,7 @@
                     <input type="text"
                            id = "sport"
                            name= "sport"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Sport(s) -- CHANGE THIS"
                            value="<?= $_POST['sport']  ?>"
@@ -231,7 +222,7 @@
                     <input type="text"
                            id = "primary-position"
                            name= "primary-position"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Primary Position*"
                            value="<?= $_POST['primary-position']  ?>"
@@ -242,7 +233,7 @@
                     <input type="text"
                            id = "secondary-position"
                            name= "secondary-position"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Secondary Position*"
                            value="<?= $_POST['secondary-position']  ?>"
@@ -253,7 +244,7 @@
                     <input type="text"
                            id = "travel-team"
                            name= "travel-team"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your Trvel Team*"
                            value="<?= $_POST['travel-team']  ?>"
@@ -264,7 +255,7 @@
                     <input type="text"
                            id = "gpa"
                            name= "gpa"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your GPA*"
                            value="<?= $_POST['gpa']  ?>"
@@ -275,7 +266,7 @@
                     <input type="text"
                            id = "sat"
                            name= "sat"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your SAT Score"
                            value="<?= $_POST['sat']  ?>"
@@ -286,7 +277,7 @@
                     <input type="text"
                            id = "act"
                            name= "act"
-                           size = "50"
+                           size = "35"
                            maxlength = "50"
                            placeholder = "Your ACT Score"
                            value="<?= $_POST['act']  ?>"
@@ -310,7 +301,7 @@
                         <input type="text"
                                id = "ref1-first-name"
                                name = "ref1-first-name"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 1 First Name"
                                value="<?= $_POST['ref1-first-name']  ?>"
@@ -321,7 +312,7 @@
                         <input type="text"
                                id = "ref1-last-name"
                                name = "ref1-last-name"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 1 Last Name"
                                value="<?= $_POST['ref1-last-name']  ?>"
@@ -332,7 +323,7 @@
                         <input type="text"
                                id = "ref1-job-title"
                                name = "ref1-job-title"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 1 Job Title"
                                value="<?= $_POST['ref1-job-title']  ?>"
@@ -343,7 +334,7 @@
                         <input type="email"
                                id = "ref1-email"
                                name = "ref1-email"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 1 Email"
                                value="<?= $_POST['ref1-email']  ?>"
@@ -354,7 +345,7 @@
                         <input type="text"
                                id = "ref1-phone"
                                name = "ref1-phone"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 1 Phone Number"
                                value="<?= $_POST['ref1-phone']  ?>"
@@ -366,7 +357,7 @@
                         <input type="text"
                                id = "ref2-first-name"
                                name = "ref2-first-name"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 2 First Name"
                                value="<?= $_POST['ref2-first-name']  ?>"
@@ -377,7 +368,7 @@
                         <input type="text"
                                id = "ref2-last-name"
                                name = "ref2-last-name"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 2 Last Name"
                                value="<?= $_POST['ref2-last-name']  ?>"
@@ -388,7 +379,7 @@
                         <input type="text"
                                id = "ref2-job-title"
                                name = "ref2-job-title"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 2 Job Title"
                                value="<?= $_POST['ref2-job-title']  ?>"
@@ -399,7 +390,7 @@
                         <input type="email"
                                id = "ref2-email"
                                name = "ref2-email"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 2 Email"
                                value="<?= $_POST['ref2-email']  ?>"
@@ -410,7 +401,7 @@
                         <input type="text"
                                id = "ref2-phone"
                                name = "ref2-phone"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 2 Phone Number"
                                value="<?= $_POST['ref2-phone']  ?>"
@@ -422,7 +413,7 @@
                         <input type="text"
                                id = "ref3-first-name"
                                name = "ref3-first-name"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 3 First Name"
                                value="<?= $_POST['ref3-first-name']  ?>"
@@ -433,7 +424,7 @@
                         <input type="text"
                                id = "ref3-last-name"
                                name = "ref3-last-name"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 3 Last Name"
                                value="<?= $_POST['ref3-last-name']  ?>"
@@ -444,7 +435,7 @@
                         <input type="text"
                                id = "ref3-job-title"
                                name = "ref3-job-title"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 3 Job Title"
                                value="<?= $_POST['ref3-job-title']  ?>"
@@ -455,7 +446,7 @@
                         <input type="email"
                                id = "ref3-email"
                                name = "ref3-email"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 3 Email"
                                value="<?= $_POST['ref3-email']  ?>"
@@ -466,7 +457,7 @@
                         <input type="text"
                                id = "ref3-phone"
                                name = "ref3-phone"
-                               size = "50"
+                               size = "35"
                                maxlength = "50"
                                placeholder = "Reference 3 Phone Number"
                                value="<?= $_POST['ref3-phone']  ?>"
@@ -484,7 +475,7 @@
                         <option value="biweekly">Bi-weekly recruiting checklist and articles - $100/per year</option>
                         <option value="mentor1yr">Mentor Program 1 year - $1099</option>
                         <option value="mentor6mo">Mentor Program 6 months - $650</option>
-                
+                    </select>
                 <input type="submit"
                        value="Submit Form"
                        name = "submit"
@@ -499,8 +490,6 @@
                     
             <?php include "submit_profile.inc.php"; ?>
         </form>
-        </div><!-- end #main-body -->
-                
     </body>
     <footer>
         <div class="Footer">

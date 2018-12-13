@@ -1,30 +1,73 @@
 <?php
-    $_SESSION["username"] = "ddoug";
-    $mysqli = mysqli_connect("127.0.0.1", "root", "", "sports");
+    //session_start();
+    echo "<script>console.log('test')</script>";
+    $mysqli = mysqli_connect("127.0.0.1", "root", "root", "sports");
    //CONNECT TO DATABASE
     if(!$mysqli){
         echo "connection error: " . mysqli_connect_error();
         die();
     }
-    else{
-        echo "SUCCESS!";
-    }
-    //QUERY THE DATABASE for players to display
-    if(isset($_POST["getPlayers"])){
-        $query = "SELECT firstName, sport
-                         FROM players;";
+    //else{
+    //    echo "SUCCESS!";
+    //}
+    //QUERY THE DATABASE to populate fields
+
+        $query = "SELECT firstName, lastName, email, cellPhone, homePhone, address, city, state, zip, highschool, height, weight, gradyear, sport, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, ref1FirstName, ref1LastName, ref1Jobtitle, ref1Email, ref1Phone, ref2FirstName, ref2LastName, ref2Jobtitle, ref2Email, ref2Phone, ref3FirstName, ref3LastName, ref3Jobtitle, ref3Email, ref3Phone, persStatement, service
+                    FROM players
+                    WHERE username = '".$_SESSION["username"]."';"; 
+        
+       // var_dump($query);
         $result = mysqli_query($mysqli, $query);
-        $num_rows = mysqli_affected_rows($mysqli);
-        echo "<p>There are $num_rows players in the database.</p>";
-        echo "<div id='display-players'>";
-        if($result && $num_rows > 0){
+        //$num_rows = mysqli_affected_rows($mysqli);
+        //echo "<p>There are $num_rows players in the database.</p>";
+        //echo "<div id='display-players'>";
+        if($result){
             while($row = mysqli_fetch_assoc($result)){
-                echo "<div id='comments'>".$row["firstName"].": ".$row["sport"]."</div>";
+                $_SESSION['firstname']         = $row["firstName"];
+                $_SESSION['lastname']          = $row["lastName"];
+                $_SESSION['email']             = $row["email"];
+                $_SESSION['cellphone']         = $row["cellPhone"];
+                $_SESSION['homephone']         = $row["homePhone"];
+                $_SESSION['address']           = $row["address"];
+                $_SESSION['city']              = $row["city"];
+                $_SESSION['state']             = $row["state"];
+                $_SESSION['zip']               = $row["zip"];
+                $_SESSION['highschool']        = $row["highschool"];
+                $_SESSION['weight']            = $row["weight"];
+                $_SESSION['height']            = $row["height"];
+                $_SESSION['grad-year']         = $row["gradYear"];
+                $_SESSION['sport']             = $row["sport"];
+                $_SESSION['primary-position']  = $row["primaryPosition"];
+                $_SESSION['secondary-position']= $row["secondaryPosition"];
+                $_SESSION['travel-team']       = $row["travelTeam"];
+                $_SESSION['gpa']               = $row["gpa"];
+                $_SESSION['sat']               = $row["sat"];
+                $_SESSION['act']               = $row["act"];
+                $_SESSION['ref1-first-name']   = $row["ref1FirstName"];
+                $_SESSION['ref1-last-name']    = $row["ref1LastName"];
+                $_SESSION['ref1-job-title']    = $row["ref1JobTitle"];
+                $_SESSION['ref1-email']        = $row["ref1Email"];
+                $_SESSION['ref1-phone']        = $row["ref1Phone"];
+                $_SESSION['ref2-first-name']   = $row["ref2FirstName"];
+                $_SESSION['ref2-last-name']    = $row["ref2LastName"];
+                $_SESSION['ref2-job-title']    = $row["ref2JobTitle"];
+                $_SESSION['ref2-email']        = $row["ref2Email"];
+                $_SESSION['ref2-phone']        = $row["ref2Phone"];
+                $_SESSION['ref3-first-name']   = $row["ref3FirstName"];
+                $_SESSION['ref3-last-name']    = $row["ref3LastName"];
+                $_SESSION['ref3-job-title']    = $row["ref3JobTitle"];
+                $_SESSION['ref3-email']        = $row["ref3Email"];
+                $_SESSION['ref3-phone']        = $row["ref3Phone"];
+                $_SESSION['pers-statement']    = $row["PersStatement"];
+                $_SESSION['service']           = $row["service"];
+                
+               // var_dump($_POST["firstname"]);
             }
         }
-    }
-    //SEND COMMENT TO DATABASE
-            if(isset($_POST["submit"])){
+    
+//echo "<script>console.log('test')</script>";
+    //SEND attributes TO DATABASE
+            if(isset($_POST['submit'])){
                 //block cross-site scripting, html entities(apersand etc), trim white space
                 $firstname  = htmlentities(strip_tags(trim($_POST["firstname"])));
                 $lastname   = htmlentities(strip_tags(trim($_POST["lastname"])));
@@ -144,16 +187,15 @@
                             service  = '$service'
                             WHERE username = '" . $_SESSION["username"] . "';";
                             
-                            
                 //THIS WORKS
                 //$_SESSION["username"] = "ddave";
                 //$query = "INSERT INTO players(firstname)VALUES('dave')WHERE username = '" . $_SESSION["username"] . "';";
 
-                echo $query;
+                $_SESSION["query"] = "weight = ".$weight;
                 $result = mysqli_query($mysqli, $query);
                 $num_rows = mysqli_affected_rows($mysqli);
                 
-                echo "<p>$num_rows records inserted.</p>";
+               // echo "<p>$num_rows records inserted.</p>";
                 //echo "<script type='text/javascript'> document.location = 'signup.php'; </script>";
             }
         

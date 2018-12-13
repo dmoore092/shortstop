@@ -14,6 +14,8 @@ header{
 }
 body{
     background-image: url(https://cdn4.sportngin.com/attachments/background_graphic/9705/8030/siteBackground.jpg);
+    background-repeat: no-repeat;
+    background-color: black;
     background-position: 50% 1.5%;
     font-family: "Arial", Helvetica, sans-serif;
     position:absolute;
@@ -42,6 +44,22 @@ hr{
     width: 100%;
     height: 100%;
     margin-bottom: 15px;
+}
+.img-container{
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.index-image-overlay{
+    position: absolute;
+    text-decoration: none;
+    background-color: #bb0a1e;
+    color: white;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    width: 100%;
+    top: 75%;
+    left: 0%;
 }
 #big-login{
     display: none;
@@ -112,7 +130,31 @@ hr{
     /* white navicon */
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHMAAABkCAMAAACCTv/3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////5ubmueBsSwAAAAJ0Uk5T/wDltzBKAAAAPklEQVR42uzYQQ0AAAgDseHfNC4IyVoD912WAACUm3uampqampqamq+aAAD+IVtTU1NTU1NT0z8EAFBsBRgAX+kR+Qam138AAAAASUVORK5CYII=);
 }
+.btn-all-buttons{
+    padding:10px 25px; 
+    border: 2px solid black;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+  /*  margin-left: 40%;
+    margin-top: 25px;
+    margin-bottom: 15px; */
+    padding: 15px 45px;
+}
+.btn-all-buttons:hover{
+    background-color: #bb0a1e;
+    color: white;
+}
 
+/*COMPONENTS LAYER CSS ID's and Classes*/
+    
+#logo, img{
+    max-width: 100%;
+    max-height: 100%;
+}
+section, article{
+    margin-bottom: 10px;
+}
 @media only screen and (min-width: 520px) {
     .navicon {display: none;}
     #body-main, #big-login>ul, #search-container, .nav>ul{
@@ -158,6 +200,7 @@ hr{
         display: block;
         background-color: #bb0a1e;
         padding: 5px 0;
+        margin-left: 0;
     }
 
     #search #button{
@@ -200,10 +243,27 @@ hr{
     .nav a:hover{
         background-color: #bb0a1e;
     }
+    #center-area{
+        display: flex;
+        justify-content: space-between;
+    }
     #center-area img{
-        width: 40%;
-        height: 40%;
-        margin-bottom: 15px;
+        width: 95%;;
+    }
+    .img-container{
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+    .index-image-overlay{
+        position: absolute;
+        text-decoration: none;
+        background-color: #bb0a1e;
+        color: white;
+        padding: 20px 0px 25px 0px;
+        width: 95%;
+        top: 75%;
+        left: 2%;
     }
     section, #center-area{
         width: 70%;
@@ -234,7 +294,6 @@ hr{
         position: relative;
         bottom: 27px;
     }
-
 
 } /* END OF min-width 520px @media */
 @media only screen and (min-width: 790px) {
@@ -290,16 +349,30 @@ hr{
     #center-area, #content{
         padding-left: 10%;
     }
+    #center-area{
+        display: flex;
+        justify-content: space-between;
+        max-width: 80%;
+    }
+    #center-area img{
+        width: 95%;;
+    }
+    .img-container{
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+    .index-image-overlay{
+        position: absolute;
+        text-decoration: none;
+        background-color: #bb0a1e;
+        color: white;
+        padding: 20px 0px 25px 0px;
+        width: 95%;
+        top: 80%;
+        left: 2.5%;
+    }
 
 }/* END OF min-width 1000px @media */
 
 
-/*COMPONENTS LAYER CSS ID's and Classes*/
-    
-#logo, img{
-    max-width: 100%;
-    max-height: 100%;
-}
-section, article{
-    margin-bottom: 10px;
-}

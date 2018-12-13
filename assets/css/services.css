@@ -1,5 +1,5 @@
 /*ITCSS CSS layered from general to specific */
-/*APPLIES TO profile.php*/
+/*APPLIES TO services.php*/
 /*GENERIC LAYER */
 
 #services-container{
@@ -16,7 +16,13 @@ h1{
     margin-top: 25px;
     text-align: center;
 }
-#btn-create-account{
+#btnRegister{
+    background-color: #bb0a1e;
+    color: white;
+    width: 100%;
+    margin-top: 15px;
+}
+/* #btn-all-buttons{
     padding:10px 25px; 
     border: 2px solid black;
     cursor:pointer;
@@ -27,10 +33,10 @@ h1{
     margin-bottom: 15px;
     padding: 15px 45px;;
 }
-#btn-create-account:hover{
+#btn-all-buttons:hover{
     background-color: #bb0a1e;
     color: white;
-}
+}*/
 table, th, td {
     border: 1px solid black;
 }
@@ -43,5 +49,15 @@ th {
     color: white;
 }
 @media only screen and (min-width: 520px){
-   
+    #btnRegister{
+        background-color: white;
+        color: black;
+        width: 30%;
+        margin-top: 15px;
+        margin-left: 35%;
+    }
+    #btnRegister:hover{
+        background-color: #bb0a1e;
+        color: white;
+    }
 }

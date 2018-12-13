@@ -1,8 +1,10 @@
 
-<?php $relpath= ""; $title="Register"; $page="login";
-      $imgpath="";
-      $linkpath = "";
-      $templinkpath = "";
+<?php 
+        session_start();
+        $relpath= ""; $title="Register"; $page="login";
+        $imgpath="";
+        $linkpath = "";
+        $templinkpath = "";
     //$page is labelled login for linking purposes for css
 ?>
 <?php include("assets/inc/header.inc.php"); ?>
@@ -17,7 +19,7 @@
                             <input type="text"
                                    id = "username"
                                    name= "username"
-                                   size = "31"
+                                   size = "25"
                                    maxlength = "150"
                                    placeholder = "Choose a username"
                                    value="samiam"
@@ -28,7 +30,7 @@
                             <input type="password"
                                    class = "password"
                                    name= "password"
-                                   size = "31"
+                                   size = "25"
                                    maxlength = "150"
                                    placeholder = "password"
                                    value="samiam"
@@ -39,7 +41,7 @@
                             <input type="password"
                                    class = "password"
                                    name= "retypepassword"
-                                   size = "31"
+                                   size = "25"
                                    maxlength = "50"
                                    placeholder = "Retype Your Password"
                                    value="samiam"
@@ -48,7 +50,7 @@
                         <input type="submit"
                                value="Create Account"
                                name = "btnCreate"
-                               class="button"
+                               class="btn-all-buttons"
                                id="btn-create-account"/>
                 <?php
                     $mysqli = mysqli_connect("localhost", "root", "root", "sports");
@@ -77,9 +79,9 @@
                                     VALUES('$username','$hashed_password');";
                     
                         $result = mysqli_query($mysqli, $query);
-                        $num_rows = mysqli_affected_rows($mysqli);
-                        
-                        echo "<script type='text/javascript'> document.location = 'profile.php'; </script>";
+                        //$num_rows = mysqli_affected_rows($mysqli);
+                        $_SESSION["username"] = $username;
+                        echo "<script type='text/javascript'> document.location = 'createprofile.php'; </script>";
                         //echo "<p>$num_rows records created</p>"  
                         }
                         else{

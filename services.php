@@ -76,7 +76,7 @@
                     </tr>
             </table>
             </div><!-- end of #services-container -->
-            <button id="btn-create-account" onclick="location.href='register.php'">Register</button>
+            <button class="btn-all-buttons" id="btnRegister" onclick="location.href='register.php'">Register</button>
 
             
  <?php include("assets/inc/footer.inc.php") ?>

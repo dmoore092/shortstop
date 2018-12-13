@@ -11,6 +11,10 @@
 .references{
     border-bottom: 1px solid black;
 }
+#edit-img{
+    width: 20px;
+    height: auto;
+}
 @media only screen and (min-width: 520px) {
     #profile-area{
         display:flex;
@@ -49,5 +53,5 @@
     }
     .references{
     border-bottom: none;
-}
+    }
 }

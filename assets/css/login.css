@@ -20,17 +20,27 @@
 #player-form>h2{
     text-align: center;
 }
-#btn-login, #btn-create-account, #btn-register{
-    padding:10px 25px; 
-    background:#fff; 
-    border: 2px solid black;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+#btn-login, #btn-create-account{
+    margin-bottom: 10px;
+    width: 115%;
+    background-color: #bb0a1e;
+    color: white;
 }
 @media only screen and (min-width: 520px) {
-        #player-form{
+    #player-form{
         max-width: 35%;
         margin: auto;
+    }
+    #btn-login, #btn-create-account{
+        margin-bottom: 10px;
+        width: 85%;
+        background-color: white;
+        color: black;
+    }
+    #btn-login:hover, #btn-create-account:hover{
+        margin-bottom: 10px;
+        width: 85%;
+        background-color: #bb0a1e;
+        color: white;
     }
 }

@@ -1,5 +1,5 @@
-
-<?php $relpath= ""; $title="Home"; $page="home";
+<?php 
+      $relpath= ""; $title="Home"; $page="home";
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
@@ -15,8 +15,18 @@
                 </section>  
             </div><!-- end of #content -->
             <div id="center-area">
-                <img src="assets/img/freeprofile-large.png" >
-                <img src="assets/img/coaches-large.png" >
+                <div class="img-container"> 
+                    <img src="assets/img/freeprofile-large.png">
+                    <a href="login.php" class="index-image-overlay">
+                        <span>Parents/Athletes</span>
+                    </a>
+                </div>
+                <div class="img-container">
+                    <img src="assets/img/coaches-large.png" >
+                    <a href="login.php" class="index-image-overlay">
+                        <span>Coaches</span>
+                    </a>
+                </div> 
               <!--  <img src="assets/img/mentor-large.png" > -->
             </div>
             

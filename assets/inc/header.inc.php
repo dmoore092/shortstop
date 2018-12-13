@@ -35,12 +35,18 @@
                     <a href="http://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
                 </div>
                 <ul>
-                    <li id="big-login-button"><a href="login.php">Login</a></li>
+                    <?php // var_dump($_SESSION['logged_in']); ?>
+                    <?php if(isset($_SESSION['logged_in'])){ ?>
+                    <li id="big-login-button"><a class="link" href="logout.php">Logout</a></li>
+                    <?php }else{ ?>
+                    <li id="big-login-button"><a class="link" href="login.php">Login</a></li>
+                    <?php } ?>
+                   <!-- <li id="big-login-button"><a href="login.php">Login</a></li>-->
                 </ul>
             </div><!-- #big-login end
            --><div id="search">
                 <div id="search-container">
-                    <input id="textbox" type="text" size="30">
+                    <input id="textbox" type="text" size="30" name="search">
                     <input id="button" type="button" value="Search">
                 </div>
             </div>
@@ -48,6 +54,7 @@
                     <ul>
                         <li id="mobile-login"><a href="login.php">Login</a></li>
                         <li id="current"><a href="index.php">Home</a></li>
+                        <li><a href="profile.php">My Profile</a></li>
                         <li><a href="about.php">About Us</a></li>
                         <li><a href="mathletes.php">Male Athletes</a></li>
                         <li><a href="fathletes.php">Female Athletes</a></li>

@@ -17,7 +17,7 @@
         $isLoggedIn = $player->login($username, $password);
     }
     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
-        //echo "<h1>Logged in</h1>";
+        echo "<h1>Logged in</h1>";
         //var_dump($_SESSION['id']);
         //$id = $_SESSION['id'];
         header("Location: http://".$_SERVER["DOCUMENT_ROOT"] . "/profile.php?id={$_SESSION['id']}");

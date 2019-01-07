@@ -1,11 +1,10 @@
 <?php 
-      $relpath= ""; $title="Home"; $page="home";
+      $relpath= ""; $title="Home"; $page="main";
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
       session_start();
       //test
-      echo "test";
 ?>
 
         <?php include('assets/inc/header.inc.php'); ?>

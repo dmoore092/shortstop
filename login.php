@@ -5,7 +5,7 @@
       $linkpath = "";
       $templinkpath = "";
       
-      include $_SERVER["DOCUMENT_ROOT"] . "/classes/Player.PDO.class.php";
+      include($_SERVER["DOCUMENT_ROOT"] . "/classes/Player.PDO.class.php");
       $_SESSION['logged_in'] = 'false';
     if(isset($_POST["login"])){
         //echo "login called";
@@ -23,7 +23,7 @@
         header("Location: http://".$_SERVER["HTTP_HOST"] . "/profile.php?id={$_SESSION['id']}");
       }
 ?>
-<?php include($_SERVER["DOCUMENT_ROOT"] . 'assets/inc/header.inc.php'); ?>
+<?php include($_SERVER["DOCUMENT_ROOT"] . '/assets/inc/header.inc.php'); ?>
         <div id="body-main">
             <form id="player-form"
                          method = "POST"

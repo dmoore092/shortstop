@@ -34,4 +34,4 @@
             
 
 
-            <?php include('/assets/inc/footer.inc.php'); ?>
+            <?php include('assets/inc/footer.inc.php'); ?>

@@ -5,6 +5,7 @@
       $templinkpath = "";
       session_start();
       //test
+      echo "test";
 ?>
 
         <?php include('assets/inc/header.inc.php'); ?>

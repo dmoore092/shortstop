@@ -44,7 +44,21 @@
 		private $commitment;
 		private $service;
 		private $profileImage;
-
+		private $showcase1;
+		private $showcase2;
+		private $showcase3;
+		private $persontype;
+		private $college;
+		private $twitter;
+		private $instagram;
+		private $facebook;
+		private $website;
+		private $characteristics;
+		private $velocity;
+		private $sixtyyarddash;
+		private $home2first;
+		private $gpareq;
+		private $satactreq;
 		
 		/**
 		 * getId() - returns the User's ID
@@ -323,6 +337,111 @@
 		 */
 		public function getProfileImage(){
 			return $this->profileImage;
+		}
+
+		/**
+		 * getShowcase1() - returns the User's 1st showcase video
+		 */
+		public function getShowcase1(){
+			return $this->showcase1;
+		}
+
+		/**
+		 * getShowcase2() - returns the User's 2nd showcase video
+		 */
+		public function getShowcase2(){
+			return $this->showcase2;
+		}
+
+		/**
+		 * getShowcase3() - returns the User's 3rd showcase video
+		 */
+		public function getShowcase3(){
+			return $this->showcase3;
+		}
+
+		/**
+		 * getPersonType() - returns the User's persontype
+		 */
+		public function getPersonType(){
+			return $this->persontype;
+		}
+
+		/**
+		 * getCollege() - returns the coach's college
+		 */
+		public function getCollege(){
+			return $this->college;
+		}
+
+		/**
+		 * getTwitter() - returns the coach's twitter
+		 */
+		public function getTwitter(){
+			return $this->twitter;
+		}
+
+		/**
+		 * getInstagram() - returns the coach's instagram
+		 */
+		public function getInstagram(){
+			return $this->instagram;
+		}
+
+		/**
+		 * getFacebook() - returns the coach's facebook
+		 */
+		public function getFacebook(){
+			return $this->facebook;
+		}
+
+		/**
+		 * getWebsite() - returns the coach's website
+		 */
+		public function getWebsite(){
+			return $this->website;
+		}
+
+		/**
+		 * getChacteristics() - returns the coach's desires characteristics in a player
+		 */
+		public function getCharacteristics(){
+			return $this->characteristics;
+		}
+
+		/**
+		 * getVelocity() - returns the coach's desires velocity in a player
+		 */
+		public function getVelocity(){
+			return $this->velocity;
+		}
+
+		/**
+		 * getSixtyYardDash() - returns the coach's desires 60 yard dash
+		 */
+		public function getSixtyyardDash(){
+			return $this->sixtyyarddash;
+		}
+
+		/**
+		 * getHome2First() - returns the coach's desired home to 1st time
+		 */
+		public function getHome2First(){
+			return $this->home2first;
+		}
+
+		/**
+		 * getGpaReq() - returns the coach's desired gpa requirement
+		 */
+		public function getGpaReq(){
+			return $this->gpareq;
+		}
+
+		/**
+		 * getActSat() - returns the coach's desired act/sat scores
+		 */
+		public function getSatAct(){
+			return $this->satactreq;
 		}
 	}
 ?>

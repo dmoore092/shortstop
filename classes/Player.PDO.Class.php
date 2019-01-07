@@ -19,26 +19,111 @@
             $this->dbConn = $this->getConn();
 		}
 		
+		/*
+		* Searchs for players by their first or last name
+		*
+		*/
+		function searchPlayers($name){
+			if($name !== " "){
+			try{
+				 $name = "%".$name."%";
+						$data = array();
+						   $stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, email, sport, persontype FROM players WHERE name LIKE :name"); 
+						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
+						$stmt->execute();
+						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
+						while($databaseProjects = $stmt->fetch()){
+								$data[] = $databaseProjects;
+						}
+						return $data;
+					}
+					catch(PDOException $e){
+						echo $e->getMessage();
+						throw new Exception("Problem searching for players in the database.");
+					}
+			}
+			else{
+				header("Location: findProject.php");
+			}
+		}
 		/**
 		 * getUsersByRole() - returns an array of users from the database whose role matches that of the specified role
 		 */
-		function getUsersByRole($role){
+		function getPlayersByGender($gender){
+			//echo $gender;
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("select * from user where role = :role"); 
-                $stmt->bindParam("role",$role,PDO::PARAM_INT);    
+                $stmt = $this->dbConn->prepare("SELECT id, username, name, email, sport, persontype FROM players WHERE gender = :gender"); 
+                $stmt->bindParam("gender",$gender,PDO::PARAM_STR);    
                 $stmt->execute();
-                $stmt->setFetchMode(PDO::FETCH_CLASS,"User");
+                $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
                 while($databaseUser = $stmt->fetch()){
-                    $data[] = $databaseUser;
-                }
+					$data[] = $databaseUser;
+					//var_dump($databaseUser);
+				}
+				//var_dump($data);
                 return $data;
             }
             catch(PDOException $e){
                 echo $e->getMessage();
-                throw new Exception("Problem getting Project from database.");
+                throw new Exception("Problem getting players from database.");
             }
 		}
+		function getPlayersFromSearch($data=null){
+            if($data != null && count($data) > 0){
+                $html = "<div id='table-wrapper'><table>\n";
+                if(true){
+                    $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th><th>Email</th></tr>";
+                    foreach($data as $player){
+						$html .= "
+                        <tr>
+                            <td><a href='profile.php?id={$player[0]}'>{$player[1]}</a></td>
+							<td>{$player[3]}</td>
+							<td>{$player[4]}</td>
+                            <td><a href='mailto:'{$player[2]}'>{$player[2]}</a></td>
+                        </tr>\n";
+					}
+					$html .= "</table></div>";
+				}
+			}
+			return $html;
+		}
+
+		function getPlayersAsTable($data=null){//$data=null
+			//var_dump($data);
+			//var_dump($player->getID());
+            //$data = $this->getEverythingAsObjects("project", "Project");
+            if($data != null && count($data) > 0){
+                $html = "<div id='table-wrapper'><table>\n";
+                if(true){
+                    $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th><th>Email</th></tr>";
+                    foreach($data as $player){
+						$html .= "
+                        <tr>
+                            <td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
+							<td>{$player->getSport()}</td>
+							<td>{$player->getPersonType()}</td>
+                            <td><a href='mailto:'{$player->getEmail()}'>{$player->getEmail()}</a></td>
+                        </tr>\n";
+                    }
+                }else{
+                    $html .= "<tr><th>Player Name</th><th>Sport</th><th>Email</th></tr>";
+                    foreach($data as $project){
+                        $html .= "<tr>
+                            <td>{$project->getProjectName()}</td>
+                            <td>{$project->getProjectLead()}</td>
+                            <td><a href='mailto:{$project->getEmail()}'>{$project->getEmail()}</a></td>
+                            <td>{$project->getDescription()}</td>
+        
+                        </tr>";
+                    }
+                }
+                $html .= "</table></div>";
+            }else{
+                $html = "<div id='body-main'><h2 class='errorMsg'>Error getting players</h2></div>";
+            }
+            return $html;
+        }
 
 		/**
 		 * updateUser() - Takes in an associative array where the key is the field name and the value is the value to be updated for that field, then updates them
@@ -167,6 +252,42 @@
 					case 'profileImage':
 						$this->updateField('players', 'profileImage', $val, $id);
 						break;
+					case 'showcase1':
+						$this->updateField('players', 'showcase1', $val, $id);
+						break;
+					case 'showcase2':
+						$this->updateField('players', 'showcase2', $val, $id);
+						break;
+					case 'showcase3':
+						$this->updateField('players', 'showcase3', $val, $id);
+						break;
+					case 'college':
+						$this->updateField('players', 'college', $val, $id);
+						break;
+					case 'facebook':
+						$this->updateField('players', 'facebook', $val, $id);
+						break;
+					case 'twitter':
+						$this->updateField('players', 'twitter', $val, $id);
+						break;
+					case 'instagram':
+						$this->updateField('players', 'instagram', $val, $id);
+						break;
+					case 'website':
+						$this->updateField('players', 'website', $val, $id);
+						break;
+					case 'velocity':
+						$this->updateField('players', 'velocity', $val, $id);
+						break;
+					case 'gpareq':
+						$this->updateField('players', 'gpareq', $val, $id);
+						break;
+					case 'satactreq':
+						$this->updateField('players', 'satactreq', $val, $id);
+						break;
+					case 'characteristics':
+						$this->updateField('players', 'characteristics', $val, $id);
+						break;
                 }
 			}
 		}
@@ -208,11 +329,48 @@
 				//false
 				return 0;
 		}
+
+		function register($username, $hashed_password, $persontype){
+			$data = [];
+			$stmt = $this->dbConn->prepare("SELECT username, pass, id FROM players WHERE username = ?");
+			$stmt->bindParam(1, $username, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
+            while($databaseUser = $stmt->fetch()){
+				$data[] = $databaseUser;
+			}
+			if((count($data)) >= 1){
+				return 0;
+			}
+			else{
+				$query = "INSERT INTO players(username, pass, persontype) VALUES(:username, :pass, :persontype)"; 
+				$stmt = $this->dbConn->prepare($query);
+				$stmt->execute(array(":username"=>$username, ":pass"=>$hashed_password, ":persontype"=>$persontype));
+				
+				$info = $this->dbConn->prepare("SELECT username, id, persontype FROM players WHERE username = ?");
+				$info->bindParam(1, $username, PDO::PARAM_STR);
+				$info->execute();
+				$info->setFetchMode(PDO::FETCH_CLASS,"Player");
+            	while($databaseUser = $info->fetch()){
+					$data[] = $databaseUser;
+				}
+				if((count($data)) == 1){
+					$player = $data[0];
+					$_SESSION['username'] = $player->getUsername();
+					$_SESSION['id'] = $player->getId();
+					$_SESSION['loggedIn'] = true;
+					$_SESSION['persontype'] = $player->getPersonType();
+					return 1;	
+				}
+			}
+			
+		}
+
 		function getMyInfo($id){//profile.php
-			$player = $this->getObjectByID('players', 'Player', $id);
+			$player = $this->getObjectById('players', 'Player', $id);
 			$html = " ";
 			//var_dump($player);
-			if ($player != null) {
+			if ($player != null && $player->getPersonType() == 'player') {
 				$html .= "<div id='body-main'>
 				<h2><a href='myinfo.php'><img src='assets/img/edit2.png'/ id='edit-img'></a> {$player->getName()} {$player->getCommitment()}</h2>
 				<hr/>
@@ -224,73 +382,113 @@
 				<div id='info-box-container'>
 				<div class='info-box'>
 					<h3>Player Info</h3>
-					<ul>
-						<li><span class='attributes'>Email:</span> {$player->getEmail()}</li>
-						<li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
-						<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li>
-						<li><span class='attributes'>City:</span> {$player->getCity()}</li>
-						<li><span class='attributes'>State:</span> {$player->getState()}</li>
-						<li><span class='attributes'>Zip:</span> {$player->getZip()}</li>
-						<li><span class='attributes'>Highschool:</span> {$player->getHighschool()}</li>
-						<li><span class='attributes'>Graduation Year:</span> {$player->getGradYear()}</li>
-						<li><span class='attributes'>GPA:</span> {$player->getGpa()}</li>
-						<li><span class='attributes'>SAT:</span> {$player->getSat()}</li>
-						<li><span class='attributes'>ACT:</span> {$player->getAct()}</li>
-					</ul>
+						<ul>
+							<li><span class='attributes'>Email:</span> {$player->getEmail()}</li>
+							<li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
+							<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li>
+							<li><span class='attributes'>City:</span> {$player->getCity()}</li>
+							<li><span class='attributes'>State:</span> {$player->getState()}</li>
+							<li><span class='attributes'>Zip:</span> {$player->getZip()}</li>
+							<li><span class='attributes'>Highschool:</span> {$player->getHighschool()}</li>
+							<li><span class='attributes'>Graduation Year:</span> {$player->getGradYear()}</li>
+							<li><span class='attributes'>GPA:</span> {$player->getGpa()}</li>
+							<li><span class='attributes'>SAT:</span> {$player->getSat()}</li>
+							<li><span class='attributes'>ACT:</span> {$player->getAct()}</li>
+						</ul>
 					</div><!-- end of .info-box -->
-			<div class='info-box'>
-				<h3>Sport Info</h3>
-					<ul>
-						<li><span class='attributes'>Sport:</span> {$player->getSport()}</li>
-						<li><span class='attributes'>Primary Position:</span> {$player->getPrimaryPosition()}</li>
-						<li><span class='attributes''>Secondary Position:</span> {$player->getSecondaryPosition()}</li>
-						<li><span class='attributes'>Travel Team:</span> {$player->getTravelTeam()}</li>
-						<li><span class='attributes'>Height:</span> {$player->getHeightFeet()}'{$player->getHeightInches()}</li>
-						<li><span class='attributes'>Weight:</span> {$player->getWeight()}</li>
-					</ul>
+				<div class='info-box'>
+					<h3>Sport Info</h3>
+						<ul>
+							<li><span class='attributes'>Sport:</span> {$player->getSport()}</li>
+							<li><span class='attributes'>Primary Position:</span> {$player->getPrimaryPosition()}</li>
+							<li><span class='attributes''>Secondary Position:</span> {$player->getSecondaryPosition()}</li>
+							<li><span class='attributes'>Travel Team:</span> {$player->getTravelTeam()}</li>
+							<li><span class='attributes'>Height:</span> {$player->getHeightFeet()}'{$player->getHeightInches()}</li>
+							<li><span class='attributes'>Weight:</span> {$player->getWeight()}</li>
+						</ul>
 					</div> <!-- end of .info-box -->
-			</div> <!-- end of info-box-container -->
-			</div><!-- end of profile-area --> 
-			<hr/>
-			<h3>Videos</h3>
-				<div id='videos'>
-					<img src='https://via.placeholder.com/300x250'>
-					<img src='https://via.placeholder.com/300x250'>
-					<img src='https://via.placeholder.com/300x250'>
+				</div> <!-- end of info-box-container -->
+				</div><!-- end of profile-area --> 
+				<hr/>
+				<h3>Videos</h3>
+					<div id='videos'>
+						<iframe id='ytplayer' type='text/html' width='300' height='250' src='https://www.youtube.com/embed/{$player->getShowcase1()}'></iframe>
+						<iframe id='ytplayer' type='text/html' width='300' height='250' src='https://www.youtube.com/embed/{$player->getShowcase2()}'></iframe>
+						<iframe id='ytplayer' type='text/html' width='300' height='250' src='https://www.youtube.com/embed/{$player->getShowcase3()}'></iframe>
+					</div>
+				<h3>References</h3>
+					<div id='reference-container'>
+					<div class='references'>
+					<ul>
+						<li><span class='attributes'>Name:</span> {$player->getRef1Name()}</li>
+						<li><span class='attributes'>Job Title:</span> {$player->getRef1JobTitle()}</li>
+						<li><span class='attributes'>Email:</span> {$player->getRef1Email()}</li>
+						<li><span class='attributes'>Phone:</span> {$player->getRef1Phone()}</li>
+					</ul>
 				</div>
-			<h3>References</h3>
-			<div id='reference-container'>
 				<div class='references'>
-				<ul>
-					<li><span class='attributes'>Name:</span> {$player->getRef1Name()}</li>
-					<li><span class='attributes'>Job Title:</span> {$player->getRef1JobTitle()}</li>
-					<li><span class='attributes'>Email:</span> {$player->getRef1Email()}</li>
-					<li><span class='attributes'>Phone:</span> {$player->getRef1Phone()}</li>
-				</ul>
-			</div>
-			<div class='references'>
-				<ul>
-					<li><span class='attributes'>Name:</span> {$player->getRef2Name()}</li>
-					<li><span class='attributes'>Job Title:</span> {$player->getRef2JobTitle()}</li>
-					<li><span class='attributes'>Email:</span> {$player->getRef2Email()}</li>
-					<li><span class='attributes'>Phone:</span> {$player->getRef2Phone()}</li>
-				</ul>
-			</div>
-			<div class='references'>
-				<ul>
-					<li><span class='attributes'>Name:</span> {$player->getRef3Name()}</li>
-					<li><span class='attributes'>Job Title:</span> {$player->getRef3JobTitle()}</li>
-					<li><span class='attributes''>Email:</span> {$player->getRef3Email()}</li>
-					<li><span class='attributes'>Phone:</span> {$player->getRef2Phone()}</li>
-				</ul>
-			</div>
-		</div> <!--end of #references-container -->
-		<hr/>
-		<div id='personal-statement'>
-			<h3>Personal Statement</h3>
-			<p>{$player->getPersStatement()}</p>
-		</div>
-		";
+					<ul>
+						<li><span class='attributes'>Name:</span> {$player->getRef2Name()}</li>
+						<li><span class='attributes'>Job Title:</span> {$player->getRef2JobTitle()}</li>
+						<li><span class='attributes'>Email:</span> {$player->getRef2Email()}</li>
+						<li><span class='attributes'>Phone:</span> {$player->getRef2Phone()}</li>
+					</ul>
+				</div>
+				<div class='references'>
+						<ul>
+							<li><span class='attributes'>Name:</span> {$player->getRef3Name()}</li>
+							<li><span class='attributes'>Job Title:</span> {$player->getRef3JobTitle()}</li>
+							<li><span class='attributes''>Email:</span> {$player->getRef3Email()}</li>
+							<li><span class='attributes'>Phone:</span> {$player->getRef2Phone()}</li>
+						</ul>
+					</div>
+				</div> <!--end of #references-container -->
+				<hr/>
+				<div id='personal-statement'>
+					<h3>Personal Statement</h3>
+					<p>{$player->getPersStatement()}</p>
+				</div>
+				";
+			}
+			else if ($player != null && $player->getPersonType() == 'coach') {
+				$html .= "<div id='body-main'>
+				<h2><a href='myinfo.php'><img src='assets/img/edit2.png'/ id='edit-img'></a> {$player->getName()} <span id='collegeh2'>{$player->getCollege()}</span></h2>
+				<hr/>
+				<div id='profile-area'>
+				<figure>
+					<img src='assets/img/userpictures/{$player->getProfileImage()}' alt='player picture' id='player-pic'>
+					<figcaption></figcaption>
+				</figure>
+				<div id='info-box-container'>
+				<div class='info-box'>
+					<h3>Coach Info</h3>
+						<ul>
+							<li><span class='attributes'>Sport:</span> {$player->getSport()}</li>
+							<li><span class='attributes'>Email:</span> <a href='{$player->getEmail()}'>{$player->getEmail()}</a></li>
+							<li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
+							<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li>
+							<li><span class='attributes'>Address:</span> {$player->getAddress()}</li>
+							<li><span class='attributes'>City:</span> {$player->getCity()}</li>
+							<li><span class='attributes'>State:</span> {$player->getState()}</li>
+							<li><span class='attributes'>Zip:</span> {$player->getZip()}</li>
+							<li><span class='attributes'>Twitter:</span> {$player->getTwitter()}</li>
+							<li><span class='attributes'>Instagram:</span> {$player->getInstagram()}</li>
+							<li><span class='attributes'>Facebook:</span> {$player->getFacebook()}</li>
+							<li><span class='attributes'>Sport Website:</span> <a href='http://{$player->getwebsite()}' target='_blank'>http://{$player->getwebsite()}</a></li>
+						</ul>
+					</div><!-- end of .info-box -->
+				<div class='info-box'>
+					<h3>Type of athlete ourprogram is looking for</h3>
+						<ul>
+							<li><span class='attributes'>Characteristics:</span> {$player->getCharacteristics()}</li>
+							<li><span class='attributes''>Velocity:</span> {$player->getVelocity()}</li>
+							<li><span class='attributes'>GPA Requirement:</span> {$player->getGpaReq()}</li>
+							<li><span class='attributes'>SAT/ACT Scores:</span> {$player->getSatAct()}</li>
+						</ul>
+					</div> <!-- end of .info-box -->
+				</div> <!-- end of info-box-container -->
+				</div><!-- end of profile-area --> 
+				";
 			}
 			return $html;
 		}
@@ -299,7 +497,7 @@
 			$html = " ";
 			//var_dump($player);
 			
-			if ($player != null) {
+			if ($player != null && $player->getPersonType() == 'player') {
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
@@ -315,7 +513,7 @@
 								   name= 'name'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Name*'
+								   placeholder = 'First and Last Name'
 								   value='{$player->getName()}'
 								   onclick='' />
 						</p>
@@ -326,7 +524,7 @@
 								   name= 'email'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Email*'
+								   placeholder = 'example@example.com'
 								   value='{$player->getEmail()}'
 								   onclick='' />
 						</p>
@@ -337,7 +535,7 @@
 								   name= 'gender'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Gender'
+								   placeholder = 'Male or Female'
 								   value='{$player->getGender()}' />
 						</p>
 						<p>
@@ -347,7 +545,7 @@
 								   name= 'cellphone'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Cellphone*'
+								   placeholder = 'xxx-xxx-xxxx'
 								   value='{$player->getCellPhone()}'
 								   onclick='' />
 						</p>
@@ -358,7 +556,7 @@
 								   name= 'homePhone'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Home Phone*'
+								   placeholder = 'xxx-xxx-xxxx'
 								   value='{$player->getHomePhone()}'
 								   onclick='' />
 						</p>
@@ -369,7 +567,7 @@
 								   name= 'address'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Address*'
+								   placeholder = 'Your Address'
 								   value='{$player->getAddress()}'
 								   onclick='' />
 						</p>
@@ -380,70 +578,20 @@
 								   name= 'city'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your City*'
+								   placeholder = 'Your City'
 								   value='{$player->getCity()}'
 								   onclick='' />
 						</p>
 						<p>
 						<label class='span' for='state'>State:* &nbsp;</label>
-							<select id='state' name='state'>
-								<option value='' disabled selected >Your State*</option>
-								<option value='Alabama'{if ($player->getState() == 'Alabama') echo 'selected' }>Alabama</option>
-								<option value='Alaska'>Alaska</option>
-								<option value='Arizona'>Arizona</option>
-								<option value='Arkansas'>Arkansas</option>
-								<option value='California'>California</option>
-								<option value='Colorado'>Colorado</option>
-								<option value='Connecticut'>Connecticut</option>
-								<option value='Delaware'>Delaware</option>
-								<option value='District of Columbia'>District of Columbia</option>
-								<option value='Florida'>Florida</option>
-								<option value='Georgia'>Georgia</option>
-								<option value='Guam'>Guam</option>
-								<option value='Hawaii'>Hawaii</option>
-								<option value='Idaho'>Idaho</option>
-								<option value='Illinois'>Illinois</option>
-								<option value='Indiana'>Indiana</option>
-								<option value='Iowa'>Iowa</option>
-								<option value='Kansas'>Kansas</option>
-								<option value='Kentucky'>Kentucky</option>
-								<option value='Louisiana'>Louisiana</option>
-								<option value='Maine'>Maine</option>
-								<option value='Maryland'>Maryland</option>
-								<option value='Massachusetts'>Massachusetts</option>
-								<option value='Michigan'>Michigan</option>
-								<option value='Minnesota'>Minnesota</option>
-								<option value='Mississippi'>Mississippi</option>
-								<option value='Missouri'>Missouri</option>
-								<option value='Montana'>Montana</option>
-								<option value='Nebraska'>Nebraska</option>
-								<option value='Nevada'>Nevada</option>
-								<option value='New Hampshire'>New Hampshire</option>
-								<option value='New Jersey'>New Jersey</option>
-								<option value='New Mexico'>New Mexico</option>
-								<option value='New York'>New York</option>
-								<option value='North Carolina'>North Carolina</option>
-								<option value='North Dakota'>North Dakota</option>
-								<option value='Northern Marianas Islands'>Northern Marianas Islands</option>
-								<option value='Ohio'>Ohio</option>
-								<option value='Oklahoma'>Oklahoma</option>
-								<option value='Oregon'>Oregon</option>
-								<option value='Pennsylvania'>Pennsylvania</option>
-								<option value='Puerto Rico'>Puerto Rico</option>
-								<option value='Rhode Island'>Rhode Island</option>
-								<option value='South Carolina'>South Carolina</option>
-								<option value='South Dakota'>South Dakota</option>
-								<option value='Tennessee'>Tennessee</option>
-								<option value='Texas'>Texas</option>
-								<option value='Utah'>Utah</option>
-								<option value='Vermont'>Vermont</option>
-								<option value='Virginia'>Virginia</option>
-								<option value='Virgin Islands'>Virgin Islands</option>
-								<option value='Washington'>Washington</option>
-								<option value='West Virginia'>West Virginia</option>
-								<option value='Wisconsin'>Wisconsin</option>
-								<option value='Wyoming'>Wyoming</option>
-							</select>
+							<input type='text'
+									id = 'state'
+									name= 'state'
+									size = '35'
+									maxlength = '50'
+									placeholder = 'Full Name ex. Alabama'
+									value='{$player->getState()}'
+									onclick='' />
 						</p>
 						<p>
 						<label class='span'>Zip:* &nbsp; </label>
@@ -452,7 +600,7 @@
 								   name= 'zip'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Zip*'
+								   placeholder = 'xxxxx'
 								   value='{$player->getZip()}'
 								   onclick='' />
 						</p>
@@ -463,7 +611,7 @@
 								   name= 'highschool'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Highschool*'
+								   placeholder = 'Your Highschool'
 								   value='{$player->getHighschool()}'
 								   onclick='' />
 						</p>
@@ -474,7 +622,7 @@
 								   name= 'weight'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Weight*'
+								   placeholder = 'xxx'
 								   value='{$player->getWeight()}'
 								   onclick='' />
 						</p>
@@ -484,7 +632,7 @@
 								name= 'heighFeet'
 								size = '15'
 								maxlength = '5'
-								placeholder = 'Feet*'
+								placeholder = 'Feet'
 								value='{$player->getHeightFeet()}'
 								onclick='' />
 						
@@ -493,7 +641,7 @@
 								name= 'heightInches'
 								size = '15'
 								maxlength = '5'
-								placeholder = 'Inches*'
+								placeholder = 'Inches'
 								value='{$player->getHeightInches()}'
 								onclick='' />
 						</p>
@@ -504,7 +652,7 @@
 								 name= 'grad-year'
 								 size = '35'
 								 maxlength = '50'
-								 placeholder = 'Your Graduation Year*'
+								 placeholder = 'xxxx'
 								 value='{$player->getGradYear()}'
 								 onclick='' />
 					  </p>
@@ -526,7 +674,7 @@
 								   name= 'primaryPosition'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Primary Position*'
+								   placeholder = 'Your Primary Position'
 								   value='{$player->getPrimaryPosition()}'
 								   onclick='' />
 						</p>
@@ -537,7 +685,7 @@
 								   name= 'secondaryPosition'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Secondary Position*'
+								   placeholder = 'Your Secondary Position'
 								   value='{$player->getSecondaryPosition()}'
 								   onclick='' />
 						</p>
@@ -548,7 +696,7 @@
 								   name= 'travelTeam'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Travel Team*'
+								   placeholder = 'Your Travel Team'
 								   value='{$player->getTravelTeam()}'
 								   onclick='' />
 						</p>
@@ -559,7 +707,7 @@
 								   name= 'gpa'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your GPA*'
+								   placeholder = 'x.xx'
 								   value='{$player->getGpa()}'
 								   onclick='' />
 						</p>
@@ -570,7 +718,7 @@
 								   name= 'sat'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your SAT Score'
+								   placeholder = 'xxx or xxxx'
 								   value='{$player->getSat()}'
 								   onclick='' />
 						</p>
@@ -581,7 +729,7 @@
 								   name= 'act'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your ACT Score'
+								   placeholder = 'xxx'
 								   value='{$player->getAct()}'
 								   onclick='' />
 						</p>
@@ -594,16 +742,16 @@
 								<input type='file' name='profileImage' accept='image/*'>
 							</p>
 							<p>
-								<span class='span'>Upload Video(Showcase): &nbsp; </span>
-								<input type='file' name='showcase-vid' accept='videos/*'>
+								<span class='span'>Upload Video ( Showcase 1 ): &nbsp; </span>
+								<input type='text' name='showcase1' id='showcase1' size = '35' maxlength = '50' value='www.youtube.com/watch?v={$player->getShowcase1()}'>
 							</p>
 							<p>
-								<span class='span'>Upload Video(Showcase): &nbsp; </span>
-								<input type='file' name='showcase-vid' accept='videos/*'>
+								<span class='span'>Upload Video ( Showcase 2 ): &nbsp; </span>
+								<input type='text' name='showcase2' id=showcase2 size = '35' maxlength = '50' value='www.youtube.com/watch?v={$player->getShowcase2()}'>
 							</p>
 							<p>
-								<span class='span'>Upload Video(Showcase): &nbsp; </span>
-								<input type='file' name='showcase-vid' accept='videos/*'>
+								<span class='span'>Upload Video ( Showcase 3 ): &nbsp; </span>
+								<input type='text' name='showcase3' id=showcase3 size = '35' maxlength = '50' value='www.youtube.com/watch?v={$player->getShowcase3()}'>
 							</p>
 						</div><!-- end of refs -->
 						<hr/>
@@ -612,13 +760,13 @@
 						<div id='refs'>
 						<p class='span'>Reference 1(Optional)</p>
 							<p>
-							  <!--  <span class='span'>First Name: &nbsp; </span> -->
+							  <!--  <span class='span'>Name: &nbsp; </span> -->
 								<input type='text'
 									   id = 'ref1-name'
 									   name = 'ref1Name'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 1 Name'
+									   placeholder = 'First and Last Name'
 									   value='{$player->getRef1Name()}'
 									   onclick='' />
 							</p>
@@ -640,7 +788,7 @@
 									   name = 'ref1Email'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 1 Email'
+									   placeholder = 'example@example.con'
 									   value='{$player->getRef1Email()}'
 									   onclick='' />
 							</p>
@@ -651,7 +799,7 @@
 									   name = 'ref1Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 1 Phone Number'
+									   placeholder = 'xxx-xxx-xxxx'
 									   value='{$player->getRef1Phone()}'
 									   onclick='' />
 							</p>
@@ -659,13 +807,13 @@
 						<div id='refs'>
 						<p class='span'>Reference 2(Optional)</p>
 							<p>
-							  <!--  <span class='span'>First Name: &nbsp; </span> -->
+							  <!--  <span class='span'>Name: &nbsp; </span> -->
 								<input type='text'
 									   id = 'ref2-name'
 									   name = 'ref2Name'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 2 Name'
+									   placeholder = 'First and Last Name'
 									   value='{$player->getRef2Name()}'
 									   onclick='' />
 							</p>
@@ -687,7 +835,7 @@
 									   name = 'ref2Email'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 2 Email'
+									   placeholder = 'example@example.com'
 									   value='{$player->getRef2Email()}'
 									   onclick='' />
 							</p>
@@ -698,7 +846,7 @@
 									   name = 'ref2Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 2 Phone Number'
+									   placeholder = 'xxx-xxx-xxxx'
 									   value='{$player->getRef2Phone()}'
 									   onclick='' />
 							</p>
@@ -707,13 +855,13 @@
 						<div id='refs'>
 						<p class='span'>Reference 3(Optional)</p>
 							<p>
-							 <!--   <span class='span'>First Name: &nbsp; </span> -->
+							 <!--   <span class='span'>Name: &nbsp; </span> -->
 								<input type='text'
 									   id = 'ref3-name'
 									   name = 'ref3Name'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 3 Name'
+									   placeholder = 'First and Last Name'
 									   value='{$player->getRef3Name()}'
 									   onclick='' />
 							</p>
@@ -735,7 +883,7 @@
 									   name = 'ref3Email'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 3 Email'
+									   placeholder = 'example@example.com'
 									   value='{$player->getRef3Email()}'
 									   onclick='' />
 							</p>
@@ -746,7 +894,7 @@
 									   name = 'ref3Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'Reference 3 Phone Number'
+									   placeholder = 'xxx-xxx-xxxx'
 									   value='{$player->getRef3Phone()}'
 									   onclick='' />
 							</p>
@@ -783,6 +931,236 @@
 			</html>
 					\n";
 				
+			}
+			else if ($player != null && $player->getPersonType() == 'coach') {
+				$html .= "<div id='body-main'>
+					<form id='player-form'
+						  method = 'POST'
+						  action= ''
+						  onsubmit = '' 
+						  enctype='multipart/form-data' >
+						<h1>Coach Info</h1>
+						<div id='refs-container'>
+						<div id='refs'>
+							<p>
+							<p>Name:* &nbsp; </p>
+								<input type='text'
+								   id = 'name'
+								   name= 'name'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'First and Last Name'
+								   value='{$player->getName()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>College Name:* &nbsp; </p>
+								<input type='text'
+								   id = 'college'
+								   name= 'college'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'Your College'
+								   value='{$player->getCollege()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Sport:* &nbsp; </p>
+								<input type='text'
+									id = 'sport'
+									name= 'sport'
+									size = '35'
+									maxlength = '50'
+									placeholder = 'Football, Basketball, Esports, etc'
+									value='{$player->getSport()}'
+									onclick='' />
+							</p>
+							<p>
+							 <p>Email:* &nbsp; </p> 
+								<input type='email'
+								   id = 'email'
+								   name= 'email'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'example@example.com'
+								   value='{$player->getEmail()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Cell Phone:* &nbsp; </p>
+								<input type='text'
+								   id = 'cellphone'
+								   name= 'cellphone'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'xxx-xxx-xxxx'
+								   value='{$player->getCellPhone()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Home Phone:* &nbsp; </p>
+								<input type='text'
+								   id = 'homephone'
+								   name= 'homePhone'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'xxx-xxx-xxxx'
+								   value='{$player->getHomePhone()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Address:* &nbsp; </p>
+								<input type='text'
+								   id = 'address'
+								   name= 'address'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'Your Address'
+								   value='{$player->getAddress()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>City:* &nbsp; </p>
+								<input type='text'
+								   id = 'city'
+								   name= 'city'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'Your City'
+								   value='{$player->getCity()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p for='state'>State:* &nbsp;</p>
+								<input type='text'
+									id = 'state'
+									name= 'state'
+									size = '35'
+									maxlength = '50'
+									placeholder = 'Full Name ex. Alabama'
+									value='{$player->getState()}'
+									onclick='' />
+							</p>
+							<p>
+							<p>Zip:* &nbsp; </p>
+								<input type='text'
+								   id = 'zip'
+								   name= 'zip'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'xxxxx'
+								   value='{$player->getZip()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Twitter: &nbsp; </p>
+								<input type='text'
+								   id = 'twitter'
+								   name= 'twitter'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'Twitter Handle'
+								   value='{$player->getTwitter()}'
+								   onclick='' />
+							</p>
+							</div><!-- end of refs -->
+							<div id='refs'>
+							<p>
+							<p>Instagram: &nbsp; </p>
+								<input type='text'
+								   id = 'instagram'
+								   name= 'instagram'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'Instagram Handle'
+								   value='{$player->getInstagram()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Facebook: &nbsp; </p>
+						  		<input type='text'
+									id = 'facebook'
+									name= 'facebook'
+									size = '35'
+									maxlength = '50'
+									placeholder = 'Facebook Handle'
+									value='{$player->getFacebook()}'
+								 	onclick='' />
+					  		</p>
+							<p>
+							<p>Your Sports Website: &nbsp; </p>
+								<input type='text'
+								   id = 'website'
+								   name= 'website'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'http://example.com'
+								   value='{$player->getWebsite()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Preferred Athlete Characteristics: &nbsp; </p>
+								<input type='text'
+								   id = 'characteristics'
+								   name= 'characteristics'
+								   size = '35'
+								   maxlength = '150'
+								   placeholder = 'example, example, example'
+								   value='{$player->getCharacteristics()}'
+								   onclick='' />
+							</p>
+							<p>
+							<p>Velocity: &nbsp; </p>
+								<input type='text'
+								   id = 'velocity'
+								   name= 'velocity'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = ''
+								   value='{$player->getVelocity()}'
+								   onclick='' />
+							</p>
+							<p>GPA Required: &nbsp; </p>
+								<input type='text'
+								   id = 'gpareq'
+								   name= 'gpareq'
+								   size = '35'
+								   maxlength = '50'
+								   placeholder = 'x.xx'
+								   value='{$player->getGpaReq()}'
+								   onclick='' />
+							</p>
+							<p>SAT/ACT Required: &nbsp; </p>
+								<input type='text'
+								   id = 'satactreq'
+								   name= 'satactreq'
+								   size = '35'
+								   maxlength = '5'
+								   placeholder = 'xxx'
+								   value='{$player->getSatAct()}'
+								   onclick='' />
+							</p>
+							</div><!-- end of refs -->
+							<div id='refs'>
+							<p>
+								<span class='span'>Upload Profile Picture: &nbsp; </span>
+								<input type='file' name='profileImage' accept='image/*'>
+							</p>
+							</div><!-- end of refs -->
+						</div>
+						<input type='submit'
+							   value='Update My Info'
+							   name = 'updateUserInfo'
+							   class='btn-all-buttons'
+							   id='btnSubmit'/>
+				</form>
+				</body>
+    			<footer>
+        			<div class='Footer'>
+        			</div>
+    			</footer>
+			</html>
+					\n";
 			}
 			return $html;
 		}

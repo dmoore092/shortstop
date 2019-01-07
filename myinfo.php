@@ -26,7 +26,7 @@
             $updateArray = array();
             if(isset($_SESSION['id'])){
                 echo "ID is set";
-                var_dump($_POST);
+                //var_dump($_POST);
                 $updateArray['id'] = $_SESSION['id'];
                 if(isset($_POST['name'])){
                     if($playerDB->isAlphaNumeric($_POST['name']) != 0){
@@ -245,7 +245,48 @@
                       $updateArray['service'] = $playerDB->sanitize($_POST['service']);
                   }
                 }
+                if(isset($_POST['showcase1'])){
+                    $updateArray['showcase1'] = $playerDB->isYouTube($_POST['showcase1']);
+                    //var_dump($updateArray);
+                }
 
+                if(isset($_POST['showcase2'])){
+                    $updateArray['showcase2'] = $playerDB->isYouTube($_POST['showcase2']);
+                    //var_dump($updateArray);
+                }
+
+                if(isset($_POST['showcase3'])){
+                    $updateArray['showcase3'] = $playerDB->isYouTube($_POST['showcase3']);
+                    //var_dump($updateArray);
+                }
+                if(isset($_POST['college'])){
+                    $updateArray['college'] = $playerDB->sanitize($_POST['college']);
+                }
+                if(isset($_POST['twitter'])){
+                    $updateArray['twitter'] = $playerDB->sanitize($_POST['twitter']);
+                }
+                if(isset($_POST['facebook'])){
+                    $updateArray['facebook'] = $playerDB->sanitize($_POST['facebook']);
+                }
+                if(isset($_POST['instagram'])){
+                    $updateArray['instagram'] = $playerDB->sanitize($_POST['instagram']);
+                }
+                if(isset($_POST['website'])){
+                    $updateArray['website'] = $playerDB->sanitize($_POST['website']);
+                }
+                if(isset($_POST['characteristics'])){
+                    $updateArray['characteristics'] = $playerDB->sanitize($_POST['characteristics']);
+                    //var_dump($updateArray);
+                }
+                if(isset($_POST['velocity'])){
+                    $updateArray['velocity'] = $playerDB->sanitize($_POST['velocity']);
+                }
+                if(isset($_POST['gpareq'])){
+                    $updateArray['gpareq'] = $playerDB->sanitize($_POST['gpareq']);
+                }
+                if(isset($_POST['satactreq'])){
+                    $updateArray['satactreq'] = $playerDB->sanitize($_POST['satactreq']);
+                }
                 //move profileImage to server folder
                 $uploadOk = 1;
                 if (is_uploaded_file($_FILES['profileImage']['tmp_name'])){ 
@@ -282,7 +323,7 @@
                         if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
                             echo 'File Has Been Uploaded !';
                             $updateArray['profileImage'] = $_FILES['profileImage']['name'];
-                            var_dump($updateArray['profileImage']);
+                            //var_dump($updateArray['profileImage']);
                         }
                         else{
                             echo 'File was not uploaded';

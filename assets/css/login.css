@@ -1,6 +1,5 @@
-/*ITCSS CSS layered from general to specific */
-/*APPLIES TO login.php*/
-/*GENERIC LAYER */
+/*APPLIES TO login.php and register.php*/
+
 
 /*login.php part*/
 #player-form{
@@ -26,6 +25,11 @@
     background-color: #bb0a1e;
     color: white;
 }
+#persontype{
+    width: 115%;
+    font-size: 1.25em;
+    margin-bottom: 15px;
+}
 @media only screen and (min-width: 520px) {
     #player-form{
         max-width: 35%;
@@ -34,13 +38,18 @@
     #btn-login, #btn-create-account{
         margin-bottom: 10px;
         width: 85%;
-        background-color: white;
-        color: black;
+        background-color: #bb0a1e;
+        color: white;
     }
     #btn-login:hover, #btn-create-account:hover{
         margin-bottom: 10px;
         width: 85%;
-        background-color: #bb0a1e;
+        background-color: #be1f1f;
         color: white;
+    }
+    #persontype{
+        width: 85%;
+        font-size: 1.25em;
+        margin-bottom: 15px;
     }
 }

@@ -1,0 +1,39 @@
+/*
+for mathletes and fathletes
+*/
+#table-wrapper{
+    width: 90%;
+    margin: auto;
+    background-color: white;
+    padding: 5px;
+    min-height: 400px;
+}
+th{
+    width: 40%;
+    text-align: left;
+    padding: 2px;
+}
+tr{
+    border-bottom: 1px solid black;
+}
+
+@media only screen and (min-width: 520px) {
+    #table-wrapper{
+        width: 75%;
+        margin: auto;
+        padding: 15px;
+        /* border: 2px solid black; */
+    }
+    table{
+        width: 80%;
+        margin: auto;
+        /* border: 2px solid black; */
+    }
+    th{
+        width: 20%;
+        margin: auto;
+        text-align: left;
+        padding: 2px;
+        /* border: 2px solid black; */
+    }
+}

@@ -14,6 +14,7 @@
     </head>
     <body>
 <header>
+    <?php include "assets/inc/search.inc.php"; ?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
                 <script>
@@ -36,7 +37,7 @@
                 </div>
                 <ul>
                     <?php // var_dump($_SESSION['logged_in']); ?>
-                    <?php if(isset($_SESSION['logged_in'])){ ?>
+                    <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){ ?>
                     <li id="big-login-button"><a class="link" href="logout.php">Logout</a></li>
                     <?php }else{ ?>
                     <li id="big-login-button"><a class="link" href="login.php">Login</a></li>
@@ -46,15 +47,17 @@
             </div><!-- #big-login end
            --><div id="search">
                 <div id="search-container">
-                    <input id="textbox" type="text" size="30" name="search">
-                    <input id="button" type="button" value="Search">
+                    <form action='#' method='POST' id="search-form"> 
+                        <input id="textbox" type="text" size="50" placeholder= "First or Last Name" name="search">
+                        <input id="button" class="searchbtn" type="submit" name= "search-btn" value="Search">
+                    </form>
                 </div>
             </div>
                 <div class="nav">
                     <ul>
                         <li id="mobile-login"><a href="login.php">Login</a></li>
                         <li id="current"><a href="index.php">Home</a></li>
-                        <li><a href="profile.php">My Profile</a></li>
+                        <li><a href="<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){echo "profile.php?id=".$_SESSION['id'];}else{echo "login.php";}?>">My Profile</a></li>
                         <li><a href="about.php">About Us</a></li>
                         <li><a href="mathletes.php">Male Athletes</a></li>
                         <li><a href="fathletes.php">Female Athletes</a></li>

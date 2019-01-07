@@ -3,6 +3,7 @@
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
+      session_start();
 ?>
 
         <?php include('assets/inc/header.inc.php'); ?>

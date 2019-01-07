@@ -137,71 +137,89 @@
             return $object;
         }
 
-	function sanitize($value){
-		$value = trim($value);
-		$value = stripslashes($value);
-		$value = strip_tags($value);
-		$value = htmlentities($value);
-		return $value;
-	}
+        function getObjectByUsername($table, $className, $username){
+            $object = null;
+            $query = "SELECT * FROM $table WHERE username = :username";
+            $stmt = $this->dbConn->prepare($query);
+            $stmt->bindParam(":username", $username);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
+            $object = $stmt->fetch();
 
-	function isAlphabetic($value){
-		$reg = "/^[a-zA-Z] [a-zA-Z ]+$/";
-		return preg_match($reg, $value);
-	}
-
-	function isAlphaNumeric($value){
-		$reg = "/^[a-zA-Z0-9 ]+$/";
-		return preg_match($reg, $value);
-	}
-
-	function isNumeric($value){
-		$reg = "/^[0-9]*$/";
-		return preg_match($reg, $value);
-    }
-    
-    function isHeightFeet($value){
-        echo $value;
-		//if($value == '4' || $value == '5' || $value == '6'){
-            return true;
-        //}
-    }
-
-    function isHeightInches($value){
-		$reg = "/^([0-9]|1[011])$/";
-        return preg_match($reg, $value);
-        //return true;
-    }
-
-    function isValidGpa($value){
-        $reg = "/^[0-4][.][0-9][0-9]$/";
-        return preg_match($reg, $value);
-    }
-
-    function isValidEmail($value){
-        $reg = "/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/";
-        return preg_match($reg, $value);
-    }
-
-    function isValidPhone($value){
-        $reg = "/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/";
-        return preg_match($reg, $value);
-    }
-
-    function isMaleOrFemale($value){
-        $value = strtolower($value);
-        if($value == "male" || $value == "female"){
-            return true;
+            return $object;
         }
-        else{
-            return false;
-        }
-    }
-    function isZip($value){
-        $reg = "/^\d{5}(?:[-\s]?\d{4})?$/";
-        return preg_match($reg, $value);
-    }
-    
 
+	    function sanitize($value){
+		    $value = trim($value);
+		    $value = stripslashes($value);
+		    $value = strip_tags($value);
+		    $value = htmlentities($value);
+		    return $value;
+	    }
+
+	    function isAlphabetic($value){
+		    $reg = "/^[a-zA-Z] [a-zA-Z ]+$/";
+		    return preg_match($reg, $value);
+	    }
+
+	    function isAlphaNumeric($value){
+		    $reg = "/^[a-zA-Z0-9 ]+$/";
+		    return preg_match($reg, $value);
+	    }
+
+	    function isNumeric($value){
+		    $reg = "/^[0-9]*$/";
+		    return preg_match($reg, $value);
+        }
+    
+        function isHeightFeet($value){
+            echo $value;
+		    //if($value == '4' || $value == '5' || $value == '6'){
+            return true;
+            //}
+        }
+
+        function isHeightInches($value){
+		    $reg = "/^([0-9]|1[011])$/";
+            return preg_match($reg, $value);
+            //return true;
+        }
+
+        function isValidGpa($value){
+            $reg = "/^[0-4][.][0-9][0-9]$/";
+            return preg_match($reg, $value);
+        }
+
+        function isValidEmail($value){
+            $reg = "/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/";
+            return preg_match($reg, $value);
+        }
+
+        function isValidPhone($value){
+            $reg = "/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/";
+            return preg_match($reg, $value);
+        }
+
+        function isMaleOrFemale($value){
+            $value = strtolower($value);
+            if($value == "male" || $value == "female"){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        function isZip($value){
+            $reg = "/^\d{5}(?:[-\s]?\d{4})?$/";
+            return preg_match($reg, $value);
+        }
+    
+        function isYouTube($value){
+            if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $value, $match)) {
+                $video_id = $match[1];
+                //var_dump($match[1]);
+            }
+            return $video_id;
+        }
     } // class
 ?>

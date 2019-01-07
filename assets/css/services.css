@@ -22,21 +22,7 @@ h1{
     width: 100%;
     margin-top: 15px;
 }
-/* #btn-all-buttons{
-    padding:10px 25px; 
-    border: 2px solid black;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    margin-left: 40%;
-    margin-top: 25px;
-    margin-bottom: 15px;
-    padding: 15px 45px;;
-}
-#btn-all-buttons:hover{
-    background-color: #bb0a1e;
-    color: white;
-}*/
+
 table, th, td {
     border: 1px solid black;
 }
@@ -50,14 +36,14 @@ th {
 }
 @media only screen and (min-width: 520px){
     #btnRegister{
-        background-color: white;
-        color: black;
+        background-color: #bb0a1e;
+        color: white;
         width: 30%;
         margin-top: 15px;
         margin-left: 35%;
     }
     #btnRegister:hover{
-        background-color: #bb0a1e;
+        background-color: #be1f1f;
         color: white;
     }
 }

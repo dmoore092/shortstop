@@ -14,6 +14,7 @@
 #edit-img{
     width: 20px;
     height: auto;
+    display: none;
 }
 @media only screen and (min-width: 520px) {
     #profile-area{
@@ -28,6 +29,9 @@
     }
     h3{
         margin-top: 15px;
+    }
+    #collegeh2{
+        margin-left: 23.5%;
     }
     #info-box-container{
         clear: both;

@@ -1,7 +1,7 @@
 <?php 
-    require_once $_SERVER["DOCUMENT_ROOT"] . "/PDO.DB.class.php";
+    require_once $_SERVER["DOCUMENT_ROOT"] . "/classes/PDO.DB.class.php";
 
-	include($_SERVER["DOCUMENT_ROOT"] . "/Player.class.php");
+	include($_SERVER["DOCUMENT_ROOT"] . "/classes/Player.class.php");
 
 	/*
 	* UserDB class contains all of the methods for using PHP Data Objects to 

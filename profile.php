@@ -1,11 +1,11 @@
 <?php 
         session_start();
         $title="Profile"; $page="profile";
-        include_once "www.dmwebdev.net/classes/Player.PDO.class.php";
+        include_once $_SERVER["DOCUMENT_ROOT"] . "/classes/Player.PDO.class.php";
 
         $playerDB = new PlayerDB();     
 
-        include ("assets/inc/header.inc.php");
+        include ($_SERVER["DOCUMENT_ROOT"] . "/assets/inc/header.inc.php");
         
         $id=$_GET['id'];
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
@@ -29,6 +29,6 @@
         //     echo "<a href='login.php' class='redirect-link'>Login</a>'";
         //     header("Location: login.php");
         }
-        include("assets/inc/footer.inc.php"); 
+        include($_SERVER["DOCUMENT_ROOT"]. "/assets/inc/footer.inc.php"); 
         
 ?>

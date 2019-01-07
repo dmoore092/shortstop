@@ -20,7 +20,7 @@
         //echo "<h1>Logged in</h1>";
         //var_dump($_SESSION['id']);
         //$id = $_SESSION['id'];
-        header("Location: /profile.php?id={$_SESSION['id']}");
+        header("Location: profile.php?id={$_SESSION['id']}");
       }
 ?>
 <?php include('assets/inc/header.inc.php'); ?>

@@ -4,6 +4,7 @@
       $linkpath = "";
       $templinkpath = "";
       session_start();
+      //test
 ?>
 
         <?php include('assets/inc/header.inc.php'); ?>

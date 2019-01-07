@@ -34,4 +34,4 @@
             
 
 
-            <?php include($_SERVER["DOCUMENT_ROOT"] . '/assets/inc/footer.inc.php'); ?>
+            <?php include('/assets/inc/footer.inc.php'); ?>

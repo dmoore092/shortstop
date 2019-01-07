@@ -5,7 +5,6 @@
       $templinkpath = "";
       session_start();
       //test
-      echo $_SERVER["DOCUMENT_ROOT"];
 ?>
 
         <?php include($_SERVER["DOCUMENT_ROOT"] . '/assets/inc/header.inc.php'); ?>

@@ -4,7 +4,7 @@
       $templinkpath = "";
       session_start();
 ?>
-<?php include("assets/inc/header.inc.php") ?>
+<?php include("/assets/inc/header.inc.php") ?>
         <div id="body-main">    
             <h1>Services</h1>
             <hr/>

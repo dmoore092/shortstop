@@ -23,7 +23,7 @@
         header("Location: /profile.php?id={$_SESSION['id']}");
       }
 ?>
-<?php include('assets/inc/header.inc.php'); ?>
+<?php include('/assets/inc/header.inc.php'); ?>
         <div id="body-main">
             <form id="player-form"
                          method = "POST"

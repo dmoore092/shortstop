@@ -8,7 +8,7 @@
       $templinkpath = "";
 ?>
 
-        <?php include('assets/inc/header.inc.php'); ?>
+        <?php include('/assets/inc/header.inc.php'); ?>
         <div id="body-main">
              <p>Logout</p>
             

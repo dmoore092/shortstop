@@ -6,7 +6,7 @@
         $linkpath = "";
         $templinkpath = "";
     //$page is labelled login for linking purposes for css
-     include("assets/inc/header.inc.php");
+     include("/assets/inc/header.inc.php");
 ?>
         <div id="body-main">
             <form id="player-form"

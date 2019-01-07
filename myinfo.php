@@ -5,7 +5,7 @@
         include_once "classes/Player.PDO.class.php";
        // include "assets/inc/submit-profile.inc.php"; 
 
-        include('assets/inc/header.inc.php'); 
+        include('/assets/inc/header.inc.php'); 
         $playerDB = new PlayerDB();
 
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {

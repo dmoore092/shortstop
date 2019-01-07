@@ -1,11 +1,11 @@
 <?php 
         session_start();
         $title="Profile"; $page="profile";
-        include_once "/classes/Player.PDO.class.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/classes/Player.PDO.class.php";
 
         $playerDB = new PlayerDB();     
 
-        include("assets/inc/header.inc.php");
+        include ("assets/inc/header.inc.php");
         
         $id=$_GET['id'];
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {

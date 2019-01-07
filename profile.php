@@ -1,7 +1,7 @@
 <?php 
         session_start();
         $title="Profile"; $page="profile";
-        include_once "../classes/Player.PDO.class.php";
+        include_once "www.dmwebdev.net/classes/Player.PDO.class.php";
 
         $playerDB = new PlayerDB();     
 

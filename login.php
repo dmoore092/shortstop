@@ -8,7 +8,7 @@
       include "classes/Player.PDO.class.php";
       $_SESSION['logged_in'] = 'false';
     if(isset($_POST["login"])){
-        echo "login called";
+        //echo "login called";
         $username = htmlentities(strip_tags(trim($_POST["username"])));//$_POST["username"];
         $password = htmlentities(strip_tags(trim($_POST["password"])));//$_POST["password"];
 
@@ -17,10 +17,10 @@
         $isLoggedIn = $player->login($username, $password);
     }
     if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
-        echo "<h1>Logged in</h1>";
+        //echo "<h1>Logged in</h1>";
         //var_dump($_SESSION['id']);
         //$id = $_SESSION['id'];
-        header("Location: profile.php?id={$_SESSION['id']}");
+        header("Location: /profile.php?id={$_SESSION['id']}");
       }
 ?>
 <?php include('assets/inc/header.inc.php'); ?>

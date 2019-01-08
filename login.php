@@ -4,7 +4,6 @@
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
-      echo "classes/Player.PDO.class.php";
       
       include("classes/Player.PDO.class.php");
       $_SESSION['logged_in'] = 'false';

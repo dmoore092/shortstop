@@ -1,6 +1,7 @@
 <?php
     //include_once ("Player.PDO.class.php");
-    //$playerDB = new PlayerDB();
+    require_once('/var/www/html/classes/Player.PDO.class.php');
+    $playerDB = new PlayerDB();
 
     $data = null;
     if(isset($_POST['search-btn'])){

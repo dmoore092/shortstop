@@ -7,7 +7,7 @@
       //test
 ?>
 
-        <?php include($_SERVER["DOCUMENT_ROOT"] . '/assets/inc/header.inc.php'); ?>
+        <?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">
                         <div id="content">
                 <section>

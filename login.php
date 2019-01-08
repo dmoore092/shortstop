@@ -4,9 +4,9 @@
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
-      echo $_SERVER["DOCUMENT_ROOT"] . "/classes/Player.PDO.class.php";
+      echo "classes/Player.PDO.class.php";
       
-      include($_SERVER["DOCUMENT_ROOT"] . "/classes/Player.PDO.class.php");
+      include("classes/Player.PDO.class.php");
       $_SESSION['logged_in'] = 'false';
     if(isset($_POST["login"])){
         //echo "login called";
@@ -24,7 +24,7 @@
         header("Location: http://".$_SERVER["HTTP_HOST"] . "/profile.php?id={$_SESSION['id']}");
       }
 ?>
-<?php include($_SERVER["DOCUMENT_ROOT"] . '/assets/inc/header.inc.php'); ?>
+<?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">
             <form id="player-form"
                          method = "POST"
@@ -63,4 +63,4 @@
 
             ?> 
             </form>
-            <?php include($_SERVER["DOCUMENT_ROOT"] . 'assets/inc/footer.inc.php'); ?>
+            <?php include('assets/inc/footer.inc.php'); ?>

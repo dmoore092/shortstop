@@ -3,7 +3,7 @@
       $linkpath = "";
       $templinkpath = "";
 ?>
-<?php include("/assets/inc/header.inc.php") ?>
+<?php include("assets/inc/header.inc.php") ?>
 <link rel="stylesheet" type="text/css" href="assets/css/services1.css" />
         <div id="body-main">    
             <h1>Services</h1>

@@ -13,9 +13,9 @@
         function __construct(){
             try{
                 // open a connection
-                //$this->dbConn = new PDO("mysql:host={$_SERVER['DB_SERVER']};dbname={$_SERVER['DB']}",
-                //$_SERVER['DB_USER'],$_SERVER['DB_PASSWORD']);
-                $this->dbConn = new PDO("mysql:host=127.0.0.1;dbname=sports,root, 1234");
+                $this->dbConn = new PDO("mysql:host={$_SERVER['DB_SERVER']};dbname={$_SERVER['DB']}",
+                $_SERVER['DB_USER'],$_SERVER['DB_PASSWORD']);
+                //$this->dbConn = new PDO("mysql:host=127.0.0.1;dbname=sports,root, 1234");
                 // Change the error reporting for development
                 $this->dbConn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 

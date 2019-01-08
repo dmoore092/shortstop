@@ -1,7 +1,7 @@
 SetEnv DB sports
 SetEnv DB_SERVER localhost 
 SetEnv DB_PASSWORD root
-SetEnv DB_USER keyhole1
+SetEnv DB_USER 1234
 
 php_flag display_startup_errors off
 php_flag display_errors on

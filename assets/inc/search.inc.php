@@ -1,7 +1,7 @@
 <?php
     require_once('./Player.PDO.class.php');
     $playerDB = new PlayerDB();
-
+     phpversion();
     $data = null;
     if(isset($_POST['search-btn'])){
         //echo "search triggered";

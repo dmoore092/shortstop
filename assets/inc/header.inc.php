@@ -14,7 +14,7 @@
     <body>
     <?php echo $_SERVER["DOCUMENT_ROOT"] . "/assets/inc/search.inc.php" ?>
 <header>
-    <?php include ($_SERVER["DOCUMENT_ROOT"] . "/assets/inc/search.inc.php"); //on dev server, remove the first /?>
+    <?php include ("/html/assets/inc/search.inc.php"); //on dev server, remove the first /?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
                 <script>

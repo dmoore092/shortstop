@@ -1,10 +1,676 @@
 <?php
     //require_once('./Player.PDO.class.php');
     //start temp part
-    require_once ("/var/www/html/classes/classes/PDO.DB.class.php");
+    //require_once ("/var/www/html/classes/classes/PDO.DB.class.php");
+     /*
+    * DB class contains all generalized methods for creating a connection to,
+    * retrieving from, updating, deleting from, and inserting into the database.
+	* version 11/8/2018
+	*/
+    
+    class DB{
+     private $dbConn;
+     /**
+      * __construct() - creates a new PDO database object and opens a connection.
+      */
+     function __construct(){
+         try{
+             // open a connection
+             $this->dbConn = new PDO("mysql:host={$_SERVER['DB_SERVER']};dbname={$_SERVER['DB']}",
+                 $_SERVER['DB_USER'],$_SERVER['DB_PASSWORD']);
 
-    include("/var/www/html/classes/classes/Player.class.php");
+             // Change the error reporting for development
+             $this->dbConn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
+         }
+         catch(PDOException $e){
+             echo $e;
+             throw new Exception("Problem Connecting to Server \n" . $e);
+         }
+     } // construct
+
+     /**
+      * getConn() - Returns the connection object for easy access
+      */
+     function getConn(){
+         return $this->dbConn;
+     }
+
+     /**
+      * logout() - unset and destroys a session, effectively logging a user
+      */
+     function logOut()
+     {
+         session_unset();
+
+         unset($_COOKIE[session_name()]);
+         setcookie(session_name(), "", time() - 3600, "/");
+
+         session_destroy();   
+         
+         header("Location: ./index.php");
+         exit; 
+     }
+
+     /**
+      * updateField() - updates a column for any field for any table
+      */
+     function updateField($tableName, $fieldName, $value, $id){
+         try{
+             $query = "UPDATE $tableName SET $fieldName = :value WHERE id = :id";
+             $stmt = $this->dbConn->prepare($query);
+             $stmt->execute(array(
+                 ":value"=>$value,
+                 ":id"=>$id
+             ));
+         }catch(PDOException $e){
+             return "A problem occurred updating $tableName";
+         }
+     }
+
+     /**
+      * delete() - deletes any entry for any table
+      */
+     function delete($tableName, $id){
+         try{
+             $query = "DELETE FROM $tableName WHERE id = :id";
+             $stmt = $this->dbConn->prepare($query);
+             $stmt->execute(array(
+                 ":id"=>$id
+             ));
+         }catch(PDOException $e){
+             return "A problem occurred deleting from $tableName";
+         }
+     }
+
+     /**
+      * getFieldById() - Returns a specific entry from any table 
+      */
+     function getFieldById($tableName, $fieldName, $id){
+         $data = array();
+         try{
+             $query = "SELECT :fieldName FROM :table WHERE id = :id";
+             $stmt = $this->dbConn->prepare($query);
+             $stmt->setFetchMode(PDO::FETCH_ASSOC);
+             $stmt->bindParam(array(
+                 ":table"=>$tableName,
+                 ":column"=>$fieldName,
+                 ":id"=>$id
+             ));
+             $stmt->execute();
+             while($item = $stmt->fetch()){
+                 $data[] = $item;
+             }
+         }catch(PDOException $e){
+             return "A problem occurred selecting the $fieldName from the table $tableName";
+         }
+         return $data;
+     }
+
+     /**
+      * getEverythingAsObjects() - returns everything in the given table as objects of the given class
+      */
+     function getEverythingAsObjects($tableName, $className){
+         include_once("$className.class.php");
+         $data = array();
+         try{
+             //$query = "SELECT * FROM $tableName";
+             $query = "SELECT projectName, name as 'projectLead', email, projectDescription  FROM $tableName p JOIN user u WHERE p.projectLead = u.id";
+             $stmt = $this->dbConn->prepare($query);
+             $stmt->execute();
+             $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
+             while($item = $stmt->fetch()){
+                 $data[] = $item;
+             }
+         }catch(PDOException $e){
+             return "A problem occurred getting everything from the table $tableName";
+         }
+         return $data;
+     }
+
+     function getObjectByID($table, $className, $id){
+         $object = null;
+         $query = "SELECT * FROM $table WHERE id = :id";
+         $stmt = $this->dbConn->prepare($query);
+         $stmt->bindParam(":id", $id);
+         $stmt->execute();
+         $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
+         $object = $stmt->fetch();
+
+         return $object;
+     }
+
+     function getObjectByUsername($table, $className, $username){
+         $object = null;
+         $query = "SELECT * FROM $table WHERE username = :username";
+         $stmt = $this->dbConn->prepare($query);
+         $stmt->bindParam(":username", $username);
+         $stmt->execute();
+         $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
+         $object = $stmt->fetch();
+
+         return $object;
+     }
+
+      function sanitize($value){
+           $value = trim($value);
+           $value = stripslashes($value);
+           $value = strip_tags($value);
+           $value = htmlentities($value);
+           return $value;
+      }
+
+      function isAlphabetic($value){
+           $reg = "/^[a-zA-Z] [a-zA-Z ]+$/";
+           return preg_match($reg, $value);
+      }
+
+      function isAlphaNumeric($value){
+           $reg = "/^[a-zA-Z0-9 ]+$/";
+           return preg_match($reg, $value);
+      }
+
+      function isNumeric($value){
+           $reg = "/^[0-9]*$/";
+           return preg_match($reg, $value);
+     }
+ 
+     function isHeightFeet($value){
+         echo $value;
+           //if($value == '4' || $value == '5' || $value == '6'){
+         return true;
+         //}
+     }
+
+     function isHeightInches($value){
+           $reg = "/^([0-9]|1[011])$/";
+         return preg_match($reg, $value);
+         //return true;
+     }
+
+     function isValidGpa($value){
+         $reg = "/^[0-4][.][0-9][0-9]$/";
+         return preg_match($reg, $value);
+     }
+
+     function isValidEmail($value){
+         $reg = "/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/";
+         return preg_match($reg, $value);
+     }
+
+     function isValidPhone($value){
+         $reg = "/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/";
+         return preg_match($reg, $value);
+     }
+
+     function isMaleOrFemale($value){
+         $value = strtolower($value);
+         if($value == "male" || $value == "female"){
+             return true;
+         }
+         else{
+             return false;
+         }
+     }
+     function isZip($value){
+         $reg = "/^\d{5}(?:[-\s]?\d{4})?$/";
+         return preg_match($reg, $value);
+     }
+ 
+     function isYouTube($value){
+         if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $value, $match)) {
+             $video_id = $match[1];
+             //var_dump($match[1]);
+         }
+         return $video_id;
+     }
+ } // class
+    //include("/var/www/html/classes/classes/Player.class.php");
+     /*
+	* User class contains all of the methods and variables for
+	* interacting with a Player object
+	*/
+	class Player{
+		private $id;
+		private $username;
+		private $password;
+		private $name;
+		private $gender;
+		private $email;
+		private $cellPhone;
+		private $homePhone;
+		private $address;
+		private $city;
+		private $state;
+		private $zip;
+		private $highschool;
+		private $weight;
+		private $heightFeet;
+		private $heightInches;
+		private $gradYear;
+		private $sport;
+		private $primaryPosition;
+		private $secondaryposition;
+		private $travelTeam;
+		private $gpa;
+		private $sat;
+		private $act;
+		private $ref1Name;
+		private $ref1JobTitle;
+		private $ref1Email;
+		private $ref1Phone;
+		private $ref2Name;
+		private $ref2JobTitle;
+		private $ref2Email;
+		private $ref2Phone;
+		private $ref3Name;
+		private $ref3JobTitle;
+		private $ref3Email;
+		private $ref3Phone;
+		private $persStatement;
+		private $commitment;
+		private $service;
+		private $profileImage;
+		private $showcase1;
+		private $showcase2;
+		private $showcase3;
+		private $persontype;
+		private $college;
+		private $twitter;
+		private $instagram;
+		private $facebook;
+		private $website;
+		private $characteristics;
+		private $velocity;
+		private $sixtyyarddash;
+		private $home2first;
+		private $gpareq;
+		private $satactreq;
+		
+		/**
+		 * getId() - returns the User's ID
+		 */
+		public function getId(){
+			return $this->id;
+		}
+		
+		/**
+		 * getUsername() - returns the User's username
+		 */
+		public function getUsername(){
+			return $this->username;
+		}
+		
+		/**
+		 * getPassword() - returns the User's hashed password from the DB
+		 */
+		public function getPassword(){
+			return $this->pass;
+		}
+		
+		/**
+		 * getName() - returns the User's Name
+		 */
+		public function getName(){
+			return $this->name;
+		}
+		
+		/**
+		 * getGender() - returns the User's gender
+		 */
+		public function getGender(){
+			return $this->gender;
+		}
+		
+		/**
+		 * getEmail() - returns the User's Email
+		 */
+		public function getEmail(){
+			return $this->email;
+		}
+
+		/**
+		 * getCellPhone() - returns the User's cellPhone
+		 */
+		public function getCellPhone(){
+			return $this->cellPhone;
+		}
+
+		/**
+		 * getPhone() - returns the User's homePhone
+		 */
+		public function getHomePhone(){
+			return $this->homePhone;
+		}
+		/**
+		 * getIAddress() - returns the User's Address
+		 */
+		public function getAddress(){
+			return $this->address;
+		}
+		
+		/**
+		 * getCity() - returns the User's City
+		 */
+		public function getCity(){
+			return $this->city;
+		}
+		
+		/**
+		 * getState() - returns the User's State
+		 */
+		public function getState(){
+			return $this->state;
+		}
+		
+		/**
+		 * getZip() - returns the User's Zip
+		 */
+		public function getZip(){
+			return $this->zip;
+		}
+		
+		/**
+		 * getHighschool() - returns the User's highschool
+		 */
+		public function getHighschool(){
+			return $this->highschool;
+		}
+		
+		/**
+		 * getWeight() - returns the User's Weight
+		 */
+		public function getWeight(){
+			return $this->weight;
+		}
+		
+		/**
+		 * getHeight() - returns the User's Height feet
+		 */
+		public function getHeightFeet(){
+			return $this->heightFeet;
+		}
+
+		/**
+		 * getHeight() - returns the User's Height inches
+		 */
+		public function getHeightInches(){
+			return $this->heightInches;
+		}
+
+		/**
+		 * getGradYear() - returns the User's GradYear
+		 */
+		public function getGradYear(){
+			return $this->gradYear;
+		}
+		
+		/**
+		 * getSport() - returns the User's Sport 
+		 */
+		public function getSport(){
+			return $this->sport;
+		}
+
+		/**
+		 * getPrimaryPosition() - returns the User's PrimaryPosition
+		 */
+		public function getPrimaryPosition(){
+			return $this->primaryPosition;
+		}
+
+		/**
+		 * getSecondaryPosition() - returns the User's Secondary Position
+		 */
+		public function getSecondaryPosition(){
+			return $this->secondaryPosition;
+		}
+
+		/**
+		 * getTravelTeam() - returns the User's Travel Team
+		 */
+		public function getTravelTeam(){
+			return $this->travelTeam;
+		}
+
+		/**
+		 * getGpa() - returns the User's GPA
+		 */
+		public function getGpa(){
+			return $this->gpa;
+		}
+
+		/**
+		 * getSat() - returns the User's SAT
+		 */
+		public function getSat(){
+			return $this->sat;
+		}
+
+		/**
+		 * getAct() - returns the User's ACT
+		 */
+		public function getAct(){
+			return $this->act;
+		}
+		
+		/**
+		 * getRef1Name() - returns the User's Reference 1 Name
+		 */
+		public function getRef1Name(){
+			return $this->ref1Name;
+		}
+		
+		/**
+		 * getRef1JobTitle() - returns the User's Reference 1 Job Title
+		 */
+		public function getRef1JobTitle(){
+			return $this->ref1JobTitle;
+		}
+
+		/**
+		 * getRef1Email() - returns the User's Reference 1 Email
+		 */
+		public function getRef1Email(){
+			return $this->ref1Email;
+		}
+
+		/**
+		 * getRef1Phone() - returns the User's Reference 1 Phone
+		 */
+		public function getRef1Phone(){
+			return $this->ref1Phone;
+		}
+
+				/**
+		 * getRef2Name() - returns the User's Reference 2 Name
+		 */
+		public function getRef2Name(){
+			return $this->ref2Name;
+		}
+		
+		/**
+		 * getRef2JobTitle() - returns the User's Reference 2 Job Title
+		 */
+		public function getRef2JobTitle(){
+			return $this->ref2JobTitle;
+		}
+
+		/**
+		 * getRef2Email() - returns the User's Reference 2 Email
+		 */
+		public function getRef2Email(){
+			return $this->ref2Email;
+		}
+
+		/**
+		 * getRef2Phone() - returns the User's Reference 2 Phone
+		 */
+		public function getRef2Phone(){
+			return $this->ref2Phone;
+		}
+
+				/**
+		 * getRef3Name() - returns the User's Reference 3 Name
+		 */
+		public function getRef3Name(){
+			return $this->ref3Name;
+		}
+		
+		/**
+		 * getRef3JobTitle() - returns the User's Reference 3 Job Title
+		 */
+		public function getRef3JobTitle(){
+			return $this->ref3JobTitle;
+		}
+
+		/**
+		 * getRef3Email() - returns the User's Reference 3 Email
+		 */
+		public function getRef3Email(){
+			return $this->ref3Email;
+		}
+
+		/**
+		 * getRef3Phone() - returns the User's Reference 3 Phone
+		 */
+		public function getRef3Phone(){
+			return $this->ref3Phone;
+		}
+
+		/**
+		 * getPersStatement() - returns the User's Personal Statement
+		 */
+		public function getPersStatement(){
+			return $this->persStatement;
+		}
+
+		/**
+		 * getCommitment() - returns the User's Commitment
+		 */
+		public function getCommitment(){
+			return $this->commitment;
+		}
+
+		/**
+		 * getService() - returns the User's Chosen Service
+		 */
+		public function getService(){
+			return $this->service;
+		}
+
+		/**
+		 * getProfileImage() - returns the User's Profile Image
+		 */
+		public function getProfileImage(){
+			return $this->profileImage;
+		}
+
+		/**
+		 * getShowcase1() - returns the User's 1st showcase video
+		 */
+		public function getShowcase1(){
+			return $this->showcase1;
+		}
+
+		/**
+		 * getShowcase2() - returns the User's 2nd showcase video
+		 */
+		public function getShowcase2(){
+			return $this->showcase2;
+		}
+
+		/**
+		 * getShowcase3() - returns the User's 3rd showcase video
+		 */
+		public function getShowcase3(){
+			return $this->showcase3;
+		}
+
+		/**
+		 * getPersonType() - returns the User's persontype
+		 */
+		public function getPersonType(){
+			return $this->persontype;
+		}
+
+		/**
+		 * getCollege() - returns the coach's college
+		 */
+		public function getCollege(){
+			return $this->college;
+		}
+
+		/**
+		 * getTwitter() - returns the coach's twitter
+		 */
+		public function getTwitter(){
+			return $this->twitter;
+		}
+
+		/**
+		 * getInstagram() - returns the coach's instagram
+		 */
+		public function getInstagram(){
+			return $this->instagram;
+		}
+
+		/**
+		 * getFacebook() - returns the coach's facebook
+		 */
+		public function getFacebook(){
+			return $this->facebook;
+		}
+
+		/**
+		 * getWebsite() - returns the coach's website
+		 */
+		public function getWebsite(){
+			return $this->website;
+		}
+
+		/**
+		 * getChacteristics() - returns the coach's desires characteristics in a player
+		 */
+		public function getCharacteristics(){
+			return $this->characteristics;
+		}
+
+		/**
+		 * getVelocity() - returns the coach's desires velocity in a player
+		 */
+		public function getVelocity(){
+			return $this->velocity;
+		}
+
+		/**
+		 * getSixtyYardDash() - returns the coach's desires 60 yard dash
+		 */
+		public function getSixtyyardDash(){
+			return $this->sixtyyarddash;
+		}
+
+		/**
+		 * getHome2First() - returns the coach's desired home to 1st time
+		 */
+		public function getHome2First(){
+			return $this->home2first;
+		}
+
+		/**
+		 * getGpaReq() - returns the coach's desired gpa requirement
+		 */
+		public function getGpaReq(){
+			return $this->gpareq;
+		}
+
+		/**
+		 * getActSat() - returns the coach's desired act/sat scores
+		 */
+		public function getSatAct(){
+			return $this->satactreq;
+		}
+	}
     /*
     * UserDB class contains all of the methods for using PHP Data Objects to 
     * interface with the database, specifically in relation to users.
@@ -1167,7 +1833,6 @@
               return $html;
          }
     } // class
-?>
 
     //end temp part
     $playerDB = new PlayerDB();

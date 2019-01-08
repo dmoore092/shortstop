@@ -13,7 +13,7 @@
     </head>
     <body>
 <header>
-    <?php include ("/var/www/html/assets/inc/search.inc.php"); ?>
+    <?php //include ("/var/www/html/assets/inc/search.inc.php"); ?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
                 <script>

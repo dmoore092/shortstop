@@ -1,7 +1,7 @@
 <?php 
-    require_once ("/var/www/html/classes/classes/PDO.DB.class.php");
+    require_once ("/var/www/html/classes/classes/PDO.DB.Class.php");
 
-	include("/var/www/html/classes/classes/Player.class.php");
+	include("/var/www/html/classes/classes/Player.Class.php");
 
 	/*
 	* UserDB class contains all of the methods for using PHP Data Objects to 

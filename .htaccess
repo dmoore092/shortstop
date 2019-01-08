@@ -1,5 +1,5 @@
 SetEnv DB sports
-SetEnv DB_SERVER localhost 
+SetEnv DB_SERVER localhost
 SetEnv DB_PASSWORD 1234
 SetEnv DB_USER root
 

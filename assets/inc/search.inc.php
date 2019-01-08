@@ -1,5 +1,6 @@
 <?php
-    require_once('/var/www/html/Player.PDO.class.php');
+    set_include_path('.:/var/www/html/classes');
+    require_once('/var/www/html/classes/Player.PDO.class.php');
     $playerDB = new PlayerDB();
 
     $data = null;

@@ -5,7 +5,7 @@
       $linkpath = "";
       $templinkpath = "";
       
-      include($_SERVER["DOCUMENT_ROOT"] . "/classes/Player.PDO.class.php");
+      include("/html/classes/Player.PDO.class.php");
       $_SESSION['logged_in'] = 'false';
     if(isset($_POST["login"])){
         //echo "login called";

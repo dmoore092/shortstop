@@ -12,7 +12,6 @@
         <meta name="description" content="We strive to provide High School and JUCO athletes the tools to successfully promote themselves to college coaches by assisting athletes through the recruiting process."/>
     </head>
     <body>
-    <?php echo $_SERVER["DOCUMENT_ROOT"] . "/assets/inc/search.inc.php" ?>
 <header>
     <?php include ("/html/assets/inc/search.inc.php"); //on dev server, remove the first /?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->

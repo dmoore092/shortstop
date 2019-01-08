@@ -1,5 +1,5 @@
 <?php 
-    require_once ("/var/www/html/classes/classes/PDO.DB.Class.php");
+    require_once ("/var/www/html/classes/PDO.DB.Class.php");
 
 	include("/var/www/html/classes/classes/Player.Class.php");
 

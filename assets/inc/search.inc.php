@@ -1,5 +1,5 @@
 <?php
-    include_once "/classes/Player.PDO.class.php";
+    include_once "classes/Player.PDO.class.php";
     $playerDB = new PlayerDB();
 
     $data = null;

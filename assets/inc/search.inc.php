@@ -1,7 +1,5 @@
 <?php
-     define('__ROOT__', dirname(dirname(__FILE__))); 
-     require_once(__ROOT__.'/classes/Player.PDO.class.php'); 
-     //require_once '/var/www/html/classes/Player.PDO.class.php';
+    require_once '/var/www/html/classes/Player.PDO.class.php';
     $playerDB = new PlayerDB();
 
     $data = null;

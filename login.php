@@ -52,11 +52,12 @@
                                    value="1234"
                                    onclick="" />
                         </p>
-                        <input type="submit"
+                        <button type="submit" name="login" class="btn-all-buttons" id="btn-login">Login</button>
+                        <!-- <input type="submit"
                                value="Login"
-                               name = "login"
+                               name="login"
                                class="btn-all-buttons"
-                               id="btn-login"/>
+                               id="btn-login"/> -->
                         <button class="btn-all-buttons" id="btn-create-account" onclick=location.href = register.php>Create Account</button>
                 <?php 
 

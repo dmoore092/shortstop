@@ -1,6 +1,6 @@
 <?php $relpath= ""; $title="Female Athletes"; $page="mfathletes";
     session_start();
-    include_once ("classes/Player.PDO.class.php");
+    include_once ("classes/Player.PDO.Class.php");
     include("assets/inc/header.inc.php");
 
     $playerDB = new PlayerDB();
@@ -9,7 +9,5 @@
     //var_dump($data);
     echo $playerDB->getPlayersAsTable($data);
 
-
     include("assets/inc/footer.inc.php");
-
 ?>

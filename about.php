@@ -7,5 +7,5 @@
 <?php include("assets/inc/header.inc.php") ?>
         <div id="body-main">    
             <p> About Page</p>
-
+        <div>
  <?php include("assets/inc/footer.inc.php") ?>

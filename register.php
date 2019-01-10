@@ -89,6 +89,7 @@
                     }
                 ?>
             </form>      
+            <?php include("assets/inc/footer.inc.php"); ?>
         </div><!-- end #main-body -->
     </body>
 </html>

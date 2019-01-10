@@ -6,3 +6,25 @@
 #copyright{
     margin-top: 20px;
 }
+#follow{
+    display: none;
+}
+@media only screen and (min-width: 520px) {
+    #foot-wrapper{
+        margin-top: 0px;
+        /* border: 2px solid black; */
+        justify-content: flex-start;
+    }
+    #sm-footer{
+        /* border: 2px solid black; */
+        width: 25%;
+        margin-right: 43%;
+    }
+    #follow{
+        margin-top: 20px;
+        /* border: 2px solid black; */
+    }
+    #follow{
+        display: block;
+    }
+}

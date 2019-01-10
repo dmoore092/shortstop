@@ -94,7 +94,7 @@
 			//var_dump($player->getID());
             //$data = $this->getEverythingAsObjects("project", "Project");
             if($data != null && count($data) > 0){
-                $html = "<div id='table-wrapper'><table>\n";
+                $html = "<div id='body-main'> <div id='table-wrapper'><table>\n";
                 if(true){
                     $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th><th>Email</th></tr>";
                     foreach($data as $player){
@@ -114,7 +114,6 @@
                             <td>{$project->getProjectLead()}</td>
                             <td><a href='mailto:{$project->getEmail()}'>{$project->getEmail()}</a></td>
                             <td>{$project->getDescription()}</td>
-        
                         </tr>";
                     }
                 }

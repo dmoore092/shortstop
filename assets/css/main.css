@@ -97,6 +97,9 @@ hr{
     text-align: left;
     width: 20%;
     border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     
 }
 #textbox, #button{
@@ -110,7 +113,7 @@ hr{
     text-decoration: none;
     background: black;
     border-radius: 4px;
-    padding: .5em 0 .5em 2em;
+    padding: 1em 0 1em 2em;
     display: inline-block;
 }
 .navicon:before {

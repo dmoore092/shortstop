@@ -7,7 +7,7 @@
       //test
 ?>
 
-        <?php include('/var/www/html/assets/inc/header.inc.php'); ?>
+        <?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">
                         <div id="content">
                 <section>

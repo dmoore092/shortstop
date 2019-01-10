@@ -14,7 +14,7 @@
     <body>
 <header>
     <?php //include ("/var/www/html/assets/inc/search.inc.php"); ?>
-    <?php require_once('/var/www/html/assets/inc/search.inc.php'); ?>
+    <?php require_once('assets/inc/search.inc.php'); ?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
                 <script>
@@ -36,12 +36,14 @@
                     <a href="http://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
                 </div>
                 <ul>
-                    <?php // var_dump($_SESSION['logged_in']); ?>
-                    <?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){ ?>
-                    <li id="big-login-button"><a class="link" href="logout.php">Logout</a></li>
-                    <?php }else{ ?>
-                    <li id="big-login-button"><a class="link" href="login.php">Login</a></li>
-                    <?php } ?>
+                    <?php
+                        if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){
+                            echo "<li id='big-login-button'><a class='link' href='logout.php'>Logout</a></li>";
+                        }
+                        else{
+                            echo "<li id='big-login-button'><a class='link' href='login.php'>Login</a></li>";
+                        }
+                    ?>
                    <!-- <li id="big-login-button"><a href="login.php">Login</a></li>-->
                 </ul>
             </div><!-- #big-login end
@@ -55,7 +57,15 @@
             </div>
                 <div class="nav">
                     <ul>
-                        <li id="mobile-login"><a href="login.php">Login</a></li>
+                        <!-- <li id="mobile-login"><a href="login.php">Login</a></li> -->
+                        <?php
+                            if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){
+                                echo "<li id='mobile-login'><a class='link' href='logout.php'>Logout</a></li>";
+                            }
+                            else{
+                                echo "<li id='mobile-login'><a class='link' href='login.php'>Login</a></li>";
+                            }
+                        ?>
                         <li id="current"><a href="index.php">Home</a></li>
                         <li><a href="<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){echo "profile.php?id=".$_SESSION['id'];}else{echo "login.php";}?>">My Profile</a></li>
                         <li><a href="about.php">About Us</a></li>

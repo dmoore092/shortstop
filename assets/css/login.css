@@ -3,8 +3,7 @@
 
 /*login.php part*/
 #player-form{
-    width: 70%;
-    margin: auto;
+    width: 60%;
     padding: 60px;
    /* border: 2px solid black; */
     border-radius: 5px;   
@@ -14,7 +13,11 @@
     border-radius: 5px;
     font-size: 1.4em;
     margin: 15px 0px;
-    padding-left: 10px;
+    padding-left: 7px;
+    width: 230px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 #player-form>h2{
     text-align: center;

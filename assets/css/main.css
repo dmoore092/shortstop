@@ -163,6 +163,7 @@ section, article{
     text-align: center;
     text-decoration: none;
     border-radius: 3px;
+    margin-right: 2px;
 }
 .fa-facebook{
     background: #3b5998;

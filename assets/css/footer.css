@@ -1,0 +1,11 @@
+#foot-wrapper{
+    display: flex;
+    padding: 0;
+    margin-top: 150px;
+}
+#sm-footer{
+    float: right;
+    margin-left: 10%;
+    border: 2px solid black;
+    color: black;
+}

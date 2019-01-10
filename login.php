@@ -52,7 +52,7 @@
                                    value="1234"
                                    onclick="" />
                         </p>
-                        <input type="submit"
+                        <input type="button"
                                value="Login"
                                name = "login"
                                class="btn-all-buttons"

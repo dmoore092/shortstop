@@ -46,6 +46,7 @@ hr{
     position: relative;
     text-align: center;
     color: white;
+    margin-bottom: 20px;
 }
 .index-image-overlay{
     position: absolute;

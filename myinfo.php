@@ -2,7 +2,7 @@
         session_start();
         $title="My Info"; $page="myinfo";
 
-        include_once ("classes/Player.PDO.class.php");
+        include_once ("classes/Player.PDO.Class.php");
        // include "assets/inc/submit-profile.inc.php"; 
 
         include('assets/inc/header.inc.php'); 

@@ -4,6 +4,7 @@
         <title><?php echo $title ?> | Athletic Prospects</title>
       <!--  <link rel="stylesheet" type="text/css" href="assets/css/main.css" /> -->
         <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/footer.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/<?php echo $page ?>.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--icon library -->
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
@@ -29,7 +30,7 @@
                     }
                 </script>
             <div id="big-login">
-                <div id="social-media">
+                <div class="social-media">
                     <span id="followUS">Follow US </span>
                      <a href="http://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
                     <a href="http://www.twitter.com" target="_blank" class="fa fa-twitter"</a>

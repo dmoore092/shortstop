@@ -156,6 +156,26 @@ hr{
 section, article{
     margin-bottom: 10px;
 }
+.fa{
+    padding: 11px;
+    font-size: 30px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+}
+.fa-facebook{
+    background: #3b5998;
+    color: white;
+}
+.fa-twitter{
+    background: #55ACEE;
+    color: white;
+}
+.fa-instagram{
+    background: #125688;
+    color: white;
+}
 @media only screen and (min-width: 520px) {
     .navicon {display: none;}
     #body-main, #big-login>ul, #search-container, .nav>ul{

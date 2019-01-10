@@ -27,6 +27,9 @@
     width: 115%;
     background-color: #bb0a1e;
     color: white;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 #persontype{
     width: 115%;

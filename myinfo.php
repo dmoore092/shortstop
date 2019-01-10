@@ -22,7 +22,7 @@
           header("Location: login.php");
         }
           if(isset($_POST['updateUserInfo'])) {
-              echo "update being attempted";
+              //echo "update being attempted";
             $updateArray = array();
             if(isset($_SESSION['id'])){
                 echo "ID is set";

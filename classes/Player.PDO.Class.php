@@ -134,17 +134,18 @@
 			//var_dump($player->getID());
             //$data = $this->getEverythingAsObjects("project", "Project");
             if($data != null && count($data) > 0){
-                $html = "<hr/><div id='table-wrapper'><table>\n";
+                $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
                 if(true){
-                    $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th><th>Email</th></tr>";
+                    $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th></tr>";
                     foreach($data as $player){
 						$html .= "
                         <tr>
                             <td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
 							<td>{$player->getSport()}</td>
 							<td>{$player->getPersonType()}</td>
-                            <td><a href='mailto:'{$player->getEmail()}'>{$player->getEmail()}</a></td>
-                        </tr>\n";
+						</tr>\n";
+						//<th>Email</th>
+						//<td><a href='mailto:'{$player->getEmail()}'>{$player->getEmail()}</a></td>
                     }
                 }else{
                     $html .= "<tr><th>Player Name</th><th>Sport</th><th>Email</th></tr>";

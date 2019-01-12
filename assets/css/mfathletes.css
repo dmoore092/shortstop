@@ -16,6 +16,10 @@ th{
 tr{
     border-bottom: 1px solid black;
 }
+td{
+    height: 30px;
+    padding: 5px;
+}
 tr:nth-child(even){
     background: #ccc;
 }

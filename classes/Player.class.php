@@ -18,8 +18,7 @@
 		private $zip;
 		private $highschool;
 		private $weight;
-		private $heightFeet;
-		private $heightInches;
+		private $height;
 		private $gradYear;
 		private $sport;
 		private $primaryPosition;
@@ -158,17 +157,10 @@
 		}
 		
 		/**
-		 * getHeight() - returns the User's Height feet
+		 * getHeight() - returns the User's Height
 		 */
-		public function getHeightFeet(){
-			return $this->heightFeet;
-		}
-
-		/**
-		 * getHeight() - returns the User's Height inches
-		 */
-		public function getHeightInches(){
-			return $this->heightInches;
+		public function getHeight(){
+			return $this->height;
 		}
 
 		/**

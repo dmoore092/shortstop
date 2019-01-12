@@ -86,9 +86,8 @@
                 }
 
                 if(isset($_POST['highschool'])){
-                  if($playerDB->isAlphaNumeric($_POST['highschool']) != 0){
-                      $updateArray['highschool'] = $playerDB->sanitize($_POST['highschool']);
-                  }
+                    $updateArray['highschool'] = $playerDB->sanitize($_POST['highschool']);
+                    echo $updateArray['highschool'];
                 }
 
                 if(isset($_POST['weight'])){
@@ -97,16 +96,9 @@
                   }
                 }
                 
-                if(isset($_POST['heightFeet'])){
-                  if($playerDB->isHeightFeet($_POST['heightFeet']) != 0){
-                      $updateArray['heightFeet'] = $playerDB->sanitize($_POST['heightFeet']);
-                  }
+                if(isset($_POST['height'])){
+                    $updateArray['height'] = $playerDB->sanitize($_POST['height']);
                 }
-                if(isset($_POST['heightInches'])){
-                    if($playerDB->isHeightInches($_POST['heightInches']) != 0){
-                        $updateArray['heightInches'] = $playerDB->sanitize($_POST['heightInches']);
-                    }
-                  }
 
                 if(isset($_POST['gradYear'])){
                   if($playerDB->isAlphaNumeric($_POST['gradYear']) != 0){
@@ -139,9 +131,7 @@
                 }
 
                 if(isset($_POST['gpa'])){
-                  if($playerDB->isValidGpa($_POST['gpa']) != 0){
-                      $updateArray['gpa'] = $playerDB->sanitize($_POST['gpa']);
-                  }
+                    $updateArray['gpa'] = $playerDB->sanitize($_POST['gpa']);
                 }
 
                 if(isset($_POST['sat'])){
@@ -333,7 +323,16 @@
                    $playerDB->updateUser($updateArray);
               }
           }
-       // }
-          
+       // }    
        include('assets/inc/footer.inc.php');
+       echo "<script>
+                function validateForm() {
+                    var check = document.forms['player-form']['highschool'].value;
+                    if (check == '') {
+                        alert('Your highschool must be filled out');
+                        document.getElementById('highschool').style.backgroundColor='red';
+                        return false;
+                    }
+                };
+            </script>";
 ?>

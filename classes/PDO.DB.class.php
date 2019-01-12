@@ -171,19 +171,6 @@
 		    $reg = "/^[0-9]*$/";
 		    return preg_match($reg, $value);
         }
-    
-        function isHeightFeet($value){
-            echo $value;
-		    //if($value == '4' || $value == '5' || $value == '6'){
-            return true;
-            //}
-        }
-
-        function isHeightInches($value){
-		    $reg = "/^([0-9]|1[011])$/";
-            return preg_match($reg, $value);
-            //return true;
-        }
 
         function isValidGpa($value){
             $reg = "/^[0-4][.][0-9][0-9]$/";
@@ -196,8 +183,10 @@
         }
 
         function isValidPhone($value){
-            $reg = "/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/";
-            return preg_match($reg, $value);
+            //$reg = "/^[2-9]\d{2}-\d{3}-\d{4}$/";
+            //return preg_match($reg, $value);
+            var_dump($value);
+            return true;
         }
 
         function isMaleOrFemale($value){

@@ -58,7 +58,6 @@ h3{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        
     }
     #height{
         width: 47%;
@@ -77,12 +76,21 @@ h3{
         color: white;
         height: 56px;
         width: 40%;
-        margin-left: 30%;
+        margin-left: 10%;
     }
     #btnSubmit:hover{
         background-color: #be1f1f;
         color: white;
     }
+    label{
+        display: block;
+        width: 100%;
+    }
+    input{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
 }
 
 /*
@@ -92,4 +100,17 @@ h3{
 		name = 'getPlayers'
 		class='button'
 		id='getPlayers'/>
-*/
+
+
+
+
+        <label class='span'>Height*: &nbsp; </label>
+						  	<input type='text'
+								id = 'heightFeet'
+								name= 'heighFeet'
+								size = '35'
+								maxlength = '5'
+								placeholder = '5'10''
+								value='{$player->getHeightFeet()}'
+								onclick='' />
+        */

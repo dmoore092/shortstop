@@ -69,6 +69,27 @@
                 throw new Exception("Problem getting players from database.");
             }
 		}
+
+		function getPlayersByRole($role){
+			try{
+                $data = array();
+                $stmt = $this->dbConn->prepare("SELECT id, username, name, email, sport, persontype FROM players WHERE persontype = :role"); 
+                $stmt->bindParam("role",$role,PDO::PARAM_STR);    
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
+                while($databaseUser = $stmt->fetch()){
+					$data[] = $databaseUser;
+					//var_dump($databaseUser);
+				}
+				//var_dump($data);
+                return $data;
+            }
+            catch(PDOException $e){
+                echo $e->getMessage();
+                throw new Exception("Problem getting players from database.");
+            }
+		}
+
 		function getPlayersFromSearch($data=null){
             if($data != null && count($data) > 0){
                 $html = "<div id='table-wrapper'><table>\n";
@@ -173,11 +194,8 @@
 					case 'weight':
 						$this->updateField('players', 'weight', $val, $id);
 						break;
-					case 'heightFeet':
-						$this->updateField('players', 'heightFeet', $val, $id);
-						break;
-					case 'heightInches':
-						$this->updateField('players', 'heightInches', $val, $id);
+					case 'height':
+						$this->updateField('players', 'height', $val, $id);
 						break;
 					case 'gradYear':
 						$this->updateField('players', 'gradYear', $val, $id);
@@ -402,7 +420,7 @@
 							<li><span class='attributes'>Primary Position:</span> {$player->getPrimaryPosition()}</li>
 							<li><span class='attributes''>Secondary Position:</span> {$player->getSecondaryPosition()}</li>
 							<li><span class='attributes'>Travel Team:</span> {$player->getTravelTeam()}</li>
-							<li><span class='attributes'>Height:</span> {$player->getHeightFeet()}'{$player->getHeightInches()}</li>
+							<li><span class='attributes'>Height:</span> {$player->getHeight()}</li>
 							<li><span class='attributes'>Weight:</span> {$player->getWeight()}</li>
 						</ul>
 					</div> <!-- end of .info-box -->
@@ -500,8 +518,8 @@
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
-						  action= ''
-						  onsubmit = '' 
+						  action= 'profile.php?id={$player->getId()}'
+						  onsubmit = 'return validateForm();' 
 						  enctype='multipart/form-data' >
 						<h1>Player Info</h1>
 						<div id='refs-container'>
@@ -541,7 +559,7 @@
 						<label class='span'>Cell Phone:* &nbsp; </label>
 							<input type='text'
 								   id = 'cellphone'
-								   name= 'cellphone'
+								   name= 'cellPhone'
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
@@ -625,24 +643,59 @@
 								   value='{$player->getWeight()}'
 								   onclick='' />
 						</p>
+						<p>
 						<label class='span'>Height*: &nbsp; </label>
-						  	<input type='text'
-								id = 'heightFeet'
-								name= 'heighFeet'
-								size = '15'
-								maxlength = '5'
-								placeholder = 'Feet'
-								value='{$player->getHeightFeet()}'
-								onclick='' />
-						
-							<input type='text'
-								id = 'heightInches'
-								name= 'heightInches'
-								size = '15'
-								maxlength = '5'
-								placeholder = 'Inches'
-								value='{$player->getHeightInches()}'
-								onclick='' />
+						<select name='height'>
+							<option value='' selected disabled>Select height:</option>
+							<option value='4 foot 0 inches'>4 foot 0 inches</option>
+							<option value='4 foot 1 inch'>4 foot 1 inch</option>
+							<option value='4 foot 2 inches'>4 foot 2 inches</option>
+							<option value='4 foot 3 inches'>4 foot 3 inches</option>
+							<option value='4 foot 4 inches'>4 foot 4 inches</option>
+							<option value='4 foot 5 inches'>4 foot 5 inches</option>
+							<option value='4 foot 6 inches'>4 foot 6 inches</option>
+							<option value='4 foot 7 inches'>4 foot 7 inches</option>
+							<option value='4 foot 8 inches'>4 foot 8 inches</option>
+							<option value='4 foot 9 inches'>4 foot 9 inches</option>
+							<option value='4 foot 10 inches'>4 foot 10 inches</option>
+							<option value='4 foot 11 inches'>4 foot 11 inches</option>
+							<option value='5 foot 0 inches'>5 foot 0 inches</option>
+							<option value='5 foot 1 inch'>5 foot 1 inch</option>
+							<option value='5 foot 2 inches'>5 foot 2 inches</option>
+							<option value='5 foot 3 inches'>5 foot 3 inches</option>
+							<option value='5 foot 4 inches'>5 foot 4 inches</option>
+							<option value='5 foot 5 inches'>5 foot 5 inches</option>
+							<option value='5 foot 6 inches'>5 foot 6 inches</option>
+							<option value='5 foot 7 inches'>5 foot 7 inches</option>
+							<option value='5 foot 8 inches'>5 foot 8 inches</option>
+							<option value='5 foot 9 inches'>5 foot 9 inches</option>
+							<option value='5 foot 10 inches'>5 foot 10 inches</option>
+							<option value='5 foot 11 inches'>5 foot 11 inches</option>
+							<option value='6 foot 0 inches'>6 foot 0 inches</option>
+							<option value='6 foot 1 inch'>6 foot 1 inch</option>
+							<option value='6 foot 2 inches'>6 foot 2 inches</option>
+							<option value='6 foot 3 inches'>6 foot 3 inches</option>
+							<option value='6 foot 4 inches'>6 foot 4 inches</option>
+							<option value='6 foot 5 inches'>6 foot 5 inches</option>
+							<option value='6 foot 6 inches'>6 foot 6 inches</option>
+							<option value='6 foot 7 inches'>6 foot 7 inches</option>
+							<option value='6 foot 8 inches'>6 foot 8 inches</option>
+							<option value='6 foot 9 inches'>6 foot 9 inches</option>
+							<option value='6 foot 10 inches'>6 foot 10 inches</option>
+							<option value='6 foot 11 inches'>6 foot 11 inches</option>
+							<option value='7 foot 0 inches'>7 foot 0 inches</option>
+							<option value='7 foot 1 inch'>7 foot 1 inch</option>
+							<option value='7 foot 2 inches'>7 foot 2 inches</option>
+							<option value='7 foot 3 inches'>7 foot 3 inches</option>
+							<option value='7 foot 4 inches'>7 foot 4 inches</option>
+							<option value='7 foot 5 inches'>7 foot 5 inches</option>
+							<option value='7 foot 6 inches'>7 foot 6 inches</option>
+							<option value='7 foot 7 inches'>7 foot 7 inches</option>
+							<option value='7 foot 8 inches'>7 foot 8 inches</option>
+							<option value='7 foot 9 inches'>7 foot 9 inches</option>
+							<option value='7 foot 10 inches'>7 foot 10 inches</option>
+							<option value='7 foot 11 inches'>7 foot 11 inches</option>
+						</select>
 						</p>
 						<p>
 						<label class='span'>Graduation Year*: &nbsp; </label>
@@ -935,8 +988,8 @@
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
-						  action= ''
-						  onsubmit = '' 
+						  action= 'profile.php?id={$player->getId()}'
+						  onsubmit = 'return validateForm();' 
 						  enctype='multipart/form-data' >
 						<h1>Coach Info</h1>
 						<div id='refs-container'>
@@ -989,7 +1042,7 @@
 							<p>Cell Phone:* &nbsp; </p>
 								<input type='text'
 								   id = 'cellphone'
-								   name= 'cellphone'
+								   name= 'cellPhone'
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'

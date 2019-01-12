@@ -417,7 +417,7 @@
 					<figcaption></figcaption>
 				</figure>
 				<div id='info-box-container'>
-				<div class='info-box'>
+				<div class='info-box' id='info-box-underline'>
 					<h3>Player Info</h3>
 						<ul>
 							<li><span class='attributes'>Email:</span> {$player->getEmail()}</li>

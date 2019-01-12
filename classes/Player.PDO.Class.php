@@ -90,6 +90,25 @@
             }
 		}
 
+		function getPlayersByFindAthleteSearch($query){
+			try{
+                $data = array();
+                $stmt = $this->dbConn->query($query); 
+                $stmt->execute();
+                $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
+                while($databaseUser = $stmt->fetch()){
+					$data[] = $databaseUser;
+					//var_dump($data);
+				}
+				//var_dump($data);
+                return $data;
+            }
+            catch(PDOException $e){
+                echo $e->getMessage();
+                throw new Exception("Problem getting players from database.");
+            }
+		}
+
 		function getPlayersFromSearch($data=null){
             if($data != null && count($data) > 0){
                 $html = "<div id='table-wrapper'><table>\n";
@@ -115,7 +134,7 @@
 			//var_dump($player->getID());
             //$data = $this->getEverythingAsObjects("project", "Project");
             if($data != null && count($data) > 0){
-                $html = "<div id='body-main'> <div id='table-wrapper'><table>\n";
+                $html = "<hr/><div id='table-wrapper'><table>\n";
                 if(true){
                     $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th><th>Email</th></tr>";
                     foreach($data as $player){
@@ -140,7 +159,7 @@
                 }
                 $html .= "</table></div>";
             }else{
-                $html = "<div id='body-main'><h2 class='errorMsg'>Error getting players</h2></div>";
+                $html = "<div id='body-main'><h2 class='errorMsg'>No Players Found</h2></div>";
             }
             return $html;
         }

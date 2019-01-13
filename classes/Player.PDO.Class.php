@@ -179,7 +179,7 @@
                         $this->updateField('players', 'username', $val, $id);
                         break;
                     case 'password':
-                        $this->updateField('players', 'password', $val, $id);
+                        $this->updateField('players', 'pass', $val, $id);
                         break;
                     case 'name':
                         $this->updateField('players', 'name', $val, $id);
@@ -327,6 +327,50 @@
 						break;
                 }
 			}
+		}
+		/** 
+		 * checkPassword() - Password Reset part 1 - takes user inputted current password and checks it against the db
+		 * returns true if passwords maths, allows creation of new password
+		*/
+		function checkPassword($username, $currentPassword){
+			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE username = ?");
+			$stmt->bindParam(1, $username, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
+            while($databaseUser = $stmt->fetch()){
+				$data[] = $databaseUser;
+			}
+			if((count($data)) == 1){
+				$pass = $data[0];
+
+				if(password_verify($currentPassword, $pass->pass)){
+					return true;
+				}
+				else{
+					//echo $player->getPassword();
+					echo "<p style='color:red;margin-top:25px'>Your current password is incorrect</p>";
+					return false;
+				}
+			}
+			//$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+		}
+		/*
+		*updatePassword() called updateUser to update the users password. Is called after checkPasword();
+		*
+		*/
+		function updatePassword($username, $newPassword){
+			$hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
+			echo $hashed_password;
+			try{
+                $stmt = $this->dbConn->prepare("UPDATE players SET pass = ? WHERE username = ?");
+				$stmt->bindParam(1, $hashed_password, PDO::PARAM_STR);
+				$stmt->bindParam(2, $username, PDO::PARAM_STR);
+				$stmt->execute();
+				//echo $stmt;
+            }catch(PDOException $e){
+                return "A problem occurred";
+            }
+			
 		}
 
 		/**
@@ -995,6 +1039,7 @@
 							   class='btn-all-buttons'
 							   id='btnSubmit'/>
 				</form>
+				<a href='passwordreset.php'>Reset my password>>></a>
 				</body>
     			<footer>
         			<div class='Footer'>
@@ -1226,6 +1271,7 @@
 							   class='btn-all-buttons'
 							   id='btnSubmit'/>
 				</form>
+				<a href='passwordreset.php'>Reset my password>>></a>
 				</body>
     			<footer>
         			<div class='Footer'>

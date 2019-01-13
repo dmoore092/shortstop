@@ -9,6 +9,9 @@ for mathletes and fathletes
     min-height: 400px;
     border-top: 1px solid black;
 }
+table{
+    border-collapse: collapse;
+}
 th{
     width: 40%;
     text-align: left;

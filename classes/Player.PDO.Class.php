@@ -98,7 +98,7 @@
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
                 while($databaseUser = $stmt->fetch()){
 					$data[] = $databaseUser;
-					var_dump($data);
+					//var_dump($data);
 				}
 				//var_dump($data);
                 return $data;

@@ -13,7 +13,7 @@
     <h2>Change your password</h2>
             <form id="password-change"
                          method = "POST"
-                         action= "profile.php?id=<?php echo $player->getId();?>"
+                         action= "myinfo.php"
                          onsubmit = "" >
 
                         <p>

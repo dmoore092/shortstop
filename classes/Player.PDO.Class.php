@@ -366,9 +366,10 @@
 				$stmt->bindParam(1, $hashed_password, PDO::PARAM_STR);
 				$stmt->bindParam(2, $username, PDO::PARAM_STR);
 				$stmt->execute();
+				return true;
 				//echo $stmt;
             }catch(PDOException $e){
-                return "A problem occurred";
+				return false;
             }
 			
 		}

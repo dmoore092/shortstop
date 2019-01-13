@@ -180,12 +180,12 @@ if(isset($_POST['search1'])){
         if($gpa != "") $arr[] = "gpa >= '{$gpa}'";
 
         if($name == "" && $sport == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
-            $query = "SELECT id, name, sport, email, persontype FROM players ";
+            $query = "SELECT id, name, highschool, gradYear, sport, primaryPosition FROM players WHERE persontype = 'player';";
         }
         else{
             $query = "SELECT id, name, sport, email, persontype FROM players WHERE ";
             $query .= implode(" AND ", $arr);
-            $query .= ";";
+            $query .= " AND persontype = 'player';";
         }
         //var_dump($query);
         //$data = $playerDB->searchPlayers($srch);

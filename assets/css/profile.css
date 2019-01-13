@@ -28,7 +28,11 @@
         justify-content: space-between;
         margin-top: 15px;
     }
-        figure{
+    #border-right, #info-box-underline{
+        border-right: 1px solid black;
+        padding-right: 15px;
+    }
+    figure{
         float: left;
         width: 35%;
         height: 35%;

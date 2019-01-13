@@ -98,7 +98,7 @@
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
                 while($databaseUser = $stmt->fetch()){
 					$data[] = $databaseUser;
-					//var_dump($data);
+					var_dump($data);
 				}
 				//var_dump($data);
                 return $data;
@@ -136,13 +136,15 @@
             if($data != null && count($data) > 0){
                 $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
                 if(true){
-                    $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th></tr>";
+                    $html .= "<tr><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
                     foreach($data as $player){
 						$html .= "
                         <tr>
                             <td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
+							<td>{$player->getHighschool()}</td>
+							<td>{$player->getGradYear()}</td>
 							<td>{$player->getSport()}</td>
-							<td>{$player->getPersonType()}</td>
+							<td>{$player->getPrimaryPosition()}</td>
 						</tr>\n";
 						//<th>Email</th>
 						//<td><a href='mailto:'{$player->getEmail()}'>{$player->getEmail()}</a></td>
@@ -542,7 +544,7 @@
 					<figcaption></figcaption>
 				</figure>
 				<div id='info-box-container'>
-				<div class='info-box'>
+				<div class='info-box' id='border-right'>
 					<h3>Coach Info</h3>
 						<ul>
 							<li><span class='attributes'>Sport:</span> {$player->getSport()}</li>

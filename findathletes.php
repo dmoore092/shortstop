@@ -187,11 +187,12 @@ if(isset($_POST['search1'])){
             $query .= implode(" AND ", $arr);
             $query .= " AND persontype = 'player';";
         }
-        //var_dump($query);
         //$data = $playerDB->searchPlayers($srch);
         $data = $playerDB->getPlayersByFindAthleteSearch($query);
         //header("Location: results.php?".http_build_query($data));
         echo $playerDB->getPlayersAsTable($data);
+        //var_dump($data);
+        echo $playerDB->getPlayers($data);
    }
  };
     include("assets/inc/footer.inc.php");

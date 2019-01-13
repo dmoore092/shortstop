@@ -129,6 +129,22 @@
 			return $html;
 		}
 
+		function getPlayers($data=null){
+			if($data != null && count($data) > 0){
+				$html = "<hr/><div class='search-wrapper'>";
+				foreach($data as $player){
+					$html .= "<span><span style='color:#bb0a1e;'>Name: </span><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></span>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Highschool: </span>{$player->getHighschool()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player->getGradYear()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player->getSport()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
+					$html .= "<hr />";
+				}
+				$html .= "</div><!-- end of search-wrapper --></div><!-- end of body-main -->";
+			}
+			return $html;
+		}
+
 		function getPlayersAsTable($data=null){//$data=null
 			//var_dump($data);
 			//var_dump($player->getID());

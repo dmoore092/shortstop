@@ -31,4 +31,19 @@
         }
         include("assets/inc/footer.inc.php"); 
         
+        if(isset($_POST['report'])){
+            $id=$_POST["playerid"];
+            $to = "dmoore092@gmail.com";
+            $subject = "AthleticProspects.com Post Reported";
+            $message = "<body><a href='www.dmwebdev.net/profile.php?id=".$id."'>A user has reported a post for inappropriate images, video, or content</body></a>";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+            $headers .= "From: webmaster@dmwebdev.net" . "\r\n" .
+                        "Reply-To: dmoore092@gmail.com" . "\r\n" .
+                        "X-Mailer: PHP/" . phpversion();
+
+            // If you leave the $headers from field empty,then your server mail ID will be displayed 
+            //and it may be moved to the spam section of the email
+            mail($to,$subject,$message,$headers);
+        }
 ?>

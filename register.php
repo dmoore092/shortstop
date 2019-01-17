@@ -1,5 +1,6 @@
 
 <?php 
+        error_reporting(0);
         session_start();
         $relpath= ""; $title="Register"; $page="login";
         $imgpath="";
@@ -73,12 +74,15 @@
                             $player = new PlayerDB();
 
                             $registered = $player->register($username, $hashed_password, $persontype);
-                            if($registered){
+                            if(!isset($_POST["persontype"])){
+                                echo "<p style='color:red';>Please select whether you are a player or coach.</p>";
+                            }
+                            else if($registered){
                                 //var_dump($_SESSION);
                                 echo "<script>window.location.href = 'myinfo.php';</script>";
                             }
                             else{
-                                echo "Username is taken, please choose another.";
+                                echo "<p style='color:red';>Username is taken, please choose another</p>";
                             }
                             
                         }

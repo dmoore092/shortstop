@@ -429,7 +429,7 @@
 				//false
 				return 0;
 		}
-
+		//checks for duplicate username first
 		function register($username, $hashed_password, $persontype){
 			$data = [];
 			$stmt = $this->dbConn->prepare("SELECT username, pass, id FROM players WHERE username = ?");
@@ -477,7 +477,10 @@
 				<div id='profile-area'>
 				<figure>
 					<img src='assets/img/userpictures/{$player->getProfileImage()}' alt='player picture' id='player-pic'>
-					<figcaption></figcaption>
+					<form method='post' action=''>
+						<input type='text' name='playerid' value='{$player->getId()}' id='hide'>
+    					<input type='submit' name='report' value='Report this profile...'> 
+					</form>
 				</figure>
 				<div id='info-box-container'>
 				<div class='info-box' id='info-box-underline'>
@@ -557,7 +560,10 @@
 				<div id='profile-area'>
 				<figure>
 					<img src='assets/img/userpictures/{$player->getProfileImage()}' alt='player picture' id='player-pic'>
-					<figcaption></figcaption>
+					<form method='post' action=''>
+						<input type='text' name='playerid' value='{$player->getId()}' id='hide'>
+    					<input type='submit' name='report' value='Report this profile...'> 
+					</form>
 				</figure>
 				<div id='info-box-container'>
 				<div class='info-box' id='border-right'>

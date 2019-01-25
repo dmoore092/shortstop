@@ -147,7 +147,7 @@
         </select>
         <input type='submit'
 		    value='Search'
-			name = 'search1'
+			name = 'search-athlete'
 			class='btn-all-buttons'
 			id='btnSubmit'/>
     </form>
@@ -159,9 +159,9 @@
 
 <?php
 
-if(isset($_POST['search1'])){
+if(isset($_POST['search-athlete'])){
     //echo "search triggered";
-    if(isset($_POST['search1'])){
+    if(isset($_POST['search-athlete'])){
         $name       = $playerDB->sanitize($_POST['name']);
         $sport      = $_POST['sport'];
         $state      = $_POST['state'];

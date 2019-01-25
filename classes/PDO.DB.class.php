@@ -52,9 +52,9 @@
         /**
          * updateField() - updates a column for any field for any table
          */
-        function updateField($tableName, $fieldName, $value, $id){
+        function updateField($fieldName, $value, $id){
             try{
-                $query = "UPDATE $tableName SET $fieldName = :value WHERE id = :id";
+                $query = "UPDATE players SET $fieldName = :value WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->execute(array(
                     ":value"=>$value,
@@ -68,15 +68,15 @@
         /**
          * delete() - deletes any entry for any table
          */
-        function delete($tableName, $id){
+        function delete($id){
             try{
-                $query = "DELETE FROM $tableName WHERE id = :id";
+                $query = "DELETE FROM players WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->execute(array(
                     ":id"=>$id
                 ));
             }catch(PDOException $e){
-                return "A problem occurred deleting from $tableName";
+                return "A problem occurred deleting";
             }
         }
 
@@ -185,7 +185,7 @@
         function isValidPhone($value){
             //$reg = "/^[2-9]\d{2}-\d{3}-\d{4}$/";
             //return preg_match($reg, $value);
-            var_dump($value);
+            //var_dump($value);
             return true;
         }
 
@@ -206,9 +206,10 @@
         function isYouTube($value){
             if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $value, $match)) {
                 $video_id = $match[1];
-                //var_dump($match[1]);
+                $newUrl = "https://www.youtube.com/embed/".$video_id;
+                return $newUrl;
             }
-            return $video_id;
+            //return $video_id;
         }
     } // class
 ?>

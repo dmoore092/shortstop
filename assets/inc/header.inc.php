@@ -78,3 +78,4 @@
                 </div>
             <div id="logo"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo-img"></div>
         </header>
+}

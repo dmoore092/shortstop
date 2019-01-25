@@ -145,6 +145,57 @@
 			return $html;
 		}
 
+		function getPlayersWhileAdminMobile($data=null){
+			if($data != null && count($data) > 0){
+				$html = "<hr/><div class='search-wrapper'>";
+				foreach($data as $player){
+					$html .= "<span><span style='color:#bb0a1e;'>Name: </span><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></span>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Highschool: </span>{$player->getHighschool()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player->getGradYear()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player->getSport()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
+					$html .= "<form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE'></form>";
+					$html .= "<hr />";
+				}
+				$html .= "</div><!-- end of search-wrapper --></div><!-- end of body-main -->";
+			}
+			return $html;
+		}
+
+		function getPlayersAsTableAsAdmin($data=null){//$data=null
+            if($data != null && count($data) > 0){
+                $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
+                if(true){
+                    $html .= "<tr><th>Action</th><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
+                    foreach($data as $player){
+						$html .= "
+						<tr>
+							<td><form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE'></form></td>
+                            <td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
+							<td>{$player->getHighschool()}</td>
+							<td>{$player->getGradYear()}</td>
+							<td>{$player->getSport()}</td>
+							<td>{$player->getPrimaryPosition()}</td>
+						</tr>\n";
+                    }
+                }else{
+                    $html .= "<tr><th>Player Name</th><th>Sport</th><th>Email</th></tr>";
+                    foreach($data as $project){
+						$html .= "<tr>
+                            <td>{$project->getProjectName()}</td>
+                            <td>{$project->getProjectLead()}</td>
+                            <td><a href='mailto:{$project->getEmail()}'>{$project->getEmail()}</a></td>
+                            <td>{$project->getDescription()}</td>
+                        </tr>";
+                    }
+                }
+                $html .= "</table></div>";
+            }else{
+                $html = "<div id='body-main'><h2 class='errorMsg'>No Players Found</h2></div>";
+            }
+            return $html;
+		}
+		
 		function getPlayersAsTable($data=null){//$data=null
 			//var_dump($data);
 			//var_dump($player->getID());
@@ -194,154 +245,154 @@
                         $id = $val;
 						break;
 					case 'username':
-                        $this->updateField('players', 'username', $val, $id);
+                        $this->updateField('username', $val, $id);
                         break;
                     case 'password':
-                        $this->updateField('players', 'pass', $val, $id);
+                        $this->updateField('pass', $val, $id);
                         break;
                     case 'name':
-                        $this->updateField('players', 'name', $val, $id);
+                        $this->updateField('name', $val, $id);
                         break;
                     case 'gender':
-                        $this->updateField('players', 'gender', $val, $id);
+                        $this->updateField('gender', $val, $id);
 						break;
 					case 'email':
-                        $this->updateField('players', 'email', $val, $id);
+                        $this->updateField('email', $val, $id);
                         break;
                     case 'cellPhone':
-                        $this->updateField('players', 'cellPhone', $val, $id);
+                        $this->updateField('cellPhone', $val, $id);
                         break;
                     case 'homePhone':
-                        $this->updateField('players', 'homePhone', $val, $id);
+                        $this->updateField('homePhone', $val, $id);
 						break;		
 					case 'address':
-                    	$this->updateField('players', 'address', $val, $id);
+                    	$this->updateField('address', $val, $id);
                         break;
                     case 'city':
-                        $this->updateField('players', 'city', $val, $id);
+                        $this->updateField('city', $val, $id);
                         break;
                     case 'state':
-                        $this->updateField('players', 'state', $val, $id);
+                        $this->updateField('state', $val, $id);
 						break;
 					case 'zip':
-						$this->updateField('players', 'zip', $val, $id);
+						$this->updateField('zip', $val, $id);
 						break;
 					case 'highschool':
-						$this->updateField('players', 'highschool', $val, $id);
+						$this->updateField('highschool', $val, $id);
 						break;
 					case 'weight':
-						$this->updateField('players', 'weight', $val, $id);
+						$this->updateField('weight', $val, $id);
 						break;
 					case 'height':
-						$this->updateField('players', 'height', $val, $id);
+						$this->updateField('height', $val, $id);
 						break;
 					case 'gradYear':
-						$this->updateField('players', 'gradYear', $val, $id);
+						$this->updateField('gradYear', $val, $id);
 						break;
 					case 'sport':
-						$this->updateField('players', 'sport', $val, $id);
+						$this->updateField('sport', $val, $id);
 						break;
 					case 'primaryPosition':
-						$this->updateField('players', 'primaryPosition', $val, $id);
+						$this->updateField('primaryPosition', $val, $id);
 						break;
 					case 'secondaryPosition':
-						$this->updateField('players', 'secondaryPosition', $val, $id);
+						$this->updateField('secondaryPosition', $val, $id);
 						break;
 					case 'travelTeam':
-						$this->updateField('players', 'travelTeam', $val, $id);
+						$this->updateField('travelTeam', $val, $id);
 						break;
 					case 'gpa':
-						$this->updateField('players', 'gpa', $val, $id);
+						$this->updateField('gpa', $val, $id);
 						break;
 					case 'sat':
-						$this->updateField('players', 'sat', $val, $id);
+						$this->updateField('sat', $val, $id);
 						break;
 					case 'act':
-						$this->updateField('players', 'act', $val, $id);
+						$this->updateField('act', $val, $id);
 						break;
 					case 'ref1Name':
-						$this->updateField('players', 'ref1Name', $val, $id);
+						$this->updateField('ref1Name', $val, $id);
 						break;
 					case 'ref1JobTitle':
-						$this->updateField('players', 'ref1JobTitle', $val, $id);
+						$this->updateField('ref1JobTitle', $val, $id);
 						break;
 					case 'ref1Email':
-						$this->updateField('players', 'ref1Email', $val, $id);
+						$this->updateField('ref1Email', $val, $id);
 						break;
 					case 'ref1Phone':
-						$this->updateField('players', 'ref1Phone', $val, $id);
+						$this->updateField('ref1Phone', $val, $id);
 						break;
 					case 'ref2Name':
-						$this->updateField('players', 'ref2Name', $val, $id);
+						$this->updateField('ref2Name', $val, $id);
 						break;
 					case 'ref2JobTitle':
-						$this->updateField('players', 'ref2JobTitle', $val, $id);
+						$this->updateField('ref2JobTitle', $val, $id);
 						break;
 					case 'ref2Email':
-						$this->updateField('players', 'ref2Email', $val, $id);
+						$this->updateField('ref2Email', $val, $id);
 						break;
 					case 'ref2Phone':
-						$this->updateField('players', 'ref2Phone', $val, $id);
+						$this->updateField('ref2Phone', $val, $id);
 						break;
 					case 'ref3Name':
-						$this->updateField('players', 'ref3Name', $val, $id);
+						$this->updateField('ref3Name', $val, $id);
 						break;
 					case 'ref3JobTitle':
-						$this->updateField('players', 'ref3JobTitle', $val, $id);
+						$this->updateField('ref3JobTitle', $val, $id);
 						break;
 					case 'ref3Email':
-						$this->updateField('players', 'ref3Email', $val, $id);
+						$this->updateField('ref3Email', $val, $id);
 						break;
 					case 'ref3Phone':
-						$this->updateField('players', 'ref3Phone', $val, $id);
+						$this->updateField('ref3Phone', $val, $id);
 						break;
 					case 'persStatement':
-						$this->updateField('players', 'persStatement', $val, $id);
+						$this->updateField('persStatement', $val, $id);
 						break;
 					case 'commitment':
-						$this->updateField('players', 'commitment', $val, $id);
+						$this->updateField('commitment', $val, $id);
 						break;
 					case 'service':
-						$this->updateField('players', 'service', $val, $id);
+						$this->updateField('service', $val, $id);
 						break;
 					case 'profileImage':
-						$this->updateField('players', 'profileImage', $val, $id);
+						$this->updateField('profileImage', $val, $id);
 						break;
 					case 'showcase1':
-						$this->updateField('players', 'showcase1', $val, $id);
+						$this->updateField('showcase1', $val, $id);
 						break;
 					case 'showcase2':
-						$this->updateField('players', 'showcase2', $val, $id);
+						$this->updateField('showcase2', $val, $id);
 						break;
 					case 'showcase3':
-						$this->updateField('players', 'showcase3', $val, $id);
+						$this->updateField('showcase3', $val, $id);
 						break;
 					case 'college':
-						$this->updateField('players', 'college', $val, $id);
+						$this->updateField('college', $val, $id);
 						break;
 					case 'facebook':
-						$this->updateField('players', 'facebook', $val, $id);
+						$this->updateField('facebook', $val, $id);
 						break;
 					case 'twitter':
-						$this->updateField('players', 'twitter', $val, $id);
+						$this->updateField('twitter', $val, $id);
 						break;
 					case 'instagram':
-						$this->updateField('players', 'instagram', $val, $id);
+						$this->updateField('instagram', $val, $id);
 						break;
 					case 'website':
-						$this->updateField('players', 'website', $val, $id);
+						$this->updateField('website', $val, $id);
 						break;
 					case 'velocity':
-						$this->updateField('players', 'velocity', $val, $id);
+						$this->updateField('velocity', $val, $id);
 						break;
 					case 'gpareq':
-						$this->updateField('players', 'gpareq', $val, $id);
+						$this->updateField('gpareq', $val, $id);
 						break;
 					case 'satactreq':
-						$this->updateField('players', 'satactreq', $val, $id);
+						$this->updateField('satactreq', $val, $id);
 						break;
 					case 'characteristics':
-						$this->updateField('players', 'characteristics', $val, $id);
+						$this->updateField('characteristics', $val, $id);
 						break;
                 }
 			}
@@ -515,9 +566,9 @@
 				<hr/>
 				<h3>Videos</h3>
 					<div id='videos'>
-						<iframe id='ytplayer' type='text/html' width='300' height='250' src='https://www.youtube.com/embed/{$player->getShowcase1()}'></iframe>
-						<iframe id='ytplayer' type='text/html' width='300' height='250' src='https://www.youtube.com/embed/{$player->getShowcase2()}'></iframe>
-						<iframe id='ytplayer' type='text/html' width='300' height='250' src='https://www.youtube.com/embed/{$player->getShowcase3()}'></iframe>
+						<iframe id='ytplayer' type='text/html' width='300' height='250' src='{$player->getShowcase1()}'></iframe>
+						<iframe id='ytplayer' type='text/html' width='300' height='250' src='{$player->getShowcase2()}'></iframe>
+						<iframe id='ytplayer' type='text/html' width='300' height='250' src='{$player->getShowcase3()}'></iframe>
 					</div>
 				<h3>References</h3>
 					<div id='reference-container'>
@@ -596,13 +647,161 @@
 				</div><!-- end of profile-area --> 
 				";
 			}
+			else if ($player != null && $player->getPersonType() == 'admin') {
+				$html .= "<div id='body-main'>
+				<h2>Administration Panel</h2>
+				<div id='content'>
+					<h3>Search for Player or Coach</h3>
+				<div id='form-wrapper'>
+				<form   id='player-form'
+						method = 'POST'
+						action= ''
+						onsubmit = '' 
+						enctype='multipart/form-data' >
+					<input type='text'
+							id = 'name'
+							name = 'name'
+							size = '20'
+							maxlength = '50'
+							placeholder = 'Full Name'
+							value=''
+							onclick='' />
+							
+					<select name='sport'>
+						<option value=' ' selected disabled>Select Sport:</option>
+						<option value='football'>Football</option>
+						<option value='basketball'>Basketball</option>
+						<option value='baseball'>Baseball</option>
+						<option value='softball'>Softball</option>
+						<option value='hockey'>Hockey</option>
+						<option value='fieldhockey'>Field Hockey</option>
+						<option value='lacrosse'>Lacrosse</option>
+						<option value='soccer'>Soccer</option>
+						<option value='trackandField'>Track and Field</option>
+						<option value='volleyball'>Volleyball</option>
+						<option value='wrestling'>Wrestling</option>
+						<option value='tennis'>Tennis</option>
+						<option value='swimming'>Swimming</option>
+						<option value='golf'>Golf</option>
+						<option value='gymnastics'>Gymnastics</option>
+						<option value='cheerleading'>Cheerleading</option>
+						<option value='esports'>Esports</option>
+					</select>
+					<select name='state'>
+					<option value=' ' selected disabled>Select State:</option>
+						<option value='New York'>New York</option>
+						<option value='Alabama'>Alabama</option>
+						<option value='Alaska'>Alaska</option>
+						<option value='Arizona'>Arizona</option>
+						<option value='rkansas'>Arkansas</option>
+						<option value='California'>California</option>
+						<option value='Colorado'>Colorado</option>
+						<option value='Connecticut'>Connecticut</option>
+						<option value='Delaware'>Delaware</option>
+						<option value='District of columbia'>District Of Columbia</option>
+						<option value='Florida'>Florida</option>
+						<option value='Georgia'>Georgia</option>
+						<option value='Hawaii'>Hawaii</option>
+						<option value='Idaho'>Idaho</option>
+						<option value='Illinois'>Illinois</option>
+						<option value='Indiana'>Indiana</option>
+						<option value='Iowa'>Iowa</option>
+						<option value='Kansas'>Kansas</option>
+						<option value='Kentucky'>Kentucky</option>
+						<option value='Louisiana'>Louisiana</option>
+						<option value='Maine'>Maine</option>
+						<option value='Maryland'>Maryland</option>
+						<option value='Massachusetts'>Massachusetts</option>
+						<option value='Michigan'>Michigan</option>
+						<option value='Minnesota'>Minnesota</option>
+						<option value='Mississippi'>Mississippi</option>
+						<option value='Missouri'>Missouri</option>
+						<option value='Montana'>Montana</option>
+						<option value='Nebraska'>Nebraska</option>
+						<option value='Nevada'>Nevada</option>
+						<option value='New Hampshire'>New Hampshire</option>
+						<option value='New Jersey'>New Jersey</option>
+						<option value='New Mexico'>New Mexico</option>
+						<option value='New York'>New York</option>
+						<option value='North Carolina'>North Carolina</option>
+						<option value='North Dakota'>North Dakota</option>
+						<option value='Ohio'>Ohio</option>
+						<option value='Oklahoma'>Oklahoma</option>
+						<option value='Oregon'>Oregon</option>
+						<option value='Pennsylvania'>Pennsylvania</option>
+						<option value='Rhode Island'>Rhode Island</option>
+						<option value='South Carolina'>South Carolina</option>
+						<option value='South Dakota'>South Dakota</option>
+						<option value='Tennessee'>Tennessee</option>
+						<option value='Texas'>Texas</option>
+						<option value='Utah'>Utah</option>
+						<option value='Vermont'>Vermont</option>
+						<option value='Virginia'>Virginia</option>
+						<option value='Washington'>Washington</option>
+						<option value='West Virginia'>West Virginia</option>
+						<option value='Wisconsin'>Wisconsin</option>
+						<option value='Wyoming'>Wyoming</option>			
+					</select>
+					<select name='class'>
+						<option value=' ' selected disabled>Class of:</option>
+						<option value='2019'>2019</option>
+						<option value='2018'>2018</option>
+						<option value='2017'>2017</option>
+						<option value='2016'>2016</option>
+						<option value='2015'>2015</option>
+						<option value='2014'>2014</option>
+						<option value='2013'>2013</option>
+						<option value='2012'>2012</option>
+						<option value='2011'>2011</option>
+						<option value='2010'>2010</option>
+					</select>
+					<input type='text'
+							id = 'position'
+							name = 'position'
+							size = '20'
+							maxlength = '50'
+							placeholder = 'Position'
+							value=''
+							onclick='' />
+					
+					<input type='text'
+							id = 'school'
+							name = 'school'
+							size = '20'
+							maxlength = '50'
+							placeholder = 'School'
+							value=''
+							onclick='' />
+							
+					<select name='gpa'>
+						<option value=' ' selected disabled>Select GPA:</option>
+						<option value='4.5'>Greater than 4.5</option>
+						<option value='4.0'>Greater than 4.0</option>
+						<option value='3.5'>Greater than 3.5</option>
+						<option value='3.0'>Greater than 3.0</option>
+						<option value='2.5'>Greater than 2.5</option>
+						<option value='2.0'>Greater than 2.0</option>
+					</select>
+					<input type='submit'
+						value='Search'
+						name = 'admin-search'
+						class='btnSubmit'
+						id='btn-Submit'/>
+				</form>
+				</div> <!-- end of form-wrapper -->
+				</div><!-- end of #content -->
+				<div id='center-area'>
+			   
+				</div> 
+				";
+			}
 			return $html;
 		}
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID('players', 'Player', $id);
 			$html = " ";
 			//var_dump($player);
-			
+			//profile.php?id={$player->getId()}
 			if ($player != null && $player->getPersonType() == 'player') {
 				$html .= "<div id='body-main'>
 					<form id='player-form'
@@ -636,13 +835,11 @@
 						</p>
 						<p>
 						<label class='span'>Gender:* &nbsp; </label> 
-							<input type='text'
-								   id = 'gender'
-								   name= 'gender'
-								   size = '35'
-								   maxlength = '50'
-								   placeholder = 'Male or Female'
-								   value='{$player->getGender()}' />
+							<select name='gender'>
+								<option value=' ' selected disabled>Select Gender:</option>
+								<option value='Male' >Male</option>
+								<option value='Female' >Female</option>
+							</select>
 						</p>
 						<p>
 						<label class='span'>Cell Phone:* &nbsp; </label>
@@ -690,14 +887,61 @@
 						</p>
 						<p>
 						<label class='span' for='state'>State:* &nbsp;</label>
-							<input type='text'
-									id = 'state'
-									name= 'state'
-									size = '35'
-									maxlength = '50'
-									placeholder = 'Full Name ex. Alabama'
-									value='{$player->getState()}'
-									onclick='' />
+							<select name='state'>
+								<option value=' ' selected disabled>Select State:</option>
+								<option value='New York'>New York</option>
+								<option value='Alabama'>Alabama</option>
+								<option value='Alaska'>Alaska</option>
+								<option value='Arizona'>Arizona</option>
+								<option value='Arkansas'>Arkansas</option>
+								<option value='California'>California</option>
+								<option value='Colorado'>Colorado</option>
+								<option value='Connecticut'>Connecticut</option>
+								<option value='Delaware'>Delaware</option>
+								<option value='District of Columbia'>District Of Columbia</option>
+								<option value='Florida'>Florida</option>
+								<option value='Georgia'>Georgia</option>
+								<option value='Hawaii'>Hawaii</option>
+								<option value='Idaho'>Idaho</option>
+								<option value='Illinois'>Illinois</option>
+								<option value='Indiana'>Indiana</option>
+								<option value='Iowa'>Iowa</option>
+								<option value='Kansas'>Kansas</option>
+								<option value='Kentucky'>Kentucky</option>
+								<option value='Louisiana'>Louisiana</option>
+								<option value='Maine'>Maine</option>
+								<option value='Maryland'>Maryland</option>
+								<option value='Massachusetts'>Massachusetts</option>
+								<option value='Michigan'>Michigan</option>
+								<option value='Minnesota'>Minnesota</option>
+								<option value='Mississippi'>Mississippi</option>
+								<option value='Missouri'>Missouri</option>
+								<option value='Montana'>Montana</option>
+								<option value='Nebraska'>Nebraska</option>
+								<option value='Nevada'>Nevada</option>
+								<option value='New Hampshire'>New Hampshire</option>
+								<option value='New Jersey'>New Jersey</option>
+								<option value='New Mexico'>New Mexico</option>
+								<option value='New York'>New York</option>
+								<option value='North Carolina'>North Carolina</option>
+								<option value='North Dakota'>North Dakota</option>
+								<option value='Ohio'>Ohio</option>
+								<option value='Oklahoma'>Oklahoma</option>
+								<option value='Oregon'>Oregon</option>
+								<option value='Pennsylvania'>Pennsylvania</option>
+								<option value='Rhode Island'>Rhode Island</option>
+								<option value='South Carolina'>South Carolina</option>
+								<option value='South Dakota'>South Dakota</option>
+								<option value='Tennessee'>Tennessee</option>
+								<option value='Texas'>Texas</option>
+								<option value='Utah'>Utah</option>
+								<option value='Vermont'>Vermont</option>
+								<option value='Virginia'>Virginia</option>
+								<option value='Washington'>Washington</option>
+								<option value='West Virginia'>West Virginia</option>
+								<option value='Wisconsin'>Wisconsin</option>
+								<option value='Wyoming'>Wyoming</option>			
+							</select>
 						</p>
 						<p>
 						<label class='span'>Zip:* &nbsp; </label>
@@ -790,7 +1034,7 @@
 						<label class='span'>Graduation Year*: &nbsp; </label>
 						  <input type='text'
 								 id = 'grad-year'
-								 name= 'grad-year'
+								 name= 'gradYear'
 								 size = '35'
 								 maxlength = '50'
 								 placeholder = 'xxxx'
@@ -874,6 +1118,17 @@
 								   value='{$player->getAct()}'
 								   onclick='' />
 						</p>
+						<p>
+						<label class='span'>Commitment: &nbsp; </label>
+							<input type='text'
+								   id = 'commitment'
+								   name= 'commitment'
+								   size = '35'
+								   maxlength = '100'
+								   placeholder = ' '
+								   value='{$player->getCommitment()}'
+								   onclick='' />
+						</p>
 					</div>
 						<hr/>
 						<h3>Player Image and Video</h3>
@@ -884,15 +1139,15 @@
 							</p>
 							<p>
 								<span class='span'>Upload Video ( Showcase 1 ): &nbsp; </span>
-								<input type='text' name='showcase1' id='showcase1' size = '35' maxlength = '50' value='www.youtube.com/watch?v={$player->getShowcase1()}'>
+								<input type='text' name='showcase1' id='showcase1' size = '35' maxlength = '50' value='{$player->getShowcase1()}'>
 							</p>
 							<p>
 								<span class='span'>Upload Video ( Showcase 2 ): &nbsp; </span>
-								<input type='text' name='showcase2' id=showcase2 size = '35' maxlength = '50' value='www.youtube.com/watch?v={$player->getShowcase2()}'>
+								<input type='text' name='showcase2' id=showcase2 size = '35' maxlength = '50' value='{$player->getShowcase2()}'>
 							</p>
 							<p>
 								<span class='span'>Upload Video ( Showcase 3 ): &nbsp; </span>
-								<input type='text' name='showcase3' id=showcase3 size = '35' maxlength = '50' value='www.youtube.com/watch?v={$player->getShowcase3()}'>
+								<input type='text' name='showcase3' id=showcase3 size = '35' maxlength = '50' value='{$player->getShowcase3()}'>
 							</p>
 						</div><!-- end of refs -->
 						<hr/>
@@ -1062,24 +1317,23 @@
 							   value='Update My Info'
 							   name = 'updateUserInfo'
 							   class='btn-all-buttons'
-							   id='btnSubmit'/>
+							   id='btnSubmit'
+							   onClick='checkMyInfo()' />
 				</form>
 				<a href='passwordreset.php'>Reset my password>>></a>
+				<script type='test/javascript' src='/assets/javascript/checkMyInfo.js' ></script>
 				</body>
-    			<footer>
-        			<div class='Footer'>
-        			</div>
-    			</footer>
-			</html>
 					\n";
 				
 			}
 			else if ($player != null && $player->getPersonType() == 'coach') {
+				//profile.php?id={$player->getId()}
+				//return checkForm();
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
 						  action= 'profile.php?id={$player->getId()}'
-						  onsubmit = 'return validateForm();' 
+						  onsubmit = '' 
 						  enctype='multipart/form-data' >
 						<h1>Coach Info</h1>
 						<div id='refs-container'>
@@ -1174,14 +1428,61 @@
 							</p>
 							<p>
 							<p for='state'>State:* &nbsp;</p>
-								<input type='text'
-									id = 'state'
-									name= 'state'
-									size = '35'
-									maxlength = '50'
-									placeholder = 'Full Name ex. Alabama'
-									value='{$player->getState()}'
-									onclick='' />
+								<select name='state'>
+									<option value=' ' selected disabled>Select State:</option>
+									<option value='new york'>New York</option>
+									<option value='alabama'>Alabama</option>
+									<option value='alaska'>Alaska</option>
+									<option value='arizona'>Arizona</option>
+									<option value='arkansas'>Arkansas</option>
+									<option value='california'>California</option>
+									<option value='colorado'>Colorado</option>
+									<option value='connecticut'>Connecticut</option>
+									<option value='delaware'>Delaware</option>
+									<option value='district of columbia'>District Of Columbia</option>
+									<option value='florida'>Florida</option>
+									<option value='georgia'>Georgia</option>
+									<option value='hawaii'>Hawaii</option>
+									<option value='idaho'>Idaho</option>
+									<option value='illinois'>Illinois</option>
+									<option value='indiana'>Indiana</option>
+									<option value='iowa'>Iowa</option>
+									<option value='kansas'>Kansas</option>
+									<option value='kentucky'>Kentucky</option>
+									<option value='louisiana'>Louisiana</option>
+									<option value='maine'>Maine</option>
+									<option value='maryland'>Maryland</option>
+									<option value='massachusetts'>Massachusetts</option>
+									<option value='michigan'>Michigan</option>
+									<option value='minnesota'>Minnesota</option>
+									<option value='mississippi'>Mississippi</option>
+									<option value='missouri'>Missouri</option>
+									<option value='montana'>Montana</option>
+									<option value='nebraska'>Nebraska</option>
+									<option value='nevada'>Nevada</option>
+									<option value='new hampshire'>New Hampshire</option>
+									<option value='new jersey'>New Jersey</option>
+									<option value='new mexico'>New Mexico</option>
+									<option value='new york'>New York</option>
+									<option value='north carolina'>North Carolina</option>
+									<option value='north dakota'>North Dakota</option>
+									<option value='ohio'>Ohio</option>
+									<option value='oklahoma'>Oklahoma</option>
+									<option value='oregon'>Oregon</option>
+									<option value='pennsylvania'>Pennsylvania</option>
+									<option value='rhode island'>Rhode Island</option>
+									<option value='south carolina'>South Carolina</option>
+									<option value='south dakota'>South Dakota</option>
+									<option value='tennessee'>Tennessee</option>
+									<option value='texas'>Texas</option>
+									<option value='utah'>Utah</option>
+									<option value='vermont'>Vermont</option>
+									<option value='virginia'>Virginia</option>
+									<option value='washington'>Washington</option>
+									<option value='west virginia'>West Virginia</option>
+									<option value='wisconsin'>Wisconsin</option>
+									<option value='wyoming'>Wyoming</option>			
+								</select>
 							</p>
 							<p>
 							<p>Zip:* &nbsp; </p>
@@ -1293,16 +1594,13 @@
 						<input type='submit'
 							   value='Update My Info'
 							   name = 'updateUserInfo'
-							   class='btn-all-buttons'
-							   id='btnSubmit'/>
+							   class='updateInfoBtn'
+							   id='btnSubmit' 
+							   onClick='checkMyInfo()'/>
 				</form>
 				<a href='passwordreset.php'>Reset my password>>></a>
+				<script type='text/javascript' src='assets/javascript/checkMyInfo.js' ></script>
 				</body>
-    			<footer>
-        			<div class='Footer'>
-        			</div>
-    			</footer>
-			</html>
 					\n";
 			}
 			return $html;

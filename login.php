@@ -38,7 +38,7 @@
                                    size = "25"
                                    maxlength = "150"
                                    placeholder = "Enter Your Username"
-                                   value="dmoore"
+                                   value=""
                                    onclick="" />
                         </p>
                         <p>
@@ -49,7 +49,7 @@
                                    size = "25"
                                    maxlength = "150"
                                    placeholder = "Password"
-                                   value="1234"
+                                   value=""
                                    onclick="" />
                         </p>
                         <button type="submit" name="login" class="btn-all-buttons" id="btn-login">Login</button>

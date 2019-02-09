@@ -18,9 +18,10 @@ input{
     -webkit-appearance: none;
 }
 select, textarea{
-    width: 290px;
+    width: 360px;
     height: 30px;
     font-size: 16px;
+    margin-bottom: 10px
 }
 #height2, #service{
     margin-top: 10px;
@@ -52,6 +53,10 @@ h3{
     width: 100%;
 }
 @media only screen and (min-width: 520px){
+    #player-form{
+        width: 90%;
+        
+    }
     h1, h3{
         text-align: center;
     } 
@@ -71,6 +76,7 @@ h3{
     }
     #textarea{
         height: 100px;
+        width: 400px;
     }
     #btnSubmit{
         background-color: #bb0a1e;
@@ -90,6 +96,9 @@ h3{
     input{
         width: 100%;
         margin-bottom: 15px;
+    }
+    select{
+        width: 410px;
     }
 
 }

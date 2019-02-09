@@ -1313,7 +1313,7 @@
 						<div id='refs'>
 						<p class='span'>Personal Statement: &nbsp; </p>
 						<p>
-						  <textarea placeholder='Personal Statement...' rows='4' cols='50' id='textarea' name='persStatement' form='player-form'>{$player->getPersStatement()}</textarea>
+						  <textarea placeholder='Personal Statement...' rows='4' cols='150' id='textarea' name='persStatement' form='player-form'>{$player->getPersStatement()}</textarea>
 					  	</p>  
 						  </div>
 					</div><!-- end of test-container -->

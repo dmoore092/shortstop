@@ -153,7 +153,8 @@
 		    $value = trim($value);
 		    $value = stripslashes($value);
 		    $value = strip_tags($value);
-		    $value = htmlentities($value);
+            $value = htmlentities($value);
+            $value = ucwords($value);
 		    return $value;
 	    }
 

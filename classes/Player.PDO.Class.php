@@ -28,7 +28,7 @@
 			try{
 				 $name = "%".$name."%";
 						$data = array();
-						   $stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, email, sport, persontype FROM players WHERE name LIKE :name"); 
+						   $stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, email, sport, persontype FROM players WHERE name LIKE :name and persontype = 'player'"); 
 						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
 						$stmt->execute();
 						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
@@ -538,8 +538,6 @@
 					<h3>Player Info</h3>
 						<ul>
 							<li><span class='attributes'>Email:</span> {$player->getEmail()}</li>
-							<li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
-							<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li>
 							<li><span class='attributes'>City:</span> {$player->getCity()}</li>
 							<li><span class='attributes'>State:</span> {$player->getState()}</li>
 							<li><span class='attributes'>Zip:</span> {$player->getZip()}</li>
@@ -563,6 +561,7 @@
 					</div> <!-- end of .info-box -->
 				</div> <!-- end of info-box-container -->
 				</div><!-- end of profile-area --> 
+				<p>When you become committed to a college, please send us an email at <a href='kprestano@athleticprospects.com'>kprestano@athleticprospects.com</a></p>
 				<hr/>
 				<h3>Videos</h3>
 					<div id='videos'>
@@ -791,7 +790,7 @@
 				</div> <!-- end of form-wrapper -->
 				</div><!-- end of #content -->
 				<div id='center-area'>
-			   
+					
 				</div> 
 				";
 			}
@@ -1154,7 +1153,7 @@
 						<h3>References</h3>
 						<div id='refs-container'>
 						<div id='refs'>
-						<p class='span'>Reference 1(Optional)</p>
+						<p class='span'>Reference 1</p>
 							<p>
 							  <!--  <span class='span'>Name: &nbsp; </span> -->
 								<input type='text'
@@ -1201,7 +1200,7 @@
 							</p>
 							</div><!-- end of refs -->
 						<div id='refs'>
-						<p class='span'>Reference 2(Optional)</p>
+						<p class='span'>Reference 2</p>
 							<p>
 							  <!--  <span class='span'>Name: &nbsp; </span> -->
 								<input type='text'
@@ -1249,7 +1248,7 @@
 							</div><!-- end of refs -->
 						
 						<div id='refs'>
-						<p class='span'>Reference 3(Optional)</p>
+						<p class='span'>Reference 3</p>
 							<p>
 							 <!--   <span class='span'>Name: &nbsp; </span> -->
 								<input type='text'
@@ -1300,17 +1299,7 @@
 						<p class='span'>Personal Statement: &nbsp; </p>
 						<p>
 						  <textarea placeholder='Personal Statement...' rows='4' cols='50' id='textarea' name='persStatement' form='player-form'>{$player->getPersStatement()}</textarea>
-					  	</p>
-						  <p class='servicelabel' for='service'>Choose Service</p>  
-						<p>
-					  	<select id='service' name='service'>
-						  <option value='' disabled selected>Choose Service</option>
-						  <option value='free'>Free Player Profile</option>
-						  <option value='biweekly'>Bi-weekly recruiting checklist and articles - $100/per year</option>
-						  <option value='mentor1yr'>Mentor Program 1 year - $1099</option>
-						  <option value='mentor6mo'>Mentor Program 6 months - $650</option>
-					  	</select>
-						  </p>
+					  	</p>  
 						  </div>
 					</div><!-- end of test-container -->
 						<input type='submit'
@@ -1607,3 +1596,15 @@
 		}
 	} // class
 ?>
+
+<!-- <p class='servicelabel' for='service'>Choose Service</p> -->
+<!-- <select id='service' name='service'>
+						  <option value='' disabled selected>Choose Service</option>
+						  <option value='free'>Free Player Profile</option>
+						  <option value='biweekly'>Bi-weekly recruiting checklist and articles - $100/per year</option>
+						  <option value='mentor1yr'>Mentor Program 1 year - $1099</option>
+						  <option value='mentor6mo'>Mentor Program 6 months - $650</option>
+					  	</select> -->
+
+						  <!-- <li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
+							<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li> -->

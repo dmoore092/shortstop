@@ -35,3 +35,4 @@ apt-get install -y php7.2-mysql
 
 #restart apache
 service apache2 restart
+

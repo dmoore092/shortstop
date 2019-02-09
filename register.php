@@ -48,13 +48,13 @@
                                    value="samiam"
                                    onclick="" />
                         </p>
-                        <p>
+                        <!-- <p>
                             <select name="persontype" id="persontype">
                                 <option value="" selected disabled>I am a...</option>
                                 <option value="player">Player</option>
                                 <option value="coach">Coach</option>
                             </select>
-                        </p>
+                        </p> -->
                         <input type="submit"
                                value="Create Account"
                                name = "btnCreate"
@@ -72,12 +72,13 @@
                             $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
                             
                             $player = new PlayerDB();
-
+                            $persontype = 'player';
                             $registered = $player->register($username, $hashed_password, $persontype);
-                            if(!isset($_POST["persontype"])){
-                                echo "<p style='color:red';>Please select whether you are a player or coach.</p>";
-                            }
-                            else if($registered){
+                            // if(!isset($_POST["persontype"])){
+                            //     echo "<p style='color:red';>Please select whether you are a player or coach.</p>";
+                            // }
+                            // else 
+                            if($registered){
                                 //var_dump($_SESSION);
                                 echo "<script>window.location.href = 'myinfo.php';</script>";
                             }

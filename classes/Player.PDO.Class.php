@@ -394,6 +394,9 @@
 					case 'characteristics':
 						$this->updateField('characteristics', $val, $id);
 						break;
+					case 'major':
+						$this->updateField('major', $val, $id);
+						break;
                 }
 			}
 		}
@@ -546,6 +549,7 @@
 							<li><span class='attributes'>GPA:</span> {$player->getGpa()}</li>
 							<li><span class='attributes'>SAT:</span> {$player->getSat()}</li>
 							<li><span class='attributes'>ACT:</span> {$player->getAct()}</li>
+							<li><span class='attributes'>Intended Major:</span> {$player->getMajor()}</li>
 						</ul>
 					</div><!-- end of .info-box -->
 				<div class='info-box'>
@@ -1039,7 +1043,7 @@
 								 placeholder = 'xxxx'
 								 value='{$player->getGradYear()}'
 								 onclick='' />
-					  </p>
+					    </p>
 						<p>
 							<label class='span'>Sport:* &nbsp; </label>
 								<input type='text'
@@ -1115,6 +1119,17 @@
 								   maxlength = '50'
 								   placeholder = 'xxx'
 								   value='{$player->getAct()}'
+								   onclick='' />
+						</p>
+						<p>
+						<label class='span'>Intended Major: &nbsp; </label>
+							<input type='text'
+								   id = 'major'
+								   name= 'major'
+								   size = '35'
+								   maxlength = '100'
+								   placeholder = ' '
+								   value='{$player->getMajor()}'
 								   onclick='' />
 						</p>
 						<p>

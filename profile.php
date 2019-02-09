@@ -166,7 +166,7 @@
 
               if(isset($_POST['weight'])){
                 if($playerDB->isAlphaNumeric($_POST['weight']) != 0){
-                    $updateArray['weight'] = $playerDB->sanitize($_POST['city']);
+                    $updateArray['weight'] = $playerDB->sanitize($_POST['weight']);
                 }
               }
               
@@ -294,6 +294,12 @@
               if(isset($_POST['persStatement'])){
                 if($playerDB->isAlphaNumeric($_POST['persStatement']) != 0){
                     $updateArray['persStatement'] = $playerDB->sanitize($_POST['persStatement']);
+                }
+              }
+
+              if(isset($_POST['major'])){
+                if($playerDB->isAlphaNumeric($_POST['major']) != 0){
+                    $updateArray['major'] = $playerDB->sanitize($_POST['major']);
                 }
               }
 

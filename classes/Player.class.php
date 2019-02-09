@@ -58,6 +58,7 @@
 		private $home2first;
 		private $gpareq;
 		private $satactreq;
+		private $major;
 		
 		/**
 		 * getId() - returns the User's ID
@@ -434,6 +435,13 @@
 		 */
 		public function getSatAct(){
 			return $this->satactreq;
+		}
+
+		/**
+		 * getMajor() - returns player's intended major
+		 */
+		public function getMajor(){
+			return $this->major;
 		}
 	}
 ?>

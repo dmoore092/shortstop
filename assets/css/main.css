@@ -13,7 +13,7 @@ body{
     background-image: url(https://cdn4.sportngin.com/attachments/background_graphic/9705/8030/siteBackground.jpg);
     background-repeat: no-repeat;
     background-color: black;  
-    background-position: 50% 1.5%;
+    background-position: 50% 5%;
     font-family: "Arial", Helvetica, sans-serif;
     position:absolute;
     min-height: 100%;
@@ -90,6 +90,7 @@ hr{
 }
 #search #textbox{
     width: 76%;
+    border: 1px solid black;
 }
 #search #button{
     color: white;
@@ -214,20 +215,23 @@ section, article{
         color: white;
     }
     #search-container{
-        display: flex;
-        justify-content: flex-end;
-        flex-wrap: nowrap;
-        margin-right: -70px;
+        /* display: flex;
+        justify-content: flex-end; */
+        /* flex-wrap: nowrap; */
+        /* margin-right: 25px; */
     }
     #search-form{
         position: relative;
-        left: 285px;
+        /* left: 620px; */
+        left: 62%;
+        
     }
     #search{
         display: block;
         background-color: #bb0a1e;
         padding: 5px 0;
         margin-left: 0;
+        
     }
 
     #search #button{
@@ -319,7 +323,7 @@ section, article{
     #big-login-button{
         float: right;
         position: relative;
-        bottom: 27px;
+        bottom: 35px;
     }
 
 } /* END OF min-width 520px @media */

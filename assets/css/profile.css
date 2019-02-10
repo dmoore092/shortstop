@@ -48,9 +48,10 @@ tr:nth-child(even){
     background: #ccc;
 }
 h2{
-    text-align: center;
+    text-align: left;
     margin-bottom: 15px;
 }
+
 #content{
     width: 80%;
     margin: auto;
@@ -67,6 +68,19 @@ input, select{
     width: 100%;
     font-size: 1.2em;
 }
+a{
+    text-decoration: none;
+    color: #bb0a1e;
+    font-weight: bold;
+}
+#title-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* border: 2px solid black; */
+    padding: 5px 0;
+}
+
 @media only screen and (min-width: 520px) {
     #profile-area{
         display:flex;
@@ -82,8 +96,10 @@ input, select{
         width: 35%;
         height: 35%;
     }
-    h3{
+
+    h2,h3{
         margin-top: 15px;
+        /* border: 2px solid black; */
     }
     #collegeh2{
         margin-left: 23.5%;
@@ -111,7 +127,7 @@ input, select{
         justify-content: space-between;
     }
     .references{
-    border-bottom: none;
+        border-bottom: none;
     }
     #info-box-underline{
         border-bottom: none;

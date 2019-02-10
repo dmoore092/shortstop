@@ -526,7 +526,10 @@
 			//var_dump($player);
 			if ($player != null && $player->getPersonType() == 'player') {
 				$html .= "<div id='body-main'>
-				<h2><a href='myinfo.php'><img src='assets/img/edit2.png'/ id='edit-img'></a> {$player->getName()} {$player->getCommitment()}</h2>
+				<div id='title-wrapper'>
+					<h2 id='name'><a href='myinfo.php'><img src='assets/img/edit2.png' id='edit-img'></a> {$player->getName()}</h2>
+					<h3 id='hs'>{$player->getHighschool()}</h3>
+				</div>
 				<hr/>
 				<div id='profile-area'>
 				<figure>

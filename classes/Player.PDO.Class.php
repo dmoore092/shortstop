@@ -568,7 +568,7 @@
 					</div> <!-- end of .info-box -->
 				</div> <!-- end of info-box-container -->
 				</div><!-- end of profile-area --> 
-				<p>When you become committed to a college, please send us an email at <a href='kprestano@athleticprospects.com'>kprestano@athleticprospects.com</a></p>
+				<p id='com-prompt'>When you become committed to a college, please send us an email at <a href='kprestano@athleticprospects.com'>kprestano@athleticprospects.com</a></p>
 				<hr/>
 				<h3>Videos</h3>
 					<div id='videos'>

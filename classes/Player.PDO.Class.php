@@ -809,11 +809,12 @@
 			//var_dump($player);
 			//profile.php?id={$player->getId()}
 			if ($player != null && $player->getPersonType() == 'player') {
+				//profile.php?id={$player->getId()}
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
-						  action= 'profile.php?id={$player->getId()}'
-						  onsubmit = 'return validateForm();' 
+						  action= ''
+						  onsubmit = '' 
 						  enctype='multipart/form-data' >
 						<h1>Player Info</h1>
 						<div id='refs-container'>
@@ -826,7 +827,7 @@
 								   maxlength = '50'
 								   placeholder = 'First and Last Name'
 								   value='{$player->getName()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						 <label class='span'>Email:* &nbsp; </label> 
@@ -837,11 +838,11 @@
 								   maxlength = '50'
 								   placeholder = 'example@example.com'
 								   value='{$player->getEmail()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Gender:* &nbsp; </label> 
-							<select name='gender'>
+							<select name='gender' required>
 								<option value=' ' selected disabled>Select Gender:</option>
 								<option value='Male' >Male</option>
 								<option value='Female' >Female</option>
@@ -856,7 +857,7 @@
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
 								   value='{$player->getCellPhone()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Home Phone:* &nbsp; </label>
@@ -867,7 +868,7 @@
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
 								   value='{$player->getHomePhone()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Address:* &nbsp; </label>
@@ -878,7 +879,7 @@
 								   maxlength = '50'
 								   placeholder = 'Your Address'
 								   value='{$player->getAddress()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>City:* &nbsp; </label>
@@ -889,11 +890,11 @@
 								   maxlength = '50'
 								   placeholder = 'Your City'
 								   value='{$player->getCity()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span' for='state'>State:* &nbsp;</label>
-							<select name='state'>
+							<select name='state' required>
 								<option value=' ' selected disabled>Select State:</option>
 								<option value='New York'>New York</option>
 								<option value='Alabama'>Alabama</option>
@@ -958,7 +959,7 @@
 								   maxlength = '50'
 								   placeholder = 'xxxxx'
 								   value='{$player->getZip()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>High School:* &nbsp; </label>
@@ -969,7 +970,7 @@
 								   maxlength = '50'
 								   placeholder = 'Your Highschool'
 								   value='{$player->getHighschool()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Weight:* &nbsp; </label>
@@ -980,11 +981,11 @@
 								   maxlength = '50'
 								   placeholder = 'xxx'
 								   value='{$player->getWeight()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Height*: &nbsp; </label>
-						<select name='height'>
+						<select name='height' required>
 							<option value='' selected disabled>Select height:</option>
 							<option value='4 foot 0 inches'>4 foot 0 inches</option>
 							<option value='4 foot 1 inch'>4 foot 1 inch</option>
@@ -1045,7 +1046,7 @@
 								 maxlength = '50'
 								 placeholder = 'xxxx'
 								 value='{$player->getGradYear()}'
-								 onclick='' />
+								 required />
 					    </p>
 						<p>
 							<label class='span'>Sport:* &nbsp; </label>
@@ -1056,7 +1057,7 @@
 										maxlength = '50'
 										placeholder = 'Football, Basketball, Esports, etc'
 										value='{$player->getSport()}'
-										onclick='' />
+										required />
 						</p>
 						<p>
 						<label class='span'>Primary Position:* &nbsp; </label>
@@ -1067,7 +1068,7 @@
 								   maxlength = '50'
 								   placeholder = 'Your Primary Position'
 								   value='{$player->getPrimaryPosition()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Secondary Position:* &nbsp; </label>
@@ -1078,7 +1079,7 @@
 								   maxlength = '50'
 								   placeholder = 'Your Secondary Position'
 								   value='{$player->getSecondaryPosition()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>Travel Team:* &nbsp; </label>
@@ -1089,7 +1090,7 @@
 								   maxlength = '50'
 								   placeholder = 'Your Travel Team'
 								   value='{$player->getTravelTeam()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>GPA:* &nbsp; </label>
@@ -1100,7 +1101,7 @@
 								   maxlength = '50'
 								   placeholder = 'x.xx'
 								   value='{$player->getGpa()}'
-								   onclick='' />
+								   required />
 						</p>
 						<p>
 						<label class='span'>SAT: &nbsp; </label>
@@ -1111,7 +1112,7 @@
 								   maxlength = '50'
 								   placeholder = 'xxx or xxxx'
 								   value='{$player->getSat()}'
-								   onclick='' />
+								    />
 						</p>
 						<p>
 						<label class='span'>ACT: &nbsp; </label>
@@ -1122,10 +1123,10 @@
 								   maxlength = '50'
 								   placeholder = 'xxx'
 								   value='{$player->getAct()}'
-								   onclick='' />
+								    />
 						</p>
 						<p>
-						<label class='span'>Intended Major: &nbsp; </label>
+						<label class='span'>Intended Major*: &nbsp; </label>
 							<input type='text'
 								   id = 'major'
 								   name= 'major'
@@ -1133,7 +1134,7 @@
 								   maxlength = '100'
 								   placeholder = ' '
 								   value='{$player->getMajor()}'
-								   onclick='' />
+								    />
 						</p>
 						<p>
 						<label class='span'>Commitment: &nbsp; </label>
@@ -1144,7 +1145,7 @@
 								   maxlength = '100'
 								   placeholder = ' '
 								   value='{$player->getCommitment()}'
-								   onclick='' />
+								    />
 						</p>
 					</div>
 						<hr/>
@@ -1181,7 +1182,7 @@
 									   maxlength = '50'
 									   placeholder = 'First and Last Name'
 									   value='{$player->getRef1Name()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
@@ -1192,7 +1193,7 @@
 									   maxlength = '50'
 									   placeholder = 'Reference 1 Job Title'
 									   value='{$player->getRef1JobTitle()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							 <!--   <span class='span'>Email: &nbsp; </span> -->
@@ -1203,7 +1204,7 @@
 									   maxlength = '50'
 									   placeholder = 'example@example.con'
 									   value='{$player->getRef1Email()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Phone Number: &nbsp; </span> -->
@@ -1214,7 +1215,7 @@
 									   maxlength = '50'
 									   placeholder = 'xxx-xxx-xxxx'
 									   value='{$player->getRef1Phone()}'
-									   onclick='' />
+									    />
 							</p>
 							</div><!-- end of refs -->
 						<div id='refs'>
@@ -1228,7 +1229,7 @@
 									   maxlength = '50'
 									   placeholder = 'First and Last Name'
 									   value='{$player->getRef2Name()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
@@ -1239,7 +1240,7 @@
 									   maxlength = '50'
 									   placeholder = 'Reference 2 Job Title'
 									   value='{$player->getRef2JobTitle()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Email: &nbsp; </span> -->
@@ -1250,7 +1251,7 @@
 									   maxlength = '50'
 									   placeholder = 'example@example.com'
 									   value='{$player->getRef2Email()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Phone Number: &nbsp; </span> -->
@@ -1261,7 +1262,7 @@
 									   maxlength = '50'
 									   placeholder = 'xxx-xxx-xxxx'
 									   value='{$player->getRef2Phone()}'
-									   onclick='' />
+									    />
 							</p>
 							</div><!-- end of refs -->
 						
@@ -1276,7 +1277,7 @@
 									   maxlength = '50'
 									   placeholder = 'First and Last Name'
 									   value='{$player->getRef3Name()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
@@ -1287,7 +1288,7 @@
 									   maxlength = '50'
 									   placeholder = 'Reference 3 Job Title'
 									   value='{$player->getRef3JobTitle()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 							  <!--  <span class='span'>Email: &nbsp; </span> -->
@@ -1298,7 +1299,7 @@
 									   maxlength = '50'
 									   placeholder = 'example@example.com'
 									   value='{$player->getRef3Email()}'
-									   onclick='' />
+									    />
 							</p>
 							<p>
 								<!-- <span class='span'>Phone Number: &nbsp; </span> -->
@@ -1309,7 +1310,7 @@
 									   maxlength = '50'
 									   placeholder = 'xxx-xxx-xxxx'
 									   value='{$player->getRef3Phone()}'
-									   onclick='' />
+									    />
 							</p>
 							
 						</div><!-- end of refs -->
@@ -1328,7 +1329,6 @@
 							   onClick='checkMyInfo()' />
 				</form>
 				<a href='passwordreset.php'>Reset my password>>></a>
-				<script type='test/javascript' src='/assets/javascript/checkMyInfo.js' ></script>
 				</body>
 					\n";
 				

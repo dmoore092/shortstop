@@ -6,12 +6,14 @@
       $imgpath="";
       $linkpath = "";
       $templinkpath = "";
-?>
 
-        <?php include('assets/inc/header.inc.php'); ?>
-        <div id="body-main">
-             <p>Logout</p>
+include('assets/inc/header.inc.php'); ?>
+<div id="body-main">
+        <div id="logout-wrapper">
+                <p>You have been successfully logged out!</p>
+        </div>
+             
             
 
 
-            <?php include('assets/inc/footer.inc.php'); ?>
+<?php include('assets/inc/footer.inc.php'); ?>

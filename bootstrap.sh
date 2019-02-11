@@ -36,3 +36,12 @@ apt-get install -y php7.2-mysql
 #restart apache
 service apache2 restart
 
+# install Swaks is an smtp of CURL, install it first:
+mkdir mailgun-php
+
+cd mailgun-php
+
+curl http://www.jetmore.org/john/code/swaks/files/swaks-20130209.0/swaks -o swaks
+
+# Set the permissions for the script so you can run it
+chmod +x swaks

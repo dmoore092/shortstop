@@ -71,19 +71,25 @@
         include("assets/inc/footer.inc.php"); 
         
         if(isset($_POST['report'])){
-            $id=$_POST["playerid"];
-            $to = "dmoore092@gmail.com";
-            $subject = "AthleticProspects.com Post Reported";
-            $message = "<body><a href='www.dmwebdev.net/profile.php?id=".$id."'>A user has reported a post for inappropriate images, video, or content</body></a>";
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-            $headers .= "From: webmaster@dmwebdev.net" . "\r\n" .
-                        "Reply-To: dmoore092@gmail.com" . "\r\n" .
-                        "X-Mailer: PHP/" . phpversion();
+            // $id=$_POST["playerid"];
+            // $to = "dmoore092@gmail.com";
+            // $subject = "AthleticProspects.com Post Reported";
+            // $message = "<body><a href='www.dmwebdev.net/profile.php?id=".$id."'>A user has reported a post for inappropriate images, video, or content</body></a>";
+            // $headers = "MIME-Version: 1.0" . "\r\n";
+            // $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+            // $headers .= "From: webmaster@dmwebdev.net" . "\r\n" .
+            //             "Reply-To: dmoore092@gmail.com" . "\r\n" .
+            //             "X-Mailer: PHP/" . phpversion();
 
-            // If you leave the $headers from field empty,then your server mail ID will be displayed 
-            //and it may be moved to the spam section of the email
-            mail($to,$subject,$message,$headers);
+
+            $oldpath = getcwd();
+            chdir("./mailgun-php");
+            $msg = "./swaks --auth --server smtp.mailgun.org --au postmaster@sandbox448969da9f4d4c26bb11056f71517f71.mailgun.org --ap 4c4ddadc26f0cfb5687e5420c0356338-1b65790d-30158b40 --to dmoore092@gmail.com --h-subject: 'User Reported Profile' --body 'A user has reported a profile for inappropriate images, video, or content. 'www.dmwebdev.net/profile.php?id=".$id."'' 2>&1";
+            $output = exec($msg);
+            chdir($oldpath);
+            echo "<script>alert('Account reported.');</script>";
+            
+            
         };
 
         if(isset($_POST['delete'])){

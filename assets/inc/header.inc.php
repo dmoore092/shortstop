@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Dale Moore">
         <meta name="description" content="We strive to provide High School and JUCO athletes the tools to successfully promote themselves to college coaches by assisting athletes through the recruiting process."/>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
 <header>

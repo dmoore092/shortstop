@@ -165,7 +165,7 @@
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player->getGradYear()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player->getSport()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
-					$html .= "<form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE'></form>";
+					$html .= "<form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE' onclick='return confirm('Really delete this profile?')';></form>";
 					$html .= "<hr />";
 				}
 				$html .= "</div><!-- end of search-wrapper --></div><!-- end of body-main -->";
@@ -188,16 +188,6 @@
 							<td>{$player->getSport()}</td>
 							<td>{$player->getPrimaryPosition()}</td>
 						</tr>\n";
-                    }
-                }else{
-                    $html .= "<tr><th>Player Name</th><th>Sport</th><th>Email</th></tr>";
-                    foreach($data as $project){
-						$html .= "<tr>
-                            <td>{$project->getProjectName()}</td>
-                            <td>{$project->getProjectLead()}</td>
-                            <td><a href='mailto:{$project->getEmail()}'>{$project->getEmail()}</a></td>
-                            <td>{$project->getDescription()}</td>
-                        </tr>";
                     }
                 }
                 $html .= "</table></div>";

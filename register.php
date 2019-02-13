@@ -23,8 +23,8 @@
                                    size = "25"
                                    maxlength = "150"
                                    placeholder = "Choose a username"
-                                   value="samiam"
-                                   onclick="" />
+                                   value=""
+                                   required />
                         </p>
                         <p>
                         <span class="span">Password:* &nbsp; </span>
@@ -34,8 +34,8 @@
                                    size = "25"
                                    maxlength = "150"
                                    placeholder = "password"
-                                   value="samiam"
-                                   onclick="" />
+                                   value=""
+                                   required />
                         </p>
                         <p>
                         <span class="span">Retype Password:* &nbsp; </span> 
@@ -45,9 +45,10 @@
                                    size = "25"
                                    maxlength = "50"
                                    placeholder = "Retype Your Password"
-                                   value="samiam"
-                                   onclick="" />
+                                   value=""
+                                   required />
                         </p>
+                        <div class="g-recaptcha" data-sitekey="6LfGGJEUAAAAAChOm6ZDVpoo3ZbjdUsfwfYT6Omj"></div>
                         <!-- <p>
                             <select name="persontype" id="persontype">
                                 <option value="" selected disabled>I am a...</option>

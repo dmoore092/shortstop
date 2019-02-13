@@ -58,7 +58,7 @@
                                name="login"
                                class="btn-all-buttons"
                                id="btn-login"/> -->
-                        <button class="btn-all-buttons" id="btn-create-account" onclick=location.href = register.php>Create Account</button>
+                        <a href = "register.php" style="text-decoration:none"><input type="button" class="btn-all-buttons" id="btn-create-account" value="Register" /></a>
                 <?php 
 
             ?> 

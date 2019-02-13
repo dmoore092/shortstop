@@ -158,7 +158,11 @@ hr{
 section, article{
     margin-bottom: 10px;
 }
+#sm-footer{
+    width: 30%;
+}
 .fa{
+    /* border: 2px solid black; */
     padding: 11px;
     font-size: 20px;
     width: 20px;
@@ -180,6 +184,10 @@ section, article{
     background: #125688;
     color: white;
 }
+.fa-envelope{
+    background: #8081ce;
+    color: white;
+}
 @media only screen and (min-width: 520px) {
     .navicon {display: none;}
     #body-main, #big-login>ul, #search-container, .nav>ul{
@@ -190,6 +198,7 @@ section, article{
     .social-media{
         width: 1000px;
         margin: auto;
+        /* border: 2px solid black; */
     }
     #followUS{
         color: white;
@@ -315,7 +324,7 @@ section, article{
         color: white;
         text-decoration: none;  
         font-size: 17px;
-        margin-left: 15px;
+        /* margin-left: 15px; */
     }
     #fb{
         clear:both;

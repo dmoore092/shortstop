@@ -8,7 +8,6 @@
     //$data = $playerDB->getPlayersByGender('male');
     //var_dump($data);
     echo $playerDB->getPlayersFromSearch($data);
-    //echo $playerDB->getPlayersAsTable($data);
 
     include("assets/inc/footer.inc.php");
 

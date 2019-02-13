@@ -7,6 +7,12 @@ for mathletes and fathletes
 .search-wrapper{
     display: block;
 }
+#empty-search-wrapper{
+    height: 200px;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 100px;
+}
 .player-attrib{
     margin-left: 15px;
 }
@@ -46,7 +52,15 @@ input, select{
     width: 100%;
     font-size: 1.2em;
 }
-
+#logout-wrapper{
+    width: 90%;
+    /* border: 2px solid black; */
+    height: 200px;
+    margin: auto;
+    text-align: center;
+    padding-top: 150px;
+    font-size: 2rem;
+}
 @media only screen and (min-width: 520px) {
     #table-wrapper{
         display: block;

@@ -32,9 +32,10 @@
             <div id="big-login">
                 <div class="social-media">
                     <span id="followUS">Follow US </span>
-                     <a href="http://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+                    <a href="http://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
                     <a href="http://www.twitter.com" target="_blank" class="fa fa-twitter"</a>
                     <a href="http://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
+                    <!-- <a href="mailto:kprestano@athleticprospects.com" class="fa fa-envelope"></a> -->
                 </div>
                 <ul>
                     <?php

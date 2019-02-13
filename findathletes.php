@@ -191,7 +191,6 @@ if(isset($_POST['search-athlete'])){
         $data = $playerDB->getPlayersByFindAthleteSearch($query);
         //header("Location: results.php?".http_build_query($data));
         echo $playerDB->getPlayersAsTable($data);
-        //var_dump($data);
         echo $playerDB->getPlayers($data);
    }
  };

@@ -25,10 +25,10 @@
 		*/
 		function searchPlayers($name){
 			if($name !== " "){
-			try{
+				try{
 				 $name = "%".$name."%";
 						$data = array();
-						   $stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, email, sport, persontype FROM players WHERE name LIKE :name and persontype = 'player'"); 
+						$stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE name LIKE :name and persontype = 'player'"); 
 						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
 						$stmt->execute();
 						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
@@ -36,14 +36,11 @@
 								$data[] = $databaseProjects;
 						}
 						return $data;
-					}
-					catch(PDOException $e){
-						echo $e->getMessage();
-						throw new Exception("Problem searching for players in the database.");
-					}
-			}
-			else{
-				header("Location: findProject.php");
+				}
+				catch(PDOException $e){
+					echo $e->getMessage();
+					throw new Exception("Problem searching for players in the database.");
+				}
 			}
 		}
 		/**
@@ -53,7 +50,7 @@
 			//echo $gender;
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("SELECT id, username, name, email, sport, persontype FROM players WHERE gender = :gender"); 
+                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE gender = :gender"); 
                 $stmt->bindParam("gender",$gender,PDO::PARAM_STR);    
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -73,7 +70,7 @@
 		function getPlayersByRole($role){
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("SELECT id, username, name, email, sport, persontype FROM players WHERE persontype = :role"); 
+                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE persontype = :role"); 
                 $stmt->bindParam("role",$role,PDO::PARAM_STR);    
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -111,20 +108,34 @@
 
 		function getPlayersFromSearch($data=null){
             if($data != null && count($data) > 0){
-                $html = "<div id='table-wrapper'><table>\n";
                 if(true){
-                    $html .= "<tr><th>Name</th><th>Sport</th><th>Role</th><th>Email</th></tr>";
+					$html = "<div id='body-main'><div id='table-wrapper'><table>\n";
+                    $html .= "<tr><th>Name</th><th>Highschool</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
                     foreach($data as $player){
 						$html .= "
                         <tr>
                             <td><a href='profile.php?id={$player[0]}'>{$player[1]}</a></td>
+							<td>{$player[2]}</td>
 							<td>{$player[3]}</td>
 							<td>{$player[4]}</td>
-                            <td><a href='mailto:'{$player[2]}'>{$player[2]}</a></td>
-                        </tr>\n";
+                            <td>{$player[5]}</td>
+						</tr>\n";
 					}
 					$html .= "</table></div>";
+					$html .= "<hr/><div class='search-wrapper'>";
+					foreach($data as $player){
+						$html .= "<p><span style='color:#bb0a1e;'>Name: </span><a href='profile.php?id={$player[0]}'>{$player[1]}</a></p>";
+						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Highschool: </span>{$player[2]}</p>";
+						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player[3]}</p>";
+						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player[4]}</p>";
+						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player[5]}</p>";
+						$html .= "<hr />";
+					}
+				$html .= "</div><!-- end of search-wrapper -->";
 				}
+			}
+			else{
+				$html = "<div id='body-main'><div id='empty-search-wrapper'><p>No players found. Try again</p></div>";
 			}
 			return $html;
 		}

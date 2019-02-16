@@ -183,7 +183,7 @@ if(isset($_POST['search-athlete'])){
             $query = "SELECT id, name, highschool, gradYear, sport, primaryPosition FROM players WHERE persontype = 'player';";
         }
         else{
-            $query = "SELECT id, name, sport, email, persontype FROM players WHERE ";
+            $query = "SELECT id, name, highschool, gradYear, sport, primaryPosition FROM players WHERE ";
             $query .= implode(" AND ", $arr);
             $query .= " AND persontype = 'player';";
         }

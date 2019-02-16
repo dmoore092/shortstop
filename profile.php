@@ -113,7 +113,7 @@
                 $mail->Username = 'dmoore092@gmail.com';                 // SMTP username
                 $mail->Password = 'Google@ccess2';                           // SMTP password
                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-                $mail->Port = 587;                                    // TCP port to connect to
+                $mail->Port = 465;                                    // TCP port to connect to
             
                 //Recipients
                 $mail->setFrom('webmaster@athleticprospects.com', 'Inappropriate Profile Report');

@@ -82,27 +82,8 @@
         include("assets/inc/footer.inc.php"); 
         
         if(isset($_POST['report'])){
-            //MAIL
-            // $id=$_POST["playerid"];
-            // $to = "dmoore092@gmail.com";
-            // $subject = "AthleticProspects.com Post Reported";
-            // $message = "<body><a href='www.dmwebdev.net/profile.php?id=".$id."'>A user has reported a post for inappropriate images, video, or content</body></a>";
-            // $headers = "MIME-Version: 1.0" . "\r\n";
-            // $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-            // $headers .= "From: webmaster@dmwebdev.net" . "\r\n" .
-            //             "Reply-To: dmoore092@gmail.com" . "\r\n" .
-            //             "X-Mailer: PHP/" . phpversion();
-            
-            //MAILGUN
-            // $oldpath = getcwd();
-            // chdir("./mailgun-php");
-            // $msg = "./swaks --auth --server smtp.mailgun.org --au postmaster@sandbox448969da9f4d4c26bb11056f71517f71.mailgun.org --ap 4c4ddadc26f0cfb5687e5420c0356338-1b65790d-30158b40 --to dmoore092@gmail.com --h-subject: 'User Reported Profile' --body 'A user has reported a profile for inappropriate images, video, or content. 'www.dmwebdev.net/profile.php?id=".$id."'' 2>&1";
-            // $output = exec($msg);
-            // chdir($oldpath);
-            // echo "<script>alert('Account reported.');</script>";
-
             //PHPMailer
-            $mail = new PHPMailer(true); 
+           $mail = new PHPMailer(true); 
             
             try {
                 //Server settings
@@ -116,7 +97,7 @@
                 $mail->Port = 465;                                    // TCP port to connect to
             
                 //Recipients
-                $mail->setFrom('webmaster@athleticprospects.com', 'Inappropriate Profile Report');
+                $mail->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
                 $mail->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient
                 //$mail->addAddress('ellen@example.com');               // Name is optional
                 //$mail->addReplyTo('info@example.com', 'Information');
@@ -129,7 +110,7 @@
             
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'test';
+                $mail->Subject = 'Inappropriate Profile report';
                 $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='www.dmwebdev.net/profile.php?id=".$id."'>Click Here.</a>";
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             

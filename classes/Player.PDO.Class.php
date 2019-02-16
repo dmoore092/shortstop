@@ -535,7 +535,7 @@
 				<div id='profile-area'>
 				<figure>
 					<img src='assets/img/userpictures/{$player->getProfileImage()}' alt='player picture' id='player-pic'>
-					<form method='post' action=''>
+					<form method='post' action='' onsubmit=\"alert('Profile Reported.');\">
 						<input type='text' name='playerid' value='{$player->getId()}' id='hide'>
     					<input type='submit' name='report' value='Report this profile...'> 
 					</form>

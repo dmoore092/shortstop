@@ -794,6 +794,11 @@
 						name = 'admin-search'
 						class='btnSubmit'
 						id='btn-Submit'/>
+					<input type='submit'
+						value='Download Database'
+						name = 'download-db'
+						class='btnSubmit'
+						id=''/>
 				</form>
 				</div> <!-- end of form-wrapper -->
 				</div><!-- end of #content -->

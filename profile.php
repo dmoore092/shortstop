@@ -1,6 +1,14 @@
 <?php 
         error_reporting(0);
         session_start();
+
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+
+        require './PHPMailer/src/Exception.php';
+        require './PHPMailer/src/PHPMailer.php';
+        require './PHPMailer/src/SMTP.php';
+
         $title="Profile"; $page="profile";
         include_once ("classes/Player.PDO.Class.php");
 
@@ -74,6 +82,7 @@
         include("assets/inc/footer.inc.php"); 
         
         if(isset($_POST['report'])){
+            //MAIL
             // $id=$_POST["playerid"];
             // $to = "dmoore092@gmail.com";
             // $subject = "AthleticProspects.com Post Reported";
@@ -83,15 +92,52 @@
             // $headers .= "From: webmaster@dmwebdev.net" . "\r\n" .
             //             "Reply-To: dmoore092@gmail.com" . "\r\n" .
             //             "X-Mailer: PHP/" . phpversion();
-
-
-            $oldpath = getcwd();
-            chdir("./mailgun-php");
-            $msg = "./swaks --auth --server smtp.mailgun.org --au postmaster@sandbox448969da9f4d4c26bb11056f71517f71.mailgun.org --ap 4c4ddadc26f0cfb5687e5420c0356338-1b65790d-30158b40 --to dmoore092@gmail.com --h-subject: 'User Reported Profile' --body 'A user has reported a profile for inappropriate images, video, or content. 'www.dmwebdev.net/profile.php?id=".$id."'' 2>&1";
-            $output = exec($msg);
-            chdir($oldpath);
-            echo "<script>alert('Account reported.');</script>";
             
+            //MAILGUN
+            // $oldpath = getcwd();
+            // chdir("./mailgun-php");
+            // $msg = "./swaks --auth --server smtp.mailgun.org --au postmaster@sandbox448969da9f4d4c26bb11056f71517f71.mailgun.org --ap 4c4ddadc26f0cfb5687e5420c0356338-1b65790d-30158b40 --to dmoore092@gmail.com --h-subject: 'User Reported Profile' --body 'A user has reported a profile for inappropriate images, video, or content. 'www.dmwebdev.net/profile.php?id=".$id."'' 2>&1";
+            // $output = exec($msg);
+            // chdir($oldpath);
+            // echo "<script>alert('Account reported.');</script>";
+
+            //PHPMailer
+            $mail = new PHPMailer(true); 
+            
+            try {
+                //Server settings
+                $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->Username = 'dmoore092@gmail.com';                 // SMTP username
+                $mail->Password = 'Google@ccess2';                           // SMTP password
+                $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 587;                                    // TCP port to connect to
+            
+                //Recipients
+                $mail->setFrom('webmaster@athleticprospects.com', 'Inappropriate Profile Report');
+                $mail->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient
+                //$mail->addAddress('ellen@example.com');               // Name is optional
+                //$mail->addReplyTo('info@example.com', 'Information');
+                //$mail->addCC('cc@example.com');
+                //$mail->addBCC('bcc@example.com');
+            
+                //Attachments
+                //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+                //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+            
+                //Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'test';
+                $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='www.dmwebdev.net/profile.php?id=".$id."'>Click Here.</a>";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            
+                $mail->send();
+                echo 'Message has been sent';
+            } catch (Exception $e) {
+                echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+            }
             
         };
 

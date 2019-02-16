@@ -11,10 +11,13 @@
         $id=$_GET['id'];
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
             //echo "logged in set";
-           // var_dump($_SESSION['id']);
-            //var_dump($_GET);
             if ($_SESSION['id'] == $_GET['id']) {  
                 echo $playerDB->getMyInfo($id);
+                echo "<script>
+                        function doubleCheck(e){
+                            if(!confirm('are you sure?')) e.preventDefault();
+                        }
+                    </script>";
                 echo "<script>document.getElementById('edit-img').style.display='inline-block'</script>";
             }
             else{

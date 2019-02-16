@@ -165,7 +165,7 @@
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player->getGradYear()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player->getSport()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
-					$html .= "<form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE' onclick='return confirm('Really delete this profile?')';></form>";
+					$html .= "<form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE' onclick=\"return confirm('Do you really want to delete this profile?')\"></form>";
 					$html .= "<hr />";
 				}
 				$html .= "</div><!-- end of search-wrapper --></div><!-- end of body-main -->";
@@ -181,7 +181,7 @@
                     foreach($data as $player){
 						$html .= "
 						<tr>
-							<td><form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE'></form></td>
+							<td><form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE' onclick=\"return confirm('Do you really want to delete this profile?')\"></form></td>
                             <td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
 							<td>{$player->getHighschool()}</td>
 							<td>{$player->getGradYear()}</td>

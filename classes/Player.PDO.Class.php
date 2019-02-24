@@ -498,10 +498,12 @@
 				return 0;
 			}
 			else{
-				$query = "INSERT INTO players(username, pass, persontype) VALUES(:username, :pass, :persontype)"; 
+				$persontype = 'player';
+				$profileImage = 'black.JPG';
+				$query = "INSERT INTO players(username, pass, persontype, profileImage) VALUES(:username, :pass, :persontype, :profileImage)"; 
 				$stmt = $this->dbConn->prepare($query);
-				$stmt->execute(array(":username"=>$username, ":pass"=>$hashed_password, ":persontype"=>$persontype));
-				
+				$stmt->execute(array(":username"=>$username, ":pass"=>$hashed_password, ":persontype"=>$persontype, ":profileImage"=>$profileImage));
+
 				$info = $this->dbConn->prepare("SELECT username, id, persontype FROM players WHERE username = ?");
 				$info->bindParam(1, $username, PDO::PARAM_STR);
 				$info->execute();

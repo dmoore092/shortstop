@@ -22,7 +22,7 @@
 #player-form>h2{
     text-align: center;
 }
-#btn-login, #btn-create-account{
+#btn-login, #btn-create-account, #btn-reset{
     margin-bottom: 10px;
     width: 115%;
     background-color: #bb0a1e;
@@ -32,6 +32,9 @@
     appearance: none;
     -webkit-border-radius:0; 
     border-radius:0;
+}
+#btn-recover{
+    height: 30px;
 }
 #persontype{
     width: 115%;
@@ -43,7 +46,7 @@
         max-width: 35%;
         margin: auto;
     }
-    #btn-login, #btn-create-account{
+    #btn-login, #btn-create-account, #btn-reset{
         margin-bottom: 10px;
         width: 85%;
         background-color: #bb0a1e;

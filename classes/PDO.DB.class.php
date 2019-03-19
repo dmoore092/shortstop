@@ -81,25 +81,25 @@
         }
 
         /**
-         * getFieldById() - Returns a specific entry from any table 
+         * getFieldByUsername() - Returns a specific entry from players 
          */
-        function getFieldById($tableName, $fieldName, $id){
-            $data = array();
+        function getFieldByUsername($fieldname, $username){
+            // var_dump($fieldname);
+            // var_dump($username);
+            //$data = array();
+            $data = "";
             try{
-                $query = "SELECT :fieldName FROM :table WHERE id = :id";
+                $query = "SELECT $fieldname FROM players WHERE username = :username";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $stmt->bindParam(array(
-                    ":table"=>$tableName,
-                    ":column"=>$fieldName,
-                    ":id"=>$id
-                ));
+                $stmt->bindParam(":username", $username);
                 $stmt->execute();
-                while($item = $stmt->fetch()){
-                    $data[] = $item;
-                }
+                // while($item = $stmt->fetch()){
+                //     $data[] = $item;
+                // }
+                $data = $stmt->fetch();
             }catch(PDOException $e){
-                return "A problem occurred selecting the $fieldName from the table $tableName";
+                return "A problem occurred.";
             }
             return $data;
         }

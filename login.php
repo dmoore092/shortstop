@@ -59,6 +59,8 @@
                                class="btn-all-buttons"
                                id="btn-login"/> -->
                         <a href = "register.php" style="text-decoration:none"><input type="button" class="btn-all-buttons" id="btn-create-account" value="Register" /></a>
+                        <br/>
+                        <a href = "recover.php" style="text-decoration:none">Reset My Password..</a>
                 <?php 
 
             ?> 

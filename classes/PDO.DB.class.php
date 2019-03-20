@@ -89,7 +89,7 @@
             //$data = array();
             $data = "";
             try{
-                $query = "SELECT $fieldname FROM players WHERE username = :username";
+                $query = "SELECT id, $fieldname, name, reset FROM players WHERE username = :username";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":username", $username);
@@ -98,12 +98,35 @@
                 //     $data[] = $item;
                 // }
                 $data = $stmt->fetch();
+                
             }catch(PDOException $e){
                 return "A problem occurred.";
             }
             return $data;
         }
+        
+        /**
+         * creates a random string and puts in into db, along with a timestamp
+         */
+        function insertResetToken(){
+            $string = '';
+            $characters = "23456789ABCDEFHJKLMNPRTVWXYZabcdefghijklmnopqrstuvwxyz";
+            for ($p = 0; $p < 20; $p++) {
+                $string .= $characters[mt_rand(0, strlen($characters)-1)];
+            }
 
+            try{
+                //$deleteToken = "DELETE FROM players WHERE resetExpires < NOW()";
+                $insertToken = "INSERT INTO players(reset, resetExpires) VALUES(:reset, NOW()+ INTERVAL 48 HOURS);";
+                $stmt = $this->dbConn->prepare($insertToken);
+                $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $stmt->bindParam(":reset", $string);
+                $stmt->execute();
+            }
+            catch{
+
+            }
+        }
         /**
          * getEverythingAsObjects() - returns everything in the given table as objects of the given class
          */

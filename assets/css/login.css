@@ -22,7 +22,7 @@
 #player-form>h2{
     text-align: center;
 }
-#btn-login, #btn-create-account, #btn-reset{
+#btn-login, #btn-create-account, #btn-reset, #btn-reset-password{
     margin-bottom: 10px;
     width: 115%;
     background-color: #bb0a1e;

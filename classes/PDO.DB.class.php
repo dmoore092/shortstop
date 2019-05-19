@@ -53,6 +53,7 @@
          * updateField() - updates a column for any field for any table
          */
         function updateField($fieldName, $value, $id){
+            var_dump($fieldName);
             try{
                 $query = "UPDATE players SET $fieldName = :value WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
@@ -108,7 +109,7 @@
         /**
          * creates a random string and puts in into db, along with a timestamp
          */
-        function insertResetToken(){
+        function insertResetToken($username){
             $string = '';
             $characters = "23456789ABCDEFHJKLMNPRTVWXYZabcdefghijklmnopqrstuvwxyz";
             for ($p = 0; $p < 20; $p++) {
@@ -117,15 +118,17 @@
 
             try{
                 //$deleteToken = "DELETE FROM players WHERE resetExpires < NOW()";
-                $insertToken = "INSERT INTO players(reset, resetExpires) VALUES(:reset, NOW()+ INTERVAL 48 HOURS);";
+                $insertToken = "UPDATE players SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND username = '$username';
+                                UPDATE players SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE username = '$username';";
                 $stmt = $this->dbConn->prepare($insertToken);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":reset", $string);
                 $stmt->execute();
             }
-            catch{
-
+            catch(PDOException $e){
+                echo $e;
             }
+            return $string;
         }
         /**
          * getEverythingAsObjects() - returns everything in the given table as objects of the given class

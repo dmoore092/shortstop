@@ -403,7 +403,7 @@
 		}
 		/** 
 		 * checkPassword() - Password Reset part 1 - takes user inputted current password and checks it against the db
-		 * returns true if passwords maths, allows creation of new password
+		 * returns true if passwords matches, allows creation of new password
 		*/
 		function checkPassword($username, $currentPassword){
 			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE username = ?");
@@ -821,7 +821,7 @@
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
-						  action= ''
+						  action= 'profile.php?id={$player->getId()}'
 						  onsubmit = '' 
 						  enctype='multipart/form-data' >
 						<h1>Player Info</h1>

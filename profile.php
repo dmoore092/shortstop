@@ -199,7 +199,7 @@
           $updateArray = array();
           if(isset($_SESSION['id'])){
               $myId = $_SESSION['id'];
-              //var_dump($_POST);
+              var_dump($_POST);
               $updateArray['id'] = $_SESSION['id'];
               if(isset($_POST['name'])){
                   //echo $_POST['name'];

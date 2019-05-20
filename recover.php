@@ -13,6 +13,7 @@
 
 
     include("classes/Player.PDO.Class.php");
+    
     $_SESSION['logged_in'] = 'false';
     if(isset($_POST["login"])){
         //echo "login called";

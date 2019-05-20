@@ -403,7 +403,7 @@
 		}
 		/** 
 		 * checkPassword() - Password Reset part 1 - takes user inputted current password and checks it against the db
-		 * returns true if passwords matches, allows creation of new password
+		 * returns true if passwords matches, allows creation of new password. For when user already knows their current password
 		*/
 		function checkPassword($username, $currentPassword){
 			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE username = ?");
@@ -475,7 +475,6 @@
 						$_SESSION['loggedIn'] = true;
 						$_SESSION['fullname'] = $player->getName();
 						$_SESSION['id'] = $player->getId();
-						//echo "<p style=color:green;>success login</p>";
 					}
 					//true
 					return 1;
@@ -483,6 +482,40 @@
 				}
 				//false
 				return 0;
+		}
+		/**
+		 * ResetPassword() - Takes in a username and password passed in from a reset email sent to the user. Checks that the user
+		 * custom password is correct and hasn't expired, sends back whether the password can be changed or not
+		 */
+		function checkTempPassExpire($username){
+			$data = array();
+			$now    = date("Y-m-d H:i:s");
+			try{
+				$stmt = $this->dbConn->prepare("SELECT reset, resetExpires FROM players WHERE username = ?"); 
+				$stmt->bindParam(1, $username, PDO::PARAM_STR);
+				$stmt->execute();
+				$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
+			}
+			catch(PDOException $e){
+				return 0;
+			}
+			while($databaseUser = $stmt->fetch()){
+				$data[] = $databaseUser;
+			}
+			if((count($data)) == 1){
+				$player = $data[0];
+				$passwordExpire = $player->getResetExpires();
+				//var_dump($now);
+				//var_dump($passwordExpire);
+				if($now < $passwordExpire){
+					return 1;
+				}
+				else{
+					echo "<p style='color:red;margin-top:25px'>Your Temporary Password Has Expired. Please Rest Your Password Again.</p>";
+					return 0;
+				}
+			}
+			return 0;
 		}
 		//checks for duplicate username first
 		function register($username, $hashed_password, $persontype){

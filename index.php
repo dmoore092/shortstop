@@ -6,7 +6,6 @@
       session_start();
       //test
 ?>
-
         <?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">
             <div id="content">

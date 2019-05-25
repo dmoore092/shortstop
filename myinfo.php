@@ -16,7 +16,7 @@
             * This line prints the entire html page. getMyInfo() is found in Player.PDO.Class.php
             * Rewrite this some day
             */
-            echo $playerDB->getMyEditableInfo($_SESSION['id']); 
+            echo $playerDB->getMyEditableInfo($_SESSION['id']);
         } else {
             echo "<h2 id='nologin'>You must be logged in to see your info</h2>";
             echo "<a href='login.php' class='redirect-link'>Login</a>'";

@@ -21,6 +21,7 @@
 		private $height;
 		private $gradYear;
 		private $sport;
+		private $sport2;
 		private $primaryPosition;
 		private $secondaryposition;
 		private $travelTeam;
@@ -177,6 +178,13 @@
 		 */
 		public function getSport(){
 			return $this->sport;
+		}
+
+		/**
+		 * getSport2() - returns the User's 2nd Sport 
+		 */
+		public function getSport2(){
+			return $this->sport2;
 		}
 
 		/**

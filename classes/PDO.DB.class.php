@@ -151,15 +151,15 @@
             return $data;
         }
 
-        function getObjectByID($table, $className, $id){
-            $object = null;
-            $query = "SELECT * FROM $table WHERE id = :id";
+        function getObjectByID($id){
+            //$object = null;
+            $query = "SELECT * FROM players WHERE id = :id";
             $stmt = $this->dbConn->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'player');
             $object = $stmt->fetch();
-
+            var_dump($object);
             return $object;
         }
 
@@ -171,7 +171,6 @@
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
             $object = $stmt->fetch();
-
             return $object;
         }
 

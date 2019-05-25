@@ -31,7 +31,27 @@
                 onclick='' />
                 
         <select name='sport'>
-            <option value="" selected disabled>Select Sport:</option>
+            <option value="" selected disabled>Select 1st Sport:</option>
+            <option value='football'>Football</option>
+            <option value='basketball'>Basketball</option>
+            <option value='baseball'>Baseball</option>
+            <option value='softball'>Softball</option>
+            <option value='hockey'>Hockey</option>
+            <option value='fieldhockey'>Field Hockey</option>
+            <option value='lacrosse'>Lacrosse</option>
+            <option value='soccer'>Soccer</option>
+            <option value='trackandField'>Track and Field</option>
+            <option value='volleyball'>Volleyball</option>
+            <option value='wrestling'>Wrestling</option>
+            <option value='tennis'>Tennis</option>
+            <option value='swimming'>Swimming</option>
+            <option value='golf'>Golf</option>
+            <option value='gymnastics'>Gymnastics</option>
+            <option value='cheerleading'>Cheerleading</option>
+            <option value='esports'>Esports</option>
+        </select>
+        <select name='sport2'>
+            <option value="" selected disabled>Select 2nd Sport:</option>
             <option value='football'>Football</option>
             <option value='basketball'>Basketball</option>
             <option value='baseball'>Baseball</option>
@@ -164,6 +184,7 @@ if(isset($_POST['search-athlete'])){
     if(isset($_POST['search-athlete'])){
         $name       = $playerDB->sanitize($_POST['name']);
         $sport      = $_POST['sport'];
+        $sport2      = $_POST['sport2'];
         $state      = $_POST['state'];
         $class      = $_POST['class'];
         $position   = $playerDB->sanitize($_POST['position']);
@@ -173,6 +194,7 @@ if(isset($_POST['search-athlete'])){
         $arr = array();
         if($name != "") $arr[] = "name LIKE '%{$name}%'";
         if($sport != "") $arr[] = "sport = '{$sport}'";
+        if($sport2 != "") $arr[] = "sport2 = '{$sport2}'";
         if($state != "") $arr[] = "state = '{$state}'";
         if($class != "") $arr[] = "gradyear = '{$class}'";
         if($position != "") $arr[] = "primaryposition LIKE '%{$position}%'";
@@ -180,10 +202,10 @@ if(isset($_POST['search-athlete'])){
         if($gpa != "") $arr[] = "gpa >= '{$gpa}'";
 
         if($name == "" && $sport == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
-            $query = "SELECT id, name, highschool, gradYear, sport, primaryPosition FROM players WHERE persontype = 'player';";
+            $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE persontype = 'player';";
         }
         else{
-            $query = "SELECT id, name, highschool, gradYear, sport, primaryPosition FROM players WHERE ";
+            $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE ";
             $query .= implode(" AND ", $arr);
             $query .= " AND persontype = 'player';";
         }

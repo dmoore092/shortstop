@@ -159,7 +159,7 @@
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'player');
             $object = $stmt->fetch();
-            var_dump($object);
+            //var_dump($object);
             return $object;
         }
 

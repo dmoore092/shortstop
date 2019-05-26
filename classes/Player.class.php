@@ -10,8 +10,8 @@
 		private $name;
 		private $gender;
 		private $email;
-		private $cellPhone;
-		private $homePhone;
+		private $cellphone;
+		private $homephone;
 		private $address;
 		private $city;
 		private $state;
@@ -108,14 +108,14 @@
 		 * getCellPhone() - returns the User's cellPhone
 		 */
 		public function getCellPhone(){
-			return $this->cellPhone;
+			return $this->cellphone;
 		}
 
 		/**
 		 * getPhone() - returns the User's homePhone
 		 */
 		public function getHomePhone(){
-			return $this->homePhone;
+			return $this->homephone;
 		}
 		/**
 		 * getIAddress() - returns the User's Address

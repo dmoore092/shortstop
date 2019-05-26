@@ -877,7 +877,180 @@
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID($id);
 			$html = " ";
-			//var_dump($player);
+
+			//populate the select option dropdowns
+			var_dump($player->getGender());
+			$gender = $player->getGender();
+			if($gender == "Male"){
+				$male = "selected";
+				$female = "";
+			}
+			elseif($gender == "Female"){
+				$female = "selected";
+				$male = "";
+			}
+			var_dump($player->getState());
+			$al= null;$ak= null;$az= null;$ar= null;$ca= null;$co= null;$ct= null;$de= null;$dc= null;$fl= null;
+			$ga= null;$hi= null;$ida= null;$il= null;$in= null;$ia= null;$ks= null;$ky= null;$la= null;$me= null;
+			$md= null;$ma= null;$mi= null;$mn= null;$ms= null;$mo= null;$mt= null;$ne= null;$nv= null;$nh= null;
+			$nj= null;$nm= null;$nc= null;$nd= null;$oh= null;$ok= null;$or= null;$pa= null;$ri= null;$sc= null;
+			$sd= null;$tn= null;$tx= null;$ut= null;$vt= null;$va= null;$wa= null;$wv= null;$wi= null;$wy= null;
+			$ny= null;
+			switch($player->getState()){
+				case "New York": 
+					$ny = "selected";
+					break;
+				case "Alabama":
+					$al = !empty("selected");
+					break;
+				case "Alaska": 
+					$ak = "selected";
+					break;
+				case "Arizona":
+					$az = "selected";
+					break;
+				case "Arkansas": 
+					$ar = "selected";
+					break;
+				case "California":
+					$ca = "selected";
+					break;
+				case "Colorado": 
+					$co = "selected";
+					break;
+				case "Connecticut":
+					$ct = "selected";
+					break;
+				case "Deleware": 
+					$de = "selected";
+					break;
+				case "District of Columbia":
+					$dc = "selected";
+					break;
+				case "Florida": 
+					$fl = "selected";
+					break;
+				case "Georgia":
+					$ga = "selected";
+					break;
+				case "Hawaii": 
+					$hi = "selected";
+					break;
+				case "Idaho":
+					$ida = "selected";
+					break;
+				case "Illinois": 
+					$il = "selected";
+					break;
+				case "Indiana":
+					$in = "selected";
+					break;
+				case "Iowa": 
+					$ia = "selected";
+					break;
+				case "Kansas":
+					$ks = "selected";
+					break;
+				case "Kentucky": 
+					$ky = "selected";
+					break;
+				case "Louisiana":
+					$la = "selected";
+					break;
+				case "Maine": 
+					$me = "selected";
+					break;
+				case "Maryland":
+					$md = "selected";
+					break;
+				case "Massachusetts": 
+					$ma = "selected";
+					break;
+				case "Michigan":
+					$mi = "selected";
+					break;
+				case "Minnesota": 
+					$mn = "selected";
+					break;
+				case "Mississippi":
+					$ms = "selected";
+					break;
+				case "Missouri": 
+					$mo = "selected";
+					break;
+				case "Montana":
+					$mt = "selected";
+					break;
+				case "Nebraska": 
+					$ne = "selected";
+					break;
+				case "Nevada":
+					$nv = "selected";
+					break;
+				case "New Hampshire": 
+					$nh = "selected";
+					break;
+				case "New Jersey":
+					$nj = "selected";
+					break;
+				case "New Mexico": 
+					$nm = "selected";
+					break;
+				case "North Carolina":
+					$nc = "selected";
+					break;
+				case "North Dakota": 
+					$nd = "selected";
+					break;
+				case "Ohio":
+					$oh = "selected";
+					break;
+				case "Oklahoma": 
+					$ok = "selected";
+					break;
+				case "Oregon":
+					$or = "selected";
+					break;
+				case "Pennsylvania": 
+					$pa = "selected";
+					break;
+				case "Rhode Island":
+					$ri = "selected";
+					break;
+				case "South Carolina": 
+					$sc = "selected";
+					break;
+				case "South Dakota":
+					$sd = "selected";
+					break;
+				case "Tennessee": 
+					$tn = "selected";
+					break;
+				case "Texas":
+					$tx = "selected";
+					break;
+				case "Utah": 
+					$ut = "selected";
+					break;
+				case "Vermont":
+					$vt = "selected";
+					break;
+				case "Virginia": 
+					$va = "selected";
+					break;
+				case "Washington":
+					$wa = "selected";
+					break;
+				case "West Virginia": 
+					$wv = "selected";
+					break;
+				case "Wisconsin":
+					$wi = "selected";
+					break;
+				case "Wyoming": 
+					$wy = "selected";
+					break;
+			}
 			//profile.php?id={$player->getId()}
 			if ($player != null && $player->getPersonType() == 'player') {
 				//profile.php?id={$player->getId()}
@@ -915,15 +1088,16 @@
 						<label class='span'>Gender:* &nbsp; </label> 
 							<select name='gender' required>
 								<option value=' ' selected disabled>Select Gender:</option>
-								<option value='Male' >Male</option>
-								<option value='Female' >Female</option>
+								<option {$male} value='Male' >Male</option>
+								<option {$female} value='Female' >Female</option>
 							</select>
 						</p>
 						<p>
 						<label class='span'>Cell Phone:* &nbsp; </label>
-							<input type='text'
+							<input type='tel'
 								   id = 'cellphone'
 								   name= 'cellPhone'
+								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
@@ -932,10 +1106,11 @@
 						</p>
 						<p>
 						<label class='span'>Home Phone:* &nbsp; </label>
-							<input type='text'
+							<input type='tel'
 								   id = 'homephone'
 								   name= 'homePhone'
 								   size = '35'
+								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
 								   value='{$player->getHomePhone()}'
@@ -967,58 +1142,57 @@
 						<label class='span' for='state'>State:* &nbsp;</label>
 							<select name='state' required>
 								<option value=' ' selected disabled>Select State:</option>
-								<option value='New York'>New York</option>
-								<option value='Alabama'>Alabama</option>
-								<option value='Alaska'>Alaska</option>
-								<option value='Arizona'>Arizona</option>
-								<option value='Arkansas'>Arkansas</option>
-								<option value='California'>California</option>
-								<option value='Colorado'>Colorado</option>
-								<option value='Connecticut'>Connecticut</option>
-								<option value='Delaware'>Delaware</option>
-								<option value='District of Columbia'>District Of Columbia</option>
-								<option value='Florida'>Florida</option>
-								<option value='Georgia'>Georgia</option>
-								<option value='Hawaii'>Hawaii</option>
-								<option value='Idaho'>Idaho</option>
-								<option value='Illinois'>Illinois</option>
-								<option value='Indiana'>Indiana</option>
-								<option value='Iowa'>Iowa</option>
-								<option value='Kansas'>Kansas</option>
-								<option value='Kentucky'>Kentucky</option>
-								<option value='Louisiana'>Louisiana</option>
-								<option value='Maine'>Maine</option>
-								<option value='Maryland'>Maryland</option>
-								<option value='Massachusetts'>Massachusetts</option>
-								<option value='Michigan'>Michigan</option>
-								<option value='Minnesota'>Minnesota</option>
-								<option value='Mississippi'>Mississippi</option>
-								<option value='Missouri'>Missouri</option>
-								<option value='Montana'>Montana</option>
-								<option value='Nebraska'>Nebraska</option>
-								<option value='Nevada'>Nevada</option>
-								<option value='New Hampshire'>New Hampshire</option>
-								<option value='New Jersey'>New Jersey</option>
-								<option value='New Mexico'>New Mexico</option>
-								<option value='New York'>New York</option>
-								<option value='North Carolina'>North Carolina</option>
-								<option value='North Dakota'>North Dakota</option>
-								<option value='Ohio'>Ohio</option>
-								<option value='Oklahoma'>Oklahoma</option>
-								<option value='Oregon'>Oregon</option>
-								<option value='Pennsylvania'>Pennsylvania</option>
-								<option value='Rhode Island'>Rhode Island</option>
-								<option value='South Carolina'>South Carolina</option>
-								<option value='South Dakota'>South Dakota</option>
-								<option value='Tennessee'>Tennessee</option>
-								<option value='Texas'>Texas</option>
-								<option value='Utah'>Utah</option>
-								<option value='Vermont'>Vermont</option>
-								<option value='Virginia'>Virginia</option>
-								<option value='Washington'>Washington</option>
-								<option value='West Virginia'>West Virginia</option>
-								<option value='Wisconsin'>Wisconsin</option>
-								<option value='Wyoming'>Wyoming</option>			
+								<option {$ny} value='New York'>New York</option>
+								<option {$al} value='Alabama'>Alabama</option>
+								<option {$ak} value='Alaska'>Alaska</option>
+								<option {$az} value='Arizona'>Arizona</option>
+								<option {$ar} value='Arkansas'>Arkansas</option>
+								<option {$ca} value='California'>California</option>
+								<option {$co} value='Colorado'>Colorado</option>
+								<option {$ct} value='Connecticut'>Connecticut</option>
+								<option {$de} value='Delaware'>Delaware</option>
+								<option {$dc} value='District of Columbia'>District Of Columbia</option>
+								<option {$fl} value='Florida'>Florida</option>
+								<option {$ga} value='Georgia'>Georgia</option>
+								<option {$hi} value='Hawaii'>Hawaii</option>
+								<option {$ida} value='Idaho'>Idaho</option>
+								<option {$il} value='Illinois'>Illinois</option>
+								<option {$in} value='Indiana'>Indiana</option>
+								<option {$ia} value='Iowa'>Iowa</option>
+								<option {$ks} value='Kansas'>Kansas</option>
+								<option {$ky} value='Kentucky'>Kentucky</option>
+								<option {$la} value='Louisiana'>Louisiana</option>
+								<option {$me} value='Maine'>Maine</option>
+								<option {$md} value='Maryland'>Maryland</option>
+								<option {$ma} value='Massachusetts'>Massachusetts</option>
+								<option {$mi} value='Michigan'>Michigan</option>
+								<option {$mn} value='Minnesota'>Minnesota</option>
+								<option {$ms} value='Mississippi'>Mississippi</option>
+								<option {$mo} value='Missouri'>Missouri</option>
+								<option {$mt} value='Montana'>Montana</option>
+								<option {$ne} value='Nebraska'>Nebraska</option>
+								<option {$nv} value='Nevada'>Nevada</option>
+								<option {$nh} value='New Hampshire'>New Hampshire</option>
+								<option {$nj} value='New Jersey'>New Jersey</option>
+								<option {$nm} value='New Mexico'>New Mexico</option>
+								<option {$nc} value='North Carolina'>North Carolina</option>
+								<option {$nd} value='North Dakota'>North Dakota</option>
+								<option {$oh} value='Ohio'>Ohio</option>
+								<option {$ok} value='Oklahoma'>Oklahoma</option>
+								<option {$or} value='Oregon'>Oregon</option>
+								<option {$pa} value='Pennsylvania'>Pennsylvania</option>
+								<option {$ri} value='Rhode Island'>Rhode Island</option>
+								<option {$sc} value='South Carolina'>South Carolina</option>
+								<option {$sd} value='South Dakota'>South Dakota</option>
+								<option {$tn} value='Tennessee'>Tennessee</option>
+								<option {$tx} value='Texas'>Texas</option>
+								<option {$ut} value='Utah'>Utah</option>
+								<option {$vt} value='Vermont'>Vermont</option>
+								<option {$va} value='Virginia'>Virginia</option>
+								<option {$wa} value='Washington'>Washington</option>
+								<option {$wv} value='West Virginia'>West Virginia</option>
+								<option {$wi} value='Wisconsin'>Wisconsin</option>
+								<option {$wy} value='Wyoming'>Wyoming</option>			
 							</select>
 						</p>
 						<p>
@@ -1118,10 +1292,12 @@
 								 placeholder = 'xxxx'
 								 value='{$player->getGradYear()}'
 								 required />
-					    </p>
+						</p>
+						<div>
 						<p>
-							<select name='sport'>
-								<option value=' ' selected disabled>Select Sport:</option>
+							<label class='span'>Sports*: &nbsp; </label>
+							<select name='sport' required>
+								<option value=' ' selected disabled>Select 1st Sport:</option>
 								<option value='football'>Football</option>
 								<option value='basketball'>Basketball</option>
 								<option value='baseball'>Baseball</option>
@@ -1143,7 +1319,7 @@
 						</p>
 						<p>
 							<select name='sport2'>
-								<option value=' ' selected disabled>Select Sport:</option>
+								<option value=' ' selected disabled>Select 2nd Sport(Optional):</option>
 								<option value='football'>Football</option>
 								<option value='basketball'>Basketball</option>
 								<option value='baseball'>Baseball</option>
@@ -1163,6 +1339,7 @@
 								<option value='esports'>Esports</option>
 							</select>
 						</p>
+						</div>
 						<p>
 						<label class='span'>Primary Position:* &nbsp; </label>
 							<input type='text'

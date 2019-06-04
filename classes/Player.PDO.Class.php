@@ -879,7 +879,6 @@
 			$html = " ";
 
 			//populate the select option dropdowns
-			var_dump($player->getGender());
 			$gender = $player->getGender();
 			if($gender == "Male"){
 				$male = "selected";
@@ -889,7 +888,7 @@
 				$female = "selected";
 				$male = "";
 			}
-			var_dump($player->getState());
+			//populate state if it's set
 			$al= null;$ak= null;$az= null;$ar= null;$ca= null;$co= null;$ct= null;$de= null;$dc= null;$fl= null;
 			$ga= null;$hi= null;$ida= null;$il= null;$in= null;$ia= null;$ks= null;$ky= null;$la= null;$me= null;
 			$md= null;$ma= null;$mi= null;$mn= null;$ms= null;$mo= null;$mt= null;$ne= null;$nv= null;$nh= null;
@@ -901,7 +900,7 @@
 					$ny = "selected";
 					break;
 				case "Alabama":
-					$al = !empty("selected");
+					$al = "selected";
 					break;
 				case "Alaska": 
 					$ak = "selected";
@@ -1049,6 +1048,267 @@
 					break;
 				case "Wyoming": 
 					$wy = "selected";
+					break;
+			}
+			//populate heigh if it's set
+			$h40 = null;$h41 = null;$h42 = null;$h43 = null;$h44 = null;$h45 = null;$h46 = null;$h47 = null;$h48 = null;
+			$h49 = null;$h410 = null;$h411 = null;$h50 = null;$h51 = null;$h52 = null;$h53 = null;$h54 = null;$h55 = null;
+			$h56 = null;$h57 = null;$h58 = null;$h59 = null;$h510 = null;$h511 = null;$h60 = null;$h61 = null;$h62 = null;
+			$h63 = null;$h64 = null;$h65 = null;$h66 = null;$h67 = null;$h68 = null;$h69 = null;$h610 = null;$h611 = null;
+			$h70 = null;$h71 = null;$h72 = null;$h73 = null;$h74 = null;$h75 = null;$h76 = null;$h77 = null;$h78 = null;
+			$h79 = null;$h710 = null;$h711 = null;
+			switch($player->getHeight()){
+				case "4 Foot 0 Inches": 
+					$h40 = "selected";
+					break;
+				case "4 Foot 1 Inches": 
+					$h41 = "selected";
+					break;
+				case "4 Foot 2 Inches": 
+					$h42 = "selected";
+					break;
+				case "4 Foot 3 Inches": 
+					$h43 = "selected";
+					break;
+				case "4 Foot 4 Inches": 
+					$h44 = "selected";
+					break;
+				case "4 Foot 5 Inches": 
+					$h45 = "selected";
+					break;
+				case "4 Foot 6 Inches": 
+					$h46 = "selected";
+					break;
+				case "4 Foot 7 Inches": 
+					$h47 = "selected";
+					break;
+				case "4 Foot 8 Inches": 
+					$h48 = "selected";
+					break;
+				case "4 Foot 9 Inches": 
+					$h49 = "selected";
+					break;
+				case "4 Foot 10 Inches": 
+					$h410 = "selected";
+					break;
+				case "4 Foot 11 Inches": 
+					$h411 = "selected";
+					break;
+				case "5 Foot 0 Inches": 
+					$h50 = "selected";
+					break;
+				case "5 Foot 1 Inches": 
+					$h51 = "selected";
+					break;
+				case "5 Foot 2 Inches": 
+					$h52 = "selected";
+					break;
+				case "5 Foot 3 Inches": 
+					$h53 = "selected";
+					break;
+				case "5 Foot 4 Inches": 
+					$h54 = "selected";
+					break;
+				case "5 Foot 5 Inches": 
+					$h5 = "selected";
+					break;
+				case "5 Foot 6 Inches": 
+					$h56 = "selected";
+					break;
+				case "5 Foot 7 Inches": 
+					$h57 = "selected";
+					break;
+				case "5 Foot 8 Inches": 
+					$h58 = "selected";
+					break;
+				case "5 Foot 9 Inches": 
+					$h59 = "selected";
+					break;
+				case "5 Foot 10 Inches": 
+					$h510 = "selected";
+					break;
+				case "5 Foot 11 Inches": 
+					$h511 = "selected";
+					break;
+				case "6 Foot 0 Inches": 
+					$h60 = "selected";
+					break;
+				case "6 Foot 1 Inches": 
+					$h61 = "selected";
+					break;
+				case "6 Foot 2 Inches": 
+					$h62 = "selected";
+					break;
+				case "6 Foot 3 Inches": 
+					$h63 = "selected";
+					break;
+				case "6 Foot 4 Inches": 
+					$h64 = "selected";
+					break;
+				case "6 Foot 5 Inches": 
+					$h65 = "selected";
+					break;
+				case "6 Foot 6 Inches": 
+					$h66 = "selected";
+					break;
+				case "6 Foot 7 Inches": 
+					$h67 = "selected";
+					break;
+				case "6 Foot 8 Inches": 
+					$h68 = "selected";
+					break;
+				case "6 Foot 9 Inches": 
+					$h69 = "selected";
+					break;
+				case "6 Foot 10 Inches": 
+					$h610 = "selected";
+					break;
+				case "6 Foot 11 Inches": 
+					$h611 = "selected";
+					break;
+				case "7 Foot 0 Inches": 
+					$h70 = "selected";
+					break;
+				case "7 Foot 1 Inches": 
+					$h71 = "selected";
+					break;
+				case "7 Foot 2 Inches": 
+					$h72 = "selected";
+					break;
+				case "7 Foot 3 Inches": 
+					$h73 = "selected";
+					break;
+				case "7 Foot 4 Inches": 
+					$h74 = "selected";
+					break;
+				case "7 Foot 5 Inches": 
+					$h75 = "selected";
+					break;
+				case "7 Foot 6 Inches": 
+					$h76 = "selected";
+					break;
+				case "7 Foot 7 Inches": 
+					$h77 = "selected";
+					break;
+				case "7 Foot 8 Inches": 
+					$h78 = "selected";
+					break;
+				case "7 Foot 9 Inches": 
+					$h79 = "selected";
+					break;
+				case "7 Foot 10 Inches": 
+					$h710 = "selected";
+					break;
+				case "7 Foot 11 Inches": 
+					$h711 = "selected";
+					break;
+			}
+			//populate 1st sport if it's set
+			$football=null;$basketball=null;$baseball=null;$softball=null;$hockey=null;$fieldhockey=null;$lacrosse=null;
+			$soccer=null;$trackandfield=null;$volleyball=null;$wrestling=null;$tennis=null;$swimming=null;
+			$golf=null;$gymnastics=null;$cheerleading=null;$esports=null;
+			switch($player->getSport()){
+				case "Football": 
+					$football = "selected";
+					break;
+				case "Backetball": 
+					$basketball = "selected";
+					break;
+				case "Softball": 
+					$softball = "selected";
+					break;
+				case "Hockey": 
+					$hockey = "selected";
+					break;
+				case "Fieldhockey": 
+					$fieldhockey = "selected";
+					break;
+				case "Lacrosse": 
+					$lacrosse = "selected";
+					break;
+				case "Soccer": 
+					$soccer = "selected";
+					break;
+				case "Trackandfield": 
+					$trackandfield = "selected";
+					break;
+				case "Volleyball": 
+					$volleyball = "selected";
+					break;
+				case "Wrestling": 
+					$wrestling = "selected";
+					break;
+				case "Tennis": 
+					$tennis = "selected";
+					break;
+				case "Swimming": 
+					$swimming = "selected";
+					break;
+				case "Golf": 
+					$golf = "selected";
+					break;
+				case "Gymnastics": 
+					$gymnastics = "selected";
+					break;
+				case "Cheerleading": 
+					$cheerleading = "selected";
+					break;
+				case "Esports": 
+					$esports = "selected";
+					break;
+			}
+			//populate n2 sport if it's set
+			$football2=null;$basketball2=null;$baseball2=null;$softball2=null;$hockey2=null;$fieldhockey2=null;$lacrosse2=null;
+			$soccer2=null;$trackandfield2=null;$volleyball2=null;$wrestling2=null;$tennis2=null;$swimming2=null;
+			$golf2=null;$gymnastics2=null;$cheerleading2=null;$esports2=null;
+			switch($player->getSport()){
+				case "Football": 
+					$football2 = "selected";
+					break;
+				case "Backetball": 
+					$basketball2 = "selected";
+					break;
+				case "Softball": 
+					$softball2 = "selected";
+					break;
+				case "Hockey": 
+					$hockey2 = "selected";
+					break;
+				case "Fieldhockey": 
+					$fieldhockey2 = "selected";
+					break;
+				case "Lacrosse": 
+					$lacrosse2 = "selected";
+					break;
+				case "Soccer": 
+					$soccer2 = "selected";
+					break;
+				case "Trackandfield": 
+					$trackandfield2 = "selected";
+					break;
+				case "Volleyball": 
+					$volleyball2 = "selected";
+					break;
+				case "Wrestling": 
+					$wrestling2 = "selected";
+					break;
+				case "Tennis": 
+					$tennis2 = "selected";
+					break;
+				case "Swimming": 
+					$swimming2 = "selected";
+					break;
+				case "Golf": 
+					$golf2 = "selected";
+					break;
+				case "Gymnastics": 
+					$gymnastics2 = "selected";
+					break;
+				case "Cheerleading": 
+					$cheerleading2 = "selected";
+					break;
+				case "Esports": 
+					$esports2 = "selected";
 					break;
 			}
 			//profile.php?id={$player->getId()}
@@ -1232,54 +1492,54 @@
 						<label class='span'>Height*: &nbsp; </label>
 						<select name='height' required>
 							<option value='' selected disabled>Select height:</option>
-							<option value='4 foot 0 inches'>4 foot 0 inches</option>
-							<option value='4 foot 1 inch'>4 foot 1 inch</option>
-							<option value='4 foot 2 inches'>4 foot 2 inches</option>
-							<option value='4 foot 3 inches'>4 foot 3 inches</option>
-							<option value='4 foot 4 inches'>4 foot 4 inches</option>
-							<option value='4 foot 5 inches'>4 foot 5 inches</option>
-							<option value='4 foot 6 inches'>4 foot 6 inches</option>
-							<option value='4 foot 7 inches'>4 foot 7 inches</option>
-							<option value='4 foot 8 inches'>4 foot 8 inches</option>
-							<option value='4 foot 9 inches'>4 foot 9 inches</option>
-							<option value='4 foot 10 inches'>4 foot 10 inches</option>
-							<option value='4 foot 11 inches'>4 foot 11 inches</option>
-							<option value='5 foot 0 inches'>5 foot 0 inches</option>
-							<option value='5 foot 1 inch'>5 foot 1 inch</option>
-							<option value='5 foot 2 inches'>5 foot 2 inches</option>
-							<option value='5 foot 3 inches'>5 foot 3 inches</option>
-							<option value='5 foot 4 inches'>5 foot 4 inches</option>
-							<option value='5 foot 5 inches'>5 foot 5 inches</option>
-							<option value='5 foot 6 inches'>5 foot 6 inches</option>
-							<option value='5 foot 7 inches'>5 foot 7 inches</option>
-							<option value='5 foot 8 inches'>5 foot 8 inches</option>
-							<option value='5 foot 9 inches'>5 foot 9 inches</option>
-							<option value='5 foot 10 inches'>5 foot 10 inches</option>
-							<option value='5 foot 11 inches'>5 foot 11 inches</option>
-							<option value='6 foot 0 inches'>6 foot 0 inches</option>
-							<option value='6 foot 1 inch'>6 foot 1 inch</option>
-							<option value='6 foot 2 inches'>6 foot 2 inches</option>
-							<option value='6 foot 3 inches'>6 foot 3 inches</option>
-							<option value='6 foot 4 inches'>6 foot 4 inches</option>
-							<option value='6 foot 5 inches'>6 foot 5 inches</option>
-							<option value='6 foot 6 inches'>6 foot 6 inches</option>
-							<option value='6 foot 7 inches'>6 foot 7 inches</option>
-							<option value='6 foot 8 inches'>6 foot 8 inches</option>
-							<option value='6 foot 9 inches'>6 foot 9 inches</option>
-							<option value='6 foot 10 inches'>6 foot 10 inches</option>
-							<option value='6 foot 11 inches'>6 foot 11 inches</option>
-							<option value='7 foot 0 inches'>7 foot 0 inches</option>
-							<option value='7 foot 1 inch'>7 foot 1 inch</option>
-							<option value='7 foot 2 inches'>7 foot 2 inches</option>
-							<option value='7 foot 3 inches'>7 foot 3 inches</option>
-							<option value='7 foot 4 inches'>7 foot 4 inches</option>
-							<option value='7 foot 5 inches'>7 foot 5 inches</option>
-							<option value='7 foot 6 inches'>7 foot 6 inches</option>
-							<option value='7 foot 7 inches'>7 foot 7 inches</option>
-							<option value='7 foot 8 inches'>7 foot 8 inches</option>
-							<option value='7 foot 9 inches'>7 foot 9 inches</option>
-							<option value='7 foot 10 inches'>7 foot 10 inches</option>
-							<option value='7 foot 11 inches'>7 foot 11 inches</option>
+							<option {$h40} value='4 foot 0 inches'>4 foot 0 inches</option>
+							<option {$h41} value='4 foot 1 inch'>4 foot 1 inch</option>
+							<option {$h42} value='4 foot 2 inches'>4 foot 2 inches</option>
+							<option {$h43} value='4 foot 3 inches'>4 foot 3 inches</option>
+							<option {$h44} value='4 foot 4 inches'>4 foot 4 inches</option>
+							<option {$h45} value='4 foot 5 inches'>4 foot 5 inches</option>
+							<option {$h46} value='4 foot 6 inches'>4 foot 6 inches</option>
+							<option {$h47} value='4 foot 7 inches'>4 foot 7 inches</option>
+							<option {$h48} value='4 foot 8 inches'>4 foot 8 inches</option>
+							<option {$h49} value='4 foot 9 inches'>4 foot 9 inches</option>
+							<option {$h410} value='4 foot 10 inches'>4 foot 10 inches</option>
+							<option {$h411} value='4 foot 11 inches'>4 foot 11 inches</option>
+							<option {$h50} value='5 foot 0 inches'>5 foot 0 inches</option>
+							<option {$h51} value='5 foot 1 inch'>5 foot 1 inch</option>
+							<option {$h52} value='5 foot 2 inches'>5 foot 2 inches</option>
+							<option {$h53} value='5 foot 3 inches'>5 foot 3 inches</option>
+							<option {$h54} value='5 foot 4 inches'>5 foot 4 inches</option>
+							<option {$h55} value='5 foot 5 inches'>5 foot 5 inches</option>
+							<option {$h56} value='5 foot 6 inches'>5 foot 6 inches</option>
+							<option {$h57} value='5 foot 7 inches'>5 foot 7 inches</option>
+							<option {$h58} value='5 foot 8 inches'>5 foot 8 inches</option>
+							<option {$h59} value='5 foot 9 inches'>5 foot 9 inches</option>
+							<option {$h510} value='5 foot 10 inches'>5 foot 10 inches</option>
+							<option {$h511} value='5 foot 11 inches'>5 foot 11 inches</option>
+							<option {$h60} value='6 foot 0 inches'>6 foot 0 inches</option>
+							<option {$h61} value='6 foot 1 inch'>6 foot 1 inch</option>
+							<option {$h62} value='6 foot 2 inches'>6 foot 2 inches</option>
+							<option {$h63} value='6 foot 3 inches'>6 foot 3 inches</option>
+							<option {$h64} value='6 foot 4 inches'>6 foot 4 inches</option>
+							<option {$h65} value='6 foot 5 inches'>6 foot 5 inches</option>
+							<option {$h66} value='6 foot 6 inches'>6 foot 6 inches</option>
+							<option {$h67} value='6 foot 7 inches'>6 foot 7 inches</option>
+							<option {$h68} value='6 foot 8 inches'>6 foot 8 inches</option>
+							<option {$h69} value='6 foot 9 inches'>6 foot 9 inches</option>
+							<option {$h610} value='6 foot 10 inches'>6 foot 10 inches</option>
+							<option {$h611} value='6 foot 11 inches'>6 foot 11 inches</option>
+							<option {$h70} value='7 foot 0 inches'>7 foot 0 inches</option>
+							<option {$h71} value='7 foot 1 inch'>7 foot 1 inch</option>
+							<option {$h72} value='7 foot 2 inches'>7 foot 2 inches</option>
+							<option {$h73} value='7 foot 3 inches'>7 foot 3 inches</option>
+							<option {$h74} value='7 foot 4 inches'>7 foot 4 inches</option>
+							<option {$h75} value='7 foot 5 inches'>7 foot 5 inches</option>
+							<option {$h76} value='7 foot 6 inches'>7 foot 6 inches</option>
+							<option {$h77} value='7 foot 7 inches'>7 foot 7 inches</option>
+							<option {$h78} value='7 foot 8 inches'>7 foot 8 inches</option>
+							<option {$h79} value='7 foot 9 inches'>7 foot 9 inches</option>
+							<option {$h710} value='7 foot 10 inches'>7 foot 10 inches</option>
+							<option {$h711} value='7 foot 11 inches'>7 foot 11 inches</option>
 						</select>
 						</p>
 						<p>
@@ -1298,45 +1558,45 @@
 							<label class='span'>Sports*: &nbsp; </label>
 							<select name='sport' required>
 								<option value=' ' selected disabled>Select 1st Sport:</option>
-								<option value='football'>Football</option>
-								<option value='basketball'>Basketball</option>
-								<option value='baseball'>Baseball</option>
-								<option value='softball'>Softball</option>
-								<option value='hockey'>Hockey</option>
-								<option value='fieldhockey'>Field Hockey</option>
-								<option value='lacrosse'>Lacrosse</option>
-								<option value='soccer'>Soccer</option>
-								<option value='trackandField'>Track and Field</option>
-								<option value='volleyball'>Volleyball</option>
-								<option value='wrestling'>Wrestling</option>
-								<option value='tennis'>Tennis</option>
-								<option value='swimming'>Swimming</option>
-								<option value='golf'>Golf</option>
-								<option value='gymnastics'>Gymnastics</option>
-								<option value='cheerleading'>Cheerleading</option>
-								<option value='esports'>Esports</option>
+								<option {$football} value='football'>Football</option>
+								<option {$basketball} value='basketball'>Basketball</option>
+								<option {$baseball} value='baseball'>Baseball</option>
+								<option {$softball} value='softball'>Softball</option>
+								<option {$hockey} value='hockey'>Hockey</option>
+								<option {$fieldhockey} value='fieldhockey'>Field Hockey</option>
+								<option {$lacrosse} value='lacrosse'>Lacrosse</option>
+								<option {$soccer} value='soccer'>Soccer</option>
+								<option {$trackandfield} value='trackandField'>Track and Field</option>
+								<option {$volleyball} value='volleyball'>Volleyball</option>
+								<option {$wrestling} value='wrestling'>Wrestling</option>
+								<option {$tennis} value='tennis'>Tennis</option>
+								<option {$swimming} value='swimming'>Swimming</option>
+								<option {$golf} value='golf'>Golf</option>
+								<option {$gymnastics} value='gymnastics'>Gymnastics</option>
+								<option {$cheerleading} value='cheerleading'>Cheerleading</option>
+								<option {$esports} value='esports'>Esports</option>
 							</select>
 						</p>
 						<p>
 							<select name='sport2'>
 								<option value=' ' selected disabled>Select 2nd Sport(Optional):</option>
-								<option value='football'>Football</option>
-								<option value='basketball'>Basketball</option>
-								<option value='baseball'>Baseball</option>
-								<option value='softball'>Softball</option>
-								<option value='hockey'>Hockey</option>
-								<option value='fieldhockey'>Field Hockey</option>
-								<option value='lacrosse'>Lacrosse</option>
-								<option value='soccer'>Soccer</option>
-								<option value='trackandField'>Track and Field</option>
-								<option value='volleyball'>Volleyball</option>
-								<option value='wrestling'>Wrestling</option>
-								<option value='tennis'>Tennis</option>
-								<option value='swimming'>Swimming</option>
-								<option value='golf'>Golf</option>
-								<option value='gymnastics'>Gymnastics</option>
-								<option value='cheerleading'>Cheerleading</option>
-								<option value='esports'>Esports</option>
+								<option {$football2} value='football'>Football</option>
+								<option {$basketball2} value='basketball'>Basketball</option>
+								<option {$baseball2} value='baseball'>Baseball</option>
+								<option {$softball2} value='softball'>Softball</option>
+								<option {$hockey2} value='hockey'>Hockey</option>
+								<option {$fieldhockey2} value='fieldhockey'>Field Hockey</option>
+								<option {$lacrosse2} value='lacrosse'>Lacrosse</option>
+								<option {$soccer2} value='soccer'>Soccer</option>
+								<option {$trackandfield2} value='trackandField'>Track and Field</option>
+								<option {$volleyball2} value='volleyball'>Volleyball</option>
+								<option {$wrestling2} value='wrestling'>Wrestling</option>
+								<option {$tennis2} value='tennis'>Tennis</option>
+								<option {$swimming2} value='swimming'>Swimming</option>
+								<option {$golf2} value='golf'>Golf</option>
+								<option {$gymnastics2} value='gymnastics'>Gymnastics</option>
+								<option {$cheerleading2} value='cheerleading'>Cheerleading</option>
+								<option {$esports2} value='esports'>Esports</option>
 							</select>
 						</p>
 						</div>

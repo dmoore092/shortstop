@@ -19,8 +19,9 @@ header{
 }
 body{
     /* background-image: url(https://cdn4.sportngin.com/attachments/background_graphic/9705/8030/siteBackground.jpg); */
+    background-image: url("/assets/img/siteBackground.jpg");
     background-repeat: no-repeat;
-    /* background-color: black;   */
+    background-color: black;  
     background-position: 50% 5%;
     /* font-family: "Arial", Helvetica, sans-serif; */
     font-family: "Lato", sans-serif;

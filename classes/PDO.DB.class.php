@@ -209,10 +209,13 @@
         }
 
         function isValidPhone($value){
-            //$reg = "/^[2-9]\d{2}-\d{3}-\d{4}$/";
-            //return preg_match($reg, $value);
-            //var_dump($value);
-            return true;
+            //eliminate every char except 0-9
+            $justNums = preg_replace("/[^0-9]/", '', $value);
+            //eliminate leading 1 if its there
+            if (strlen($justNums) == 11) $justNums = preg_replace("/^1/", '',$justNums);
+            //if we have 10 digits left, it's probably valid.
+            if (strlen($justNums) == 10) $isPhoneNum = true;
+            return $isPhoneNum;
         }
 
         function isMaleOrFemale($value){

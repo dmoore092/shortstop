@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <title><?php echo $title ?> | Athletic Prospects</title>
-      <!--  <link rel="stylesheet" type="text/css" href="assets/css/main.css" /> -->
         <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/footer.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/<?php echo $page ?>.css" />
@@ -78,5 +77,5 @@
                         <li><a href="register.php">Register</a></li>
                     </ul><!-- end of #top-bar -->
                 </div>
-            <div id="logo"><img src="https://cdn3.sportngin.com/attachments/banner_graphic/9705/8066/SiteHeader.png" alt="logo" id="logo-img"></div>
+            <div id="logo"><img src="/assets/img/siteLogo.png" alt="logo" id="logo-img"></div>
         </header>

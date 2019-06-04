@@ -57,6 +57,7 @@
         $email = new PHPMailer(true); 
         $email->SMTPDebug = 2;                                 // Enable verbose debug output
         $email->isSMTP();                                      // Set mailer to use SMTP
+        header('Content-Type: text/csv; charset=utf-8');
         $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $email->SMTPAuth = true;                               // Enable SMTP authentication
         $email->Username = 'dmoore092@gmail.com';                 // SMTP username
@@ -68,7 +69,7 @@
         $email->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
         $email->addAddress($recipientAddr, $recipientName);     // Add a recipient
         
-        header('Content-Type: text/csv; charset=utf-8');
+        
 
         //Content
         $email->isHTML(true);                                  // Set email format to HTML

@@ -6,4 +6,4 @@ SetEnv DB_USER root
 # php_flag display_startup_errors off
 # php_flag display_errors on
 # php_flag html_errors on
-php_value error_reporting 32767
+# php_value error_reporting 32767

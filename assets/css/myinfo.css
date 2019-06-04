@@ -16,6 +16,8 @@ input{
     font-size: 16px;
     -webkit-text-size-adjust: none;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-text-size-adjust: none;
 }
 select, textarea{
     width: 300px;

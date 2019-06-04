@@ -233,10 +233,7 @@ section, article{
         color: white;
     }
     #search-container{
-        /* display: flex;
-        justify-content: flex-end; */
-        /* flex-wrap: nowrap; */
-        /* margin-right: 25px; */
+        height: 30px;
     }
     #search-form{
         position: relative;
@@ -249,7 +246,6 @@ section, article{
         background-color: #bb0a1e;
         padding: 5px 0;
         margin-left: 0;
-        
     }
 
     #search #button{

@@ -1,6 +1,6 @@
 <?php
     error_reporting(0);
-    $relpath= ""; $title="Male Athletes"; $page="mfathletes";
+    $relpath= ""; $title="Search Athletes"; $page="mfathletes";
     session_start();
     include_once ("classes/Player.PDO.Class.php");
     include("assets/inc/header.inc.php");

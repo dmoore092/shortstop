@@ -18,9 +18,12 @@
             */
             echo $playerDB->getMyEditableInfo($_SESSION['id']);
         } else {
-            echo "<h2 id='nologin'>You must be logged in to see your info</h2>";
-            echo "<a href='login.php' class='redirect-link'>Login</a>'";
-          header("Location: login.php");
+            echo "<div id='body-main'>";
+            echo "<div id='cont' class='go-login'>";
+            echo "<h2 id='nologin'>You must be logged in</h2>";
+            echo "<a href='login.php' class='redirect-link'>Login</a>";
+            echo "</div>";
+            // header("Location: login.php");
         }
 
        include('assets/inc/footer.inc.php');

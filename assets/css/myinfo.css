@@ -1,6 +1,26 @@
 /*ITCSS CSS layered from general to specific */
 /*APPLIES TO myinfo.php.php*/
 /*GENERIC LAYER */
+.go-login{
+    width: 90%;
+    /* border: 2px solid black; */
+    height: 200px;
+    margin: auto;
+    text-align: center;
+    padding-top: 150px;
+    font-size: 1.5rem;
+}
+.redirect-link{
+    position: relative;
+    width: 100px; 
+    margin: auto;
+    top: 50px;
+    background-color: #bb0a1e;
+    color: white;
+    text-decoration: none;
+    border: 2px solid black;
+    padding: 20px 95px;
+}
 #player-form{
     width: 80%;
     margin: auto;
@@ -56,9 +76,12 @@ h3{
     width: 100%;
 }
 @media only screen and (min-width: 520px){
+    .redirect-link{
+        position: relative;
+        /* left: 300px; */
+    }
     #player-form{
         width: 90%;
-        
     }
     h1, h3{
         text-align: center;

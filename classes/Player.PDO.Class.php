@@ -1313,6 +1313,7 @@
 			}
 			//profile.php?id={$player->getId()}
 			if ($player != null && $player->getPersonType() == 'player') {
+				$male=null;$female=null;
 				//profile.php?id={$player->getId()}
 				$html .= "<div id='body-main'>
 					<form id='player-form'

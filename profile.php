@@ -36,6 +36,8 @@
         else {
             //echo "not logged in, username should be passed through";
             //$id = $_GET["id"];
+            
+            //shows the profile
             echo $playerDB->getMyInfo($id);
         //     echo "<h2 id='nologin'>You must be logged in to see your info</h2>";
         //     echo "<a href='login.php' class='redirect-link'>Login</a>'";

@@ -201,7 +201,7 @@ if(isset($_POST['search-athlete'])){
         if($school != "") $arr[] = "highschool LIKE '%{$school}%'";
         if($gpa != "") $arr[] = "gpa >= '{$gpa}'";
 
-        if($name == "" && $sport == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
+        if($name == "" && $sport == "" && $sport2 == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
             $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE persontype = 'player';";
         }
         else{

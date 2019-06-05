@@ -60,8 +60,8 @@
         header('Content-Type: text/csv; charset=utf-8');
         $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $email->SMTPAuth = true;                               // Enable SMTP authentication
-        $email->Username = 'dmoore092@gmail.com';                 // SMTP username
-        $email->Password = 'Google@ccess2';                           // SMTP password
+        $email->Username = 'athleticprospects1@gmail.com';                 // SMTP username
+        $email->Password = 'Webm@ster1';                           // SMTP password
         $email->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $email->Port = 465;                                    // TCP port to connect to
         $email->SMTPDebug = false; 

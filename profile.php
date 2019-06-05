@@ -156,14 +156,15 @@
             try {
                 //Server settings
                 $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->isSMTP(); 
+                header('Content-Type: text/csv; charset=utf-8');                                     // Set mailer to use SMTP
                 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'dmoore092@gmail.com';                 // SMTP username
-                $mail->Password = 'Google@ccess2';                           // SMTP password
+                $mail->Username = 'athleticprospects1@gmail.com';     // SMTP username
+                $mail->Password = 'Webm@ster1';                       // SMTP password
                 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 465;                                    // TCP port to connect to
-            
+                $mail->SMTPDebug = false;
                 //Recipients
                 $mail->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
                 $mail->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient

@@ -567,7 +567,6 @@
 
 		function getMyInfo($id){//profile.php - PLAYERS
 			$player = $this->getObjectByID($id);
-			var_dump($player);
 			$html = " ";
 			//var_dump($player);
 			if ($player != null && $player->getPersonType() == 'player') {

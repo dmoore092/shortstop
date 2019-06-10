@@ -1257,7 +1257,7 @@
 					$esports = "selected";
 					break;
 			}
-			//populate n2 sport if it's set
+			//populate 2nd sport if it's set
 			$football2=null;$basketball2=null;$baseball2=null;$softball2=null;$hockey2=null;$fieldhockey2=null;$lacrosse2=null;
 			$soccer2=null;$trackandfield2=null;$volleyball2=null;$wrestling2=null;$tennis2=null;$swimming2=null;
 			$golf2=null;$gymnastics2=null;$cheerleading2=null;$esports2=null;

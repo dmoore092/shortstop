@@ -567,6 +567,7 @@
 
 		function getMyInfo($id){//profile.php - PLAYERS
 			$player = $this->getObjectByID($id);
+			var_dump($player);
 			$html = " ";
 			//var_dump($player);
 			if ($player != null && $player->getPersonType() == 'player') {
@@ -643,7 +644,7 @@
 				<div class='references'>
 						<ul>
 							<li><span class='attributes'>Name:</span> {$player->getRef3Name()}</li>
-							<li><span class='attributes'>Job Title:</span> {$player->getRef3JobTitle()}</li>
+							<li><span class='attributes'>Job Title:</span> {$player->getRef3Jobtitle()}</li>
 							<li><span class='attributes''>Email:</span> {$player->getRef3Email()}</li>
 							<li><span class='attributes'>Phone:</span> {$player->getRef3Phone()}</li>
 						</ul>
@@ -882,11 +883,11 @@
 			$gender = $player->getGender();
 			if($gender == "Male"){
 				$male = "selected";
-				$female = "";
+				//$female = "";
 			}
 			elseif($gender == "Female"){
 				$female = "selected";
-				$male = "";
+				//$male = "";
 			}
 			//populate state if it's set
 			$al= null;$ak= null;$az= null;$ar= null;$ca= null;$co= null;$ct= null;$de= null;$dc= null;$fl= null;
@@ -1825,7 +1826,7 @@
 							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
 								<input type='text'
 									   id = 'ref3-job-title'
-									   name = 'ref3JobTitle'
+									   name = 'ref3Jobtitle'
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'Reference 3 Job Title'

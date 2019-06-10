@@ -37,7 +37,7 @@
 		private $ref2Email;
 		private $ref2Phone;
 		private $ref3Name;
-		private $ref3JobTitle;
+		private $ref3Jobtitle;
 		private $ref3Email;
 		private $ref3Phone;
 		private $persStatement;
@@ -296,7 +296,7 @@
 		 * getRef3JobTitle() - returns the User's Reference 3 Job Title
 		 */
 		public function getRef3JobTitle(){
-			return $this->ref3JobTitle;
+			return $this->ref3Jobtitle;
 		}
 
 		/**

@@ -645,7 +645,7 @@
 							<li><span class='attributes'>Name:</span> {$player->getRef3Name()}</li>
 							<li><span class='attributes'>Job Title:</span> {$player->getRef3JobTitle()}</li>
 							<li><span class='attributes''>Email:</span> {$player->getRef3Email()}</li>
-							<li><span class='attributes'>Phone:</span> {$player->getRef2Phone()}</li>
+							<li><span class='attributes'>Phone:</span> {$player->getRef3Phone()}</li>
 						</ul>
 					</div>
 				</div> <!--end of #references-container -->

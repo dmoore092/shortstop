@@ -395,7 +395,7 @@
               }
 
               if(isset($_POST['ref3Phone'])){
-                if($playerDB->isNumeric($_POST['ref3Phone']) != 0){
+                if($playerDB->isValidPhone($_POST['ref3Phone']) != 0){
                     $updateArray['ref3Phone'] = $playerDB->sanitize($_POST['ref3Phone']);
                 }
               }

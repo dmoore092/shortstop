@@ -1699,15 +1699,15 @@
 							</p>
 							<p>
 								<span class='span'>Upload Video ( Showcase 1 ): &nbsp; </span>
-								<input type='text' name='showcase1' id='showcase1' size = '35' maxlength = '50' value='{$player->getShowcase1()}'>
+								<input type='text' name='showcase1' id='showcase1' class='showcase' size = '35' maxlength = '50' value='{$player->getShowcase1()}'>
 							</p>
 							<p>
 								<span class='span'>Upload Video ( Showcase 2 ): &nbsp; </span>
-								<input type='text' name='showcase2' id=showcase2 size = '35' maxlength = '50' value='{$player->getShowcase2()}'>
+								<input type='text' name='showcase2' id='showcase2' class='showcase' size = '35' maxlength = '50' value='{$player->getShowcase2()}'>
 							</p>
 							<p>
 								<span class='span'>Upload Video ( Showcase 3 ): &nbsp; </span>
-								<input type='text' name='showcase3' id=showcase3 size = '35' maxlength = '50' value='{$player->getShowcase3()}'>
+								<input type='text' name='showcase3' id='showcase3' class='showcase' size = '35' maxlength = '50' value='{$player->getShowcase3()}'>
 							</p>
 						</div><!-- end of refs -->
 						<hr/>

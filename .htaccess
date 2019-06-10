@@ -1,14 +1,14 @@
 #development
-# SetEnv DB sports
-# SetEnv DB_SERVER 127.0.0.1
-# SetEnv DB_PASSWORD root
-# SetEnv DB_USER root
+SetEnv DB sports
+SetEnv DB_SERVER 127.0.0.1
+SetEnv DB_PASSWORD root
+SetEnv DB_USER root
 
 #production
-SetEnv DB died52h990bhctqt
-SetEnv DB_SERVER nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
-SetEnv DB_PASSWORD pzai4vad7q5d55gr
-SetEnv DB_USER ugaf16xakn6l03kv
+# SetEnv DB died52h990bhctqt
+# SetEnv DB_SERVER nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+# SetEnv DB_PASSWORD pzai4vad7q5d55gr
+# SetEnv DB_USER ugaf16xakn6l03kv
 
 # php_flag display_startup_errors off
 # php_flag display_errors on

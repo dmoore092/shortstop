@@ -1,6 +1,6 @@
 #development
 SetEnv DB sports
-SetEnv DB_SERVER 157.230.214.117/
+SetEnv DB_SERVER 157.230.214.117
 SetEnv DB_PASSWORD root
 SetEnv DB_USER root
 

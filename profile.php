@@ -13,7 +13,6 @@
         include_once ("classes/Player.PDO.Class.php");
 
         $playerDB = new PlayerDB();     
-        var_dump($playerDB);
         include ("assets/inc/header.inc.php");
 
         $id=$_GET['id'];

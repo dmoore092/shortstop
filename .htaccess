@@ -10,7 +10,7 @@ SetEnv DB_USER root
 # SetEnv DB_PASSWORD pzai4vad7q5d55gr
 # SetEnv DB_USER ugaf16xakn6l03kv
 
-# php_flag display_startup_errors off
-# php_flag display_errors on
-# php_flag html_errors on
-# php_value error_reporting 32767
+php_flag display_startup_errors off
+php_flag display_errors on
+php_flag html_errors on
+php_value error_reporting 32767

@@ -501,7 +501,7 @@
                       if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
                           //echo 'File Has Been Uploaded !';
                           $updateArray['profileImage'] = $_FILES['profileImage']['name'];
-                          //var_dump($updateArray['profileImage']);
+                          var_dump($updateArray['profileImage']);
                       }
                       else{
                           echo 'File was not uploaded';

@@ -1,7 +1,7 @@
 #development
 SetEnv DB sports
 SetEnv DB_SERVER localhost
-SetEnv DB_PASSWORD 
+SetEnv DB_PASSWORD root
 SetEnv DB_USER root
 
 #production

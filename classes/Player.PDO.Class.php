@@ -877,7 +877,6 @@
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID($id);
 			$html = " ";
-			var_dump($player);
 			var_dump($player->getGender());
 			//populate the select option dropdowns
 			$male=null;$female=null;

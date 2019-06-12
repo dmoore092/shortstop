@@ -5,6 +5,8 @@
         ini_set('display_errors',1);
         error_reporting(E_ALL);
 
+        echo exec('whoami');
+
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
 

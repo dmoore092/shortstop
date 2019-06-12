@@ -76,7 +76,7 @@
         $email->Subject = 'Reset Your Password';
         $email->Body    = "Someone has requested to reset your password. If this wasn't you, someone is trying to access your account.
                             <br>
-                            <a href=\"http://192.168.33.10/changepassword.php?id=".$recipientId."&uname=".$username."&reset=".$recipientCode."\">Click Here</a> to reset your password.";
+                            <a href=\"http://www.athleticprospects.com/changepassword.php?id=".$recipientId."&uname=".$username."&reset=".$recipientCode."\">Click Here</a> to reset your password.";
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         
         try{

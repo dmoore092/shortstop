@@ -1,11 +1,9 @@
 <?php 
-        //error_reporting(0);
+        error_reporting(0);
         session_start();
 
-        ini_set('display_errors',1);
-        error_reporting(E_ALL);
-
-        echo exec('whoami');
+        // ini_set('display_errors',1);
+        // error_reporting(E_ALL);
 
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
@@ -102,8 +100,8 @@
             $email->isSMTP();                                      // Set mailer to use SMTP
             $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $email->SMTPAuth = true;                               // Enable SMTP authentication
-            $email->Username = 'dmoore092@gmail.com';                 // SMTP username
-            $email->Password = 'Google@ccess2';                           // SMTP password
+            $email->Username = 'athleticprospects1@gmail.com';                 // SMTP username
+            $email->Password = 'Webm@ster1';                           // SMTP password
             $email->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
             $email->Port = 465;                                    // TCP port to connect to
         
@@ -184,7 +182,7 @@
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Inappropriate Profile report';
-                $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='www.dmwebdev.net/profile.php?id=".$id."'>Click Here.</a>";
+                $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='www.athleticprospects.com/profile.php?id=".$id."'>Click Here.</a>";
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             
                 $mail->send();
@@ -204,7 +202,7 @@
         // Handles all form data from myinfo.php
         if(isset($_POST['updateUserInfo'])) {
             //echo "update being attempted";
-        //echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+        echo "<meta http-equiv='refresh' content='0'>";//force page refresh
           $updateArray = array();
           if(isset($_SESSION['id'])){
               $myId = $_SESSION['id'];

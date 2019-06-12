@@ -877,16 +877,15 @@
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID($id);
 			$html = " ";
-			//var_dump($player);
-			var_dump($player->getGender());
-			//populate the select option dropdowns
-			$male=null;$female=null;
+
+			//populate gender option if it's set
+			$m=null;$f=null;
 			switch($player->getGender()){
 				case "Male": 
-					$male = "selected";
+					$m = "selected";
 					break;
 				case "Female":
-					$female = "selected";
+					$f = "selected";
 					break;
 			}
 
@@ -1351,8 +1350,8 @@
 						<label class='span'>Gender:* &nbsp; </label> 
 							<select name='gender' required>
 								<option value=' ' selected disabled>Select Gender:</option>
-								<option {$male} value='Male' >Male</option>
-								<option {$female} value='Female' >Female</option>
+								<option {$m}   value='Male'    >Male    </option>
+								<option {$f} value='Female'  >Female  </option>
 							</select>
 						</p>
 						<p>

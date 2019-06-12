@@ -877,7 +877,8 @@
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID($id);
 			$html = " ";
-
+			var_dump($player);
+			var_dump($player->getGender());
 			//populate the select option dropdowns
 			$male=null;$female=null;
 			switch($player->getGender()){
@@ -888,6 +889,7 @@
 					$female = "selected";
 					break;
 			}
+
 			//populate state if it's set
 			$al= null;$ak= null;$az= null;$ar= null;$ca= null;$co= null;$ct= null;$de= null;$dc= null;$fl= null;
 			$ga= null;$hi= null;$ida= null;$il= null;$in= null;$ia= null;$ks= null;$ky= null;$la= null;$me= null;

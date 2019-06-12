@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
   #config.vm.network :public_network, :bridge => 'en01',:use_dhcp_assigned_default_route => true
 
   config.vm.synced_folder ".", "/var/www/html", :nfs => {:mount_options => ["dmode=777", "fmode=666"]}
+  # config.vm.synced_folder "/home/dmo/Projects/client-proj1", "/vagrant", :type => "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.

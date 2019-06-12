@@ -497,6 +497,7 @@
                      //Save the file
                      if ($uploadOk == 1){
                       $dest='assets/img/userpictures/'.$upload_file_name;
+                      var_dump($_FILES);
                       if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
                           //echo 'File Has Been Uploaded !';
                           $updateArray['profileImage'] = $_FILES['profileImage']['name'];

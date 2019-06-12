@@ -877,7 +877,6 @@
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID($id);
 			$html = " ";
-			var_dump($_FILES);
 			//populate gender option if it's set
 			$m=null;$f=null;
 			switch($player->getGender()){
@@ -1319,7 +1318,7 @@
 				$html .= "<div id='body-main'>
 					<form id='player-form'
 						  method = 'POST'
-						  action= ''
+						  action= 'profile.php?id={$player->getId()}'
 						  onsubmit = '' 
 						  enctype='multipart/form-data' >
 						<h1>Player Info</h1>

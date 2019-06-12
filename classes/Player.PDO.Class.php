@@ -877,6 +877,7 @@
 		function getMyEditableInfo($id) {//myInfo.php
 			$player = $this->getObjectByID($id);
 			$html = " ";
+			var_dump($_FILES);
 			//populate gender option if it's set
 			$m=null;$f=null;
 			switch($player->getGender()){

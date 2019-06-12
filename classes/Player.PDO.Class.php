@@ -879,14 +879,14 @@
 			$html = " ";
 
 			//populate the select option dropdowns
-			$gender = $player->getGender();
-			if($gender == "Male"){
-				$male = "selected";
-				//$female = "";
-			}
-			elseif($gender == "Female"){
-				$female = "selected";
-				//$male = "";
+			$male=null;$female=null;
+			switch($player->getGender()){
+				case "Male": 
+					$male = "selected";
+					break;
+				case "Female":
+					$female = "selected";
+					break;
 			}
 			//populate state if it's set
 			$al= null;$ak= null;$az= null;$ar= null;$ca= null;$co= null;$ct= null;$de= null;$dc= null;$fl= null;

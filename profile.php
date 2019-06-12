@@ -496,15 +496,15 @@
                      }
                      //Save the file
                      if ($uploadOk == 1){
-                        //$dest='/assets/img/userpictures/'.$upload_file_name;
-                        $dest='/var/www/html/assets/img/userpictures/'.$upload_file_name;
-                      var_dump($_FILES);
+                        $dest='./assets/img/userpictures/'.$upload_file_name;
+                        //$dest='/var/www/html/assets/img/userpictures/'.$upload_file_name;
                       if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
                           //echo 'File Has Been Uploaded !';
                           $updateArray['profileImage'] = $_FILES['profileImage']['name'];
                       }
                       else{
-                          echo 'File was not uploaded';
+                          var_dump($_FILE['1111.jpg']['error']);
+                        //   echo 'File was not uploaded';
                       }
                      }
                  }

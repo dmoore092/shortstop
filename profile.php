@@ -199,7 +199,7 @@
         // Handles all form data from myinfo.php
         if(isset($_POST['updateUserInfo'])) {
             //echo "update being attempted";
-        echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+        //echo "<meta http-equiv='refresh' content='0'>";//force page refresh
           $updateArray = array();
           if(isset($_SESSION['id'])){
               $myId = $_SESSION['id'];
@@ -502,7 +502,6 @@
                       if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
                           //echo 'File Has Been Uploaded !';
                           $updateArray['profileImage'] = $_FILES['profileImage']['name'];
-                          var_dump($updateArray['profileImage']);
                       }
                       else{
                           echo 'File was not uploaded';
@@ -513,7 +512,7 @@
                  
                  //profile.php?id={$player->getId()}
                  //echo $updateArray
-                 //var_dump($updateArray);
+                 var_dump($updateArray);
             }
         }
 ?>

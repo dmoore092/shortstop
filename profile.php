@@ -512,7 +512,7 @@
                  
                  //profile.php?id={$player->getId()}
                  //echo $updateArray
-                 var_dump($updateArray);
+                 //var_dump($updateArray);
             }
         }
 ?>

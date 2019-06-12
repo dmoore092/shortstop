@@ -506,7 +506,7 @@
                           $updateArray['profileImage'] = $_FILES['profileImage']['name'];
                       }
                       else{
-                          var_dump($_FILE['1111.jpg']['error']);
+                          var_dump($_FILES['1111.jpg']['error']);
                         //   echo 'File was not uploaded';
                       }
                      }

@@ -496,7 +496,7 @@
                      }
                      //Save the file
                      if ($uploadOk == 1){
-                      $dest='assets/img/userpictures/'.$upload_file_name;
+                      $dest='/assets/img/userpictures/'.$upload_file_name;
                       var_dump($_FILES);
                       if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
                           //echo 'File Has Been Uploaded !';
@@ -508,7 +508,6 @@
                       }
                      }
                  }
-                 var_dump($updateArray);
                  $playerDB->updateUser($updateArray);
                  
                  //profile.php?id={$player->getId()}

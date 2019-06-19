@@ -28,7 +28,7 @@
 				try{
 				 $name = "%".$name."%";
 						$data = array();
-						$stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, highschool, gradYear, sport, sport2, primaryposition FROM players WHERE name LIKE :name and persontype = 'player'"); 
+						$stmt = $this->dbConn->prepare("SELECT DISTINCT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE name LIKE :name and persontype = 'player'"); 
 						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
 						$stmt->execute();
 						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
@@ -50,7 +50,7 @@
 			//echo $gender;
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, sport2, primaryposition FROM players WHERE gender = :gender"); 
+                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE gender = :gender"); 
                 $stmt->bindParam("gender",$gender,PDO::PARAM_STR);    
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -70,7 +70,7 @@
 		function getPlayersByRole($role){
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, sport2, primaryposition FROM players WHERE persontype = :role"); 
+                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE persontype = :role"); 
                 $stmt->bindParam("role",$role,PDO::PARAM_STR);    
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -110,7 +110,7 @@
             if($data != null && count($data) > 0){
                 if(true){
 					$html = "<div id='body-main'><div id='table-wrapper'><table>\n";
-                    $html .= "<tr><th>Name</th><th>Highschool</th><th>Class of</th><th>1st Sport</th><th>2nd Sport</th><th>Position</th></tr>";
+					$html .= "<tr><th>Name</th><th>Highschool</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
                     foreach($data as $player){
 						$html .= "
                         <tr>
@@ -128,8 +128,7 @@
 						$html .= "<p><span style='color:#bb0a1e;'>Name: </span><a href='profile.php?id={$player[0]}'>{$player[1]}</a></p>";
 						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Highschool: </span>{$player[2]}</p>";
 						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player[3]}</p>";
-						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>1st Sport: </span>{$player[4]}</p>";
-						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>2nd Sport: </span>{$player[5]}</p>";
+						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player[4]}</p>";
 						$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player[6]}</p>";
 						$html .= "<hr />";
 					}
@@ -149,8 +148,7 @@
 					$html .= "<span><span style='color:#bb0a1e;'>Name: </span><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></span>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Highschool: </span>{$player->getHighschool()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player->getGradYear()}</p>";
-					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>1st Sport: </span>{$player->getSport()}</p>";
-					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>2nd Sport: </span>{$player->getSport2()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player->getSport()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
 					$html .= "<hr />";
 				}
@@ -166,8 +164,7 @@
 					$html .= "<span><span style='color:#bb0a1e;'>Name: </span><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></span>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Highschool: </span>{$player->getHighschool()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Class of: </span>{$player->getGradYear()}</p>";
-					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>1st Sport: </span>{$player->getSport()}</p>";
-					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>2nd Sport: </span>{$player->getSport2()}</p>";
+					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Sport: </span>{$player->getSport()}</p>";
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
 					$html .= "<form method='post' action=''><input type='text' name='playerid' value='{$player->getId()}' id='hide'><input type='submit' name='delete' class='btnSubmit' value='DELETE' onclick=\"return confirm('Do you really want to delete this profile?')\"></form>";
 					$html .= "<hr />";
@@ -181,7 +178,7 @@
             if($data != null && count($data) > 0){
                 $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
                 if(true){
-                    $html .= "<tr><th>Action</th><th>Name</th><th>School</th><th>Class of</th><th>1st Sport</th><th>2nd Sport</th><th>Position</th></tr>";
+                    $html .= "<tr><th>Action</th><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
                     foreach($data as $player){
 						$html .= "
 						<tr>
@@ -190,7 +187,6 @@
 							<td>{$player->getHighschool()}</td>
 							<td>{$player->getGradYear()}</td>
 							<td>{$player->getSport()}</td>
-							<td>{$player->getSport2()}</td>
 							<td>{$player->getPrimaryPosition()}</td>
 						</tr>\n";
                     }
@@ -209,7 +205,7 @@
             if($data != null && count($data) > 0){
                 $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
                 if(true){
-                    $html .= "<tr><th>Name</th><th>School</th><th>Class of</th><th>1st Sport</th><th>2nd Sport</th><th>Position</th></tr>";
+                    $html .= "<tr><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
                     foreach($data as $player){
 						$html .= "
                         <tr>
@@ -217,7 +213,6 @@
 							<td>{$player->getHighschool()}</td>
 							<td>{$player->getGradYear()}</td>
 							<td>{$player->getSport()}</td>
-							<td>{$player->getSport2()}</td>
 							<td>{$player->getPrimaryPosition()}</td>
 						</tr>\n";
 						//<th>Email</th>
@@ -298,9 +293,6 @@
 						break;
 					case 'sport':
 						$this->updateField('sport', $val, $id);
-						break;
-					case 'sport2':
-						$this->updateField('sport2', $val, $id);
 						break;
 					case 'primaryPosition':
 						$this->updateField('primaryPosition', $val, $id);
@@ -588,11 +580,11 @@
 				<div class='info-box' id='info-box-underline'>
 					<h3>Player Info</h3>
 						<ul>
-							<li><span class='attributes'>Email:</span> {$player->getEmail()}</li>
+							<li><span class='attributes'>Email:</span> <a href='mailto:{$player->getEmail()}'>{$player->getEmail()}</a></li>
 							<li><span class='attributes'>City:</span> {$player->getCity()}</li>
 							<li><span class='attributes'>State:</span> {$player->getState()}</li>
 							<li><span class='attributes'>Zip:</span> {$player->getZip()}</li>
-							<li><span class='attributes'>Highschool:</span> {$player->getHighschool()}</li>
+							<li><span class='attributes'>School:</span> {$player->getHighschool()}</li>
 							<li><span class='attributes'>Graduation Year:</span> {$player->getGradYear()}</li>
 							<li><span class='attributes'>GPA:</span> {$player->getGpa()}</li>
 							<li><span class='attributes'>SAT:</span> {$player->getSat()}</li>
@@ -603,8 +595,7 @@
 				<div class='info-box'>
 					<h3>Sport Info</h3>
 						<ul>
-							<li><span class='attributes'>1st Sport:</span> {$player->getSport()}</li>
-							<li><span class='attributes'>2nd Sport:</span> {$player->getSport2()}</li>
+							<li><span class='attributes'>Sport:</span> {$player->getSport()}</li>
 							<li><span class='attributes'>Primary Position:</span> {$player->getPrimaryPosition()}</li>
 							<li><span class='attributes''>Secondary Position:</span> {$player->getSecondaryPosition()}</li>
 							<li><span class='attributes'>Travel Team:</span> {$player->getTravelTeam()}</li>
@@ -628,7 +619,7 @@
 					<ul>
 						<li><span class='attributes'>Name:</span> {$player->getRef1Name()}</li>
 						<li><span class='attributes'>Job Title:</span> {$player->getRef1JobTitle()}</li>
-						<li><span class='attributes'>Email:</span> {$player->getRef1Email()}</li>
+						<li><span class='attributes'>Email:</span> <a href='mailto:{$player->getRef1Email()}'>{$player->getRef1Email()}</a></li>
 						<li><span class='attributes'>Phone:</span> {$player->getRef1Phone()}</li>
 					</ul>
 				</div>
@@ -636,7 +627,7 @@
 					<ul>
 						<li><span class='attributes'>Name:</span> {$player->getRef2Name()}</li>
 						<li><span class='attributes'>Job Title:</span> {$player->getRef2JobTitle()}</li>
-						<li><span class='attributes'>Email:</span> {$player->getRef2Email()}</li>
+						<li><span class='attributes'>Email:</span> <a href='mailto:{$player->getRef2Email()}'>{$player->getRef2Email()}</a></li>
 						<li><span class='attributes'>Phone:</span> {$player->getRef2Phone()}</li>
 					</ul>
 				</div>
@@ -644,7 +635,7 @@
 						<ul>
 							<li><span class='attributes'>Name:</span> {$player->getRef3Name()}</li>
 							<li><span class='attributes'>Job Title:</span> {$player->getRef3Jobtitle()}</li>
-							<li><span class='attributes''>Email:</span> {$player->getRef3Email()}</li>
+							<li><span class='attributes''>Email:</span> <a href='mailto:{$player->getRef3Email()}'>{$player->getRef3Email()}</a></li>
 							<li><span class='attributes'>Phone:</span> {$player->getRef3Phone()}</li>
 						</ul>
 					</div>
@@ -720,27 +711,7 @@
 							onclick='' />
 							
 					<select name='sport'>
-						<option value=' ' selected disabled>Select 1st Sport:</option>
-						<option value='football'>Football</option>
-						<option value='basketball'>Basketball</option>
-						<option value='baseball'>Baseball</option>
-						<option value='softball'>Softball</option>
-						<option value='hockey'>Hockey</option>
-						<option value='fieldhockey'>Field Hockey</option>
-						<option value='lacrosse'>Lacrosse</option>
-						<option value='soccer'>Soccer</option>
-						<option value='trackandField'>Track and Field</option>
-						<option value='volleyball'>Volleyball</option>
-						<option value='wrestling'>Wrestling</option>
-						<option value='tennis'>Tennis</option>
-						<option value='swimming'>Swimming</option>
-						<option value='golf'>Golf</option>
-						<option value='gymnastics'>Gymnastics</option>
-						<option value='cheerleading'>Cheerleading</option>
-						<option value='esports'>Esports</option>
-					</select>
-					<select name='sport2'>
-						<option value=' ' selected disabled>Select 2nd Sport:</option>
+						<option value=' ' selected disabled>Select Sport:</option>
 						<option value='football'>Football</option>
 						<option value='basketball'>Basketball</option>
 						<option value='baseball'>Baseball</option>
@@ -1204,7 +1175,7 @@
 					$h711 = "selected";
 					break;
 			}
-			//populate 1st sport if it's set
+			//populate sport if it's set
 			$football=null;$basketball=null;$baseball=null;$softball=null;$hockey=null;$fieldhockey=null;$lacrosse=null;
 			$soccer=null;$trackandfield=null;$volleyball=null;$wrestling=null;$tennis=null;$swimming=null;
 			$golf=null;$gymnastics=null;$cheerleading=null;$esports=null;
@@ -1256,60 +1227,6 @@
 					break;
 				case "Esports": 
 					$esports = "selected";
-					break;
-			}
-			//populate 2nd sport if it's set
-			$football2=null;$basketball2=null;$baseball2=null;$softball2=null;$hockey2=null;$fieldhockey2=null;$lacrosse2=null;
-			$soccer2=null;$trackandfield2=null;$volleyball2=null;$wrestling2=null;$tennis2=null;$swimming2=null;
-			$golf2=null;$gymnastics2=null;$cheerleading2=null;$esports2=null;
-			switch($player->getSport()){
-				case "Football": 
-					$football2 = "selected";
-					break;
-				case "Backetball": 
-					$basketball2 = "selected";
-					break;
-				case "Softball": 
-					$softball2 = "selected";
-					break;
-				case "Hockey": 
-					$hockey2 = "selected";
-					break;
-				case "Fieldhockey": 
-					$fieldhockey2 = "selected";
-					break;
-				case "Lacrosse": 
-					$lacrosse2 = "selected";
-					break;
-				case "Soccer": 
-					$soccer2 = "selected";
-					break;
-				case "Trackandfield": 
-					$trackandfield2 = "selected";
-					break;
-				case "Volleyball": 
-					$volleyball2 = "selected";
-					break;
-				case "Wrestling": 
-					$wrestling2 = "selected";
-					break;
-				case "Tennis": 
-					$tennis2 = "selected";
-					break;
-				case "Swimming": 
-					$swimming2 = "selected";
-					break;
-				case "Golf": 
-					$golf2 = "selected";
-					break;
-				case "Gymnastics": 
-					$gymnastics2 = "selected";
-					break;
-				case "Cheerleading": 
-					$cheerleading2 = "selected";
-					break;
-				case "Esports": 
-					$esports2 = "selected";
 					break;
 			}
 			//profile.php?id={$player->getId()}
@@ -1469,13 +1386,13 @@
 								   required />
 						</p>
 						<p>
-						<label class='span'>High School:* &nbsp; </label>
+						<label class='span'>School:* &nbsp; </label>
 							<input type='text'
 								   id = 'highschool'
 								   name= 'highschool'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'Your Highschool'
+								   placeholder = 'Your School'
 								   value='{$player->getHighschool()}'
 								   required />
 						</p>
@@ -1557,9 +1474,9 @@
 						</p>
 						<div>
 						<p>
-							<label class='span'>Sports*: &nbsp; </label>
+							<label class='span'>Sport*: &nbsp; </label>
 							<select name='sport' required>
-								<option value=' ' selected disabled>Select 1st Sport:</option>
+								<option value=' ' selected disabled>Select Sport:</option>
 								<option {$football} value='football'>Football</option>
 								<option {$basketball} value='basketball'>Basketball</option>
 								<option {$baseball} value='baseball'>Baseball</option>
@@ -1577,28 +1494,6 @@
 								<option {$gymnastics} value='gymnastics'>Gymnastics</option>
 								<option {$cheerleading} value='cheerleading'>Cheerleading</option>
 								<option {$esports} value='esports'>Esports</option>
-							</select>
-						</p>
-						<p>
-							<select name='sport2'>
-								<option value=' ' selected disabled>Select 2nd Sport(Optional):</option>
-								<option {$football2} value='football'>Football</option>
-								<option {$basketball2} value='basketball'>Basketball</option>
-								<option {$baseball2} value='baseball'>Baseball</option>
-								<option {$softball2} value='softball'>Softball</option>
-								<option {$hockey2} value='hockey'>Hockey</option>
-								<option {$fieldhockey2} value='fieldhockey'>Field Hockey</option>
-								<option {$lacrosse2} value='lacrosse'>Lacrosse</option>
-								<option {$soccer2} value='soccer'>Soccer</option>
-								<option {$trackandfield2} value='trackandField'>Track and Field</option>
-								<option {$volleyball2} value='volleyball'>Volleyball</option>
-								<option {$wrestling2} value='wrestling'>Wrestling</option>
-								<option {$tennis2} value='tennis'>Tennis</option>
-								<option {$swimming2} value='swimming'>Swimming</option>
-								<option {$golf2} value='golf'>Golf</option>
-								<option {$gymnastics2} value='gymnastics'>Gymnastics</option>
-								<option {$cheerleading2} value='cheerleading'>Cheerleading</option>
-								<option {$esports2} value='esports'>Esports</option>
 							</select>
 						</p>
 						</div>

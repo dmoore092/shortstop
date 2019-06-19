@@ -50,7 +50,6 @@
         if(isset($_POST['admin-search'])){
             $name       = $playerDB->sanitize($_POST['name']);
             $sport      = $_POST['sport'];
-            $sport2      = $_POST['sport2'];
             $state      = $_POST['state'];
             $class      = $_POST['class'];
             $position   = $playerDB->sanitize($_POST['position']);
@@ -60,7 +59,6 @@
             $arr = array();
             if($name != "") $arr[] = "name LIKE '%{$name}%'";
             if($sport != "") $arr[] = "sport = '{$sport}'";
-            if($sport2 != "") $arr[] = "sport2 = '{$sport2}'";
             if($state != "") $arr[] = "state = '{$state}'";
             if($class != "") $arr[] = "gradyear = '{$class}'";
             if($position != "") $arr[] = "primaryposition LIKE '%{$position}%'";
@@ -68,10 +66,10 @@
             if($gpa != "") $arr[] = "gpa >= '{$gpa}'";
 
             if($name == "" && $sport == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
-                $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE persontype = 'player' OR persontype = 'coach';";
+                $query = "SELECT id, name, highschool, gradYear, sport, primaryPosition FROM players WHERE persontype = 'player' OR persontype = 'coach';";
             }
             else{
-                $query = "SELECT id, name, sport, sport2, email, persontype FROM players WHERE ";
+                $query = "SELECT id, name, sport, email, persontype FROM players WHERE ";
                 $query .= implode(" AND ", $arr);
                 $query .= " AND persontype = 'player' OR persontype = 'coach';";
             }
@@ -113,13 +111,13 @@
             header('Content-Disposition: attachment; filename=apdb.csv');  
             $output = fopen("apdb.csv", "w");  
             fputcsv($output, array('id', 'username', 'name', 'gender', 'email', 'cellphone', 'homephone', 'address', 'city', 'state', 'zip',
-                                    'highschool', 'weight', 'height', 'Class Of', 'sport', 'sport2', 'Primary Position', 'Secondary Position',
+                                    'highschool', 'weight', 'height', 'Class Of', 'sport', 'Primary Position', 'Secondary Position',
                                 'Travel Team', 'gpa', 'sat', 'act', 'Major', 'Ref1 Name', 'Ref1 Email', 'Ref1 Phone', 'Ref2 Name', 'Ref2 Email', 'Ref2 Phone', 
                                 'Ref3 Name', 'Ref3 Email', 'Ref3 Phone', 'Personal Statement', 'Commitment', 'Service', 'Role', 'College', 'twitter',
                                 'Facebook','Instagram', 'Website', 'Desired Characteristics', 'Velocty', 'Gpa Req'));  
             
             $query = "SELECT id, username, name, gender, email, cellphone, homephone, address, city, state, zip, highschool, weight, height, gradYear, ";
-            $query .= "sport, sport2, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, major, ref1Name, ref1Email, ref1Phone, ";
+            $query .= "sport, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, major, ref1Name, ref1Email, ref1Phone, ";
             $query .= "ref2Name, ref2Email, ref2Phone, ref3Name, ref3Email, ref3Phone, persStatement, commitment, service, persontype, college, ";
             $query .= "twitter, facebook, instagram, website, characteristics, velocity, gpareq FROM players;";  
             $result = mysqli_query($conn, $query);
@@ -289,11 +287,6 @@
               if(isset($_POST['sport'])){
                 if($playerDB->isAlphaNumeric($_POST['sport']) != 0){
                     $updateArray['sport'] = $playerDB->sanitize($_POST['sport']);
-                }
-              }
-              if(isset($_POST['sport2'])){
-                if($playerDB->isAlphaNumeric($_POST['sport2']) != 0){
-                    $updateArray['sport2'] = $playerDB->sanitize($_POST['sport2']);
                 }
               }
               if(isset($_POST['primaryPosition'])){

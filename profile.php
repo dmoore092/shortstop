@@ -1,5 +1,5 @@
 <?php 
-        error_reporting(0);
+        //error_reporting(0);
         session_start();
 
         // ini_set('display_errors',1);
@@ -11,6 +11,7 @@
         require './PHPMailer/src/Exception.php';
         require './PHPMailer/src/PHPMailer.php';
         require './PHPMailer/src/SMTP.php';
+
 
         $title="Profile"; $page="profile";
         include_once ("classes/Player.PDO.Class.php");
@@ -512,3 +513,4 @@
             }
         }
 ?>
+

@@ -837,10 +837,34 @@
 						id=''/>
 				</form>
 				</div> <!-- end of form-wrapper -->
+				<script src=\"https://js.stripe.com/v3\"></script>
+				<hr />
+				<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
+						id=\"checkout-button-plan_FHnWT0qjpXfvQB\"
+						class=\"btnSubmit\" 
+						role=\"link\"
+						onclick=\"pay()\">
+						Pay For Webhosting
+				</button>
+				<div id=\"error-message\"></div>
+				<script>
+					var stripe = Stripe('pk_test_fQSYS2NeV0puQz3wEubTT4mR00As7au9js');
+					var checkoutButton = document.getElementById('checkout-button-plan_FHnWT0qjpXfvQB');
+					function pay(){
+						stripe.redirectToCheckout({
+							items: [{plan: 'plan_FHnWT0qjpXfvQB', quantity: 1}],
+							successUrl: window.location.protocol + '//192.168.33.10/profile.php?id=2',
+							cancelUrl: window.location.protocol + '//192.168.33.10/profile.php?id=2',
+						})
+						.then(function (result) {
+						if (result.error) {
+							var displayError = document.getElementById('error-message');
+							displayError.textContent = result.error.message;
+						}
+						});
+					}
+				</script>
 				</div><!-- end of #content -->
-				<div id='center-area'>
-					
-				</div> 
 				";
 			}
 			return $html;

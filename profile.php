@@ -20,34 +20,35 @@
         include ("assets/inc/header.inc.php");
 
         $id=$_GET['id'];
+        $showAdmin = false;
+        
+        //decide whether to show admin panel or not. This blocks the ability to add admin id(1 or 2) to the URL and bypass logging in
+        if(($_SESSION['id'] == $_GET['id'] && $id == 1) || ($_SESSION['id'] == $_GET['id'] && $id == 2)){
+            $showAdmin = true;
+        }
+        else{
+            $showAdmin = false;
+        }
+
+        //shows profiles based on being logged in or not
         if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
             //echo "logged in set";
             if ($_SESSION['id'] == $_GET['id']) {  
-                echo $playerDB->getMyInfo($id);
-                echo "<script>
-                        function doubleCheck(e){
-                            if(!confirm('are you sure?')) e.preventDefault();
-                        }
-                    </script>";
+                //player is logged in, show profile with edit button for myinfo.php
+                echo $playerDB->getMyInfo($id, $showAdmin);
                 echo "<script>document.getElementById('edit-img').style.display='inline-block'</script>";
             }
             else{
-                //echo "logged in, but username should be passed through from mathelete/fathelete";
-                echo $playerDB->getMyInfo($id);
+                //player is logged in, but viewing other profiles
+                echo $playerDB->getMyInfo($id, $showAdmin);
             } 
         }
         else {
-            //echo "not logged in, username should be passed through";
-            //$id = $_GET["id"];
-            
-            //shows the profile
-            echo $playerDB->getMyInfo($id);
-        //     echo "<h2 id='nologin'>You must be logged in to see your info</h2>";
-        //     echo "<a href='login.php' class='redirect-link'>Login</a>'";
-        //     header("Location: login.php");
+            //person is not logged in, can see profiles
+            echo $playerDB->getMyInfo($id, $showAdmin);
         }
 
-
+        //search from admin panel
         if(isset($_POST['admin-search'])){
             $name       = $playerDB->sanitize($_POST['name']);
             $sport      = $_POST['sport'];
@@ -82,7 +83,7 @@
             echo $playerDB->getPlayersWhileAdminMobile($data);
         }
 
-
+        //admin wants to download the Database
         if(isset($_POST['download-db'])){
             
             try{
@@ -150,6 +151,7 @@
 
         include("assets/inc/footer.inc.php"); 
         
+        //someone reports a profile
         if(isset($_POST['report'])){
             //PHPMailer
            $mail = new PHPMailer(true); 

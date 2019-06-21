@@ -693,8 +693,9 @@
 			else if ($player != null && $player->getPersonType() == 'admin') {
 				if($showAdmin == false){
 					$html .= "<div id='body-main'>
-							<p>Restricted</p>
-							</div>
+								<div id='profile-area'>
+									<p>Restricted</p>
+								</div>
 					";
 				}
 				else{

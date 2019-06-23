@@ -107,6 +107,11 @@
         </select>
         <select name='class'>
             <option value=' ' selected disabled>Class of:</option>
+            <option value='2019'>2024</option>
+            <option value='2018'>2023</option>
+            <option value='2017'>2022</option>
+            <option value='2016'>2021</option>
+            <option value='2015'>2020</option>
             <option value='2019'>2019</option>
             <option value='2018'>2018</option>
             <option value='2017'>2017</option>

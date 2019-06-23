@@ -174,7 +174,7 @@ if(isset($_POST['search-athlete'])){
         $position   = $playerDB->sanitize($_POST['position']);
         $school     = $playerDB->sanitize($_POST['school']);
         $gpa        = $_POST['gpa'];
-        
+        var_dump($class);
         $arr = array();
         if($name != "") $arr[] = "name LIKE '%{$name}%'";
         if($sport != "") $arr[] = "sport = '{$sport}'";

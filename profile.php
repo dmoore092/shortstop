@@ -107,7 +107,7 @@
         
             //Recipients
             $email->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
-            $email->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient
+            $email->addAddress('kprestano@athleticprospects.com', 'Keith');     // Add a recipient
             
             header('Content-Type: text/csv; charset=utf-8');  
             header('Content-Disposition: attachment; filename=apdb.csv');  
@@ -183,7 +183,7 @@
                 //Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Inappropriate Profile report';
-                $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='www.athleticprospects.com/profile.php?id=".$id."'>Click Here.</a>";
+                $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='https://www.athleticprospects.com/profile.php?id=".$id."'>Click Here.</a>";
                 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             
                 $mail->send();

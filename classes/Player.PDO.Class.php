@@ -856,13 +856,13 @@
 					</button>
 					<div id=\"error-message\"></div>
 					<script>
-						var stripe = Stripe('pk_test_fQSYS2NeV0puQz3wEubTT4mR00As7au9js');
-						var checkoutButton = document.getElementById('checkout-button-plan_FHnWT0qjpXfvQB');
+						var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
+						var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
 						function pay(){
 							stripe.redirectToCheckout({
-								items: [{plan: 'plan_FHnWT0qjpXfvQB', quantity: 1}],
-								successUrl: window.location.protocol + '//192.168.33.10/profile.php?id=2',
-								cancelUrl: window.location.protocol + '//192.168.33.10/profile.php?id=2',
+								items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
+								successUrl: window.location.protocol + '//www.athleticprospects.com/index',
+								cancelUrl: window.location.protocol + '//www.athleticprospects.com/index',
 							})
 							.then(function (result) {
 							if (result.error) {

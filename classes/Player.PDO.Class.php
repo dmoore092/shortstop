@@ -862,10 +862,10 @@
 					</div> <!-- end of form-wrapper -->
 					<div id=\"error-message\"></div>
 					<script>
-					alert('test');
 						var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 						var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
 						function pay(){
+							alert('test');
 							stripe.redirectToCheckout({
 								items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
 								successUrl: window.location.protocol + '//www.athleticprospects.com/index',

@@ -700,6 +700,7 @@
 				}
 				else{
 					$html .= "<div id='body-main'>
+					<script src=\"https://js.stripe.com/v3\"></script>
 					<h2>Administration Panel</h2>
 					<div id='content'>
 						<h3>Search for Player or Coach</h3>
@@ -850,7 +851,6 @@
 							class='btnSubmit'
 							id=''/>
 						<hr />
-						<script src=\"https://js.stripe.com/v3\"></script>
 						<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
 								id=\"checkout-button-plan_FJ7HouBZeAK4zB\"
 								class=\"btnSubmit\" 

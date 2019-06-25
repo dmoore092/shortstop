@@ -30,6 +30,6 @@
 
             </p>
             <h2>Any Questions?</h2>
-            <p>Email us at <a href="Kprestano@athleticprospects.com">Kprestano@athleticprospects.com</a></p>
+            <p>Email us at <a href="mailto:Kprestano@athleticprospects.com">Kprestano@athleticprospects.com</a></p>
         <div>
  <?php include("assets/inc/footer.inc.php") ?>

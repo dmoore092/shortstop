@@ -851,21 +851,20 @@
 							class='btnSubmit'
 							id=''/>
 						<hr />
-						<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
-								id=\"checkout-button-plan_FJ7HouBZeAK4zB\"
-								class=\"btnSubmit\" 
-								role=\"link\"
-								onclick=\"pay()\">
-								Pay For Webhosting
-						</button>
 					</form>
+					<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
+					id=\"checkout-button-plan_FJ7HouBZeAK4zB\"
+					class=\"btnSubmit\" 
+					role=\"link\"
+					onclick=\"pay()\">
+					Pay For Webhosting
+					</button>
 					</div> <!-- end of form-wrapper -->
 					<div id=\"error-message\"></div>
 					<script>
 						var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 						var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
 						function pay(){
-							alert('test');
 							stripe.redirectToCheckout({
 								items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
 								successUrl: window.location.protocol + '//www.athleticprospects.com/index',

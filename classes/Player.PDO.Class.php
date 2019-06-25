@@ -850,6 +850,7 @@
 							class='btnSubmit'
 							id=''/>
 						<hr />
+						<script src=\"https://js.stripe.com/v3\"></script>
 						<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
 								id=\"checkout-button-plan_FJ7HouBZeAK4zB\"
 								class=\"btnSubmit\" 
@@ -859,7 +860,6 @@
 						</button>
 					</form>
 					</div> <!-- end of form-wrapper -->
-					<script src=\"https://js.stripe.com/v3\"></script>
 					<div id=\"error-message\"></div>
 					<script>
 						var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');

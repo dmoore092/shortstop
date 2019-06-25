@@ -162,4 +162,7 @@ a{
         padding: 2px;
         /* border: 2px solid black; */
     }
+    .admin-panel{
+        margin-right: 70px;
+    }
 }

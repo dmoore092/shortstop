@@ -26,86 +26,81 @@
 <?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">
             <form id="player-form"
-                         method = "POST"
-                         action= ""
-                         onsubmit = "" >
-                        <h2>Login</h2>
-                        <p>
-                            <!-- <span class="span">First Name:* &nbsp; </span> -->
-                            <input type="text"
-                                   id = "username"
-                                   name= "username"
-                                   size = "25"
-                                   maxlength = "150"
-                                   placeholder = "Enter Your Username"
-                                   value=""
-                                   onclick="" />
-                        </p>
-                        <p>
-                            <!-- <span class="span">First Name:* &nbsp; </span> -->
-                            <input type="password"
-                                   class = "password"
-                                   name= "password"
-                                   size = "25"
-                                   maxlength = "150"
-                                   placeholder = "Password"
-                                   value=""
-                                   onclick="" />
-                        </p>
-                        <button type="submit" name="login" class="btn-all-buttons" id="btn-login">Login</button>
-                        <!-- <input type="submit"
-                               value="Login"
-                               name="login"
-                               class="btn-all-buttons"
-                               id="btn-login"/> -->
-                        <a href = "register.php" style="text-decoration:none"><input type="button" class="btn-all-buttons" id="btn-create-account" value="Register" /></a>
-                        <br/>
-                        <a href = "recover.php" style="text-decoration:none">Reset My Password..</a>
-                <?php 
-
-            ?> 
+                    method = "POST"
+                    action= ""
+                    onsubmit = "" >
+                <h2>Login</h2>
+                <p>
+                    <!-- <span class="span">First Name:* &nbsp; </span> -->
+                    <input type="text"
+                            id = "username"
+                            name= "username"
+                            size = "25"
+                            maxlength = "150"
+                            placeholder = "Enter Your Username"
+                            value=""
+                            onclick="" />
+                </p>
+                <p>
+                    <!-- <span class="span">First Name:* &nbsp; </span> -->
+                    <input type="password"
+                            class = "password"
+                            name= "password"
+                            size = "25"
+                            maxlength = "150"
+                            placeholder = "Password"
+                            value=""
+                            onclick="" />
+                </p>
+                <button type="submit" name="login" class="btn-all-buttons" id="btn-login">Login</button>
+                <!-- <input type="submit"
+                        value="Login"
+                        name="login"
+                        class="btn-all-buttons"
+                        id="btn-login"/> -->
+                <a href = "register.php" style="text-decoration:none"><input type="button" class="btn-all-buttons" id="btn-create-account" value="Register" /></a>
+                <br/>
+                <a href = "recover.php" style="text-decoration:none">Reset My Password..</a>
             </form>
-<?php include('assets/inc/footer.inc.php'); 
-
-    //reset the users password. From changepassword.php
-    if(isset($_POST['update-password'])){
-        //makes recaptcha work
-        if(isset($_POST['g-recaptcha-response'])){
-            $captcha=$_POST['g-recaptcha-response'];
-            //captcha failed
-            if(!$captcha){
-                echo "<p style='color:red';>Please check the ReCaptcha!</p>";
-                exit;
-            }
-            $response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfGGJEUAAAAAFAw4zjaPVM2rlP1HqtQBw05rCek&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
-            if($response['success'] == false){
-                echo "<p style='color:red';>ReCaptcha Failed.</p>";
-            }
-            //captcha passed
-            else{
-                //check the user typed the same password both times
-                if($_POST["password"] == $_POST['retypepassword']){
-                    if($_POST['password'] != ""){
-                        $newpassword = $_POST['password'];
-                        $result = $playerDB->checkTempPassExpire($_GET['uname']);
-                        //everything is ready for password change
-                        if($result == 1){
-                            echo "ready to change password, call updatePassword()";
-                            $player = new PlayerDB();
-                            //password is hashed in updatePassword, not here
-                            $player->updatePassword($_GET['uname'], $newpassword);
+            <?php 
+                //reset the users password. From changepassword.php
+                if(isset($_POST['update-password'])){
+                    //makes recaptcha work
+                    if(isset($_POST['g-recaptcha-response'])){
+                        $captcha=$_POST['g-recaptcha-response'];
+                        //captcha failed
+                        if(!$captcha){
+                            echo "<p style='color:red;'>Password Change Failed! Please use the ReCaptcha</p>";
+                            exit;
                         }
-                    }
-                    else{
-                        echo "<p style='color:red;margin-top:25px'>Password cannot be empty, try again</p>";
-                    }
+                        $response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6LfGGJEUAAAAAFAw4zjaPVM2rlP1HqtQBw05rCek&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+                        if($response['success'] == false){
+                            echo "<p style='color:red;'>ReCaptcha Failed.</p>";
+                        }
+                        //captcha passed
+                        else{
+                            //check the user typed the same password both times
+                            if($_POST["password"] == $_POST['retypepassword']){
+                                if($_POST['password'] != ""){
+                                    $newpassword = $_POST['password'];
+                                    $result = $playerDB->checkTempPassExpire($_GET['uname']);
+                                    //everything is ready for password change
+                                    if($result == 1){
+                                        //echo "ready to change password, call updatePassword()";
+                                        $player = new PlayerDB();
+                                        //password is hashed in updatePassword, not here
+                                        $player->updatePassword($_GET['uname'], $newpassword);
+                                    }
+                                }
+                                else{
+                                    echo "<p style='color:red;margin-top:25px'>Password cannot be empty, try again</p>";
+                                }
+                            }
+                            else{
+                                echo "<p style='color:red;margin-top:25px'>Passwords do not match, try again</p>";
+                            }
+                        }
+                    }  
                 }
-                else{
-                    echo "<p style='color:red;margin-top:25px'>Passwords do not match, try again</p>";
-                }
-            }
-        }  
-    }
-
-
-?>
+            ?> 
+<?php include('assets/inc/footer.inc.php'); ?>

@@ -705,6 +705,7 @@
 						<h3>Search for Player or Coach</h3>
 					<div id='form-wrapper'>
 					<form   id='player-form'
+							class='admin-panel'
 							method = 'POST'
 							action= ''
 							onsubmit = '' 
@@ -848,17 +849,17 @@
 							name = 'download-db'
 							class='btnSubmit'
 							id=''/>
+						<hr />
+						<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
+								id=\"checkout-button-plan_FJ7HouBZeAK4zB\"
+								class=\"btnSubmit\" 
+								role=\"link\"
+								onclick=\"pay()\">
+								Pay For Webhosting
+						</button>
 					</form>
 					</div> <!-- end of form-wrapper -->
 					<script src=\"https://js.stripe.com/v3\"></script>
-					<hr />
-					<button style=\"background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em\" 
-							id=\"checkout-button-plan_FJ7HouBZeAK4zB\"
-							class=\"btnSubmit\" 
-							role=\"link\"
-							onclick=\"pay()\">
-							Pay For Webhosting
-					</button>
 					<div id=\"error-message\"></div>
 					<script>
 						var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');

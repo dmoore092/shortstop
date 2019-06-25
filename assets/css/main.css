@@ -375,6 +375,10 @@ section, article{
         margin-right: auto;
         width: 60%;
     }
+    #logo-img{
+        display: block;
+        margin: auto;
+    }
     section, article{
         width: 100%;
         margin: 15px 0px;

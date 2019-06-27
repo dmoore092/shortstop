@@ -2092,14 +2092,17 @@
 	} // class
 ?>
 
-<!-- <p class='servicelabel' for='service'>Choose Service</p> -->
-<!-- <select id='service' name='service'>
-						  <option value='' disabled selected>Choose Service</option>
-						  <option value='free'>Free Player Profile</option>
-						  <option value='biweekly'>Bi-weekly recruiting checklist and articles - $100/per year</option>
-						  <option value='mentor1yr'>Mentor Program 1 year - $1099</option>
-						  <option value='mentor6mo'>Mentor Program 6 months - $650</option>
-					  	</select> -->
-
-						  <!-- <li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
-							<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li> -->
+<?php 
+// <!-- <p class='servicelabel' for='service'>Choose Service</p> -->
+//<!-- <select id='service' name='service'>
+//						  <option value='' disabled selected>Choose Service</option>
+//						  <option value='free'>Free Player Profile</option>
+//						  <option value='biweekly'>Bi-weekly recruiting checklist and articles - $100/per year</option>
+//						  <option value='mentor1yr'>Mentor Program 1 year - $1099</option>
+//						  <option value='mentor6mo'>Mentor Program 6 months - $650</option>
+//					  	</select> -->
+//
+//						  <!-- <li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
+//							<li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li> -->
+//
+?>

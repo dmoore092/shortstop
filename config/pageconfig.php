@@ -32,6 +32,10 @@
 			$PAGE = "myinfo"; 
 			$TITLE = "My Info";
 			break;
+		case "/blog.php":
+			$PAGE="blog"; 
+			$TITLE = "Blog";
+			break;
 		case "/passwordreset.php":
 			$PAGE="passwordreset"; 
 			$TITLE = "Reset My Password";

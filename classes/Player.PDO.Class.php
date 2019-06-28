@@ -703,7 +703,30 @@
 					<script src=\"https://js.stripe.com/v3\"></script>
 					<h2>Administration Panel</h2>
 					<div id='content'>
-						<h3>Search for Player or Coach</h3>
+					<h3>Blog Post</h3>
+					<form	id='blog-form'
+							class='admin-panel'
+							method = 'POST'
+							action= 'blog.php'
+							onsubmit = '' 
+							enctype='multipart/form-data' >
+						<input type='text'
+								id = 'title'
+								name = 'title'
+								size = '20'
+								maxlength = '50'
+								placeholder = 'Title'
+								value=''
+								onclick='' />
+						<textarea name='post' form='blog-form' col='50' row='10' placeholder='Enter text here...'></textarea>
+						<input type='submit'
+								value='Submit Post'
+								name = 'submit-post'
+								class='btnSubmit'
+								id='btn-post'/>
+					<hr>
+					</form>
+						<h3>Search for Player</h3>
 					<div id='form-wrapper'>
 					<form   id='player-form'
 							class='admin-panel'

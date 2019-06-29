@@ -6,6 +6,9 @@
         <link rel="stylesheet" type="text/css" href="assets/css/footer.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/<?php echo $PAGE ?>.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--icon library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="assets/javascript/jqueryui-1.12.1/jquery-ui.css" />
+        <script src="assets/javascript/jqueryui-1.12.1/jquery-ui.js"></script>
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Dale Moore">

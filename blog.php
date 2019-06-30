@@ -24,7 +24,7 @@
                         echo "<div class=\"post\"><p><form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
                     }
                     else{
-                        echo "<h3>{$row['title']}</h3>";
+                        echo "<div class=\"post\"><h3>{$row['title']}</h3>";
                     } 
                     echo "<h6>By Keith Prestano</h6>";
                     echo "<h6>{$row['post_date']}</h6>";

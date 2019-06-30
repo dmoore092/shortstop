@@ -19,3 +19,13 @@ p{
 .pagination li a{
     color: white;
 }
+button{
+    background-color: #bb0a1e;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    float: right;
+}
+h6{
+    clear: both;
+}

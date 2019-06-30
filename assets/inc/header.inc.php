@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><?php echo $title ?> | Athletic Prospects</title>
+        <title><?php echo $TITLE ?> | Athletic Prospects</title>
         <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/footer.css" />
-        <link rel="stylesheet" type="text/css" href="assets/css/<?php echo $page ?>.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/<?php echo $PAGE ?>.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!--icon library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="assets/javascript/jqueryui-1.12.1/jquery-ui.css" />
+        <script type="text/javascript" src="assets/javascript/jqueryui-1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="assets/javascript/jPaginate/src/jQuery.paginate.js"></script>
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Dale Moore">
@@ -14,7 +18,6 @@
     </head>
     <body>
 <header>
-    <?php //include ("/var/www/html/assets/inc/search.inc.php"); ?>
     <?php require_once('assets/inc/search.inc.php'); ?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>

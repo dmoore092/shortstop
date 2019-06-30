@@ -1,6 +1,5 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
 <?php include('assets/inc/header.inc.php'); ?>
-
         <div id="body-main">
             <div id="content">
                 <section>

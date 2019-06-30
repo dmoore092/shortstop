@@ -4,3 +4,18 @@ h3, button{
 p{
     margin-top: 15px;
 }
+.pagination__controls {
+    width: 100%;
+    /* text-align: center; */
+}
+.pagination li{
+    display: inline-block;
+    background-color: #bb0a1e;
+    color: white;
+    padding: 10px 20px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+.pagination li a{
+    color: white;
+}

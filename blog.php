@@ -1,8 +1,9 @@
 <?php include("config/pageconfig.php"); session_start();?>
 <?php include("assets/inc/header.inc.php") ?>
-        <div id="body-main">    
+        <div id="body-main">   
             <h1>Blog</h1>
             <hr />
+            <div class="blog">
          <?php
             //check if logged in
             if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
@@ -20,7 +21,7 @@
                     if($canDelete == true){
                         $postid = $row['id'];
                         // echo "<form action='blog.php'><input type='submit' name='delete-post' value='$postid'></form><h3>{$row['title']}</h3>";
-                        echo "<form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
+                        echo "<div class=\"post\"><p><form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
                     }
                     else{
                         echo "<h3>{$row['title']}</h3>";
@@ -29,13 +30,27 @@
                     echo "<h6>{$row['post_date']}</h6>";
                     echo "<p>{$row['text']}</p>";
                     echo "<div><p>Tags: {$row['tags']}</p></div>";
-                    echo "<hr>";
+                    echo "<hr></p></div>";
                 } 
             }
             catch(exception $e){
                 echo "Connection failed: " . $e->getMessage();
             } 
         ?>
+        </div> <!-- end of .pagination -->
+        <script>
+            $(document).ready(function(){
+               //alert('ready');
+               $('.blog').paginate({
+                   items_per_page  : 2,
+                   border: true,
+                   border_color: '#fff',
+                   background_color: '#bb0a1e',
+                   rotate: true,
+                });
+            });
+        </script> 
+
 <?php include("assets/inc/footer.inc.php") ?>
 <script>
     function deletePost(){

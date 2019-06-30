@@ -176,7 +176,8 @@
 
 		function getPlayersAsTableAsAdmin($data=null){//$data=null
             if($data != null && count($data) > 0){
-                $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
+				//<div id='body-main'>
+                $html = "<div id='table-wrapper'><table>\n";
                 if(true){
                     $html .= "<tr><th>Action</th><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
                     foreach($data as $player){

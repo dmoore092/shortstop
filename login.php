@@ -37,4 +37,4 @@
             </form>
 
 <?php include('assets/inc/footer.inc.php'); ?>
-<?php include('assets/inc/reset_password_actual.php'); ?>
+<?php include('assets/inc/password_reset_actual.php'); ?>

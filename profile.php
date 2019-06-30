@@ -5,13 +5,11 @@
 <?php include("assets/inc/phpmailer_download_db.php"); ?>
 <?php include("assets/inc/phpmailer_report_profile.php"); ?>
 
-<?php include("assets/inc/delete_profile.php"); ?>
-
 <?php include ("assets/inc/header.inc.php");?>
 <?php include("assets/inc/show_profile.php"); ?>
 <?php include("assets/inc/admin_search.php"); ?>
+<?php include("assets/inc/delete_profile.php"); ?>
 <?php include("assets/inc/footer.inc.php"); ?>
 
 <?php include("assets/inc/handle_myinfo.php");?>
-
 

@@ -609,9 +609,9 @@
 				<hr/>
 				<h3>Videos</h3>
 					<div id='videos'>
-						<iframe id='ytplayer' type='text/html' width='300' height='250' src='{$player->getShowcase1()}'></iframe>
-						<iframe id='ytplayer' type='text/html' width='300' height='250' src='{$player->getShowcase2()}'></iframe>
-						<iframe id='ytplayer' type='text/html' width='300' height='250' src='{$player->getShowcase3()}'></iframe>
+						<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='{$player->getShowcase1()}'></iframe>
+						<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='{$player->getShowcase2()}'></iframe>
+						<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='{$player->getShowcase3()}'></iframe>
 					</div>
 				<h3>References</h3>
 					<div id='reference-container'>

@@ -704,6 +704,7 @@
 					<script>
 						window.onload = function() {
 							$( \"#tabs\" ).tabs();
+							$( \"#edit-tabs\" ).tabs();
 						}
 					</script>
 					<h2>Administration Panel</h2>
@@ -712,6 +713,7 @@
 						<ul>
 							<li><a href=\"#fragment-1\" class=\"tab-headers\">Post A Blog</a></li>
 							<li><a href=\"#fragment-2\" class=\"tab-headers\">Delete Profiles/Download Database/Pay for Webhosting</a></li>
+							<li><a href=\"#fragment-3\" class=\"tab-headers\">Edit Site Content</a></li>
 						</ul>
 						<div id=\"fragment-1\">
 							<h3>Blog Post</h3>
@@ -903,7 +905,53 @@
 										<div id=\"error-message\"></div>
 								</form>
 								</div> <!-- end of form-wrapper -->
-						</div> <!-- fragment 2 -->
+						</div> <!-- end of fragment 2 -->
+						<div id=\"fragment-3\">
+							<div id=\"edit-tabs\">
+								<ul>
+									<li><a href=\"#about-us\" class=\"tab-headers\">Edit About Us</a></li>
+									<li><a href=\"#home_page\" class=\"tab-headers\">Edit Home Page</a></li>
+								</ul>
+								<div id=\"about-us\">
+									<form id='edit-about-us-form'
+											class='edit-about-us'
+											method = 'POST'
+											enctype='multipart/form-data'>
+										<input type='text'
+											id = 'about-us-header'
+											name = 'about-us-header'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Header'/>
+										<textarea name='about-us-content' form='edit-about-us-form' col='50' row='10' placeholder='Enter text here...'></textarea>
+										<input type='submit'
+											value='Submit \"About Us\" Section'
+											name = 'submit-about-us'
+											class='btnSubmit'
+											id='btn-about-us'/>
+									</form>
+								</div> <!-- end of about-us -->
+								<div id=\"home-page\">
+									<form id='edit-home-page-form'
+											class='edit-home-page'
+											method = 'POST'
+											enctype='multipart/form-data'>
+										<input type='text'
+											id = 'home-page-header'
+											name = 'home-page-header'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Header'/>
+										<textarea name='home-page-content' form='edit-home-page-form' col='50' row='10' placeholder='Enter text here...'></textarea>
+										<input type='submit'
+											value='Submit \"Home Page\" Section'
+											name = 'submit-home-page'
+											class='btnSubmit'
+											id='btn-home-page'/>
+									</form>
+								</div> <!-- end of home-page -->
+							</div> <!-- end of edit-tabs-->
+						</div> <!-- end of fragment 3 -->
 					</div> <!-- end of #tabs -->
 					<script>
 						//web hosting

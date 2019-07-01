@@ -83,6 +83,17 @@ a{
 #com-prompt{
     font-size: .8rem;
 }
+#blog-form{
+    width: 100%;
+}
+textarea{
+    resize: none;
+    width: 100%;
+    resize: both;
+    overflow: scroll;
+    height: 300px;
+    width: 100%;
+}
 @media only screen and (min-width: 520px) {
     #profile-area{
         display:flex;
@@ -164,8 +175,5 @@ a{
     }
     .admin-panel{
         margin-right: 70px;
-    }
-    #checkout-button-plan_FJ7HouBZeAK4zB{
-        max-width: 92%;
     }
 }

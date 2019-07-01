@@ -44,6 +44,10 @@
 			$PAGE="login"; 
 			$TITLE = "Recover My Password";
 			break;
+		case "/results.php":
+			$PAGE="mfathletes"; 
+			$TITLE = "Search Results";
+			break;
 		case "/register.php":
 			$PAGE="login"; 
 			$TITLE = "Register";

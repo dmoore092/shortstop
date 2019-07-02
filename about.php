@@ -3,28 +3,48 @@
         <div id="body-main">    
             <h1>About Us</h1>
             <hr />
-            <h2>Our Mission</h2>
-            <p>
-                Athletic Prospects' mission is to guide each player 
-                in bridging the gap between high school and collegiate athletics. 
-                College coaches are looking for the commitment of the player and that's where we come into play. 
-            </p>
-            <p>
-                Bi-weekly, we will help our athletes stand out in the recruiting process by 
-                guiding them in their personal communication with coaches. Through our experience, 
-                we've learned one of the greatest tools to have in the recruiting process is communication. 
-                Athletic Prospects goes beyond just getting the player recognized; we get the player involved. 
-                And, with our individualized process, players will be seen as a committed and motivated player that wants to play college ball. 
-            </p>
-            <p>
-                We want serve our athletes the top notch recruitment experience that they deserve. Our focus is on the student-athlete's future. 
-                That means we'll work with them to find academic scholarships, athletic scholarships, and their dream school. 
-            </p>
-            <p>
-                Our team wants to see Athletic Prospects' athletes grow into responsible, hardworking adults by giving them the skills they need to achieve their dreams. 
-
-            </p>
+            <?php 
+                try{
+                    $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
+                    //echo "Connected successfully"; 
+                    $query = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";
+                    $result = mysqli_query($conn, $query);
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<h2>{$row['header']}</h2>";
+                        echo "<p>{$row['text']}</p>";
+                    }
+                    mysqli_close($conn);
+                }
+                catch(exception $e){
+                    echo "Connection failed: " . $e->getMessage();
+                } 
+            ?>
             <h2>Any Questions?</h2>
             <p>Email us at <a href="mailto:Kprestano@athleticprospects.com">Kprestano@athleticprospects.com</a></p>
         <div>
  <?php include("assets/inc/footer.inc.php") ?>
+
+
+ <?php 
+ //changing site content for "About Us"
+ if(isset($_POST['submit-about-us'])){
+    echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+    try{
+        $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+        if($mysqli->connect_error) {
+            exit('Error connecting to database'); 
+          }
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $mysqli->set_charset("utf8mb4");
+
+        $stmt = $mysqli->prepare("INSERT INTO about_us(header, text, creation_date) VALUES(?, ?, NOW());");
+        $stmt->bind_param("ss", $_POST['about-us-header'], $_POST['about-us-content']);
+        $stmt->execute();
+        $stmt->close();
+    }
+    catch(exception $e){
+        //echo "Connection failed: " . $e->getMessage();
+    } 
+ }
+ 
+ ?>

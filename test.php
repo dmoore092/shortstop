@@ -12,7 +12,7 @@
 <div id="edit-tabs">
     <ul>
         <li><a href="#about-us" class="tab-headers">Edit About Us</a></li>
-        <li><a href="home-page" class="tab-headers">Edit Home Page</a></li>
+        <li><a href="#home-page" class="tab-headers">Edit Home Page</a></li>
     </ul>
     <div id="about-us">
         <form id='edit-about-us-form'

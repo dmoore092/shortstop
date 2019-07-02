@@ -69,6 +69,7 @@
     //SEND attributes TO DATABASE
             if(isset($_POST['submit'])){
                 //block cross-site scripting, html entities(apersand etc), trim white space
+                //rewrite this!!!!!!!!!!!!!!1
                 $firstname  = htmlentities(strip_tags(trim($_POST["firstname"])));
                 $lastname   = htmlentities(strip_tags(trim($_POST["lastname"])));
                 $email      = htmlentities(strip_tags(trim($_POST["email"])));

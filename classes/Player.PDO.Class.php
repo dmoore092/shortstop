@@ -910,13 +910,15 @@
 							<div id=\"edit-tabs\">
 								<ul>
 									<li><a href=\"#about-us\" class=\"tab-headers\">Edit About Us</a></li>
-									<li><a href=\"#home_page\" class=\"tab-headers\">Edit Home Page</a></li>
+									<li><a href=\"#home-page\" class=\"tab-headers\">Edit Home Page</a></li>
 								</ul>
 								<div id=\"about-us\">
 									<form id='edit-about-us-form'
 											class='edit-about-us'
 											method = 'POST'
+											action='about.php'
 											enctype='multipart/form-data'>
+											<h4>Section: About Us</h4>
 										<input type='text'
 											id = 'about-us-header'
 											name = 'about-us-header'
@@ -935,7 +937,9 @@
 									<form id='edit-home-page-form'
 											class='edit-home-page'
 											method = 'POST'
+											action= 'index.php'
 											enctype='multipart/form-data'>
+										<h4>Section: Home Page</h4>
 										<input type='text'
 											id = 'home-page-header'
 											name = 'home-page-header'

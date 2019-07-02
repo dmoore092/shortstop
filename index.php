@@ -8,7 +8,7 @@
                         try{
                             $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
                             //echo "Connected successfully"; 
-                            $query = "SELECT header, text FROM home_page;";
+                            $query = "SELECT header, text FROM home_page ORDER BY id DESC LIMIT 1;";
                             $result = mysqli_query($conn, $query);
                             while($row = mysqli_fetch_assoc($result)){
                                 echo "<h2>{$row['header']}</h2>";
@@ -20,13 +20,6 @@
                         } 
                     
                     ?>
-                    <!-- <h2>At Athletic Prospects</h2> -->
-                    <!-- <p>
-                        We strive to provide High School and JUCO athletes the tools to successfully promote themselves 
-                        to college coaches by assisting athletes through the recruiting process. Our goal is to be a mentor-leader 
-                        to athletes to teach them the importance of academics and athletics while showing strong leadership 
-                        characteristics to be successful on and off the field.
-                    </p> -->
                     <hr/>
                 </section>  
             
@@ -39,3 +32,27 @@
 <?php include('assets/inc/footer.inc.php'); ?>
 
 <?php include('assets/inc/password_reset_email_link.php'); ?>
+
+<?php 
+ //changing site content for "Home Page"
+ if(isset($_POST['submit-home-page'])){
+    echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+    try{
+        $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+        if($mysqli->connect_error) {
+            exit('Error connecting to database'); 
+          }
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $mysqli->set_charset("utf8mb4");
+
+        $stmt = $mysqli->prepare("INSERT INTO home_page(header, text, creation_date) VALUES(?, ?, NOW());");
+        $stmt->bind_param("ss", $_POST['home-page-header'], $_POST['home-page-content']);
+        $stmt->execute();
+        $stmt->close();
+    }
+    catch(exception $e){
+        //echo "Connection failed: " . $e->getMessage();
+    } 
+ }
+
+?>

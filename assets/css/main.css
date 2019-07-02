@@ -196,6 +196,9 @@ section, article{
     background: #8081ce;
     color: white;
 }
+#index-header{
+    margin-bottom: 10px;
+}
 @media only screen and (min-width: 520px) {
     .navicon {display: none;}
     #body-main, #big-login>ul, #search-container, .nav>ul{

@@ -739,7 +739,7 @@
 									placeholder = 'Tags'
 									value=''
 									onclick='' />
-							<textarea name='post' form='blog-form' col='50' row='10' placeholder='Enter text here...'></textarea>
+							<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
 							<input type='submit'
 									value='Submit Post'
 									name = 'submit-post'
@@ -922,10 +922,11 @@
 										<input type='text'
 											id = 'about-us-header'
 											name = 'about-us-header'
+											value='".$_SESSION['aboutUsHeader']."'
 											size = '20'
 											maxlength = '50'
 											placeholder = 'Header'/>
-										<textarea name='about-us-content' form='edit-about-us-form' col='50' row='10' placeholder='Enter text here...'></textarea>
+										<textarea name='about-us-content' form='edit-about-us-form' id='about-us-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'>".$_SESSION['aboutUsText']."</textarea>
 										<input type='submit'
 											value='Submit \"About Us\" Section'
 											name = 'submit-about-us'
@@ -943,10 +944,11 @@
 										<input type='text'
 											id = 'home-page-header'
 											name = 'home-page-header'
+											value='".$_SESSION['aboutUsText']."'
 											size = '20'
 											maxlength = '50'
 											placeholder = 'Header'/>
-										<textarea name='home-page-content' form='edit-home-page-form' col='50' row='10' placeholder='Enter text here...'></textarea>
+										<textarea name='home-page-content' form='edit-home-page-form' id='home-page-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'>".$_SESSION['homePageText']."</textarea>
 										<input type='submit'
 											value='Submit \"Home Page\" Section'
 											name = 'submit-home-page'

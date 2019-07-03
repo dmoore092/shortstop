@@ -71,7 +71,7 @@ input, select{
 a{
     text-decoration: none;
     color: #bb0a1e;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 #title-wrapper{
     /* display: flex; */

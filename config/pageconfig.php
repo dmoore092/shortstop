@@ -52,6 +52,10 @@
 			$PAGE="login"; 
 			$TITLE = "Register";
 			break;
+		case "/test.php":
+			$PAGE="profile"; 
+			$TITLE = "TEST";
+			break;
 		// default:
 		// 	$CURRENT_PAGE = "Index";
 		// 	$PAGE_TITLE = "Welcome to my homepage!";

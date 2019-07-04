@@ -2,6 +2,8 @@
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']);?>
 
+<?php include("assets/inc/populate_content_edit_forms.php"); ?>
+
 <?php include('assets/inc/header.inc.php'); ?>   
             <div id='body-main'>
             <?php if($player != null && $player->getPersonType() == 'player'): ?>
@@ -139,13 +141,16 @@
 							$( "#edit-tabs" ).tabs();
 						}
 					</script>
-					<h2>Administration Panel</h2>
+					
 					<div id='content'>
+					<h2>Administration Panel</h2>
 					<div id="tabs">
 						<ul>
 							<li><a href="#fragment-1" class="tab-headers">Post A Blog</a></li>
-							<li><a href="#fragment-2" class="tab-headers">Delete Profiles/Download Database/Pay for Webhosting</a></li>
-							<li><a href="#fragment-3" class="tab-headers">Edit Site Content</a></li>
+							<li><a href="#fragment-5" class="tab-headers">Edit Site Content</a></li>
+							<li><a href="#fragment-2" class="tab-headers">Delete Profiles</a></li>
+							<li><a href="#fragment-3" class="tab-headers">Download Database</a></li>
+							<li><a href="#fragment-4" class="tab-headers">Pay For Webhosting</a></li>
 						</ul>
 						<div id="fragment-1">
 							<h3>Blog Post</h3>
@@ -177,7 +182,6 @@
 									name = 'submit-post'
 									class='btnSubmit'
 									id='btn-post'/>
-					<hr>
 							</form>
 						</div> <!-- fragment 1 -->
 						<div id="fragment-2">
@@ -321,24 +325,31 @@
 										name = 'admin-search'
 										class='btnSubmit'
 										id='btn-Submit'/>
-									<input type='submit'
+								</form>
+								</div> <!-- end of form-wrapper -->
+						</div> <!-- end of fragment 2 -->
+						<div id="fragment-3">
+							<form action="">
+							<input type='submit'
 										value='Download Database'
 										name = 'download-db'
 										class='btnSubmit'
 										id=''/>
-										<hr>
-										<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em" 
+							</form>
+						</div> <!-- end of fragment 3 -->
+						<div id="fragment-4">
+							<form action="">
+							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em" 
 												id="checkout-button-plan_FJ7HouBZeAK4zB"
 												class="btnSubmit" 
 												role="link"
 												onclick="pay()">
 											Pay For Webhosting
 										</button>
-										<div id="error-message"></div>
-								</form>
-								</div> <!-- end of form-wrapper -->
-						</div> <!-- end of fragment 2 -->
-						<div id="fragment-3">
+							</form>
+							<div id="error-message"></div>
+						</div> <!-- end of fragment 4-->
+						<div id="fragment-5">
 							<div id="edit-tabs">
 								<ul>
 									<li><a href="#about-us" class="tab-headers">Edit About Us</a></li>
@@ -389,7 +400,7 @@
 									</form>
 								</div> <!-- end of home-page -->
 							</div> <!-- end of edit-tabs-->
-						</div> <!-- end of fragment 3 -->
+						</div> <!-- end of fragment 5-->
 					</div> <!-- end of #tabs -->
 					<script>
 						//web hosting
@@ -410,6 +421,7 @@
 						}
 				</script>
 				</div><!-- end of #content -->
+				<?php include("assets/inc/admin_search.php"); ?>
                 <?php else: ?>
 					<div id='profile-area'>
 							<p>Restricted</p>
@@ -421,7 +433,6 @@
 <?php include("assets/inc/phpmailer_download_db.php"); ?>
 <?php include("assets/inc/phpmailer_report_profile.php"); ?>
 
-<?php include("assets/inc/populate_content_edit_forms.php"); ?>
-<?php include("assets/inc/admin_search.php"); ?>
+
 <?php include("assets/inc/delete_profile.php"); ?>
 <?php include("assets/inc/handle_myinfo.php");?>

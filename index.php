@@ -13,6 +13,7 @@
                             while($row = mysqli_fetch_assoc($result)){
                                 echo "<h2 id='index-header'>{$row['header']}</h2>";
                                 echo "<p>{$row['text']}</p>";
+                                echo "<hr>";
                             } 
                         }
                         catch(exception $e){
@@ -20,12 +21,10 @@
                         } 
                     
                     ?>
-                    <hr/>
                 </section>  
             
             </div><!-- end of #content -->
             <div id="center-area">
-            
                 <a href = "register.php"><img src = "/assets/img/mainbanner.jpg" /></a>
             </div>
             

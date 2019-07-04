@@ -8,28 +8,18 @@
                     action= ""
                     onsubmit = "" >
                 <h2>Login</h2>
-                <p>
-                    <!-- <span class="span">First Name:* &nbsp; </span> -->
-                    <input type="text"
-                            id = "username"
-                            name= "username"
-                            size = "25"
-                            maxlength = "150"
-                            placeholder = "Enter Your Username"
-                            value=""
-                            onclick="" />
-                </p>
-                <p>
-                    <!-- <span class="span">First Name:* &nbsp; </span> -->
-                    <input type="password"
-                            class = "password"
-                            name= "password"
-                            size = "25"
-                            maxlength = "150"
-                            placeholder = "Password"
-                            value=""
-                            onclick="" />
-                </p>
+                <!-- <span class="span">First Name:* &nbsp; </span> -->
+                <input type="text"
+                        id = "username"
+                        name= "username"
+                        placeholder = "Enter Your Username" />
+                <!-- <span class="span">First Name:* &nbsp; </span> -->
+                <input type="password"
+                        class = "password"
+                        name= "password"
+                        placeholder = "Password"
+                        value=""
+                        onclick="" />
                 <button type="submit" name="login" class="btn-all-buttons" id="btn-login">Login</button>
                 <a href = "register.php" style="text-decoration:none"><input type="button" class="btn-all-buttons" id="btn-create-account" value="Register" /></a>
                 <br/>

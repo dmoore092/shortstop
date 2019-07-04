@@ -155,8 +155,5 @@
     </form>
     </div> <!-- end of form-wrapper -->
     </div><!-- end of #content -->
-    <div id="center-area">
-   
-    </div>
 <?php include("assets/inc/searchathlete.php"); ?>
 <?php    include("assets/inc/footer.inc.php");?>

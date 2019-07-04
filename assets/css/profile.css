@@ -1,7 +1,7 @@
 /*ITCSS CSS layered from general to specific */
 /*APPLIES TO profile.php*/
 /*GENERIC LAYER */
- .info-box li, #reference-container li{
+.info-box li, #reference-container li{
         margin: 10px 0;
         list-style-type: none;
         /* border-bottom: 1px solid black; */
@@ -52,10 +52,6 @@ h2{
     margin-bottom: 15px;
 }
 
-#content{
-    width: 80%;
-    margin: auto;
-}
 input, select{
     width: 100%;
     height: 30px;
@@ -74,10 +70,6 @@ a{
     /* font-weight: bold; */
 }
 #title-wrapper{
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    /* border: 2px solid black; */
     padding: 5px 0;
 }
 #com-prompt{
@@ -93,6 +85,31 @@ textarea{
     overflow: scroll;
     height: 300px;
     width: 100%;
+}
+#content h2{
+    text-align: center;
+    padding-top: 15px;
+}
+#fragment-1, #fragment-5{
+    width: 100%;
+    margin: auto;
+    padding: 0;
+}
+#fragment-1 h3{
+    margin-top: 15px;
+    margin-bottom: 20px;
+
+}
+#edit-tabs{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.tab-headers{
+    width: 100%;
+}
+#fragment-1 h3{
+    margin-bottom: 40px;
 }
 @media only screen and (min-width: 520px) {
     #profile-area{
@@ -173,7 +190,9 @@ textarea{
         padding: 2px;
         /* border: 2px solid black; */
     }
-    .admin-panel{
-        margin-right: 70px;
+}
+@media only screen and (min-width: 1000px) {
+    #tabs{
+        margin: auto;
     }
 }

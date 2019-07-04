@@ -3,13 +3,32 @@
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']);?>
 
 <?php include("assets/inc/populate_content_edit_forms.php"); ?>
-<?php //include("assets/inc/phpmailer_use_require.php"); ?>
 <?php include("assets/inc/phpmailer_download_db.php"); ?>
 <?php include("assets/inc/phpmailer_report_profile.php"); ?>
+
 <?php include("assets/inc/delete_profile.php"); ?>
 <?php include("assets/inc/handle_myinfo.php");?>
 
-<?php include('assets/inc/header.inc.php'); ?>   
+<?php include('assets/inc/header.inc.php'); ?>  
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+		//web hosting
+		var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
+		var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
+		function pay(){
+			stripe.redirectToCheckout({
+				items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
+				successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+			})
+			.then(function (result) {
+				if (result.error) {
+					var displayError = document.getElementById('error-message');
+					displayError.textContent = result.error.message;
+				}
+			});
+		}
+</script>
             <div id='body-main'>
             <?php if($player != null && $player->getPersonType() == 'player'): ?>
 				<div id='title-wrapper'>
@@ -333,8 +352,8 @@
 								</form>
 								</div> <!-- end of form-wrapper -->
 						</div> <!-- end of fragment 2 -->
-						<div id="fragment-3">
-							<form action="">
+						<div id="fragment-3" >
+							<form action="" method='POST'>
 							<input type='submit'
 										value='Download Database'
 										name = 'download-db'
@@ -343,7 +362,7 @@
 							</form>
 						</div> <!-- end of fragment 3 -->
 						<div id="fragment-4">
-							<form action="">
+							<form action="" method='POST'>
 							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em" 
 												id="checkout-button-plan_FJ7HouBZeAK4zB"
 												class="btnSubmit" 
@@ -407,24 +426,6 @@
 							</div> <!-- end of edit-tabs-->
 						</div> <!-- end of fragment 5-->
 					</div> <!-- end of #tabs -->
-					<script>
-						//web hosting
-						var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
-						var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
-						function pay(){
-							stripe.redirectToCheckout({
-								items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
-								successUrl: window.location.protocol + '//www.athleticprospects.com/index',
-								cancelUrl: window.location.protocol + '//www.athleticprospects.com/index',
-							})
-							.then(function (result) {
-								if (result.error) {
-									var displayError = document.getElementById('error-message');
-									displayError.textContent = result.error.message;
-								}
-							});
-						}
-				</script>
 				<?php include("assets/inc/admin_search.php"); ?>
 				</div><!-- end of #content -->
                 <?php else: ?>

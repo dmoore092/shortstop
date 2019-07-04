@@ -53,7 +53,7 @@
          * updateField() - updates a column for any field for any table
          */
         function updateField($fieldName, $value, $id){
-            var_dump($fieldName);
+            //var_dump($fieldName);
             try{
                 $query = "UPDATE players SET $fieldName = :value WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);

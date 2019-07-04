@@ -1,8 +1,8 @@
 #development
 SetEnv DB sports
 SetEnv DB_SERVER 127.0.0.1
-#SetEnv DB_PASSWORD root
 SetEnv DB_PASSWORD root
+SetEnv DB_PASSWORD KeyHole1!@
 SetEnv DB_USER root
 
 DirectoryIndex index.php
@@ -12,7 +12,7 @@ DirectoryIndex index.php
 # php_flag html_errors on
 # php_value error_reporting 32767
 
-php_flag display_startup_errors on
-php_flag display_errors on
-php_flag html_errors on
-php_value error_reporting E_ALL
+php_flag display_startup_errors off
+php_flag display_errors of
+php_flag html_errors of
+php_value error_reporting 0

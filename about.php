@@ -5,7 +5,7 @@
             <hr />
             <?php 
                 try{
-                    $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
+                    $conn = mysqli_connect('127.0.0.1', 'root', 'KeyHole1!@', 'sports');
                     //echo "Connected successfully"; 
                     $query = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";
                     $result = mysqli_query($conn, $query);
@@ -16,7 +16,7 @@
                     mysqli_close($conn);
                 }
                 catch(exception $e){
-                    echo "Connection failed: " . $e->getMessage();
+                    //echo "Connection failed: " . $e->getMessage();
                 } 
             ?>
             <h2>Any Questions?</h2>

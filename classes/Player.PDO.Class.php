@@ -38,7 +38,7 @@
 						return $data;
 				}
 				catch(PDOException $e){
-					echo $e->getMessage();
+					//echo $e->getMessage();
 					throw new Exception("Problem searching for players in the database.");
 				}
 			}
@@ -62,7 +62,7 @@
                 return $data;
             }
             catch(PDOException $e){
-                echo $e->getMessage();
+                //echo $e->getMessage();
                 throw new Exception("Problem getting players from database.");
             }
 		}
@@ -82,7 +82,7 @@
                 return $data;
             }
             catch(PDOException $e){
-                echo $e->getMessage();
+                //echo $e->getMessage();
                 throw new Exception("Problem getting players from database.");
             }
 		}
@@ -435,7 +435,7 @@
 		*/
 		function updatePassword($username, $newPassword){
 			$hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
-			echo $hashed_password;
+			//echo $hashed_password;
 			try{
                 $stmt = $this->dbConn->prepare("UPDATE players SET pass = ? WHERE username = ?");
 				$stmt->bindParam(1, $hashed_password, PDO::PARAM_STR);

@@ -1,10 +1,10 @@
 <?php
     //session_start();
-    echo "<script>console.log('test')</script>";
-    $mysqli = mysqli_connect("127.0.0.1", "root", "root", "sports");
+    //echo "<script>console.log('test')</script>";
+    $mysqli = mysqli_connect("127.0.0.1", "root", "KeyHole1!@", "sports");
    //CONNECT TO DATABASE
     if(!$mysqli){
-        echo "connection error: " . mysqli_connect_error();
+        //echo "connection error: " . mysqli_connect_error();
         die();
     }
     //else{

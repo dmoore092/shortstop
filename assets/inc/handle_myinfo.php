@@ -68,7 +68,7 @@
 
             if(isset($_POST['highschool'])){
                 $updateArray['highschool'] = $playerDB->sanitize($_POST['highschool']);
-                echo $updateArray['highschool'];
+                //echo $updateArray['highschool'];
             }
 
             if(isset($_POST['weight'])){

@@ -21,7 +21,7 @@
 
             }
             catch(PDOException $e){
-                echo $e;
+                //echo $e;
                 throw new Exception("Problem Connecting to Server \n" . $e);
             }
         } // construct
@@ -126,7 +126,7 @@
                 $stmt->execute();
             }
             catch(PDOException $e){
-                echo $e;
+                //echo $e;
             }
             return $string;
         }

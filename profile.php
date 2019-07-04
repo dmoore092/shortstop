@@ -30,13 +30,12 @@
 		}
 </script>
             <div id='body-main'>
-            <?php if($player != null && $player->getPersonType() == 'player'): ?>
+<?php if($player != null && $player->getPersonType() == 'player'): ?>
 				<div id='title-wrapper'>
 
-				<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 
+	<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 
                     <a href='myinfo.php'>Edit My Profile</a>
-                <?php endif; ?>
-
+    <?php endif; ?>
                 <h2 id='name'><?php echo $player->getName() ?></h2>
 					<h3 id='hs'><?php echo $player->getHighschool() ?></h3>
 				</div>
@@ -80,12 +79,18 @@
 				</div><!-- end of profile-area --> 
 				<p id='com-prompt'>When you become committed to a college, please send us an email at <a href='kprestano@athleticprospects.com'>kprestano@athleticprospects.com</a></p>
 				<hr/>
-				<h3>Videos</h3>
-					<div id='videos'>
-						<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase1() ?>'></iframe>
-						<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase2() ?>'></iframe>
-						<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase3() ?>'></iframe>
-					</div>
+<?php if ($player->getShowcase1() != null || $player->getShowcase2() != null || $player->getShowcase3() != null){ ?>
+				<h3>Videos</h3>	
+				<div id='videos'>	
+	<?php if($player->getShowcase1() != null){ ?>
+					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase1() ?>'></iframe>
+	<?php  } if($player->getShowcase2() != null){ ?>
+					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase2() ?>'></iframe>
+	<?php  } if($player->getShowcase3() != null){ ?>
+					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase3() ?>'></iframe>
+	<?php  } ?>
+				</div>
+<?php  } ?>
 				<h3>References</h3>
 					<div id='reference-container'>
 					<div class='references'>
@@ -118,7 +123,7 @@
 					<h3>Personal Statement</h3>
 					<p><?php echo $player->getPersStatement() ?></p>
 				</div>
-            <?php elseif($player != null && $player->getPersonType() == 'coach'): ?>
+<?php elseif($player != null && $player->getPersonType() == 'coach'): ?>
                 <h2><a href='myinfo.php'><img src='assets/img/edit2.png'/ id='edit-img'></a> {$player->getName()} <span id='collegeh2'>{$player->getCollege()}</span></h2>
                 <hr/>
                 <div id='profile-area'>
@@ -158,7 +163,7 @@
                         </div> <!-- end of .info-box -->
                     </div> <!-- end of info-box-container -->
                 </div><!-- end of profile-area --> 
-            <?php elseif($player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 1 || $player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 2): ?>
+<?php elseif($player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 1 || $player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 2): ?>
 					<script>
 						window.onload = function() {
 							$( "#tabs" ).tabs();
@@ -428,9 +433,9 @@
 					</div> <!-- end of #tabs -->
 				<?php include("assets/inc/admin_search.php"); ?>
 				</div><!-- end of #content -->
-                <?php else: ?>
+	<?php else: ?>
 					<div id='profile-area'>
 							<p>Restricted</p>
 					</div>
-            <?php endif; ?>
+<?php endif; ?>
 <?php include("assets/inc/footer.inc.php"); ?>

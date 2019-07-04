@@ -9,7 +9,7 @@
 
     if(isset($_POST['download-db'])){      
         try{
-            $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
+            $conn = mysqli_connect('127.0.0.1', 'root', 'KeyHole1!@', 'sports');
             //echo "Connected successfully"; 
         }
         catch(exception $e){

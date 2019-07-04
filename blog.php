@@ -13,7 +13,7 @@
                 }
             }
             try{
-                $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
+                $conn = mysqli_connect('127.0.0.1', 'root', 'KeyHole1!@', 'sports');
                 //echo "Connected successfully"; 
                 $query = "SELECT * FROM blog_posts ORDER BY id DESC;";
                 $result = mysqli_query($conn, $query);
@@ -32,9 +32,10 @@
                     echo "<div><p>Tags: {$row['tags']}</p></div>";
                     echo "<hr></p></div>";
                 } 
+                mysqli_close($conn);
             }
             catch(exception $e){
-                echo "Connection failed: " . $e->getMessage();
+                //echo "Connection failed: " . $e->getMessage();
             } 
         ?>
         </div> <!-- end of .pagination -->
@@ -59,39 +60,55 @@
 </script>
 
 <?php
+ //posting a blog"
+ if(isset($_POST['submit-post'])){
+    echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+    try{
+        $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+        if($mysqli->connect_error) {
+            exit('Error connecting to database'); 
+          }
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        $mysqli->set_charset("utf8mb4");
 
-    if(isset($_POST["submit-post"])){
-        //force page refresh, makes it so person doesn't have to reload and resend page after submitting a new post
-        echo "<meta http-equiv='refresh' content='0'>";
-        $title  = mysqli_real_escape_string($_POST["title"]);
-        $post   = mysqli_real_escape_string($_POST["post"]);
-        $tags   = mysqli_real_escape_string($_POST["tags"]);
-        $title  = nl2br(htmlentities(strip_tags(trim($_POST["title"]))));
-        $post   = nl2br(htmlentities(strip_tags(trim($_POST["post"]))));
-        $tags   = nl2br(htmlentities(strip_tags(trim($_POST["tags"]))));
-        $query = "INSERT INTO blog_posts(title, text, tags, post_date) VALUES('$title', '$post', '$tags', NOW())";
-        $result = mysqli_query($conn, $query);
+        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date) VALUES(?, ?, ?, NOW());");
+        $stmt->bind_param("sss", $_POST["title"], $_POST["post"], $_POST["tags"]);
+        $stmt->execute();
+        $stmt->close();
     }
+    catch(exception $e){
+        //echo "Connection failed: " . $e->getMessage();
+    } 
+ }
 
-
-    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
-        //check if admin, if yes, show delete button
+//deleting a blog post
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
+    try{
         if ($_SESSION['id'] == 1 || $_SESSION['id'] == 2) {
             if(isset($_GET['delete-post'])){
-                $query = "DELETE FROM blog_posts WHERE id = {$_GET['delete-post']};";
+                $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+                if($mysqli->connect_error) {
+                    exit('Error connecting to database'); 
+                  }
+                mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+                $mysqli->set_charset("utf8mb4");
+        
+                $stmt = $mysqli->prepare("DELETE FROM blog_posts WHERE id = ?");
+                $stmt->bind_param("i", $_GET['delete-post']);
                 echo "<script>";
-                echo  "if (window.confirm('Confirm Delete Post?')){";
-                        mysqli_query($conn, $query);
+                echo "var confirm = window.confirm('Confirm Delete Post?');";
+                echo "if(confirm === true){";
+                        $stmt->execute();
                 echo    "window.location.href = 'blog.php';";
                 echo "};";
-                echo   "</script>"; 
+                echo   "</script>";
+                $stmt->close();
             }
+            
         }
     }
-
-
-
-
-        
-    
+    catch(exception $e){
+        //echo "Connection failed: " . $e->getMessage();
+    } 
+ }
 ?>

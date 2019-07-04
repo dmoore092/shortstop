@@ -1,10 +1,10 @@
 <?php
     //session_start();
-    echo "<script>console.log('test')</script>";
-    $mysqli = mysqli_connect("127.0.0.1", "root", "root", "sports");
+    //echo "<script>console.log('test')</script>";
+    $mysqli = mysqli_connect("127.0.0.1", "root", "KeyHole1!@", "sports");
    //CONNECT TO DATABASE
     if(!$mysqli){
-        echo "connection error: " . mysqli_connect_error();
+        //echo "connection error: " . mysqli_connect_error();
         die();
     }
     //else{
@@ -69,6 +69,7 @@
     //SEND attributes TO DATABASE
             if(isset($_POST['submit'])){
                 //block cross-site scripting, html entities(apersand etc), trim white space
+                //rewrite this!!!!!!!!!!!!!!1
                 $firstname  = htmlentities(strip_tags(trim($_POST["firstname"])));
                 $lastname   = htmlentities(strip_tags(trim($_POST["lastname"])));
                 $email      = htmlentities(strip_tags(trim($_POST["email"])));

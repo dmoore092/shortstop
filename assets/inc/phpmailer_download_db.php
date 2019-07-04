@@ -1,19 +1,24 @@
 <?php
     //admin wants to download the Database
     //goes into profile.php
-    if(isset($_POST['download-db'])){
-                
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require_once './PHPMailer/src/Exception.php';
+    require_once './PHPMailer/src/PHPMailer.php';
+    require_once './PHPMailer/src/SMTP.php';
+
+    if(isset($_POST['download-db'])){      
         try{
-            $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
-            echo "Connected successfully"; 
+            $conn = mysqli_connect('127.0.0.1', 'root', 'KeyHole1!@', 'sports');
+            //echo "Connected successfully"; 
         }
         catch(exception $e){
-            echo "Connection failed: " . $e->getMessage();
+            //echo "Connection failed: " . $e->getMessage();
         }
         //return $conn;
         
         $email = new PHPMailer(true); 
-        $email->SMTPDebug = 2;                                 // Enable verbose debug output
+        //$email->SMTPDebug = 2;                                 // Enable verbose debug output
         $email->isSMTP();                                      // Set mailer to use SMTP
         $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $email->SMTPAuth = true;                               // Enable SMTP authentication
@@ -21,13 +26,14 @@
         $email->Password = 'Webm@ster1';                           // SMTP password
         $email->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $email->Port = 465;                                    // TCP port to connect to
-
+        $email->SMTPDebug = false;
         //Recipients
         $email->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
         $email->addAddress('kprestano@athleticprospects.com', 'Keith');     // Add a recipient
-        
-        header('Content-Type: text/csv; charset=utf-8');  
-        header('Content-Disposition: attachment; filename=apdb.csv');  
+        $email->addAddress('dmoore092@gmail.com', 'Dale'); 
+
+        //header('Content-Type: text/csv; charset=utf-8');  
+        //header('Content-Disposition: attachment; filename=apdb.csv');  
         $output = fopen("apdb.csv", "w");  
         fputcsv($output, array('id', 'username', 'name', 'gender', 'email', 'cellphone', 'homephone', 'address', 'city', 'state', 'zip',
                                 'highschool', 'weight', 'height', 'Class Of', 'sport', 'Primary Position', 'Secondary Position',
@@ -40,6 +46,7 @@
         $query .= "ref2Name, ref2Email, ref2Phone, ref3Name, ref3Email, ref3Phone, persStatement, commitment, service, persontype, college, ";
         $query .= "twitter, facebook, instagram, website, characteristics, velocity, gpareq FROM players;";  
         $result = mysqli_query($conn, $query);
+
         while($row = mysqli_fetch_assoc($result)){  
             fputcsv($output, $row);  
         }  
@@ -58,10 +65,10 @@
         
         try{
             $email->send();
-            echo 'Message has been sent';
+            //echo 'Message has been sent';
         } 
         catch (Exception $e) {
-            echo 'Message could not be sent. Mailer Error: ', $email->ErrorInfo;
+            //echo 'Message could not be sent. Mailer Error: ', $email->ErrorInfo;
         }
     } 
 ?>

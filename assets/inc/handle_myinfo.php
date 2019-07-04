@@ -7,7 +7,6 @@
         $updateArray = array();
         if(isset($_SESSION['id'])){
             $myId = $_SESSION['id'];
-            var_dump($_POST);
             $updateArray['id'] = $_SESSION['id'];
             if(isset($_POST['name'])){
                 //echo $_POST['name'];
@@ -69,7 +68,7 @@
 
             if(isset($_POST['highschool'])){
                 $updateArray['highschool'] = $playerDB->sanitize($_POST['highschool']);
-                echo $updateArray['highschool'];
+                //echo $updateArray['highschool'];
             }
 
             if(isset($_POST['weight'])){

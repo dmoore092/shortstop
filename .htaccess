@@ -2,7 +2,7 @@
 SetEnv DB sports
 SetEnv DB_SERVER 127.0.0.1
 SetEnv DB_PASSWORD root
-SetEnv DB_PASSWORD KeyHole1!@
+SetEnv DB_PASSWORD y#GbqXtBGcy!z3Cf
 SetEnv DB_USER root
 
 DirectoryIndex index.php

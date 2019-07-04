@@ -13,7 +13,7 @@
                 }
             }
             try{
-                $conn = mysqli_connect('127.0.0.1', 'root', 'KeyHole1!@', 'sports');
+                $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
                 //echo "Connected successfully"; 
                 $query = "SELECT * FROM blog_posts ORDER BY id DESC;";
                 $result = mysqli_query($conn, $query);

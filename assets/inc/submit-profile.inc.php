@@ -1,7 +1,7 @@
 <?php
     //session_start();
     //echo "<script>console.log('test')</script>";
-    $mysqli = mysqli_connect("127.0.0.1", "root", "KeyHole1!@", "sports");
+    $mysqli = mysqli_connect("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
    //CONNECT TO DATABASE
     if(!$mysqli){
         //echo "connection error: " . mysqli_connect_error();

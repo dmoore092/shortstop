@@ -1,6 +1,6 @@
 <?php 
 try{
-    $conn = mysqli_connect('127.0.0.1', 'root', 'KeyHole1!@', 'sports');
+    $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
     //echo "Connected successfully"; 
     $queryHome = "SELECT header, text FROM home_page ORDER BY id DESC LIMIT 1;";
     $queryAbout = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";

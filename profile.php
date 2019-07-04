@@ -3,6 +3,11 @@
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']);?>
 
 <?php include("assets/inc/populate_content_edit_forms.php"); ?>
+<?php //include("assets/inc/phpmailer_use_require.php"); ?>
+<?php include("assets/inc/phpmailer_download_db.php"); ?>
+<?php include("assets/inc/phpmailer_report_profile.php"); ?>
+<?php include("assets/inc/delete_profile.php"); ?>
+<?php include("assets/inc/handle_myinfo.php");?>
 
 <?php include('assets/inc/header.inc.php'); ?>   
             <div id='body-main'>
@@ -420,19 +425,11 @@
 							});
 						}
 				</script>
-				</div><!-- end of #content -->
 				<?php include("assets/inc/admin_search.php"); ?>
+				</div><!-- end of #content -->
                 <?php else: ?>
 					<div id='profile-area'>
 							<p>Restricted</p>
 					</div>
             <?php endif; ?>
 <?php include("assets/inc/footer.inc.php"); ?>
-
-<?php include("assets/inc/phpmailer_use_require.php"); ?>
-<?php include("assets/inc/phpmailer_download_db.php"); ?>
-<?php include("assets/inc/phpmailer_report_profile.php"); ?>
-
-
-<?php include("assets/inc/delete_profile.php"); ?>
-<?php include("assets/inc/handle_myinfo.php");?>

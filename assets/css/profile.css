@@ -1,12 +1,16 @@
 /*ITCSS CSS layered from general to specific */
 /*APPLIES TO profile.php*/
 /*GENERIC LAYER */
+figure img{
+    width: 100%;
+    height: 100%;
+}
 .info-box li, #reference-container li{
-        margin: 10px 0;
-        list-style-type: none;
-        /* border-bottom: 1px solid black; */
-        margin-bottom: 20px;
-    }
+    margin: 10px 0;
+    list-style-type: none;
+    /* border-bottom: 1px solid black; */
+    margin-bottom: 20px;
+}
 .attributes{
     color: #bb0a1e;
 }

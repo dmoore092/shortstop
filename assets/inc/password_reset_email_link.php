@@ -1,14 +1,13 @@
 <!-- sends a password reset link to the email of the username -->
 <?php 
     //goes into index.php
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    require './PHPMailer/src/Exception.php';
-    require './PHPMailer/src/PHPMailer.php';
-    require './PHPMailer/src/SMTP.php';
+     use PHPMailer\PHPMailer\PHPMailer;
+     use PHPMailer\PHPMailer\Exception;
+     require './PHPMailer/src/Exception.php';
+     require './PHPMailer/src/PHPMailer.php';
+     require './PHPMailer/src/SMTP.php';
 
     if(isset($_POST['reset'])){
-        echo "reset is set";
         $username = $playerDB->sanitize($_POST['username']);
         $username = strtolower($username);
         $fieldname = "email";

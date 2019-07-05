@@ -48,7 +48,7 @@
         $mysqli->set_charset("utf8mb4");
 
         $stmt = $mysqli->prepare("INSERT INTO home_page(header, text, creation_date) VALUES(?, ?, NOW());");
-        $stmt->bind_param("ss", $_POST['home-page-header'], $_POST['home-page-content']);
+        $stmt->bind_param("ss", nl2br($_POST['home-page-header']), nl2br($_POST['home-page-content']));
         $stmt->execute();
         $stmt->close();
     }

@@ -11,20 +11,7 @@
 
 <?php include('assets/inc/header.inc.php'); ?>  
 
-<!-- Load Stripe.js on your website. -->
 <script src="https://js.stripe.com/v3"></script>
-
-<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-plan_FJ7HouBZeAK4zB"
-  role="link"
->
-  Checkout
-</button>
-
-<div id="error-message"></div>
-
 <script>
   var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
@@ -53,25 +40,6 @@
     });
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- <script src="https://js.stripe.com/v3/"></script>
 <script>
@@ -431,7 +399,15 @@
 						</div> <!-- end of fragment 3 -->
 						<div id="fragment-4">
 							<form action="" method='POST'>
-							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em" 
+							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  									id="checkout-button-plan_FJ7HouBZeAK4zB"
+									  lass="btnSubmit"
+  									role="link">
+									  Pay For Webhosting
+							</button>
+
+<div id="error-message"></div>
+							<!-- <button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em" 
 												id="checkout-button-plan_FJ7HouBZeAK4zB"
 												class="btnSubmit" 
 												role="link"
@@ -439,7 +415,7 @@
 											Pay For Webhosting
 										</button>
 							</form>
-							<div id="error-message"></div>
+							<div id="error-message"></div> -->
 						</div> <!-- end of fragment 4-->
 						<div id="fragment-5">
 							<div id="edit-tabs">

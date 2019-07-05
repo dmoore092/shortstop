@@ -371,7 +371,7 @@
 							</form>
 						</div> <!-- end of fragment 3 -->
 						<div id="fragment-4">
-							<form action="" method='POST'>
+							<!-- <form action="" method='POST'> -->
 							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
   									id="checkout-button-plan_FJ7HouBZeAK4zB"
 									  lass="btnSubmit"

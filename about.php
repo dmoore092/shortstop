@@ -30,7 +30,7 @@
  if(isset($_POST['submit-about-us'])){
     echo "<meta http-equiv='refresh' content='0'>";//force page refresh
     try{
-        $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+        $mysqli = new mysqli("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
         if($mysqli->connect_error) {
             exit('Error connecting to database'); 
           }

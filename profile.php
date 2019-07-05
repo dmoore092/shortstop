@@ -13,26 +13,6 @@
 
 <script src="https://js.stripe.com/v3"></script>
 
-
-<!-- <script src="https://js.stripe.com/v3/"></script>
-<script>
-		//web hosting
-		var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
-		var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
-		function pay(){
-			stripe.redirectToCheckout({
-				items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
-				successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-				cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-			})
-			.then(function (result) {
-				if (result.error) {
-					var displayError = document.getElementById('error-message');
-					displayError.textContent = result.error.message;
-				}
-			});
-		}
-</script> -->
             <div id='body-main'>
 <?php if($player != null && $player->getPersonType() == 'player'): ?>
 				<div id='title-wrapper'>
@@ -374,30 +354,30 @@
 							<!-- <form action="" method='POST'> -->
 							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
   									id="checkout-button-plan_FJ7HouBZeAK4zB"
-									  lass="btnSubmit"
+									class="btnSubmit"
   									role="link">
-									  Pay For Webhosting
+									Pay For Webhosting
 							</button>
 							<div id="error-message"></div>
-							<script>
-								var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
+		<script>
+			var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
-								var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
-								checkoutButton.addEventListener('click', function () {
-									stripe.redirectToCheckout({
-									items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
+			var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
+			checkoutButton.addEventListener('click', function () {
+				stripe.redirectToCheckout({
+				items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
 
-									successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-									cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-									})
-									.then(function (result) {
-									if (result.error) {
-										var displayError = document.getElementById('error-message');
-										displayError.textContent = result.error.message;
-									}
-									});
-								});
-							</script>
+				successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				})
+				.then(function (result) {
+				if (result.error) {
+					var displayError = document.getElementById('error-message');
+					displayError.textContent = result.error.message;
+				}
+				});
+			});
+		</script>
 						</div> <!-- end of fragment 4-->
 						<div id="fragment-5">
 							<div id="edit-tabs">

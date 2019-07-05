@@ -378,17 +378,26 @@
   									role="link">
 									  Pay For Webhosting
 							</button>
+							<div id="error-message"></div>
+							<script>
+								var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
-<div id="error-message"></div>
-							<!-- <button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1.2em" 
-												id="checkout-button-plan_FJ7HouBZeAK4zB"
-												class="btnSubmit" 
-												role="link"
-												onclick="pay()">
-											Pay For Webhosting
-										</button>
-							</form>
-							<div id="error-message"></div> -->
+								var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
+								checkoutButton.addEventListener('click', function () {
+									stripe.redirectToCheckout({
+									items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
+
+									successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+									cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+									})
+									.then(function (result) {
+									if (result.error) {
+										var displayError = document.getElementById('error-message');
+										displayError.textContent = result.error.message;
+									}
+									});
+								});
+							</script>
 						</div> <!-- end of fragment 4-->
 						<div id="fragment-5">
 							<div id="edit-tabs">
@@ -450,32 +459,4 @@
 							<p>Restricted</p>
 					</div>
 <?php endif; ?>
-<script>
-  var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
-
-  var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
-  checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
-    stripe.redirectToCheckout({
-      items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
-
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-      cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-    })
-    .then(function (result) {
-      if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-</script>
 <?php include("assets/inc/footer.inc.php"); ?>

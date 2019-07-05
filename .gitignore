@@ -1,4 +1,4 @@
 ZPasswordList-plaintext.txt
 assets/img/userpictures
 .htaccess
-
+database/get_db_backups.sh

@@ -38,7 +38,7 @@
         $mysqli->set_charset("utf8mb4");
 
         $stmt = $mysqli->prepare("INSERT INTO about_us(header, text, creation_date) VALUES(?, ?, NOW());");
-        $stmt->bind_param("ss", $_POST['about-us-header'], $_POST['about-us-content']);
+        $stmt->bind_param("ss", nl2br($_POST['about-us-header']), nl2br($_POST['about-us-content']));
         $stmt->execute();
         $stmt->close();
     }

@@ -155,7 +155,7 @@
             $object = null;
             $query = "SELECT id, 
                             AES_DECRYPT(username,'!trN8xLnaHcA@cKu') AS username,
-                            AES_DECRYPT(`name`,'!trN8xLnaHcA@cKu') AS name,
+                            AES_DECRYPT(`name`,'!trN8xLnaHcA@cKu') AS `name`,
                             AES_DECRYPT(gender,'!trN8xLnaHcA@cKu') AS gender,
                             AES_DECRYPT(email,'!trN8xLnaHcA@cKu') AS email,
                             AES_DECRYPT(`address`,'!trN8xLnaHcA@cKu') AS `address`,
@@ -165,7 +165,7 @@
                             AES_DECRYPT(`state`,'!trN8xLnaHcA@cKu') AS `state`,
                             AES_DECRYPT(zip,'!trN8xLnaHcA@cKu') AS zip,
                             AES_DECRYPT(highschool,'!trN8xLnaHcA@cKu') AS highschool,
-                            AES_DECRYPT(`weight`,'!trN8xLnaHcA@cKu') AS weight,
+                            AES_DECRYPT(`weight`,'!trN8xLnaHcA@cKu') AS `weight`,
                             AES_DECRYPT(height,'!trN8xLnaHcA@cKu') AS height,
                             AES_DECRYPT(gradYear,'!trN8xLnaHcA@cKu') AS gradyear,
                             AES_DECRYPT(major,'!trN8xLnaHcA@cKu') AS major,

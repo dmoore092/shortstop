@@ -1,4 +1,4 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
 <?php include("classes/Player.PDO.Class.php");?>
 <?php include('assets/inc/do_login.php'); ?>
 <?php include('assets/inc/header.inc.php'); ?>
@@ -28,3 +28,4 @@
 
 <?php include('assets/inc/footer.inc.php'); ?>
 <?php include('assets/inc/password_reset_actual.php'); ?>
+

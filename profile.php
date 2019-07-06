@@ -1,6 +1,6 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
-<?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']);?>
+<?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
 <?php include("assets/inc/populate_content_edit_forms.php"); ?>
 <?php include("assets/inc/phpmailer_download_db.php"); ?>
@@ -14,7 +14,7 @@
 <script src="https://js.stripe.com/v3"></script>
 
             <div id='body-main'>
-<?php if($player != null && $player->getPersonType() == 'player'): ?>
+<?php  if($player != null && $player->getPersonType() == 'player'): ?>
 				<div id='title-wrapper'>
 
 	<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 

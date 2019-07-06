@@ -19,30 +19,30 @@
 		private $highschool;
 		private $weight;
 		private $height;
-		private $gradYear;
+		private $gradyear;
 		private $sport;
-		private $primaryPosition;
+		private $primaryposition;
 		private $secondaryposition;
-		private $travelTeam;
+		private $travelteam;
 		private $gpa;
 		private $sat;
 		private $act;
-		private $ref1Name;
-		private $ref1JobTitle;
-		private $ref1Email;
-		private $ref1Phone;
-		private $ref2Name;
-		private $ref2JobTitle;
-		private $ref2Email;
-		private $ref2Phone;
-		private $ref3Name;
-		private $ref3Jobtitle;
-		private $ref3Email;
-		private $ref3Phone;
-		private $persStatement;
+		private $ref1name;
+		private $ref1jobtitle;
+		private $ref1email;
+		private $ref1phone;
+		private $ref2name;
+		private $ref2jobtitle;
+		private $ref2email;
+		private $ref2phone;
+		private $ref3name;
+		private $ref3jobtitle;
+		private $ref3email;
+		private $ref3phone;
+		private $persstatement;
 		private $commitment;
 		private $service;
-		private $profileImage;
+		private $profileimage;
 		private $showcase1;
 		private $showcase2;
 		private $showcase3;
@@ -59,7 +59,7 @@
 		private $gpareq;
 		private $satactreq;
 		private $major;
-		private $resetExpires;
+		private $resetexpires;
 		
 		/**
 		 * getId() - returns the User's ID
@@ -169,7 +169,7 @@
 		 * getGradYear() - returns the User's GradYear
 		 */
 		public function getGradYear(){
-			return $this->gradYear;
+			return $this->gradyear;
 		}
 		
 		/**
@@ -183,21 +183,21 @@
 		 * getPrimaryPosition() - returns the User's PrimaryPosition
 		 */
 		public function getPrimaryPosition(){
-			return $this->primaryPosition;
+			return $this->primaryposition;
 		}
 
 		/**
 		 * getSecondaryPosition() - returns the User's Secondary Position
 		 */
 		public function getSecondaryPosition(){
-			return $this->secondaryPosition;
+			return $this->secondaryposition;
 		}
 
 		/**
 		 * getTravelTeam() - returns the User's Travel Team
 		 */
 		public function getTravelTeam(){
-			return $this->travelTeam;
+			return $this->travelteam;
 		}
 
 		/**
@@ -225,91 +225,91 @@
 		 * getRef1Name() - returns the User's Reference 1 Name
 		 */
 		public function getRef1Name(){
-			return $this->ref1Name;
+			return $this->ref1name;
 		}
 		
 		/**
 		 * getRef1JobTitle() - returns the User's Reference 1 Job Title
 		 */
 		public function getRef1JobTitle(){
-			return $this->ref1JobTitle;
+			return $this->ref1jobtitle;
 		}
 
 		/**
 		 * getRef1Email() - returns the User's Reference 1 Email
 		 */
 		public function getRef1Email(){
-			return $this->ref1Email;
+			return $this->ref1email;
 		}
 
 		/**
 		 * getRef1Phone() - returns the User's Reference 1 Phone
 		 */
 		public function getRef1Phone(){
-			return $this->ref1Phone;
+			return $this->ref1phone;
 		}
 
 				/**
 		 * getRef2Name() - returns the User's Reference 2 Name
 		 */
 		public function getRef2Name(){
-			return $this->ref2Name;
+			return $this->ref2name;
 		}
 		
 		/**
 		 * getRef2JobTitle() - returns the User's Reference 2 Job Title
 		 */
 		public function getRef2JobTitle(){
-			return $this->ref2JobTitle;
+			return $this->ref2jobtitle;
 		}
 
 		/**
 		 * getRef2Email() - returns the User's Reference 2 Email
 		 */
 		public function getRef2Email(){
-			return $this->ref2Email;
+			return $this->ref2email;
 		}
 
 		/**
 		 * getRef2Phone() - returns the User's Reference 2 Phone
 		 */
 		public function getRef2Phone(){
-			return $this->ref2Phone;
+			return $this->ref2phone;
 		}
 
 				/**
 		 * getRef3Name() - returns the User's Reference 3 Name
 		 */
 		public function getRef3Name(){
-			return $this->ref3Name;
+			return $this->ref3name;
 		}
 		
 		/**
 		 * getRef3JobTitle() - returns the User's Reference 3 Job Title
 		 */
 		public function getRef3JobTitle(){
-			return $this->ref3Jobtitle;
+			return $this->ref3jobtitle;
 		}
 
 		/**
 		 * getRef3Email() - returns the User's Reference 3 Email
 		 */
 		public function getRef3Email(){
-			return $this->ref3Email;
+			return $this->ref3email;
 		}
 
 		/**
 		 * getRef3Phone() - returns the User's Reference 3 Phone
 		 */
 		public function getRef3Phone(){
-			return $this->ref3Phone;
+			return $this->ref3phone;
 		}
 
 		/**
 		 * getPersStatement() - returns the User's Personal Statement
 		 */
 		public function getPersStatement(){
-			return $this->persStatement;
+			return $this->persstatement;
 		}
 
 		/**
@@ -330,7 +330,7 @@
 		 * getProfileImage() - returns the User's Profile Image
 		 */
 		public function getProfileImage(){
-			return $this->profileImage;
+			return $this->profileimage;
 		}
 
 		/**
@@ -448,7 +448,7 @@
 		 * getResetExpires() - returns when the players temporary password expires
 		 */
 		public function getResetExpires(){
-			return $this->resetExpires;
+			return $this->resetexpires;
 		}
 	}
 ?>

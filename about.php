@@ -10,10 +10,8 @@
                     $query = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";
                     $result = mysqli_query($conn, $query);
                     while($row = mysqli_fetch_assoc($result)){
-                        nl2br($row['header']);
-                        nl2br($row['text']);
-                        echo "<h2>{$row['header']}</h2>";
-                        echo "<p>{$row['text']}</p>";
+                        echo "<h2>".nl2br($row['header'])."</h2>";
+                        echo "<p>".nl2br($row['text'])."</p>";
                     }
                     mysqli_close($conn);
                 }

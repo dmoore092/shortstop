@@ -1,4 +1,4 @@
-<?php include("config/pageconfig.php"); session_start(); ini_set('display_errors', '1'); error_reporting(E_ALL); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
 
 <?php include('assets/inc/email_reset.php');?>
 <?php include('assets/inc/header.inc.php');?>

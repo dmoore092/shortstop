@@ -15,7 +15,7 @@
         $playerDB->insertResetToken($username);
         
         $result = $playerDB->getFieldByUsername($fieldname, $username);
-        var_dump($result);
+        //var_dump($result);
         $recipientAddr = $result["email"];
         $recipientName = $result["name"];
         $recipientId   = $result["id"];

@@ -10,8 +10,8 @@
                     $query = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";
                     $result = mysqli_query($conn, $query);
                     while($row = mysqli_fetch_assoc($result)){
-                        strip_tags($row['header']);
-                        strip_tags($row['text']);
+                        strip_tags(html_entity_decode($row['header']));
+                        strip_tags(html_entity_decode($row['text']));
                         echo "<h2>{$row['header']}</h2>";
                         echo "<p>{$row['text']}</p>";
                     }

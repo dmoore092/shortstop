@@ -12,8 +12,8 @@
                             $query = "SELECT header, text FROM home_page ORDER BY id DESC LIMIT 1;";
                             $result = mysqli_query($conn, $query);
                             while($row = mysqli_fetch_assoc($result)){
-                                strip_tags(html_entity_decode($row['header']));
-                                strip_tags(html_entity_decode($row['text']));
+                                strip_tags($row['header'], '<br>');
+                                strip_tags($row['text'], '<br>');
                                 echo "<h2 id='index-header'>{$row['header']}</h2>";
                                 echo "<p>{$row['text']}</p>";
                                 echo "<hr>";

@@ -59,7 +59,7 @@
 		private $gpareq;
 		private $satactreq;
 		private $major;
-		private $resetexpires;
+		private $resetExpires;
 		
 		/**
 		 * getId() - returns the User's ID
@@ -448,7 +448,7 @@
 		 * getResetExpires() - returns when the players temporary password expires
 		 */
 		public function getResetExpires(){
-			return $this->resetexpires;
+			return $this->resetExpires;
 		}
 	}
 ?>

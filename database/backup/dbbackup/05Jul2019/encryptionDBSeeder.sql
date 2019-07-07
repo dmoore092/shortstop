@@ -42,42 +42,6 @@ INSERT INTO `about_us` VALUES (1,'test','Test','2019-07-05 03:19:01'),(28,'Our M
 UNLOCK TABLES;
 
 --
--- Table structure for table `aboutinfo`
---
-
-DROP TABLE IF EXISTS `aboutinfo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `aboutinfo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `header` varchar(1000) DEFAULT NULL,
-  `p1` text,
-  `p2` text,
-  `p3` text,
-  `p4` text,
-  `p5` text,
-  `p6` text,
-  `p7` text,
-  `p8` text,
-  `p9` text,
-  `p10` text,
-  `date` datetime DEFAULT NULL,
-  `editedby` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `aboutinfo`
---
-
-LOCK TABLES `aboutinfo` WRITE;
-/*!40000 ALTER TABLE `aboutinfo` DISABLE KEYS */;
-INSERT INTO `aboutinfo` VALUES (1,'About Us','Athletic Prospects\' mission is to guide each player in bridging the gap between high school and collegiate athletics. College coaches are looking for the commitment of the player and that\'s where we come into play. ','Bi-weekly, we will help our athletes stand out in the recruiting process by guiding them in their personal communication with coaches. Through our experience, we\'ve learned one of the greatest tools to have in the recruiting process is communication. Athletic Prospects goes beyond just getting the player recognized; we get the player involved. And, with our individualized process, players will be seen as a committed and motivated player that wants to play college ball. ','We want serve our athletes the top notch recruitment experience that they deserve. Our focus is on the student-athlete\'s future. That means we\'ll work with them to find academic scholarships, athletic scholarships, and their dream school. ','Our team wants to see Athletic Prospects\' athletes grow into responsible, hardworking adults by giving them the skills they need to achieve their dreams. ','','','','','','','2019-07-04 21:53:22','dmoore092');
-/*!40000 ALTER TABLE `aboutinfo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `blog_posts`
 --
 
@@ -128,33 +92,6 @@ LOCK TABLES `home_page` WRITE;
 /*!40000 ALTER TABLE `home_page` DISABLE KEYS */;
 INSERT INTO `home_page` VALUES (1,'At Athletic Prospects','Test','2019-07-05 03:19:01'),(28,'At Athletic Prospects','We strive to provide High School and JUCO athletes the tools to successfully promote themselves to college coaches by assisting athletes through the recruiting process. Our goal is to be a mentor-leader to athletes to teach them the importance of academics and athletics while showing strong leadership characteristics to be successful on and off the field.','2019-07-05 03:20:08');
 /*!40000 ALTER TABLE `home_page` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `homeinfo`
---
-
-DROP TABLE IF EXISTS `homeinfo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `homeinfo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `header` varchar(1000) NOT NULL DEFAULT 'At Athletic Prospects',
-  `content` varchar(10000) NOT NULL DEFAULT 'We strive to provide High School and JUCO athletes the tools to successfully promote themselves to college coaches by assisting athletes through the recruiting process. Our goal is to be a mentor-leader to athletes to teach them the importance of academics and athletics while showing strong leadership characteristics to be successful on and off the field. ',
-  `date` datetime DEFAULT NULL,
-  `editedby` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `homeinfo`
---
-
-LOCK TABLES `homeinfo` WRITE;
-/*!40000 ALTER TABLE `homeinfo` DISABLE KEYS */;
-INSERT INTO `homeinfo` VALUES (1,'At Athletic Prospects','We strive to provide High School and JUCO athletes the tools to successfully promote themselves to college coaches by assisting athletes through the recruiting process. Our goal is to be a mentor-leader to athletes to teach them the importance of academics and athletics while showing strong leadership characteristics to be successful on and off the field. ','2019-07-04 21:53:22','dmoore092');
-/*!40000 ALTER TABLE `homeinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

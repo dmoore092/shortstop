@@ -90,7 +90,7 @@
             //$data = array();
             $data = "";
             try{
-                $query = "SELECT id, AES_ENCRYPT($fieldname, '!trN8xLnaHcA@cKu'), AES_ENCRYPT(name, '!trN8xLnaHcA@cKu') FROM players WHERE username = AES_DECRYPT(:username, '!trN8xLnaHcA@cKu')";
+                $query = "SELECT id, AES_DECRYPT($fieldname, '!trN8xLnaHcA@cKu') AS $fieldname, AES_DECRYPT(name, '!trN8xLnaHcA@cKu') AS `name`, `reset` FROM players WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu')";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":username", $username);
@@ -110,6 +110,7 @@
          * creates a random string and puts in into db, along with a timestamp
          */
         function insertResetToken($username){
+            var_dump($username);
             $string = '';
             $characters = "23456789ABCDEFHJKLMNPRTVWXYZabcdefghijklmnopqrstuvwxyz";
             for ($p = 0; $p < 20; $p++) {
@@ -118,8 +119,8 @@
 
             try{
                 //$deleteToken = "DELETE FROM players WHERE resetExpires < NOW()";
-                $insertToken = "UPDATE players SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND username = AES_DECRYPT('$username', '!trN8xLnaHcA@cKu');
-                                UPDATE players SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE username = AES_DECRYPT('$username', '!trN8xLnaHcA@cKu');";
+                $insertToken = "UPDATE players SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');
+                                UPDATE players SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');";
                 $stmt = $this->dbConn->prepare($insertToken);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":reset", $string);

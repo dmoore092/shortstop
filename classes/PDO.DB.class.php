@@ -110,7 +110,7 @@
          * creates a random string and puts in into db, along with a timestamp
          */
         function insertResetToken($username){
-            var_dump($username);
+            //var_dump($username);
             $string = '';
             $characters = "23456789ABCDEFHJKLMNPRTVWXYZabcdefghijklmnopqrstuvwxyz";
             for ($p = 0; $p < 20; $p++) {

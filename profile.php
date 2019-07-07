@@ -417,10 +417,10 @@
 										<input type='text'
 											id = 'home-page-header'
 											name = 'home-page-header'
-											value='<?php echo $_SESSION['aboutUsText'] ?>'
+											value='<?php echo $_SESSION['homePageHeader'] ?>'
 											size = '20'
 											maxlength = '50'
-											placeholder = 'Header'/>
+											placeholder = 'Header' />
 										<textarea name='home-page-content' form='edit-home-page-form' id='home-page-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['homePageText'] ?></textarea>
 										<input type='submit'
 											value='Submit "Home Page" Section'

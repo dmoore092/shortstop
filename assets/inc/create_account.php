@@ -33,7 +33,6 @@
                     else{
                         echo "<p style='color:red';>Username is taken, please choose another</p>";
                     }
-                    
                 }
                 else{
                     echo "Passwords do not match";

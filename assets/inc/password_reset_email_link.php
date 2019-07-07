@@ -13,8 +13,9 @@
         $fieldname = "email";
         // $data = $playerDB->getPlayersByFindAthleteSearch($query);
         $playerDB->insertResetToken($username);
+        
         $result = $playerDB->getFieldByUsername($fieldname, $username);
-
+        var_dump($result);
         $recipientAddr = $result["email"];
         $recipientName = $result["name"];
         $recipientId   = $result["id"];
@@ -23,7 +24,7 @@
         $email = new PHPMailer(true); 
         $email->SMTPDebug = 2;                                 // Enable verbose debug output
         $email->isSMTP();                                      // Set mailer to use SMTP
-        header('Content-Type: text/csv; charset=utf-8');
+        //header('Content-Type: text/csv; charset=utf-8');
         $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $email->SMTPAuth = true;                               // Enable SMTP authentication
         $email->Username = 'athleticprospects1@gmail.com';                 // SMTP username

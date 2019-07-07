@@ -1,30 +1,22 @@
-/*APPLIES TO login.php and register.php*/
 
-
-/*login.php part*/
 #player-form{
-    width: 60%;
-    padding: 60px;
-   /* border: 2px solid black; */
-    border-radius: 5px;   
+    max-width: 500px;
+    margin: auto;
 }
-#username, .password{ /*login.php*/
-    height: 30px;
-    border-radius: 5px;
-    font-size: 1.4em;
-    margin: 15px 0px;
-    padding-left: 7px;
-    width: 110%;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-#player-form>h2{
+#player-form h2{
     text-align: center;
+    margin-bottom: 10px;
+}
+#player-form input, #player-form button{
+    margin-bottom: 10px;
+}
+#username, .password{
+    display: block;
+    height: 30px;
+    width: 100%;
+    border-radius: 0;
 }
 #btn-login, #btn-create-account, #btn-reset, #btn-reset-password{
-    margin-bottom: 10px;
-    width: 115%;
     background-color: #bb0a1e;
     color: white;
     -webkit-appearance: none;
@@ -32,38 +24,21 @@
     appearance: none;
     -webkit-border-radius:0; 
     border-radius:0;
+    width: 100%;
 }
-#btn-recover{
-    height: 30px;
-}
-#persontype{
-    width: 115%;
-    font-size: 1.25em;
-    margin-bottom: 15px;
+
+.g-recaptcha{
+    transform:scale(0.88); 
+    -webkit-transform:scale(0.88); 
+    transform-origin:0 0; 
+    -webkit-transform-origin:0 0;
 }
 @media only screen and (min-width: 520px) {
     #player-form{
-        max-width: 35%;
-        margin: auto;
+        max-width: 300px;
     }
-    #btn-login, #btn-create-account, #btn-reset{
-        margin-bottom: 10px;
-        width: 85%;
-        background-color: #bb0a1e;
-        color: white;
-    }
-    #btn-login:hover, #btn-create-account:hover{
-        margin-bottom: 10px;
-        width: 85%;
-        background-color: #be1f1f;
-        color: white;
-    }
-    #persontype{
-        width: 85%;
-        font-size: 1.25em;
-        margin-bottom: 15px;
-    }
-    #username, .password{
-        width: 290px;
+    .g-recaptcha{
+        transform:scale(1); 
+        -webkit-transform:scale(1); 
     }
 }

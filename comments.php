@@ -122,8 +122,8 @@ $templinkpath = "http://localhost:8888/Web%20and%20Mobile%202/individualfinal/We
                 echo "</div>";
             //check if there is any feedback, display it to the screen
             if(!empty($feedback)){
-                echo $feedback;
-                echo $msg;
+                //echo $feedback;
+                //echo $msg;
             }
             //SEND COMMENT TO DATABASE
             if(isset($_POST["btnsubmit"])){

@@ -1,8 +1,7 @@
-
 *{
     margin: 0;
     padding: 0;
-    
+    box-sizing: border-box;
 }
 html,body
 {
@@ -41,15 +40,21 @@ hr{
 #body-main{
     background-color: white;
     padding: 15px;
-    width: 93%;
+    width: 100%;
     margin: auto;
     margin-bottom: 20px;
     height: 100%;
 }
+#center-area{
+    width: 100%;
+    margin: auto;
+}
 #center-area img{
+    display: block;
     width: 100%;
     height: 100%;
     margin-bottom: 15px;
+    margin: auto;
 }
 .img-container{
     position: relative;
@@ -159,21 +164,25 @@ hr{
 
 /*COMPONENTS LAYER CSS ID's and Classes*/
     
-#logo, img{
+#logo-img{
     max-width: 100%;
     max-height: 100%;
 }
+
 section, article{
     margin-bottom: 10px;
 }
+
 #sm-footer{
-    width: 30%;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
 }
 .fa{
-    /* border: 2px solid black; */
-    padding: 11px;
-    font-size: 20px;
-    width: 20px;
+    
+    width: 50px;
+    padding-top: 15px;
+    height: 45px;
     text-align: center;
     text-decoration: none;
     border-radius: 3px;
@@ -196,6 +205,9 @@ section, article{
     background: #8081ce;
     color: white;
 }
+#index-header{
+    margin-bottom: 10px;
+}
 @media only screen and (min-width: 520px) {
     .navicon {display: none;}
     #body-main, #big-login>ul, #search-container, .nav>ul{
@@ -206,19 +218,22 @@ section, article{
     .social-media{
         width: 1000px;
         margin: auto;
-        /* border: 2px solid black; */
     }
     #followUS{
         color: white;
         margin-left: 15px;
     }
+    #sm-footer{
+        justify-content: start;
+    }
+    #follow{
+        width: 250px;
+    }
     .fa{
-        padding: 11px;
-        font-size: 30px;
-        width: 30px;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 3px;
+
+        width: 50px;
+        padding-top: 12px;
+        height: 40px;
     }
     .fa-facebook{
         background: #3b5998;
@@ -288,12 +303,8 @@ section, article{
     .nav a:hover{
         background-color: #bb0a1e;
     }
-    #center-area{
-        display: flex;
-        justify-content: space-between;
-    }
-    #center-area img{
-        width: 95%;;
+    #content p, #content hr{
+        width: 95%;
     }
     .img-container{
         position: relative;
@@ -310,7 +321,7 @@ section, article{
         top: 75%;
         left: 2%;
     }
-    section, #center-area{
+    section{
         width: 70%;
         margin: auto;
     }
@@ -339,6 +350,13 @@ section, article{
         position: relative;
         bottom: 35px;
     }
+    #center-area{
+        width: 70%;
+    }
+    #center-area img{
+        width: 95%;
+        margin-left: 0;
+    }
 
 } /* END OF min-width 520px @media */
 @media only screen and (min-width: 790px) {
@@ -355,31 +373,38 @@ section, article{
         padding-right: 10px; /* This creates some space between the element and the border. */
         border-right: 1px solid #bbb; /* This creates the border. Replace black with whatever color you want. */
     }
+    
 }/* END OF min-width 790px @media */
 
 @media only screen and (min-width: 1000px) {
-
-    #center-area{
-        display:block;
-        justify-content: space-evenly;
-        width: 100%;
-        margin-left: 0;
-    }
     #content{
         display: flex;
         flex-wrap: wrap;
-        width: 75%;
+        width: 100%;
+    }
+    #content h2, #content p, #content hr{
+        width: 80%;
+        margin: auto;
+    }
+    #center-area{
+        width: 80%;
+    }
+    #center-area img{
+        width: 100%;
+        margin-left: 0;
     }
     #logo{
         margin-left: auto;
         margin-right: auto;
         width: 60%;
     }
+    #logo-img{
+        display: block;
+        margin: auto;
+    }
     section, article{
         width: 100%;
         margin: 15px 0px;
-        
-
     }
     aside{
         float: right;
@@ -390,17 +415,6 @@ section, article{
     }
     footer{
         clear: both;
-    }
-    #center-area, #content{
-        padding-left: 10%;
-    }
-    #center-area{
-        display: flex;
-        justify-content: space-between;
-        max-width: 80%;
-    }
-    #center-area img{
-        width: 95%;;
     }
     .img-container{
         position: relative;

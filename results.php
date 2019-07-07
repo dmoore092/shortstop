@@ -1,12 +1,9 @@
-<?php $relpath= ""; $title="Search Results"; $page="mfathletes";
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include_once ("classes/Player.PDO.Class.php"); ?>
+<?php include("assets/inc/header.inc.php");
 
-    include_once ("classes/Player.PDO.Class.php");
-    include("assets/inc/header.inc.php");
-
-    //$playerDB = new PlayerDB();
+    //search results from top of vagivation
     $data=$_GET;
-    //$data = $playerDB->getPlayersByGender('male');
-    //var_dump($data);
     echo $playerDB->getPlayersFromSearch($data);
 
     include("assets/inc/footer.inc.php");

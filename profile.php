@@ -1,519 +1,442 @@
-<?php 
-        error_reporting(0);
-        session_start();
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
+<?php include_once ("classes/Player.PDO.Class.php"); ?>
+<?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']);?>
 
-        use PHPMailer\PHPMailer\PHPMailer;
-        use PHPMailer\PHPMailer\Exception;
+<?php include("assets/inc/populate_content_edit_forms.php"); ?>
+<?php include("assets/inc/phpmailer_download_db.php"); ?>
+<?php include("assets/inc/phpmailer_report_profile.php"); ?>
 
-        require './PHPMailer/src/Exception.php';
-        require './PHPMailer/src/PHPMailer.php';
-        require './PHPMailer/src/SMTP.php';
+<?php include("assets/inc/delete_profile.php"); ?>
+<?php include("assets/inc/handle_myinfo.php");?>
 
-        $title="Profile"; $page="profile";
-        include_once ("classes/Player.PDO.Class.php");
+<?php include('assets/inc/header.inc.php'); ?>  
 
-        $playerDB = new PlayerDB();     
+<script src="https://js.stripe.com/v3"></script>
 
-        include ("assets/inc/header.inc.php");
-        
-        $id=$_GET['id'];
-        if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
-            //echo "logged in set";
-            if ($_SESSION['id'] == $_GET['id']) {  
-                echo $playerDB->getMyInfo($id);
-                echo "<script>
-                        function doubleCheck(e){
-                            if(!confirm('are you sure?')) e.preventDefault();
-                        }
-                    </script>";
-                echo "<script>document.getElementById('edit-img').style.display='inline-block'</script>";
-            }
-            else{
-                //echo "logged in, but username should be passed through from mathelete/fathelete";
-                echo $playerDB->getMyInfo($id);
-            } 
-        }
-        else {
-            //echo "not logged in, username should be passed through";
-            //$id = $_GET["id"];
-            
-            //shows the profile
-            echo $playerDB->getMyInfo($id);
-        //     echo "<h2 id='nologin'>You must be logged in to see your info</h2>";
-        //     echo "<a href='login.php' class='redirect-link'>Login</a>'";
-        //     header("Location: login.php");
-        }
+            <div id='body-main'>
+<?php if($player != null && $player->getPersonType() == 'player'): ?>
+				<div id='title-wrapper'>
 
+	<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 
+                    <a href='myinfo.php'>Edit My Profile</a>
+    <?php endif; ?>
+                <h2 id='name'><?php echo $player->getName() ?></h2>
+					<h3 id='hs'><?php echo $player->getHighschool() ?></h3>
+				</div>
+				<hr/>
+				<div id='profile-area'>
+				<figure>
+					<img src='assets/img/userpictures/<?php echo $player->getProfileImage() ?>' alt='player picture' id='player-pic'>
+					<form method='post' action='' onsubmit="alert('Profile Reported.');">
+						<input type='text' name='playerid' value='<?php echo $player->getId()?>' id='hide'>
+    					<input type='submit' name='report' value='Report this profile...'> 
+					</form>
+				</figure>
+				<div id='info-box-container'>
+				<div class='info-box' id='info-box-underline'>
+					<h3>Player Info</h3>
+						<ul>
+							<li><span class='attributes'>Email:</span> <a href='mailto: <?php $player->getEmail() ?>'><?php echo $player->getEmail() ?></a></li>
+							<li><span class='attributes'>City:</span> <?php echo $player->getCity() ?></li>
+							<li><span class='attributes'>State:</span> <?php echo $player->getState() ?></li>
+							<li><span class='attributes'>Zip:</span> <?php echo $player->getZip() ?></li>
+							<li><span class='attributes'>School:</span> <?php echo $player->getHighschool() ?></li>
+							<li><span class='attributes'>Graduation Year:</span> <?php echo $player->getGradYear() ?></li>
+							<li><span class='attributes'>GPA:</span> <?php echo $player->getGpa() ?></li>
+							<li><span class='attributes'>SAT:</span> <?php echo $player->getSat() ?></li>
+							<li><span class='attributes'>ACT:</span> <?php echo $player->getAct() ?></li>
+							<li><span class='attributes'>Intended Major:</span> <?php echo $player->getMajor() ?></li>
+						</ul>
+					</div><!-- end of .info-box -->
+				<div class='info-box'>
+					<h3>Sport Info</h3>
+						<ul>
+							<li><span class='attributes'>Sport:</span> <?php echo $player->getSport() ?></li>
+							<li><span class='attributes'>Primary Position:</span> <?php echo $player->getPrimaryPosition() ?></li>
+							<li><span class='attributes''>Secondary Position:</span> <?php echo $player->getSecondaryPosition() ?></li>
+							<li><span class='attributes'>Travel Team:</span> <?php echo $player->getTravelTeam() ?></li>
+							<li><span class='attributes'>Height:</span> <?php echo $player->getHeight() ?></li>
+							<li><span class='attributes'>Weight:</span> <?php echo $player->getWeight() ?></li>
+						</ul>
+					</div> <!-- end of .info-box -->
+				</div> <!-- end of info-box-container -->
+				</div><!-- end of profile-area --> 
+				<p id='com-prompt'>When you become committed to a college, please send us an email at <a href='kprestano@athleticprospects.com'>kprestano@athleticprospects.com</a></p>
+				<hr/>
+<?php if ($player->getShowcase1() != null || $player->getShowcase2() != null || $player->getShowcase3() != null){ ?>
+				<h3>Videos</h3>	
+				<div id='videos'>	
+	<?php if($player->getShowcase1() != null){ ?>
+					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase1() ?>'></iframe>
+	<?php  } if($player->getShowcase2() != null){ ?>
+					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase2() ?>'></iframe>
+	<?php  } if($player->getShowcase3() != null){ ?>
+					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase3() ?>'></iframe>
+	<?php  } ?>
+				</div>
+<?php  } ?>
+				<h3>References</h3>
+					<div id='reference-container'>
+					<div class='references'>
+					<ul>
+						<li><span class='attributes'>Name:</span> <?php echo $player->getRef1Name() ?></li>
+						<li><span class='attributes'>Job Title:</span> <?php echo $player->getRef1JobTitle() ?></li>
+						<li><span class='attributes'>Email:</span> <a href='mailto:<?php echo $player->getRef1Email() ?>'><?php echo $player->getRef1Email() ?></a></li>
+						<li><span class='attributes'>Phone:</span> <?php echo $player->getRef1Phone() ?></li>
+					</ul>
+				</div>
+				<div class='references'>
+					<ul>
+						<li><span class='attributes'>Name:</span> <?php echo $player->getRef2Name() ?></li>
+						<li><span class='attributes'>Job Title:</span> <?php echo $player->getRef2JobTitle() ?></li>
+						<li><span class='attributes'>Email:</span> <a href='mailto:<?php echo $player->getRef2Email() ?>'><?php echo $player->getRef2Email() ?></a></li>
+						<li><span class='attributes'>Phone:</span> <?php echo $player->getRef2Phone() ?></li>
+					</ul>
+				</div>
+				<div class='references'>
+						<ul>
+							<li><span class='attributes'>Name:</span> <?php echo $player->getRef3Name() ?></li>
+							<li><span class='attributes'>Job Title:</span> <?php echo $player->getRef3Jobtitle() ?></li>
+							<li><span class='attributes'>Email:</span> <a href='mailto:<?php echo $player->getRef3Email() ?>'><?php echo $player->getRef3Email() ?></a></li>
+							<li><span class='attributes'>Phone:</span> <?php echo $player->getRef3Phone() ?></li>
+						</ul>
+					</div>
+				</div> <!--end of #references-container -->
+				<hr/>
+				<div id='personal-statement'>
+					<h3>Personal Statement</h3>
+					<p><?php echo $player->getPersStatement() ?></p>
+				</div>
+<?php elseif($player != null && $player->getPersonType() == 'coach'): ?>
+                <h2><a href='myinfo.php'><img src='assets/img/edit2.png'/ id='edit-img'></a> {$player->getName()} <span id='collegeh2'>{$player->getCollege()}</span></h2>
+                <hr/>
+                <div id='profile-area'>
+                        <figure>
+                            <img src='assets/img/userpictures/{$player->getProfileImage()}' alt='player picture' id='player-pic'>
+                            <form method='post' action=''>
+                                <input type='text' name='playerid' value='{$player->getId()}' id='hide'>
+                                <input type='submit' name='report' value='Report this profile...'> 
+                            </form>
+                        </figure>
+                    <div id='info-box-container'>
+                        <div class='info-box' id='border-right'>
+                            <h3>Coach Info</h3>
+                            <ul>
+                                <li><span class='attributes'>Sport:</span> {$player->getSport()}</li>
+                                <li><span class='attributes'>Email:</span> <a href='{$player->getEmail()}'>{$player->getEmail()}</a></li>
+                                <li><span class='attributes'>Cell Phone:</span> {$player->getCellPhone()}</li>
+                                <li><span class='attributes'>Home Phone:</span> {$player->getHomePhone()}</li>
+                                <li><span class='attributes'>Address:</span> {$player->getAddress()}</li>
+                                <li><span class='attributes'>City:</span> {$player->getCity()}</li>
+                                <li><span class='attributes'>State:</span> {$player->getState()}</li>
+                                <li><span class='attributes'>Zip:</span> {$player->getZip()}</li>
+                                <li><span class='attributes'>Twitter:</span> {$player->getTwitter()}</li>
+                                <li><span class='attributes'>Instagram:</span> {$player->getInstagram()}</li>
+                                <li><span class='attributes'>Facebook:</span> {$player->getFacebook()}</li>
+                                <li><span class='attributes'>Sport Website:</span> <a href='http://{$player->getwebsite()}' target='_blank'>http://{$player->getwebsite()}</a></li>
+                            </ul>
+                        </div><!-- end of .info-box -->
+                        <div class='info-box'>
+                            <h3>Type of athlete ourprogram is looking for</h3>
+                            <ul>
+                                <li><span class='attributes'>Characteristics:</span> {$player->getCharacteristics()}</li>
+                                <li><span class='attributes''>Velocity:</span> {$player->getVelocity()}</li>
+                                <li><span class='attributes'>GPA Requirement:</span> {$player->getGpaReq()}</li>
+                                <li><span class='attributes'>SAT/ACT Scores:</span> {$player->getSatAct()}</li>
+                            </ul>
+                        </div> <!-- end of .info-box -->
+                    </div> <!-- end of info-box-container -->
+                </div><!-- end of profile-area --> 
+<?php elseif($player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 1 || $player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 2): ?>
+					<script>
+						window.onload = function() {
+							$( "#tabs" ).tabs();
+							$( "#edit-tabs" ).tabs();
+						}
+					</script>
+					
+					<div id='content'>
+					<h2>Administration Panel</h2>
+					<div id="tabs">
+						<ul>
+							<li><a href="#fragment-1" class="tab-headers">Post A Blog</a></li>
+							<li><a href="#fragment-5" class="tab-headers">Edit Site Content</a></li>
+							<li><a href="#fragment-2" class="tab-headers">Delete Profiles</a></li>
+							<li><a href="#fragment-3" class="tab-headers">Download Database</a></li>
+							<li><a href="#fragment-4" class="tab-headers">Pay For Webhosting</a></li>
+						</ul>
+						<div id="fragment-1">
+							<h3>Blog Post</h3>
+							<form	id='blog-form'
+									class='admin-panel'
+									method = 'POST'
+									action= 'blog.php'
+									onsubmit = '' 
+									enctype='multipart/form-data' >
+							<input type='text'
+									id = 'title'
+									name = 'title'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Title'
+									value=''
+									onclick='' />
+							<input type='text'
+									id = 'tags'
+									name = 'tags'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Tags'
+									value=''
+									onclick='' />
+							<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
+							<input type='submit'
+									value='Submit Post'
+									name = 'submit-post'
+									class='btnSubmit'
+									id='btn-post'/>
+							</form>
+						</div> <!-- fragment 1 -->
+						<div id="fragment-2">
+							<h3>Search for Player</h3>
+							<div id='form-wrapper'>
+								<form   id='player-form'
+										class='admin-panel'
+										method = 'POST'
+										action= ''
+										onsubmit = '' 
+										enctype='multipart/form-data' >
+									<input type='text'
+											id = 'name'
+											name = 'name'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Full Name'
+											value=''
+											onclick='' />
+									<select name='sport'>
+										<option value=' ' selected disabled>Select Sport:</option>
+										<option value='football'>Football</option>
+										<option value='basketball'>Basketball</option>
+										<option value='baseball'>Baseball</option>
+										<option value='softball'>Softball</option>
+										<option value='hockey'>Hockey</option>
+										<option value='fieldhockey'>Field Hockey</option>
+										<option value='lacrosse'>Lacrosse</option>
+										<option value='soccer'>Soccer</option>
+										<option value='trackandField'>Track and Field</option>
+										<option value='volleyball'>Volleyball</option>
+										<option value='wrestling'>Wrestling</option>
+										<option value='tennis'>Tennis</option>
+										<option value='swimming'>Swimming</option>
+										<option value='golf'>Golf</option>
+										<option value='gymnastics'>Gymnastics</option>
+										<option value='cheerleading'>Cheerleading</option>
+										<option value='esports'>Esports</option>
+									</select>
+									<select name='state'>
+										<option value=' ' selected disabled>Select State:</option>
+										<option value='New York'>New York</option>
+										<option value='Alabama'>Alabama</option>
+										<option value='Alaska'>Alaska</option>
+										<option value='Arizona'>Arizona</option>
+										<option value='rkansas'>Arkansas</option>
+										<option value='California'>California</option>
+										<option value='Colorado'>Colorado</option>
+										<option value='Connecticut'>Connecticut</option>
+										<option value='Delaware'>Delaware</option>
+										<option value='District of columbia'>District Of Columbia</option>
+										<option value='Florida'>Florida</option>
+										<option value='Georgia'>Georgia</option>
+										<option value='Hawaii'>Hawaii</option>
+										<option value='Idaho'>Idaho</option>
+										<option value='Illinois'>Illinois</option>
+										<option value='Indiana'>Indiana</option>
+										<option value='Iowa'>Iowa</option>
+										<option value='Kansas'>Kansas</option>
+										<option value='Kentucky'>Kentucky</option>
+										<option value='Louisiana'>Louisiana</option>
+										<option value='Maine'>Maine</option>
+										<option value='Maryland'>Maryland</option>
+										<option value='Massachusetts'>Massachusetts</option>
+										<option value='Michigan'>Michigan</option>
+										<option value='Minnesota'>Minnesota</option>
+										<option value='Mississippi'>Mississippi</option>
+										<option value='Missouri'>Missouri</option>
+										<option value='Montana'>Montana</option>
+										<option value='Nebraska'>Nebraska</option>
+										<option value='Nevada'>Nevada</option>
+										<option value='New Hampshire'>New Hampshire</option>
+										<option value='New Jersey'>New Jersey</option>
+										<option value='New Mexico'>New Mexico</option>
+										<option value='New York'>New York</option>
+										<option value='North Carolina'>North Carolina</option>
+										<option value='North Dakota'>North Dakota</option>
+										<option value='Ohio'>Ohio</option>
+										<option value='Oklahoma'>Oklahoma</option>
+										<option value='Oregon'>Oregon</option>
+										<option value='Pennsylvania'>Pennsylvania</option>
+										<option value='Rhode Island'>Rhode Island</option>
+										<option value='South Carolina'>South Carolina</option>
+										<option value='South Dakota'>South Dakota</option>
+										<option value='Tennessee'>Tennessee</option>
+										<option value='Texas'>Texas</option>
+										<option value='Utah'>Utah</option>
+										<option value='Vermont'>Vermont</option>
+										<option value='Virginia'>Virginia</option>
+										<option value='Washington'>Washington</option>
+										<option value='West Virginia'>West Virginia</option>
+										<option value='Wisconsin'>Wisconsin</option>
+										<option value='Wyoming'>Wyoming</option>			
+									</select>
+									<select name='class'>
+									<option value=' ' selected disabled>Class of:</option>
+										<option value='2024'>2024</option>
+										<option value='2023'>2023</option>
+										<option value='2022'>2022</option>
+										<option value='2021'>2021</option>
+										<option value='2022'>2020</option>
+										<option value='2019'>2019</option>
+										<option value='2018'>2018</option>
+										<option value='2017'>2017</option>
+										<option value='2016'>2016</option>
+										<option value='2015'>2015</option>
+										<option value='2014'>2014</option>
+										<option value='2013'>2013</option>
+										<option value='2012'>2012</option>
+										<option value='2011'>2011</option>
+										<option value='2010'>2010</option>
+									</select>
+									<input type='text'
+											id = 'position'
+											name = 'position'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Position'
+											value=''
+											onclick='' />
+						
+									<input type='text'
+											id = 'school'
+											name = 'school'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'School'
+											value=''
+											onclick='' />                    
+									<select name='gpa'>
+										<option value=' ' selected disabled>Select GPA:</option>
+										<option value='4.5'>Greater than 4.5</option>
+										<option value='4.0'>Greater than 4.0</option>
+										<option value='3.5'>Greater than 3.5</option>
+										<option value='3.0'>Greater than 3.0</option>
+										<option value='2.5'>Greater than 2.5</option>
+										<option value='2.0'>Greater than 2.0</option>
+									</select>
+									<input type='submit'
+										value='Search'
+										name = 'admin-search'
+										class='btnSubmit'
+										id='btn-Submit'/>
+								</form>
+								</div> <!-- end of form-wrapper -->
+						</div> <!-- end of fragment 2 -->
+						<div id="fragment-3" >
+							<form action="" method='POST'>
+							<input type='submit'
+										value='Download Database'
+										name = 'download-db'
+										class='btnSubmit'
+										id=''/>
+							</form>
+						</div> <!-- end of fragment 3 -->
+						<div id="fragment-4">
+							<!-- <form action="" method='POST'> -->
+							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  									id="checkout-button-plan_FJ7HouBZeAK4zB"
+									class="btnSubmit"
+  									role="link">
+									Pay For Webhosting
+							</button>
+							<div id="error-message"></div>
+		<script>
+			var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
-        if(isset($_POST['admin-search'])){
-            $name       = $playerDB->sanitize($_POST['name']);
-            $sport      = $_POST['sport'];
-            $sport2      = $_POST['sport2'];
-            $state      = $_POST['state'];
-            $class      = $_POST['class'];
-            $position   = $playerDB->sanitize($_POST['position']);
-            $school     = $playerDB->sanitize($_POST['school']);
-            $gpa        = $_POST['gpa'];
-            
-            $arr = array();
-            if($name != "") $arr[] = "name LIKE '%{$name}%'";
-            if($sport != "") $arr[] = "sport = '{$sport}'";
-            if($sport2 != "") $arr[] = "sport2 = '{$sport2}'";
-            if($state != "") $arr[] = "state = '{$state}'";
-            if($class != "") $arr[] = "gradyear = '{$class}'";
-            if($position != "") $arr[] = "primaryposition LIKE '%{$position}%'";
-            if($school != "") $arr[] = "highschool LIKE '%{$school}%'";
-            if($gpa != "") $arr[] = "gpa >= '{$gpa}'";
+			var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
+			checkoutButton.addEventListener('click', function () {
+				stripe.redirectToCheckout({
+				items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
 
-            if($name == "" && $sport == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
-                $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE persontype = 'player' OR persontype = 'coach';";
-            }
-            else{
-                $query = "SELECT id, name, sport, sport2, email, persontype FROM players WHERE ";
-                $query .= implode(" AND ", $arr);
-                $query .= " AND persontype = 'player' OR persontype = 'coach';";
-            }
-            //$data = $playerDB->searchPlayers($srch);
-            $data = $playerDB->getPlayersByFindAthleteSearch($query);
-            //header("Location: results.php?".http_build_query($data));
-            echo $playerDB->getPlayersAsTableasAdmin($data);
-            //var_dump($data);
-            echo $playerDB->getPlayersWhileAdminMobile($data);
-        }
-
-
-        if(isset($_POST['download-db'])){
-            
-            try{
-                $conn = mysqli_connect('127.0.0.1', 'root', 'root', 'sports');
-                 echo "Connected successfully"; 
-            }
-            catch(exception $e){
-                echo "Connection failed: " . $e->getMessage();
-            }
-            //return $conn;
-            
-            $email = new PHPMailer(true); 
-            $email->SMTPDebug = 2;                                 // Enable verbose debug output
-            $email->isSMTP();                                      // Set mailer to use SMTP
-            $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-            $email->SMTPAuth = true;                               // Enable SMTP authentication
-            $email->Username = 'dmoore092@gmail.com';                 // SMTP username
-            $email->Password = 'Google@ccess2';                           // SMTP password
-            $email->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-            $email->Port = 465;                                    // TCP port to connect to
-        
-            //Recipients
-            $email->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
-            $email->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient
-            
-            header('Content-Type: text/csv; charset=utf-8');  
-            header('Content-Disposition: attachment; filename=apdb.csv');  
-            $output = fopen("apdb.csv", "w");  
-            fputcsv($output, array('id', 'username', 'name', 'gender', 'email', 'cellphone', 'homephone', 'address', 'city', 'state', 'zip',
-                                    'highschool', 'weight', 'height', 'Class Of', 'sport', 'sport2', 'Primary Position', 'Secondary Position',
-                                'Travel Team', 'gpa', 'sat', 'act', 'Major', 'Ref1 Name', 'Ref1 Email', 'Ref1 Phone', 'Ref2 Name', 'Ref2 Email', 'Ref2 Phone', 
-                                'Ref3 Name', 'Ref3 Email', 'Ref3 Phone', 'Personal Statement', 'Commitment', 'Service', 'Role', 'College', 'twitter',
-                                'Facebook','Instagram', 'Website', 'Desired Characteristics', 'Velocty', 'Gpa Req'));  
-            
-            $query = "SELECT id, username, name, gender, email, cellphone, homephone, address, city, state, zip, highschool, weight, height, gradYear, ";
-            $query .= "sport, sport2, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, major, ref1Name, ref1Email, ref1Phone, ";
-            $query .= "ref2Name, ref2Email, ref2Phone, ref3Name, ref3Email, ref3Phone, persStatement, commitment, service, persontype, college, ";
-            $query .= "twitter, facebook, instagram, website, characteristics, velocity, gpareq FROM players;";  
-            $result = mysqli_query($conn, $query);
-            while($row = mysqli_fetch_assoc($result)){  
-                fputcsv($output, $row);  
-            }  
-            
-            fclose($output);
-            MYSQLI_CLOSE($conn);
-            //Attachments
-            //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-            $email->addAttachment('apdb.csv');    // Optional name
-        
-            //Content
-            $email->isHTML(true);                                  // Set email format to HTML
-            $email->Subject = 'Database Export';
-            $email->Body    = "Here is the current DB. Some fields like passwords, and links to images are omitted";
-            //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-            
-            try{
-                $email->send();
-                echo 'Message has been sent';
-            } 
-            catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: ', $email->ErrorInfo;
-            }
-        } 
-        
-
-        include("assets/inc/footer.inc.php"); 
-        
-        if(isset($_POST['report'])){
-            //PHPMailer
-           $mail = new PHPMailer(true); 
-            
-            try {
-                //Server settings
-                $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-                $mail->isSMTP(); 
-                header('Content-Type: text/csv; charset=utf-8');                                     // Set mailer to use SMTP
-                $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-                $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'athleticprospects1@gmail.com';     // SMTP username
-                $mail->Password = 'Webm@ster1';                       // SMTP password
-                $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-                $mail->Port = 465;                                    // TCP port to connect to
-                $mail->SMTPDebug = false;
-                //Recipients
-                $mail->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
-                $mail->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient
-                //$mail->addAddress('kprestano@athleticprospects.com', 'Keith'); // Name is optional
-                //$mail->addReplyTo('info@example.com', 'Information');
-                //$mail->addCC('cc@example.com');
-                //$mail->addBCC('bcc@example.com');
-            
-                //Attachments
-                //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-            
-                //Content
-                $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Inappropriate Profile report';
-                $mail->Body    = "A user has reported a profile for inappropriate images, video, or content. <a href='www.dmwebdev.net/profile.php?id=".$id."'>Click Here.</a>";
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-            
-                $mail->send();
-                echo 'Message has been sent';
-            } catch (Exception $e) {
-                echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-            }
-            
-        };
-
-        if(isset($_POST['delete'])){
-            $id=$_POST["playerid"];
-            $playerDB->delete($id);
-        };
-
-
-        // Handles all form data from myinfo.php
-        if(isset($_POST['updateUserInfo'])) {
-            //echo "update being attempted";
-        echo "<meta http-equiv='refresh' content='0'>";//force page refresh
-          $updateArray = array();
-          if(isset($_SESSION['id'])){
-              $myId = $_SESSION['id'];
-              var_dump($_POST);
-              $updateArray['id'] = $_SESSION['id'];
-              if(isset($_POST['name'])){
-                  //echo $_POST['name'];
-                  if($playerDB->isAlphaNumeric($_POST['name']) != 0){
-                      $updateArray['name'] = $playerDB->sanitize($_POST['name']);
-                  }
-              }
-              if(isset($_POST['username'])){
-                  if($playerDB->isAlphaNumeric($_POST['username']) != 0){
-                      $updateArray['username'] = $playerDB->sanitize($_POST['username']);
-                  }
-              }
-
-              if(isset($_POST['gender'])){
-                if($playerDB->isMaleOrFemale($_POST['gender']) != 0){
-                    $updateArray['gender'] = $playerDB->sanitize($_POST['gender']);
-                }
-              }
-              
-              if(isset($_POST['email'])){
-                if($playerDB->isValidEmail($_POST['email']) != 0){
-                    $updateArray['email'] = $playerDB->sanitize($_POST['email']);
-                }
-              }
-
-              if(isset($_POST['cellPhone'])){
-                  if($playerDB->isValidPhone($_POST['cellPhone']) != 0){
-                      $updateArray['cellPhone'] = $playerDB->sanitize($_POST['cellPhone']);
-                  }
-              }
-
-              if(isset($_POST['homePhone'])){
-                if($playerDB->isValidPhone($_POST['homePhone']) != 0){
-                    $updateArray['homePhone'] = $playerDB->sanitize($_POST['homePhone']);
-                }
-              }
-              
-              if(isset($_POST['address'])){
-                //if($playerDB->isAlphaNumeric($_POST['address']) != 0){
-                    $updateArray['address'] = $playerDB->sanitize($_POST['address']);
-                //}
-              }
-
-              if(isset($_POST['city'])){
-                if($playerDB->isAlphaNumeric($_POST['city']) != 0){
-                    $updateArray['city'] = $playerDB->sanitize($_POST['city']);
-                }
-              }
-              
-              if(isset($_POST['state'])){
-                  $updateArray['state'] = $_POST['state'];
-              }
-
-              if(isset($_POST['zip'])){
-                if($playerDB->isZip($_POST['zip']) != 0){
-                    $updateArray['zip'] = $playerDB->sanitize($_POST['zip']);
-                }
-              }
-
-              if(isset($_POST['highschool'])){
-                  $updateArray['highschool'] = $playerDB->sanitize($_POST['highschool']);
-                  echo $updateArray['highschool'];
-              }
-
-              if(isset($_POST['weight'])){
-                if($playerDB->isAlphaNumeric($_POST['weight']) != 0){
-                    $updateArray['weight'] = $playerDB->sanitize($_POST['weight']);
-                }
-              }
-              
-              if(isset($_POST['height'])){
-                  $updateArray['height'] = $playerDB->sanitize($_POST['height']);
-              }
-
-              if(isset($_POST['gradYear'])){
-                  if($playerDB->isNumeric($_POST['gradYear']) != 0){
-                    $updateArray['gradYear'] = $playerDB->sanitize($_POST['gradYear']);
-                  }
-              }
-              if(isset($_POST['sport'])){
-                if($playerDB->isAlphaNumeric($_POST['sport']) != 0){
-                    $updateArray['sport'] = $playerDB->sanitize($_POST['sport']);
-                }
-              }
-              if(isset($_POST['sport2'])){
-                if($playerDB->isAlphaNumeric($_POST['sport2']) != 0){
-                    $updateArray['sport2'] = $playerDB->sanitize($_POST['sport2']);
-                }
-              }
-              if(isset($_POST['primaryPosition'])){
-                if($playerDB->isAlphaNumeric($_POST['primaryPosition']) != 0){
-                    $updateArray['primaryPosition'] = $playerDB->sanitize($_POST['primaryPosition']);
-                }
-              }
-
-              if(isset($_POST['secondaryPosition'])){
-                if($playerDB->isAlphaNumeric($_POST['secondaryPosition']) != 0){
-                    $updateArray['secondaryPosition'] = $playerDB->sanitize($_POST['secondaryPosition']);
-                }
-              }
-
-              if(isset($_POST['travelTeam'])){
-                if($playerDB->isAlphaNumeric($_POST['travelTeam']) != 0){
-                    $updateArray['travelTeam'] = $playerDB->sanitize($_POST['travelTeam']);
-                }
-              }
-
-              if(isset($_POST['gpa'])){
-                  $updateArray['gpa'] = $playerDB->sanitize($_POST['gpa']);
-              }
-
-              if(isset($_POST['sat'])){
-                if($playerDB->isNumeric($_POST['sat']) != 0){
-                    $updateArray['sat'] = $playerDB->sanitize($_POST['sat']);
-                }
-              }
-
-              if(isset($_POST['act'])){
-                if($playerDB->isNumeric($_POST['act']) != 0){
-                    $updateArray['act'] = $playerDB->sanitize($_POST['act']);
-                }
-              }
-
-              if(isset($_POST['ref1Name'])){
-                if($playerDB->isAlphaNumeric($_POST['ref1Name']) != 0){
-                    $updateArray['ref1Name'] = $playerDB->sanitize($_POST['ref1Name']);
-                }
-              }
-
-              if(isset($_POST['ref1JobTitle'])){
-                if($playerDB->isAlphaNumeric($_POST['ref1JobTitle']) != 0){
-                    $updateArray['ref1JobTitle'] = $playerDB->sanitize($_POST['ref1JobTitle']);
-                }
-              }
-
-              if(isset($_POST['ref1Email'])){
-                if($playerDB->isValidEmail($_POST['ref1Email']) != 0){
-                    $updateArray['ref1Email'] = $playerDB->sanitize($_POST['ref1Email']);
-                }
-              }
-
-              if(isset($_POST['ref1Phone'])){
-                if($playerDB->isValidPhone($_POST['ref1Phone']) != 0){
-                    $updateArray['ref1Phone'] = $playerDB->sanitize($_POST['ref1Phone']);
-                }
-              }
-
-              if(isset($_POST['ref2Name'])){
-                if($playerDB->isAlphaNumeric($_POST['ref2Name']) != 0){
-                    $updateArray['ref2Name'] = $playerDB->sanitize($_POST['ref2Name']);
-                }
-              }
-
-              if(isset($_POST['ref2JobTitle'])){
-                if($playerDB->isAlphaNumeric($_POST['ref2JobTitle']) != 0){
-                    $updateArray['ref2JobTitle'] = $playerDB->sanitize($_POST['ref2JobTitle']);
-                }
-              }
-
-              if(isset($_POST['ref2Email'])){
-                if($playerDB->isValidEmail($_POST['ref2Email']) != 0){
-                    $updateArray['ref2Email'] = $playerDB->sanitize($_POST['ref2Email']);
-                }
-              }
-
-              if(isset($_POST['ref2Phone'])){
-                if($playerDB->isValidPhone($_POST['ref2Phone']) != 0){
-                    $updateArray['ref2Phone'] = $playerDB->sanitize($_POST['ref2Phone']);
-                }
-              }
-
-              if(isset($_POST['ref3Name'])){
-                if($playerDB->isAlphaNumeric($_POST['ref3Name']) != 0){
-                    $updateArray['ref3Name'] = $playerDB->sanitize($_POST['ref3Name']);
-                }
-              }
-
-              if(isset($_POST['ref3JobTitle'])){
-                if($playerDB->isAlphaNumeric($_POST['ref3JobTitle']) != 0){
-                    $updateArray['ref3JobTitle'] = $playerDB->sanitize($_POST['ref3JobTitle']);
-                }
-              }
-
-              if(isset($_POST['ref3Email'])){
-                if($playerDB->isValidEmail($_POST['ref3Email']) != 0){
-                    $updateArray['ref3Email'] = $playerDB->sanitize($_POST['ref3Email']);
-                }
-              }
-
-              if(isset($_POST['ref3Phone'])){
-                if($playerDB->isValidPhone($_POST['ref3Phone']) != 0){
-                    $updateArray['ref3Phone'] = $playerDB->sanitize($_POST['ref3Phone']);
-                }
-              }
-
-              if(isset($_POST['persStatement'])){
-                if($playerDB->isAlphaNumeric($_POST['persStatement']) != 0){
-                    $updateArray['persStatement'] = $playerDB->sanitize($_POST['persStatement']);
-                }
-              }
-
-              if(isset($_POST['major'])){
-                if($playerDB->isAlphaNumeric($_POST['major']) != 0){
-                    $updateArray['major'] = $playerDB->sanitize($_POST['major']);
-                }
-              }
-
-              if(isset($_POST['commitment'])){
-                if($playerDB->isAlphaNumeric($_POST['commitment']) != 0){
-                    $updateArray['commitment'] = $playerDB->sanitize($_POST['commitment']);
-                }
-              }
-
-              if(isset($_POST['service'])){
-                if($playerDB->isAlphabetic($_POST['service']) != 0){
-                    $updateArray['service'] = $playerDB->sanitize($_POST['service']);
-                }
-              }
-              if(isset($_POST['showcase1'])){
-                  $updateArray['showcase1'] = $playerDB->isYouTube($_POST['showcase1']);
-                  //var_dump($updateArray);
-              }
-
-              if(isset($_POST['showcase2'])){
-                  $updateArray['showcase2'] = $playerDB->isYouTube($_POST['showcase2']);
-                  //var_dump($updateArray);
-              }
-
-              if(isset($_POST['showcase3'])){
-                  $updateArray['showcase3'] = $playerDB->isYouTube($_POST['showcase3']);
-                  //var_dump($updateArray);
-              }
-              if(isset($_POST['college'])){
-                  $updateArray['college'] = $playerDB->sanitize($_POST['college']);
-              }
-              if(isset($_POST['twitter'])){
-                  $updateArray['twitter'] = $playerDB->sanitize($_POST['twitter']);
-              }
-              if(isset($_POST['facebook'])){
-                  $updateArray['facebook'] = $playerDB->sanitize($_POST['facebook']);
-              }
-              if(isset($_POST['instagram'])){
-                  $updateArray['instagram'] = $playerDB->sanitize($_POST['instagram']);
-              }
-              if(isset($_POST['website'])){
-                  $updateArray['website'] = $playerDB->sanitize($_POST['website']);
-              }
-              if(isset($_POST['characteristics'])){
-                  $updateArray['characteristics'] = $playerDB->sanitize($_POST['characteristics']);
-                  //var_dump($updateArray);
-              }
-              if(isset($_POST['velocity'])){
-                  $updateArray['velocity'] = $playerDB->sanitize($_POST['velocity']);
-              }
-              if(isset($_POST['gpareq'])){
-                  $updateArray['gpareq'] = $playerDB->sanitize($_POST['gpareq']);
-              }
-              if(isset($_POST['satactreq'])){
-                  $updateArray['satactreq'] = $playerDB->sanitize($_POST['satactreq']);
-              }
-              //move profileImage to server folder
-              $uploadOk = 1;
-              if (is_uploaded_file($_FILES['profileImage']['tmp_name'])){ 
-                  //First, Validate the file name
-                      if(empty($_FILES['profileImage']['name'])){
-                         echo " File name is empty! ";
-                         $uploadOk = 0;
-                         exit;
-                      }
-                      $upload_file_name = $_FILES['profileImage']['name'];
-                      //Too long file name?
-                      if(strlen ($upload_file_name)>100){
-                         echo " too long file name ";
-                         $uploadOk = 0;
-                      }
-                      $check = getimagesize($_FILES["profileImage"]["tmp_name"]);
-                      if($check !== false) {
-                          //echo "File is an image - " . $check["mime"] . ".";
-                          $uploadOk = 1;
-                      } else {
-                          echo "File is not an image.";
-                          $uploadOk = 0;
-                      }
-                     //replace any non-alpha-numeric cracters in th file name
-                     $upload_file_name = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $upload_file_name);
-                     //set a limit to the file upload size
-                     if ($_FILES['profileImage']['size'] > 1000000){
-                         echo " File is too large ";
-                         $uploadOk = 0;        
-                     }
-                     //Save the file
-                     if ($uploadOk == 1){
-                      $dest='assets/img/userpictures/'.$upload_file_name;
-                    //   $dest='https://cloud-cube.s3.amazonaws.com/tjjwzjnpmyzm/'.$upload_file_name;
-                      if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
-                          //echo 'File Has Been Uploaded !';
-                          $updateArray['profileImage'] = $_FILES['profileImage']['name'];
-                          //var_dump($updateArray['profileImage']);
-                      }
-                      else{
-                          echo 'File was not uploaded';
-                      }
-                     }
-                 }
-                 $playerDB->updateUser($updateArray);
-                 
-                 //profile.php?id={$player->getId()}
-                 //echo $updateArray
-                 //var_dump($updateArray);
-            }
-        }
-?>
+				successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				})
+				.then(function (result) {
+				if (result.error) {
+					var displayError = document.getElementById('error-message');
+					displayError.textContent = result.error.message;
+				}
+				});
+			});
+		</script>
+						</div> <!-- end of fragment 4-->
+						<div id="fragment-5">
+							<div id="edit-tabs">
+								<ul>
+									<li><a href="#about-us" class="tab-headers">Edit About Us</a></li>
+									<li><a href="#home-page" class="tab-headers">Edit Home Page</a></li>
+								</ul>
+								<div id="about-us">
+									<form id='edit-about-us-form'
+											class='edit-about-us'
+											method = 'POST'
+											action='about.php'
+											enctype='multipart/form-data'>
+											<h4>Section: About Us</h4>
+										<input type='text'
+											id = 'about-us-header'
+											name = 'about-us-header'
+											value='<?php echo $_SESSION['aboutUsHeader'] ?>'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Header'/>
+										<textarea name='about-us-content' form='edit-about-us-form' id='about-us-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['aboutUsText'] ?></textarea>
+										<input type='submit'
+											value='Submit "About Us" Section'
+											name = 'submit-about-us'
+											class='btnSubmit'
+											id='btn-about-us'/>
+									</form>
+								</div> <!-- end of about-us -->
+								<div id="home-page">
+									<form id='edit-home-page-form'
+											class='edit-home-page'
+											method = 'POST'
+											action= 'index.php'
+											enctype='multipart/form-data'>
+										<h4>Section: Home Page</h4>
+										<input type='text'
+											id = 'home-page-header'
+											name = 'home-page-header'
+											value='<?php echo $_SESSION['aboutUsText'] ?>'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Header'/>
+										<textarea name='home-page-content' form='edit-home-page-form' id='home-page-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['homePageText'] ?></textarea>
+										<input type='submit'
+											value='Submit "Home Page" Section'
+											name = 'submit-home-page'
+											class='btnSubmit'
+											id='btn-home-page'/>
+									</form>
+								</div> <!-- end of home-page -->
+							</div> <!-- end of edit-tabs-->
+						</div> <!-- end of fragment 5-->
+					</div> <!-- end of #tabs -->
+				<?php include("assets/inc/admin_search.php"); ?>
+				</div><!-- end of #content -->
+	<?php else: ?>
+					<div id='profile-area'>
+							<p>Restricted</p>
+					</div>
+<?php endif; ?>
+<?php include("assets/inc/footer.inc.php"); ?>

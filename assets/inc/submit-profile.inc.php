@@ -1,10 +1,10 @@
 <?php
     //session_start();
-    echo "<script>console.log('test')</script>";
-    $mysqli = mysqli_connect("127.0.0.1", "root", "root", "sports");
+    //echo "<script>console.log('test')</script>";
+    $mysqli = mysqli_connect("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
    //CONNECT TO DATABASE
     if(!$mysqli){
-        echo "connection error: " . mysqli_connect_error();
+        //echo "connection error: " . mysqli_connect_error();
         die();
     }
     //else{
@@ -12,7 +12,7 @@
     //}
     //QUERY THE DATABASE to populate fields
 
-        $query = "SELECT firstName, lastName, email, cellPhone, homePhone, address, city, state, zip, highschool, height, weight, gradyear, sport, sport2, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, ref1FirstName, ref1LastName, ref1Jobtitle, ref1Email, ref1Phone, ref2FirstName, ref2LastName, ref2Jobtitle, ref2Email, ref2Phone, ref3FirstName, ref3LastName, ref3Jobtitle, ref3Email, ref3Phone, persStatement, service
+        $query = "SELECT firstName, lastName, email, cellPhone, homePhone, address, city, state, zip, highschool, height, weight, gradyear, sport, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, ref1FirstName, ref1LastName, ref1Jobtitle, ref1Email, ref1Phone, ref2FirstName, ref2LastName, ref2Jobtitle, ref2Email, ref2Phone, ref3FirstName, ref3LastName, ref3Jobtitle, ref3Email, ref3Phone, persStatement, service
                     FROM players
                     WHERE username = '".$_SESSION["username"]."';"; 
         
@@ -37,7 +37,6 @@
                 $_SESSION['height']            = $row["height"];
                 $_SESSION['grad-year']         = $row["gradYear"];
                 $_SESSION['sport']             = $row["sport"];
-                $_SESSION['sport2']            = $row["sport2"];
                 $_SESSION['primary-position']  = $row["primaryPosition"];
                 $_SESSION['secondary-position']= $row["secondaryPosition"];
                 $_SESSION['travel-team']       = $row["travelTeam"];
@@ -70,6 +69,7 @@
     //SEND attributes TO DATABASE
             if(isset($_POST['submit'])){
                 //block cross-site scripting, html entities(apersand etc), trim white space
+                //rewrite this!!!!!!!!!!!!!!1
                 $firstname  = htmlentities(strip_tags(trim($_POST["firstname"])));
                 $lastname   = htmlentities(strip_tags(trim($_POST["lastname"])));
                 $email      = htmlentities(strip_tags(trim($_POST["email"])));
@@ -84,7 +84,6 @@
                 $height     =  htmlentities(strip_tags(trim($_POST["height"])));
                 $gradyear   =  htmlentities(strip_tags(trim($_POST["grad-year"])));
                 $sport      =  htmlentities(strip_tags(trim($_POST["sport"])));
-                $sport2      =  htmlentities(strip_tags(trim($_POST["sport2"])));
                 $primaryposition    =  htmlentities(strip_tags(trim($_POST["primary-position"])));
                 $secondaryposition  =  htmlentities(strip_tags(trim($_POST["secondary-position"])));
                 $travelteam =  htmlentities(strip_tags(trim($_POST["travel-team"])));
@@ -124,7 +123,6 @@
                 $weight     = mysqli_real_escape_string($mysqli, $_POST["weight"]);
                 $gradyear   = mysqli_real_escape_string($mysqli, $_POST["grad-year"]);
                 $sport      = mysqli_real_escape_string($mysqli, $_POST["sport"]);
-                $sport2      = mysqli_real_escape_string($mysqli, $_POST["sport2"]);
                 $primaryposition    =  mysqli_real_escape_string($mysqli, $_POST["primary-position"]);
                 $secondaryposition  =  mysqli_real_escape_string($mysqli, $_POST["secondary-position"]);
                 $travelteam = mysqli_real_escape_string($mysqli, $_POST["travel-team"]);
@@ -165,7 +163,6 @@
                             weight = '$weight',
                             gradyear = '$gradyear', 
                             sport = '$sport',
-                            sport2 = '$sport2', 
                             primaryPosition = '$primaryposition', 
                             secondaryPosition = '$secondaryposition', 
                             travelTeam = '$travelteam', 

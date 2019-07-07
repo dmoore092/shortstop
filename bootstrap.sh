@@ -9,27 +9,18 @@ apt-get install -y git
 apt-get install -y apache2
 a2enmod rewrite
 
-#php
-apt-get install -y libapache2-mod-php5
-apt-get install -y php5-common
-apt-get install -y php5-mcrypt
-apt-get install -y php5-zip
-
 # #add php repo
-# sudo apt-get install software-properties-common
-# apt-add-repository ppa:ondrej/php
-# apt-get update
+sudo apt-get install software-properties-common
+apt-add-repository ppa:ondrej/php
+apt-get update
 
 # #install php
-# apt-get install -y php7.3
-
-# #more apache
-# apt-get install -y libapache2-mod-php7.3
-# service apache2 restart
-
-# apt-get install - y php7.3-common
-# apt-get install - y php7.3-mcrypt
-# apt-get install - y php7.3-zip
+apt-get install -y php7.3
+apt-get install -y php7.3-common
+apt-get install -y php7.3-mcrypt
+apt-get install -y php7.3-zip
+apt-get install -y libapache2-mod-php7.3
+apt-get install -y php7.3-dom
 
 #set mysql pass
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
@@ -37,17 +28,7 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password_again passwo
 
 #install mysql
 apt-get install -y mysql-server
-apt-get install -y php5-mysql
+apt-get install -y php7.3-mysql
 
 #restart apache
 service apache2 restart
-
-# install Swaks is an smtp of CURL, install it first:
-#mkdir mailgun-php
-
-#cd mailgun-php
-
-#curl http://www.jetmore.org/john/code/swaks/files/swaks-20130209.0/swaks -o swaks
-
-# Set the permissions for the script so you can run it
-#chmod +x swaks

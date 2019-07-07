@@ -1,14 +1,5 @@
-<?php 
-        error_reporting(0);
-      $relpath= ""; $title="Reset my password"; $page="passwordreset";
-      $imgpath="";
-      $linkpath = "";
-      $templinkpath = "";
-      session_start();
-      //test
-
-      include('assets/inc/header.inc.php');
-?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include('assets/inc/header.inc.php');?>
 <div id="body-main">
     <h2>Change your password</h2>
             <form id="password-change"
@@ -55,32 +46,5 @@
 
             ?> 
             </form>
-<?php 
-            $player = new PlayerDB();
-
-            if(isset($_POST["updatepassword"])){
-                $username = $_SESSION["username"];
-                
-                if($_POST['newpassword'] == $_POST['newpasswordagain']){
-                    if($_POST['newpassword'] != ""){
-                        $currentpassword = $_POST["currentpassword"];
-                    
-                        if($player->checkPassword($username, $currentpassword)){
-                            //echo "success!";
-                            $newpassword = $_POST['newpassword'];
-                            $player->updatePassword($username, $newpassword);
-                        }
-                    }
-                    else{
-                        echo "<p style='color:red;margin-top:25px'>Password cannot be empty, try again</p>";
-                    }
-                }
-                else{
-                    echo "<p style='color:red;margin-top:25px'>Passwords do not match, try again</p>";
-                };
-                //$success = $player->updatepassword($oldpassword, $newpassword);
-            }
-
-include('assets/inc/footer.inc.php'); 
-
-?>
+<?php include('assets/inc/password_reset_with_password.php'); ?>
+<?php include('assets/inc/footer.inc.php'); ?>

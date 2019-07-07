@@ -1,16 +1,13 @@
-<?php
-    error_reporting(0);
-    $relpath= ""; $title="Search Athletes"; $page="mfathletes";
-    session_start();
-    include_once ("classes/Player.PDO.Class.php");
-    include("assets/inc/header.inc.php");
-    $name = "";
-    $position = "";
-    $school = "";
-    
-    $playerDB = new PlayerDB();
-    
-?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+
+<?php include_once ("classes/Player.PDO.Class.php"); 
+      $name = "";
+      $position = "";
+      $school = "";
+      $playerDB = new PlayerDB();?>
+
+<?php include("assets/inc/header.inc.php"); ?>
+
 <div id="body-main">
     <h2>Search for Players</h2>
     <div id="content">
@@ -31,27 +28,7 @@
                 onclick='' />
                 
         <select name='sport'>
-            <option value="" selected disabled>Select 1st Sport:</option>
-            <option value='football'>Football</option>
-            <option value='basketball'>Basketball</option>
-            <option value='baseball'>Baseball</option>
-            <option value='softball'>Softball</option>
-            <option value='hockey'>Hockey</option>
-            <option value='fieldhockey'>Field Hockey</option>
-            <option value='lacrosse'>Lacrosse</option>
-            <option value='soccer'>Soccer</option>
-            <option value='trackandField'>Track and Field</option>
-            <option value='volleyball'>Volleyball</option>
-            <option value='wrestling'>Wrestling</option>
-            <option value='tennis'>Tennis</option>
-            <option value='swimming'>Swimming</option>
-            <option value='golf'>Golf</option>
-            <option value='gymnastics'>Gymnastics</option>
-            <option value='cheerleading'>Cheerleading</option>
-            <option value='esports'>Esports</option>
-        </select>
-        <select name='sport2'>
-            <option value="" selected disabled>Select 2nd Sport:</option>
+            <option value="" selected disabled>Select Sport:</option>
             <option value='football'>Football</option>
             <option value='basketball'>Basketball</option>
             <option value='baseball'>Baseball</option>
@@ -127,6 +104,11 @@
         </select>
         <select name='class'>
             <option value=' ' selected disabled>Class of:</option>
+            <option value='2024'>2024</option>
+            <option value='2023'>2023</option>
+            <option value='2022'>2022</option>
+            <option value='2021'>2021</option>
+            <option value='2020'>2020</option>
             <option value='2019'>2019</option>
             <option value='2018'>2018</option>
             <option value='2017'>2017</option>
@@ -173,49 +155,5 @@
     </form>
     </div> <!-- end of form-wrapper -->
     </div><!-- end of #content -->
-    <div id="center-area">
-   
-    </div>
-
-<?php
-
-if(isset($_POST['search-athlete'])){
-    //echo "search triggered";
-    if(isset($_POST['search-athlete'])){
-        $name       = $playerDB->sanitize($_POST['name']);
-        $sport      = $_POST['sport'];
-        $sport2      = $_POST['sport2'];
-        $state      = $_POST['state'];
-        $class      = $_POST['class'];
-        $position   = $playerDB->sanitize($_POST['position']);
-        $school     = $playerDB->sanitize($_POST['school']);
-        $gpa        = $_POST['gpa'];
-        
-        $arr = array();
-        if($name != "") $arr[] = "name LIKE '%{$name}%'";
-        if($sport != "") $arr[] = "sport = '{$sport}'";
-        if($sport2 != "") $arr[] = "sport2 = '{$sport2}'";
-        if($state != "") $arr[] = "state = '{$state}'";
-        if($class != "") $arr[] = "gradyear = '{$class}'";
-        if($position != "") $arr[] = "primaryposition LIKE '%{$position}%'";
-        if($school != "") $arr[] = "highschool LIKE '%{$school}%'";
-        if($gpa != "") $arr[] = "gpa >= '{$gpa}'";
-
-        if($name == "" && $sport == "" && $sport2 == "" && $state == "" && $class == "" && $position == "" && $school == "" && $gpa == "" ){
-            $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE persontype = 'player';";
-        }
-        else{
-            $query = "SELECT id, name, highschool, gradYear, sport, sport2, primaryPosition FROM players WHERE ";
-            $query .= implode(" AND ", $arr);
-            $query .= " AND persontype = 'player';";
-        }
-        //$data = $playerDB->searchPlayers($srch);
-        $data = $playerDB->getPlayersByFindAthleteSearch($query);
-        //header("Location: results.php?".http_build_query($data));
-        echo $playerDB->getPlayersAsTable($data);
-        echo $playerDB->getPlayers($data);
-   }
- };
-    include("assets/inc/footer.inc.php");
-
-?>
+<?php include("assets/inc/searchathlete.php"); ?>
+<?php    include("assets/inc/footer.inc.php");?>

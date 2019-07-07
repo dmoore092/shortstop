@@ -3,17 +3,19 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "generic/ubuntu1804"
 
   # config.vm.box_check_update = false
 
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
   config.vm.network "private_network", ip: "192.168.33.10"
-  #config.vm.network "public_network"
-  #config.vm.network :public_network, :bridge => 'en01',:use_dhcp_assigned_default_route => true
+  # config.vm.network "public_network"
+  # config.vm.network :public_network, :bridge => 'en01',:use_dhcp_assigned_default_route => true
 
   config.vm.synced_folder ".", "/var/www/html", :nfs => {:mount_options => ["dmode=777", "fmode=666"]}
+  # config.vm.synced_folder "/home/dmo/Projects/client-proj1", "/vagrant", :type => "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.

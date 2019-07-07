@@ -15,13 +15,13 @@
                 // open a connection
                 $this->dbConn = new PDO("mysql:host={$_SERVER['DB_SERVER']};dbname={$_SERVER['DB']}",
                 $_SERVER['DB_USER'],$_SERVER['DB_PASSWORD']);
-                //$this->dbConn = new PDO("mysql:host=127.0.0.1;dbname=sports,root,root");
+                // $this->dbConn = new PDO("mysql:host=127.0.0.1;dbname=sports,root,root");
                 // Change the error reporting for development
                 $this->dbConn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
             }
             catch(PDOException $e){
-                echo $e;
+                //echo $e;
                 throw new Exception("Problem Connecting to Server \n" . $e);
             }
         } // construct
@@ -53,7 +53,7 @@
          * updateField() - updates a column for any field for any table
          */
         function updateField($fieldName, $value, $id){
-            var_dump($fieldName);
+            //var_dump($fieldName);
             try{
                 $query = "UPDATE players SET $fieldName = :value WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
@@ -126,7 +126,7 @@
                 $stmt->execute();
             }
             catch(PDOException $e){
-                echo $e;
+                //echo $e;
             }
             return $string;
         }

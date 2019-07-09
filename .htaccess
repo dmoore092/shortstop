@@ -7,9 +7,10 @@ SetEnv DB_USER root
 
 DirectoryIndex index.php
 
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+#turn off for dev, on for prod. Forces https redirect
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 php_flag display_startup_errors off
 php_flag display_errors off

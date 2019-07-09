@@ -29,7 +29,7 @@ rm ${FILE}.gz  2> /dev/null
 #mysqldump --opt --protocol=TCP --user=${USER} --password=${PASS} --host=${DBSERVER} ${DATABASE} > ${FILE}
 
 # use this command for a database server on localhost. add other options if need be.
-mysqldump --opt --user=${USER} --password=${PASS} ${DATABASE} > ${FILE}
+mysqldump --opt --user=${USER} --password=${PASS} ${DATABASE} > dbbackup/${FILE}
 
 # (4) gzip the mysql database dump file
 gzip $FILE

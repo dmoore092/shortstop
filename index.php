@@ -1,8 +1,6 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
 <?php include('assets/inc/header.inc.php'); ?>
 
-
-
         <div id="body-main">
             <div id="content">
                 <section>
@@ -14,8 +12,8 @@
                             $query = "SELECT header, text FROM home_page ORDER BY id DESC LIMIT 1;";
                             $result = mysqli_query($conn, $query);
                             while($row = mysqli_fetch_assoc($result)){
-                                echo "<h2 id='index-header'>{$row['header']}</h2>";
-                                echo "<p>{$row['text']}</p>";
+                                echo "<h2>".nl2br($row['header'])."</h2>";
+                                echo "<p>".nl2br($row['text'])."</p>";
                                 echo "<hr>";
                             } 
                         }
@@ -48,7 +46,7 @@
         $mysqli->set_charset("utf8mb4");
 
         $stmt = $mysqli->prepare("INSERT INTO home_page(header, text, creation_date) VALUES(?, ?, NOW());");
-        $stmt->bind_param("ss", nl2br($_POST['home-page-header']), nl2br($_POST['home-page-content']));
+        $stmt->bind_param("ss", $_POST['home-page-header'], $_POST['home-page-content']);
         $stmt->execute();
         $stmt->close();
     }

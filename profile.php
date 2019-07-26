@@ -1,6 +1,6 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
-<?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']);?>
+<?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
 <?php include("assets/inc/populate_content_edit_forms.php"); ?>
 <?php include("assets/inc/phpmailer_download_db.php"); ?>
@@ -14,7 +14,7 @@
 <script src="https://js.stripe.com/v3"></script>
 
             <div id='body-main'>
-<?php if($player != null && $player->getPersonType() == 'player'): ?>
+<?php  if($player != null && $player->getPersonType() == 'player'): ?>
 				<div id='title-wrapper'>
 
 	<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 
@@ -417,10 +417,10 @@
 										<input type='text'
 											id = 'home-page-header'
 											name = 'home-page-header'
-											value='<?php echo $_SESSION['aboutUsText'] ?>'
+											value='<?php echo $_SESSION['homePageHeader'] ?>'
 											size = '20'
 											maxlength = '50'
-											placeholder = 'Header'/>
+											placeholder = 'Header' />
 										<textarea name='home-page-content' form='edit-home-page-form' id='home-page-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['homePageText'] ?></textarea>
 										<input type='submit'
 											value='Submit "Home Page" Section'

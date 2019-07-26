@@ -6,6 +6,7 @@ SetEnv DB_PASSWORD y#GbqXtBGcy!z3Cf
 SetEnv DB_USER root
 
 DirectoryIndex index.php
+SetEnv APPLICATION_ENV "development"
 
 #turn off for dev, on for prod. Forces https redirect
 # RewriteEngine On

@@ -36,48 +36,52 @@
 				<div class='info-box' id='info-box-underline'>
 					<h3>Player Info</h3>
 						<ul>
-							<li><span class='attributes'>Email:</span> <a href='mailto: <?php $player->getEmail() ?>'><?php echo $player->getEmail() ?></a></li>
-							<li><span class='attributes'>City:</span> <?php echo $player->getCity() ?></li>
-							<li><span class='attributes'>State:</span> <?php echo $player->getState() ?></li>
-							<li><span class='attributes'>Zip:</span> <?php echo $player->getZip() ?></li>
-							<li><span class='attributes'>School:</span> <?php echo $player->getHighschool() ?></li>
-							<li><span class='attributes'>Graduation Year:</span> <?php echo $player->getGradYear() ?></li>
-							<li><span class='attributes'>GPA:</span> <?php echo $player->getGpa() ?></li>
-							<li><span class='attributes'>SAT:</span> <?php echo $player->getSat() ?></li>
-							<li><span class='attributes'>ACT:</span> <?php echo $player->getAct() ?></li>
-							<li><span class='attributes'>Intended Major:</span> <?php echo $player->getMajor() ?></li>
+							<?php //only show those elements which are not null ?>
+							<?php if($player->getEmail() != null){ ?><li><span class='attributes'>Email:</span> <a href='mailto: <?php $player->getEmail() ?>'><?php echo $player->getEmail() ?></a></li><?php } ?>
+							<?php if($player->getCity() != null){ ?><li><span class='attributes'>City:</span> <?php echo $player->getCity() ?></li><?php } ?>
+							<?php if($player->getState() != null){ ?><li><span class='attributes'>State:</span> <?php echo $player->getState() ?></li><?php } ?>
+							<?php if($player->getZip() != null){ ?><li><span class='attributes'>Zip:</span> <?php echo $player->getZip() ?></li><?php } ?>
+							<?php if($player->getHighschool() != null){ ?><li><span class='attributes'>School:</span> <?php echo $player->getHighschool() ?></li><?php } ?>
+							<?php if($player->getGradYear() != null){ ?><li><span class='attributes'>Graduation Year:</span> <?php echo $player->getGradYear() ?></li><?php } ?>
+							<?php if($player->getGpa() != null){ ?><li><span class='attributes'>GPA:</span> <?php echo $player->getGpa() ?></li><?php } ?>
+							<?php if($player->getSat() != null){ ?><li><span class='attributes'>SAT:</span> <?php echo $player->getSat() ?></li><?php } ?>
+							<?php if($player->getAct() != null){ ?><li><span class='attributes'>ACT:</span> <?php echo $player->getAct() ?></li><?php } ?>
+							<?php if($player->getMajor() != null){ ?><li><span class='attributes'>Intended Major:</span> <?php echo $player->getMajor() ?></li><?php } ?>
 						</ul>
 					</div><!-- end of .info-box -->
 				<div class='info-box'>
 					<h3>Sport Info</h3>
 						<ul>
-							<li><span class='attributes'>Sport:</span> <?php echo $player->getSport() ?></li>
-							<li><span class='attributes'>Primary Position:</span> <?php echo $player->getPrimaryPosition() ?></li>
-							<li><span class='attributes''>Secondary Position:</span> <?php echo $player->getSecondaryPosition() ?></li>
-							<li><span class='attributes'>Travel Team:</span> <?php echo $player->getTravelTeam() ?></li>
-							<li><span class='attributes'>Height:</span> <?php echo $player->getHeight() ?></li>
-							<li><span class='attributes'>Weight:</span> <?php echo $player->getWeight() ?></li>
+							<?php if($player->getSport() != null){ ?><li><span class='attributes'>Sport:</span> <?php echo $player->getSport() ?></li></li><?php } ?>
+							<?php if($player->getPrimaryPosition() != null){ ?><li><span class='attributes'>Primary Position:</span> <?php echo $player->getPrimaryPosition() ?></li></li><?php } ?>
+							<?php if($player->getSecondaryPosition() != null){ ?><li><span class='attributes''>Secondary Position:</span> <?php echo $player->getSecondaryPosition() ?></li></li><?php } ?>
+							<?php if($player->getTravelTeam() != null){ ?><li><span class='attributes'>Travel Team:</span> <?php echo $player->getTravelTeam() ?></li></li><?php } ?>
+							<?php if($player->getHeight() != null){ ?><li><span class='attributes'>Height:</span> <?php echo $player->getHeight() ?></li></li><?php } ?>
+							<?php if($player->getWeight() != null){ ?><li><span class='attributes'>Weight:</span> <?php echo $player->getWeight() ?></li></li><?php } ?>
 						</ul>
 					</div> <!-- end of .info-box -->
 				</div> <!-- end of info-box-container -->
 				</div><!-- end of profile-area --> 
 				<p id='com-prompt'>When you become committed to a college, please send us an email at <a href='kprestano@athleticprospects.com'>kprestano@athleticprospects.com</a></p>
+				
+	<?php if ($player->getShowcase1() != null || $player->getShowcase2() != null || $player->getShowcase3() != null){ ?>
 				<hr/>
-<?php if ($player->getShowcase1() != null || $player->getShowcase2() != null || $player->getShowcase3() != null){ ?>
 				<h3>Videos</h3>	
 				<div id='videos'>	
-	<?php if($player->getShowcase1() != null){ ?>
+		<?php if($player->getShowcase1() != null){ ?>
 					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase1() ?>'></iframe>
-	<?php  } if($player->getShowcase2() != null){ ?>
+		<?php  } if($player->getShowcase2() != null){ ?>
 					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase2() ?>'></iframe>
-	<?php  } if($player->getShowcase3() != null){ ?>
+		<?php  } if($player->getShowcase3() != null){ ?>
 					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase3() ?>'></iframe>
-	<?php  } ?>
+		<?php  } ?>
 				</div>
-<?php  } ?>
+	<?php  } ?>
+	<?php if($player->getRef1Name() != null || $player->getRef2Name() != null || $player->getRef3Name() != null){ ?>
 				<h3>References</h3>
-					<div id='reference-container'>
-					<div class='references'>
+				<div id='reference-container'>
+			<?php if($player->getRef1Name() != null){ ?>
+				<div class='references'>
 					<ul>
 						<li><span class='attributes'>Name:</span> <?php echo $player->getRef1Name() ?></li>
 						<li><span class='attributes'>Job Title:</span> <?php echo $player->getRef1JobTitle() ?></li>
@@ -85,6 +89,8 @@
 						<li><span class='attributes'>Phone:</span> <?php echo $player->getRef1Phone() ?></li>
 					</ul>
 				</div>
+			<?php } ?>
+			<?php if($player->getRef2Name() != null){ ?>
 				<div class='references'>
 					<ul>
 						<li><span class='attributes'>Name:</span> <?php echo $player->getRef2Name() ?></li>
@@ -93,6 +99,8 @@
 						<li><span class='attributes'>Phone:</span> <?php echo $player->getRef2Phone() ?></li>
 					</ul>
 				</div>
+			<?php } ?>
+			<?php if($player->getRef3Name() != null){ ?>
 				<div class='references'>
 						<ul>
 							<li><span class='attributes'>Name:</span> <?php echo $player->getRef3Name() ?></li>
@@ -101,12 +109,16 @@
 							<li><span class='attributes'>Phone:</span> <?php echo $player->getRef3Phone() ?></li>
 						</ul>
 					</div>
+			<?php } ?>
 				</div> <!--end of #references-container -->
-				<hr/>
-				<div id='personal-statement'>
+	<?php  } ?>
+	<?php  if($player->getPersStatement() != null){ ?>
+			<hr/>
+			<div id='personal-statement'>
 					<h3>Personal Statement</h3>
 					<p><?php echo $player->getPersStatement() ?></p>
 				</div>
+	<?php  } ?>
 <?php elseif($player != null && $player->getPersonType() == 'coach'): ?>
                 <h2><a href='myinfo.php'><img src='assets/img/edit2.png'/ id='edit-img'></a> {$player->getName()} <span id='collegeh2'>{$player->getCollege()}</span></h2>
                 <hr/>

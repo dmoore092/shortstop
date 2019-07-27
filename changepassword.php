@@ -35,7 +35,9 @@
                             value=""
                             required />
                 </p>
-                <div class="g-recaptcha" data-sitekey="6LfGGJEUAAAAAChOm6ZDVpoo3ZbjdUsfwfYT6Omj"></div>
+                <?php if($environment == 'production'){ ?>
+                    <div class="g-recaptcha" data-sitekey="6LfGGJEUAAAAAChOm6ZDVpoo3ZbjdUsfwfYT6Omj"></div>
+                <?php } ?>
                 <input type="submit"
                         value="Update Password"
                         name = "update-password"

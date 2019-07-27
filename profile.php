@@ -78,6 +78,7 @@
 				</div>
 	<?php  } ?>
 	<?php if($player->getRef1Name() != null || $player->getRef2Name() != null || $player->getRef3Name() != null){ ?>
+				<hr/>
 				<h3>References</h3>
 				<div id='reference-container'>
 			<?php if($player->getRef1Name() != null){ ?>

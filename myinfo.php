@@ -40,7 +40,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 <?php if($player != null && $player->getPersonType() == "player"){ ?>
 					<form id='player-form'
 						  method = 'POST'
-						  action= 'profile.php?id={$player->getId()}'
+						  action= 'profile.php?id=<?php echo $player->getId();?>'
 						  onsubmit = '' 
 						  enctype='multipart/form-data' >
 						<h1>Player Info</h1>
@@ -53,7 +53,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'First and Last Name'
-								   value=<?php echo $player->getName(); ?>
+								   value='<?php echo $player->getName(); ?>'
 								   required >
 						</p>
 						<p>
@@ -64,7 +64,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'example@example.com'
-								   value=<?php echo $player->getEmail();?>
+								   value='<?php echo $player->getEmail();?>'
 								   required >
 						</p>
 						<p>
@@ -84,7 +84,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
-								   value=<?php echo $player->getCellPhone();?>
+								   value='<?php echo $player->getCellPhone();?>'
 								   required >
 						</p>
 						<p>
@@ -96,7 +96,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
 								   maxlength = '50'
 								   placeholder = 'xxx-xxx-xxxx'
-								   value=<?php echo $player->getHomePhone();?>
+								   value='<?php echo $player->getHomePhone();?>'
 								   required >
 						</p>
 						<p>
@@ -107,7 +107,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'Your Address'
-								   value=<?php echo $player->getAddress()?>
+								   value='<?php echo $player->getAddress()?>'
 								   required >
 						</p>
 						<p>
@@ -118,7 +118,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'Your City'
-								   value=<?php echo $player->getCity()?>
+								   value='<?php echo $player->getCity()?>'
 								   required >
 						</p>
 						<p>
@@ -126,7 +126,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							<select name='state' required>
                                 <option value=' ' selected disabled>Select State:</option>
 <?php foreach($states as $value){ ?>
-                                <option <?php if($player->getState() == $value){echo "selected";} ?> value=<?php echo $value ?>><?php echo $value?></option>
+                                <option <?php if($player->getState() == $value){echo "selected";} ?> value=<?php echo "'".$value."'" ?>><?php echo $value?></option>
 <?php } ?>
 							</select>
 						</p>
@@ -138,7 +138,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxxxx'
-								   value=<?php echo $player->getZip()?>
+								   value='<?php echo $player->getZip()?>'
 								   required >
 						</p>
 						<p>
@@ -149,7 +149,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'Your School'
-								   value=<?php echo $player->getHighschool()?>
+								   value='<?php echo $player->getHighschool()?>'
 								   required >
 						</p>
 						<p>
@@ -160,7 +160,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx'
-								   value=<?php echo $player->getWeight()?>
+								   value='<?php echo $player->getWeight()?>'
 								   required >
 						</p>
 						<p>
@@ -168,7 +168,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 						<select name='height' required>
                             <option value='' selected disabled>Select height:</option>
 <?php foreach($heights as $value){ ?>
-                            <option <?php if($player->getHeight() == $value){echo "selected";}?> value=<?php echo $value ?>><?php echo $value ?></option>
+                            <option <?php if($player->getHeight() == $value){echo "selected";}?> value=<?php echo "'".$value."'" ?>><?php echo $value ?></option>
 <?php } ?>
 						</select>
 						</p>
@@ -180,7 +180,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								 size = '35'
 								 maxlength = '50'
 								 placeholder = 'xxxx'
-								 value=<?php echo $player->getGradYear()?>
+								 value='<?php echo $player->getGradYear()?>'
 								 required >
 						</p>
 						<div>
@@ -189,7 +189,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							<select name='sport' required autocomplete="off">
                                 <option value=' '  disabled>Select Sport:</option>
 <?php foreach($sports as $key=>$value){ ?>
-                                <option <?php if($player->getSport() == $value){echo "selected ";}?>value=<?php echo $key?> ><?php echo $value ?></option>
+                                <option <?php if($player->getSport() == $value){echo "selected ";}?>value=<?php echo "'".$key."'" ?> ><?php echo $value ?></option>
 <?php } ?>
 							</select>
 						</p>
@@ -202,7 +202,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'Your Primary Position'
-								   value=<?php echo $player->getPrimaryPosition()?>
+								   value='<?php echo $player->getPrimaryPosition()?>'
 								   required >
 						</p>
 						<p>
@@ -213,7 +213,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'Your Secondary Position'
-								   value=<?php echo $player->getSecondaryPosition()?>
+								   value='<?php echo $player->getSecondaryPosition()?>'
 								   required >
 						</p>
 						<p>
@@ -224,7 +224,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'Your Travel Team'
-								   value=<?php echo $player->getTravelTeam()?>
+								   value='<?php echo $player->getTravelTeam()?>'
 								   required >
 						</p>
 						<p>
@@ -235,7 +235,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'x.xx'
-								   value=<?php echo $player->getGpa()?>
+								   value='<?php echo $player->getGpa()?>'
 								   required >
 						</p>
 						<p>
@@ -246,7 +246,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx or xxxx'
-								   value=<?php echo $player->getSat()?>
+								   value='<?php echo $player->getSat()?>'
 								    >
 						</p>
 						<p>
@@ -257,7 +257,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '50'
 								   placeholder = 'xxx'
-								   value=<?php echo $player->getAct()?>
+								   value='<?php echo $player->getAct()?>'
 								    >
 						</p>
 						<p>
@@ -268,7 +268,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '100'
 								   placeholder = ' '
-								   value=<?php echo $player->getMajor()?>
+								   value='<?php echo $player->getMajor()?>'
 								    >
 						</p>
 						<p>
@@ -279,7 +279,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   size = '35'
 								   maxlength = '100'
 								   placeholder = ' '
-								   value=<?php echo $player->getCommitment()?>
+								   value='<?php echo $player->getCommitment()?>'
 								    >
 						</p>
 					</div>
@@ -316,7 +316,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'First and Last Name'
-									   value=<?php echo $player->getRef1Name()?>
+									   value='<?php echo $player->getRef1Name()?>'
 									    >
 							</p>
 							<p>
@@ -327,7 +327,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'Reference 1 Job Title'
-									   value=<?php echo $player->getRef1JobTitle()?>
+									   value='<?php echo $player->getRef1JobTitle()?>'
 									    >
 							</p>
 							<p>
@@ -338,7 +338,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'example@example.con'
-									   value=<?php echo $player->getRef1Email()?>
+									   value='<?php echo $player->getRef1Email()?>'
 									    >
 							</p>
 							<p>
@@ -349,7 +349,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'xxx-xxx-xxxx'
-									   value=<?php echo $player->getRef1Phone()?>
+									   value='<?php echo $player->getRef1Phone()?>'
 									    >
 							</p>
 							</div><!-- end of refs -->
@@ -363,7 +363,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'First and Last Name'
-									   value=<?php echo $player->getRef2Name()?>
+									   value='<?php echo $player->getRef2Name()?>'
 									    >
 							</p>
 							<p>
@@ -374,7 +374,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'Reference 2 Job Title'
-									   value=<?php echo $player->getRef2JobTitle()?>
+									   value='<?php echo $player->getRef2JobTitle()?>'
 									    >
 							</p>
 							<p>
@@ -385,7 +385,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'example@example.com'
-									   value=<?php echo $player->getRef2Email()?>
+									   value='<?php echo $player->getRef2Email()?>'
 									    >
 							</p>
 							<p>
@@ -396,7 +396,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'xxx-xxx-xxxx'
-									   value=<?php echo $player->getRef2Phone()?>
+									   value='<?php echo $player->getRef2Phone()?>'
 									    >
 							</p>
 							</div><!-- end of refs -->
@@ -411,7 +411,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'First and Last Name'
-									   value=<?php echo $player->getRef3Name()?>
+									   value='<?php echo $player->getRef3Name()?>'
 									    >
 							</p>
 							<p>
@@ -422,7 +422,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'Reference 3 Job Title'
-									   value=<?php echo $player->getRef3JobTitle()?>
+									   value='<?php echo $player->getRef3JobTitle()?>'
 									    >
 							</p>
 							<p>
@@ -433,7 +433,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'example@example.com'
-									   value=<?php echo $player->getRef3Email()?>
+									   value='<?php echo $player->getRef3Email()?>'
 									    >
 							</p>
 							<p>
@@ -444,7 +444,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   size = '35'
 									   maxlength = '50'
 									   placeholder = 'xxx-xxx-xxxx'
-									   value=<?php echo $player->getRef3Phone()?>
+									   value='<?php echo $player->getRef3Phone()?>'
 									    >
 							</p>
 							

@@ -1,8 +1,4 @@
 #production
-#SetEnv DB sports
-#SetEnv DB_SERVER 127.0.0.1
-#SetEnv DB_PASSWORD y#GbqXtBGcy!z3Cf
-#SetEnv DB_USER root
 #heroku
 SetEnv DB died52h990bhctqt
 SetEnv DB_SERVER nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
@@ -11,12 +7,12 @@ SetEnv DB_PASSWORD pzai4vad7q5d55gr
 
 
 DirectoryIndex index.php
-SetEnv APPLICATION_ENV "development"
+SetEnv APPLICATION_ENV "production"
 
 #turn off for dev, on for prod. Forces https redirect
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 # php_flag display_startup_errors off
 # php_flag display_errors off

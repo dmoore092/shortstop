@@ -28,7 +28,7 @@
 				try{
 				 $name = "%".$name."%";
 						$data = array();
-						$stmt = $this->dbConn->prepare("SELECT DISTINCT id, AES_DECRYPT(name, '!trN8xLnaHcA@cKu'), AES_DECRYPT(highscool, '!trN8xLnaHcA@cKu'), AES_DECRYPT(gradYear, '!trN8xLnaHcA@cKu'), AES_DECRYPT(sport, '!trN8xLnaHcA@cKu'), AES_DECRYPT(primaryposition, '!trN8xLnaHcA@cKu') FROM players WHERE name LIKE AES_ENCRYPT(:name, '!trN8xLnaHcA@cKu') and persontype = 'player'"); 
+						$stmt = $this->dbConn->prepare("SELECT DISTINCT id, AES_DECRYPT(name, '!trN8xLnaHcA@cKu'), AES_DECRYPT(highscool, '!trN8xLnaHcA@cKu'), AES_DECRYPT(gradYear, '!trN8xLnaHcA@cKu'), AES_DECRYPT(sport, '!trN8xLnaHcA@cKu'), AES_DECRYPT(primaryposition, '!trN8xLnaHcA@cKu') FROM died52h990bhctqt WHERE name LIKE AES_ENCRYPT(:name, '!trN8xLnaHcA@cKu') and persontype = 'player'"); 
 						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
 						$stmt->execute();
 						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
@@ -50,7 +50,7 @@
 			//echo $gender;
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE gender = :gender"); 
+                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM died52h990bhctqt WHERE gender = :gender"); 
                 $stmt->bindParam("gender",$gender,PDO::PARAM_STR);    
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -70,7 +70,7 @@
 		function getPlayersByRole($role){
 			try{
                 $data = array();
-                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM players WHERE persontype = :role"); 
+                $stmt = $this->dbConn->prepare("SELECT id, name, highschool, gradYear, sport, primaryposition FROM died52h990bhctqt WHERE persontype = :role"); 
                 $stmt->bindParam("role",$role,PDO::PARAM_STR);    
                 $stmt->execute();
                 $stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -408,7 +408,7 @@
 		 * returns true if passwords matches, allows creation of new password. For when user already knows their current password
 		*/
 		function checkPassword($username, $currentPassword){
-			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+			$stmt = $this->dbConn->prepare("SELECT pass FROM died52h990bhctqt WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -458,7 +458,7 @@
 				$data = array();
 				//$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 				//$hashed_password = hash('sha256', $password);
-				$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
+				$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM died52h990bhctqt WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
 				$stmt->bindParam(1, $username, PDO::PARAM_STR);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -494,7 +494,7 @@
 			$data = array();
 			$now  = date("Y-m-d H:i:s");
 			try{
-				$stmt = $this->dbConn->prepare("SELECT `reset`, resetExpires FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
+				$stmt = $this->dbConn->prepare("SELECT `reset`, resetExpires FROM died52h990bhctqt WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
 				$stmt->bindParam(1, $username, PDO::PARAM_STR);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -522,7 +522,7 @@
 		//checks for duplicate username first
 		function register($username, $hashed_password, $persontype){
 			$data = [];
-			$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+			$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM died52h990bhctqt WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
@@ -546,7 +546,7 @@
 				//var_dump($query);
 				$stmt->execute(array(":username"=>$username, ":pass"=>$hashed_password));
 
-				$info = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), id, persontype FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+				$info = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), id, persontype FROM died52h990bhctqt WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 				$info->bindParam(1, $username, PDO::PARAM_STR);
 				$info->execute();
 				$info->setFetchMode(PDO::FETCH_CLASS,"Player");

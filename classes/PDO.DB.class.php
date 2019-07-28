@@ -55,7 +55,7 @@
         function updateField($fieldName, $value, $id){
             //var_dump($fieldName);
             try{
-                $query = "UPDATE players SET $fieldName = AES_ENCRYPT(:value, '!trN8xLnaHcA@cKu') WHERE id = :id";
+                $query = "UPDATE died52h990bhctqt SET $fieldName = AES_ENCRYPT(:value, '!trN8xLnaHcA@cKu') WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->execute(array(
                     ":value"=>$value,
@@ -71,7 +71,7 @@
          */
         function delete($id){
             try{
-                $query = "DELETE FROM players WHERE id = :id";
+                $query = "DELETE FROM died52h990bhctqt WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->execute(array(
                     ":id"=>$id
@@ -82,7 +82,7 @@
         }
 
         /**
-         * getFieldByUsername() - Returns a specific entry from players 
+         * getFieldByUsername() - Returns a specific entry from died52h990bhctqt 
          */
         function getFieldByUsername($fieldname, $username){
             // var_dump($fieldname);
@@ -90,7 +90,7 @@
             //$data = array();
             $data = "";
             try{
-                $query = "SELECT id, AES_DECRYPT($fieldname, '!trN8xLnaHcA@cKu') AS $fieldname, AES_DECRYPT(name, '!trN8xLnaHcA@cKu') AS `name`, `reset` FROM players WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu')";
+                $query = "SELECT id, AES_DECRYPT($fieldname, '!trN8xLnaHcA@cKu') AS $fieldname, AES_DECRYPT(name, '!trN8xLnaHcA@cKu') AS `name`, `reset` FROM died52h990bhctqt WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu')";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":username", $username);
@@ -118,9 +118,9 @@
             }
 
             try{
-                //$deleteToken = "DELETE FROM players WHERE resetExpires < NOW()";
-                $insertToken = "UPDATE players SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');
-                                UPDATE players SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');";
+                //$deleteToken = "DELETE FROM died52h990bhctqt WHERE resetExpires < NOW()";
+                $insertToken = "UPDATE died52h990bhctqt SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');
+                                UPDATE died52h990bhctqt SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');";
                 $stmt = $this->dbConn->prepare($insertToken);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":reset", $string);
@@ -196,8 +196,8 @@
                             AES_DECRYPT(showcase2,'!trN8xLnaHcA@cKu') AS showcase2,
                             AES_DECRYPT(showcase3,'!trN8xLnaHcA@cKu') AS showcase3,
                             AES_DECRYPT(college,'!trN8xLnaHcA@cKu') AS college,
-                            persontype FROM players WHERE id = :id";
-            //$query = "SELECT AES_DECRYPT(name,'!trN8xLnaHcA@cKu'), persontype FROM players WHERE id = :id;";
+                            persontype FROM died52h990bhctqt WHERE id = :id";
+            //$query = "SELECT AES_DECRYPT(name,'!trN8xLnaHcA@cKu'), persontype FROM died52h990bhctqt WHERE id = :id;";
             $stmt = $this->dbConn->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->execute();

@@ -7,7 +7,7 @@
                     
                     <?php 
                         try{
-                            $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
+                            $conn = mysqli_connect('ugaf16xakn6l03kv:pzai4vad7q5d55gr@nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306', 'ugaf16xakn6l03kv', 'pzai4vad7q5d55gr', 'died52h990bhctqt');
                             //echo "Connected successfully"; 
                             $query = "SELECT header, text FROM home_page ORDER BY id DESC LIMIT 1;";
                             $result = mysqli_query($conn, $query);

@@ -4,7 +4,7 @@
 #SetEnv DB_PASSWORD y#GbqXtBGcy!z3Cf
 #SetEnv DB_USER root
 #heroku
-SetEnv DB sports
+SetEnv DB died52h990bhctqt
 SetEnv DB_SERVER nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
 SetEnv DB_USER ugaf16xakn6l03kv
 SetEnv DB_PASSWORD pzai4vad7q5d55gr

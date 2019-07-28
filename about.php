@@ -5,7 +5,7 @@
             <hr />
             <?php 
                 try{
-                    $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
+                    $conn = mysqli_connect('nt71li6axbkq1q6a.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 'ugaf16xakn6l03kv', 'pzai4vad7q5d55gr', 'died52h990bhctqt');
                     //echo "Connected successfully"; 
                     $query = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";
                     $result = mysqli_query($conn, $query);

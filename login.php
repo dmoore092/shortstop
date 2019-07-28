@@ -25,6 +25,7 @@
                 <br/>
                 <a href = "recover.php" style="text-decoration:none">Reset My Password..</a>
             </form>
-
-<?php include('assets/inc/footer.inc.php'); ?>
 <?php include('assets/inc/password_reset_actual.php'); ?>
+<?php include('assets/inc/footer.inc.php'); ?>
+
+

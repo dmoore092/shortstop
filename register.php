@@ -40,7 +40,9 @@
                                    value=""
                                    required />
                         </p>
+                    <?php if($environment == 'production'){ ?>
                         <div class="g-recaptcha" data-sitekey="6LfGGJEUAAAAAChOm6ZDVpoo3ZbjdUsfwfYT6Omj"></div>
+                    <?php } ?>
                        <?php 
                             //wrapped in php to hide from inspect
                             //<p>
@@ -59,3 +61,4 @@
             </form>      
 <?php include("assets/inc/footer.inc.php"); ?>
 <?php include("assets/inc/create_account.php"); ?>
+

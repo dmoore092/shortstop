@@ -91,8 +91,7 @@ input, select{
         /* border: 2px solid black; */
     }
     #content{
-        width: 90%;
-        /* border: 2px solid black; */
+        width: 70%;
     }
     #form-wrapper{
         width: 50%;
@@ -111,4 +110,5 @@ input, select{
         width: 100%;
         font-size: 1.2em;
     }
+
 }

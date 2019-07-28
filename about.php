@@ -10,8 +10,8 @@
                     $query = "SELECT header, text FROM about_us ORDER BY id DESC LIMIT 1;";
                     $result = mysqli_query($conn, $query);
                     while($row = mysqli_fetch_assoc($result)){
-                        echo "<h2>{$row['header']}</h2>";
-                        echo "<p>{$row['text']}</p>";
+                        echo "<h2>".nl2br($row['header'])."</h2>";
+                        echo "<p>".nl2br($row['text'])."</p>";
                     }
                     mysqli_close($conn);
                 }
@@ -38,7 +38,7 @@
         $mysqli->set_charset("utf8mb4");
 
         $stmt = $mysqli->prepare("INSERT INTO about_us(header, text, creation_date) VALUES(?, ?, NOW());");
-        $stmt->bind_param("ss", nl2br($_POST['about-us-header']), nl2br($_POST['about-us-content']));
+        $stmt->bind_param("ss", $_POST['about-us-header'], $_POST['about-us-content']);
         $stmt->execute();
         $stmt->close();
     }

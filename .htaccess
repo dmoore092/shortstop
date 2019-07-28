@@ -6,17 +6,19 @@ SetEnv DB_PASSWORD y#GbqXtBGcy!z3Cf
 SetEnv DB_USER root
 
 DirectoryIndex index.php
+SetEnv APPLICATION_ENV "development"
 
-RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
-
-# php_flag display_startup_errors off
-# php_flag display_errors on
-# php_flag html_errors on
-# php_value error_reporting 32767
+#turn off for dev, on for prod. Forces https redirect
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 
 php_flag display_startup_errors off
-php_flag display_errors of
-php_flag html_errors of
+php_flag display_errors off
+php_flag html_errors off
 php_value error_reporting 0
+
+# php_flag display_startup_errors on
+# php_flag display_errors on
+# php_flag html_errors onn
+# php_value error_reporting E_ALL

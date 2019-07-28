@@ -1,4 +1,6 @@
 <?php
+	$environment = getenv("APPLICATION_ENV");
+	
 	switch ($_SERVER["SCRIPT_NAME"]) {
 		case "/index.php":
 			$PAGE = "main"; 

@@ -1,5 +1,5 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
-<?php require 'AWSS3/aws-autoloader.php'; ?>
+<?php include 'AWSS3/aws-autoloader.php'; ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
 <?php 
 //variables for select options

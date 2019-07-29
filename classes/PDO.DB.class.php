@@ -55,7 +55,7 @@
         function updateField($fieldName, $value, $id){
             //var_dump($fieldName);
             try{
-                $query = "UPDATE players SET $fieldName = AES_ENCRYPT(:value, '!trN8xLnaHcA@cKu') WHERE id = :id";
+                $query = "UPDATE players SET $fieldName = :value WHERE id = :id";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->execute(array(
                     ":value"=>$value,
@@ -90,7 +90,7 @@
             //$data = array();
             $data = "";
             try{
-                $query = "SELECT id, AES_DECRYPT($fieldname, '!trN8xLnaHcA@cKu') AS $fieldname, AES_DECRYPT(name, '!trN8xLnaHcA@cKu') AS `name`, `reset` FROM players WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu')";
+                $query = "SELECT id, $fieldname, name, `reset` FROM players WHERE username = :username";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":username", $username);
@@ -154,50 +154,14 @@
 
         function getObjectByID($id){
             $object = null;
-            $query = "SELECT id, 
-                            AES_DECRYPT(username,'!trN8xLnaHcA@cKu') AS username,
-                            AES_DECRYPT(`name`,'!trN8xLnaHcA@cKu') AS `name`,
-                            AES_DECRYPT(gender,'!trN8xLnaHcA@cKu') AS gender,
-                            AES_DECRYPT(email,'!trN8xLnaHcA@cKu') AS email,
-                            AES_DECRYPT(`address`,'!trN8xLnaHcA@cKu') AS `address`,
-                            AES_DECRYPT(cellPhone,'!trN8xLnaHcA@cKu') AS cellphone,
-                            AES_DECRYPT(homePhone,'!trN8xLnaHcA@cKu') AS homephone,
-                            AES_DECRYPT(city,'!trN8xLnaHcA@cKu') AS city,
-                            AES_DECRYPT(`state`,'!trN8xLnaHcA@cKu') AS `state`,
-                            AES_DECRYPT(zip,'!trN8xLnaHcA@cKu') AS zip,
-                            AES_DECRYPT(highschool,'!trN8xLnaHcA@cKu') AS highschool,
-                            AES_DECRYPT(`weight`,'!trN8xLnaHcA@cKu') AS `weight`,
-                            AES_DECRYPT(height,'!trN8xLnaHcA@cKu') AS height,
-                            AES_DECRYPT(gradYear,'!trN8xLnaHcA@cKu') AS gradyear,
-                            AES_DECRYPT(major,'!trN8xLnaHcA@cKu') AS major,
-                            AES_DECRYPT(commitment,'!trN8xLnaHcA@cKu') AS commitment,
-                            AES_DECRYPT(gpa,'!trN8xLnaHcA@cKu') AS gpa,
-                            AES_DECRYPT(sat,'!trN8xLnaHcA@cKu') AS sat,
-                            AES_DECRYPT(act,'!trN8xLnaHcA@cKu') AS act,
-                            AES_DECRYPT(sport,'!trN8xLnaHcA@cKu') AS sport,
-                            AES_DECRYPT(primaryPosition,'!trN8xLnaHcA@cKu') AS primaryposition,
-                            AES_DECRYPT(secondaryPosition,'!trN8xLnaHcA@cKu') AS secondaryposition,
-                            AES_DECRYPT(travelTeam,'!trN8xLnaHcA@cKu') AS travelteam,
-                            AES_DECRYPT(ref1Name,'!trN8xLnaHcA@cKu') AS ref1name,
-                            AES_DECRYPT(ref1JobTitle,'!trN8xLnaHcA@cKu') AS ref1jobtitle,
-                            AES_DECRYPT(ref1Email,'!trN8xLnaHcA@cKu') AS ref1email,
-                            AES_DECRYPT(ref1Phone,'!trN8xLnaHcA@cKu') AS ref1phone,
-                            AES_DECRYPT(ref2Name,'!trN8xLnaHcA@cKu') AS ref2name,
-                            AES_DECRYPT(ref2JobTitle,'!trN8xLnaHcA@cKu') AS ref2jobtitle,
-                            AES_DECRYPT(ref2Email,'!trN8xLnaHcA@cKu') AS ref2email,
-                            AES_DECRYPT(ref2Phone,'!trN8xLnaHcA@cKu') AS ref2phone,
-                            AES_DECRYPT(ref3Name,'!trN8xLnaHcA@cKu') AS ref3name,
-                            AES_DECRYPT(ref3JobTitle,'!trN8xLnaHcA@cKu') AS ref3jobtitle,
-                            AES_DECRYPT(ref3Email,'!trN8xLnaHcA@cKu') AS ref3email,
-                            AES_DECRYPT(ref3Phone,'!trN8xLnaHcA@cKu') AS ref3phone,
-                            AES_DECRYPT(persStatement,'!trN8xLnaHcA@cKu') AS persstatement,
-                            AES_DECRYPT(profileImage,'!trN8xLnaHcA@cKu') AS profileimage,
-                            AES_DECRYPT(showcase1,'!trN8xLnaHcA@cKu') AS showcase1,
-                            AES_DECRYPT(showcase2,'!trN8xLnaHcA@cKu') AS showcase2,
-                            AES_DECRYPT(showcase3,'!trN8xLnaHcA@cKu') AS showcase3,
-                            AES_DECRYPT(college,'!trN8xLnaHcA@cKu') AS college,
-                            persontype FROM players WHERE id = :id";
-            //$query = "SELECT AES_DECRYPT(name,'!trN8xLnaHcA@cKu'), persontype FROM players WHERE id = :id;";
+            $query = "SELECT id, username,`name`,gender,email,`address`,cellphone,homephone,
+                            city,`state`,zip,highschool,`weight`,height,gradyear,major,commitment,
+                            gpa,sat,act,sport,primaryposition,secondaryposition,travelteam,ref1name,
+                            ref1jobtitle,ref1email,ref1phone,ref2name,ref2jobtitle,ref2email,
+                            ref2phone,ref3name,ref3jobtitle,ref3email,ref3phone,persstatement,
+                            profileimage,showcase1,showcase2,showcase3,college,persontype 
+                        FROM players WHERE id = :id";
+            //$query = "SELECT name, persontype FROM players WHERE id = :id;";
             $stmt = $this->dbConn->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->execute();
@@ -209,7 +173,7 @@
 
         function getObjectByUsername($table, $className, $username){
             $object = null;
-            $query = "SELECT * FROM $table WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu');";
+            $query = "SELECT * FROM $table WHERE username = :username;";
             $stmt = $this->dbConn->prepare($query);
             $stmt->bindParam(":username", $username);
             $stmt->execute();

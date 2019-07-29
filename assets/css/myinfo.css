@@ -7,7 +7,7 @@
     height: 200px;
     margin: auto;
     text-align: center;
-    padding-top: 150px;
+    padding-top: 50px;
     font-size: 1.5rem;
 }
 .redirect-link{
@@ -131,25 +131,3 @@ h3{
     }
 
 }
-
-/*
-				
-	<input type='submit'
-		value='Get Players'
-		name = 'getPlayers'
-		class='button'
-		id='getPlayers'/>
-
-
-
-
-        <label class='span'>Height*: &nbsp; </label>
-						  	<input type='text'
-								id = 'heightFeet'
-								name= 'heighFeet'
-								size = '35'
-								maxlength = '5'
-								placeholder = '5'10''
-								value='{$player->getHeightFeet()}'
-								onclick='' />
-        */

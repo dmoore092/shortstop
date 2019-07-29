@@ -20,8 +20,8 @@
 	<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 
                     <a href='myinfo.php'>Edit My Profile</a>
     <?php endif; ?>
-                <h2 id='name'><?php echo $player->getName() ?></h2>
-					<h3 id='hs'><?php echo $player->getHighschool() ?></h3>
+                <h2 id='name'><?php echo $player->getName(); ?></h2>
+					<h3 id='hs'><?php echo $player->getHighschool(); ?></h3>
 				</div>
 				<hr/>
 				<div id='profile-area'>

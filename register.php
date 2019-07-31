@@ -1,5 +1,6 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
-
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
+<?php include_once ("classes/Player.PDO.Class.php"); ?>
+<?php include("assets/inc/create_account.php"); ?>
 <?php include("assets/inc/header.inc.php");?>
         <div id="body-main">
             <form id="player-form"
@@ -60,5 +61,6 @@
                                id="btn-create-account"/>
             </form>      
 <?php include("assets/inc/footer.inc.php"); ?>
-<?php include("assets/inc/create_account.php"); ?>
+
+
 

@@ -21,8 +21,10 @@
                         $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
                         
                         $player = new PlayerDB();
+                        var_dump($player);
                         $persontype = 'player';
                         $registered = $player->register($username, $hashed_password, $persontype);
+                        var_dump($persontype);
                         // if(!isset($_POST["persontype"])){
                         //     echo "<p style='color:red';>Please select whether you are a player or coach.</p>";
                         // }
@@ -47,10 +49,8 @@
             $username  = htmlentities(strip_tags(trim($_POST["username"])));
             $password  = htmlentities(strip_tags(trim($_POST["retypepassword"])));
             //$persontype = $_POST['persontype'];
-
             if($_POST["password"] == $password){
                 $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
-                
                 $player = new PlayerDB();
                 $persontype = 'player';
                 $registered = $player->register($username, $hashed_password, $persontype);

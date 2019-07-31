@@ -28,7 +28,7 @@
 				try{
 				 $name = "%".$name."%";
 						$data = array();
-						$stmt = $this->dbConn->prepare("SELECT DISTINCT id, AES_DECRYPT(name, '!trN8xLnaHcA@cKu'), AES_DECRYPT(highscool, '!trN8xLnaHcA@cKu'), AES_DECRYPT(gradYear, '!trN8xLnaHcA@cKu'), AES_DECRYPT(sport, '!trN8xLnaHcA@cKu'), AES_DECRYPT(primaryposition, '!trN8xLnaHcA@cKu') FROM players WHERE name LIKE AES_ENCRYPT(:name, '!trN8xLnaHcA@cKu') and persontype = 'player'"); 
+						$stmt = $this->dbConn->prepare("SELECT id, AES_DECRYPT(name, '!trN8xLnaHcA@cKu'), AES_DECRYPT(highschool, '!trN8xLnaHcA@cKu'), AES_DECRYPT(gradYear, '!trN8xLnaHcA@cKu'), AES_DECRYPT(sport, '!trN8xLnaHcA@cKu'), AES_DECRYPT(primaryposition, '!trN8xLnaHcA@cKu') FROM players WHERE name LIKE AES_DECRYPT(:name, '!trN8xLnaHcA@cKu') and persontype = 'player'"); 
 						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
 						$stmt->execute();
 						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
@@ -142,6 +142,7 @@
 		}
 
 		function getPlayers($data=null){
+			$html = "";
 			if($data != null && count($data) > 0){
 				$html = "<hr/><div class='search-wrapper'>";
 				foreach($data as $player){
@@ -152,7 +153,7 @@
 					$html .= "<p class='player-attrib'><span style='color:#bb0a1e;'>Position: </span>{$player->getPrimaryPosition()}</p>";
 					$html .= "<hr />";
 				}
-				$html .= "</div><!-- end of search-wrapper --></div><!-- end of body-main -->";
+				$html .= "</div><!-- end of search-wrapper -->";
 			}
 			return $html;
 		}
@@ -202,34 +203,20 @@
 		function getPlayersAsTable($data=null){
             if($data != null && count($data) > 0){
                 $html = "<div id='body-main'><div id='table-wrapper'><table>\n";
-                if(true){
-                    $html .= "<tr><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
-                    foreach($data as $player){
-						$html .= "
-                        <tr>
-                            <td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
-							<td>{$player->getHighschool()}</td>
-							<td>{$player->getGradYear()}</td>
-							<td>{$player->getSport()}</td>
-							<td>{$player->getPrimaryPosition()}</td>
-						</tr>\n";
-						//<th>Email</th>
-						//<td><a href='mailto:'{$player->getEmail()}'>{$player->getEmail()}</a></td>
-                    }
-                }else{
-                    $html .= "<tr><th>Player Name</th><th>Sport</th><th>Email</th></tr>";
-                    foreach($data as $project){
-                        $html .= "<tr>
-                            <td>{$project->getProjectName()}</td>
-                            <td>{$project->getProjectLead()}</td>
-                            <td><a href='mailto:{$project->getEmail()}'>{$project->getEmail()}</a></td>
-                            <td>{$project->getDescription()}</td>
-                        </tr>";
-                    }
-                }
+				$html .= "<tr><th>Name</th><th>School</th><th>Class of</th><th>Sport</th><th>Position</th></tr>";
+				foreach($data as $player){
+					$html .= "
+					<tr>
+						<td><a href='profile.php?id={$player->getId()}'>{$player->getName()}</a></td>
+						<td>{$player->getHighschool()}</td>
+						<td>{$player->getGradYear()}</td>
+						<td>{$player->getSport()}</td>
+						<td>{$player->getPrimaryPosition()}</td>
+					</tr>\n";
+				}
                 $html .= "</table></div>";
             }else{
-                $html = "<div id='body-main'><h2 class='errorMsg'>No Players Found</h2></div>";
+                $html = "<div id='body-main'><h2 class='errorMsg'>No Players Found</h2>";
             }
             return $html;
         }
@@ -508,6 +495,7 @@
 		}
 		//checks for duplicate username first
 		function register($username, $hashed_password, $persontype){
+			var_dump($username);
 			$data = [];
 			$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
@@ -515,7 +503,6 @@
 			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
             while($databaseUser = $stmt->fetch()){
 				$data[] = $databaseUser;
-				
 			}
 			if((count($data)) >= 1){
 				return 0;

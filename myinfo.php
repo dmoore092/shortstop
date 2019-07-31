@@ -72,7 +72,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							<select name='gender' required>
 								<option value=' ' selected disabled>Select Gender:</option>
 								<option <?php if($player->getGender() == "Male"){echo "selected";} ?> value='Male'>Male    </option>
-								<option <?php if($player->getGender() == "Femaleale"){echo "selected";} ?> value='Female'>Female  </option>
+								<option <?php if($player->getGender() == "Female"){echo "selected";} ?> value='Female'>Female  </option>
 							</select>
 						</p>
 						<p>

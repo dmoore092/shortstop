@@ -1,0 +1,12 @@
+{
+    "name": "dmo/shortstop",
+    "type": "project",
+    "require": {
+    },
+    "authors": [
+        {
+            "name": "Dale Moore",
+            "email": "dmoore092@gmail.com"
+        }
+    ]
+}

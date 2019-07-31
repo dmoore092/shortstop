@@ -18,7 +18,7 @@
     </head>
     <body>
 <header>
-    <?php require_once('assets/inc/search.inc.php'); ?>
+    <?php //require_once('assets/inc/search.inc.php'); ?>
                 <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
             <div><a href="javascript:void(0);" class="navicon" onclick="openNav()">Menu</a></div>
                 <script>
@@ -54,9 +54,9 @@
             </div><!-- #big-login end
            --><div id="search">
                 <div id="search-container">
-                    <form action='#' method='POST' id="search-form"> 
+                    <form action='results.php' method='POST' id="search-form"> 
                         <input id="textbox" type="text" size="50" placeholder= "First or Last Name" name="search">
-                        <input id="button" class="searchbtn" type="submit" name= "search-btn" value="Search">
+                        <input id="button" class="searchbtn" type="submit" name="search-btn" value="Search">
                     </form>
                 </div>
             </div>

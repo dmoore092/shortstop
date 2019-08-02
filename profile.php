@@ -1,4 +1,4 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
@@ -10,7 +10,6 @@
 <?php include("assets/inc/handle_myinfo.php");?>
 
 <?php include('assets/inc/header.inc.php'); ?>  
-
 <script src="https://js.stripe.com/v3"></script>
 
             <div id='body-main'>
@@ -371,25 +370,101 @@
   									role="link">
 									Pay For Webhosting
 							</button>
+							<div>
+								<form action="" method='POST'>
+									<label for="amount">Name of Feature You're Paying For:</label>
+									<input type='text'
+											id = 'featurename'
+											name = 'featurename'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'e.g. Add Player Payments'
+											value=''/> 
+									<label for="amount">Amount to Pay:</label>
+									<input type='text'
+											id = 'amount'
+											name = 'dollaramount'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Dollar Amount'
+											value=''/>  
+									<input type='submit'
+											value='Pay This Amount'
+											name = 'pay'
+											class='btnSubmit'
+											id="pay"
+											onclick=""/>
+								</form>
+							</div>
 							<div id="error-message"></div>
+							<?php
+require_once('vendor/autoload.php');
+if(isset($_POST["pay"])){
+	$dollaramount = 0;
+	$featurename = "";
+	try{
+		// Set your secret key: remember to change this to your live secret key in production
+		// See your keys here: https://dashboard.stripe.com/account/apikeys
+		\Stripe\Stripe::setApiKey('sk_test_qBigmAJA2s4FoHGSuwfubFpA00EHWL7ygH');
+		if(!empty($_POST["dollaramount"])){
+			$dollaramount = $_POST["dollaramount"] * 100;
+			$featurename = $_POST["featurename"];
+			$session = \Stripe\Checkout\Session::create([
+			'payment_method_types' => ['card'],
+			'line_items' => [[
+				'name' => $featurename,
+				'amount' => $dollaramount,
+				'currency' => 'usd',
+				'quantity' => 1,
+			]],
+			'success_url' => 'https://www.athleticprospects.com/profile.php?id=2',
+			'cancel_url' => 'https://www.athleticprospects.com/profile.php?id=2',
+			]);
+		}
+		else{
+			echo "<script>alert('Please enter a value greater than $0.50');</script>";
+		}
+		
+	}
+	catch(\Stripe\Error\InvalidRequest $e){
+		
+	}
+	catch (Exception $e) {
+		
+	} 
+	
+
+?>
+<script>
+		var stripe2 = Stripe('pk_test_fQSYS2NeV0puQz3wEubTT4mR00As7au9js');
+		stripe2.redirectToCheckout({
+			sessionId: "<?php echo $session["id"]; ?>"
+		}).then(function (result) {
+			//console.log('error: ' + result.error.message);
+		});
+</script>
+<?php
+}//leave this. Makes the stripe integration here work
+?>
+
 		<script>
-			var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
+			// var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
-			var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
-			checkoutButton.addEventListener('click', function () {
-				stripe.redirectToCheckout({
-				items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
+			// var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
+			// checkoutButton.addEventListener('click', function () {
+			// 	stripe.redirectToCheckout({
+			// 	items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
 
-				successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-				cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-				})
-				.then(function (result) {
-				if (result.error) {
-					var displayError = document.getElementById('error-message');
-					displayError.textContent = result.error.message;
-				}
-				});
-			});
+			// 	successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+			// 	cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+			// 	})
+			// 	.then(function (result) {
+			// 	if (result.error) {
+			// 		var displayError = document.getElementById('error-message');
+			// 		displayError.textContent = result.error.message;
+			// 	}
+			// 	});
+			// });
 		</script>
 						</div> <!-- end of fragment 4-->
 						<div id="fragment-5">
@@ -452,4 +527,8 @@
 							<p>Restricted</p>
 					</div>
 <?php endif; ?>
+
+
+
 <?php include("assets/inc/footer.inc.php"); ?>
+

@@ -2,6 +2,7 @@
     "name": "dmo/shortstop",
     "type": "project",
     "require": {
+        "stripe/stripe-php": "^6.41"
     },
     "authors": [
         {

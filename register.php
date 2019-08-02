@@ -2,12 +2,36 @@
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
 <?php include("assets/inc/create_account.php"); ?>
 <?php include("assets/inc/header.inc.php");?>
+<script>
+    function checkRegistrationForm(){
+        var passwordsMatch = "<?php echo $passwordsMatch; ?> ";
+        var registrationcode = document.getElementById("registrationcode").value;
+        if(uniqueUsername == false){
+            event.preventDefault();
+            document.getElementById('username-error').style='color:red;display:block;';
+            document.getElementById('username').style='border:2px solid red;';
+        }
+        else if(registrationcode.toLowerCase() !== "elite prospects"){
+            event.preventDefault();
+            document.getElementById("registrationcode").style="border:2px solid red";
+            document.getElementById("registration-code-error").style="display:block;";
+        }
+        else if(document.getElementById("password1").value !== document.getElementById("password2").value){
+            event.preventDefault();
+            document.getElementById("password1").style="border:2px solid red";
+            document.getElementById("password2").style="border:2px solid red";
+            document.getElementById("password-match-error").style="display:block;";
+        }
+
+    }
+</script>
         <div id="body-main">
             <form id="player-form"
                          method = "POST"
                          action= ""
-                         onsubmit = "" >
+                         onsubmit = "checkRegistrationForm();" >
                         <h2>Create an Account</h2>
+                        <p id="username-error">Username is taken, please choose another</p>
                         <p>
                             <span class="span">Username:* &nbsp; </span>
                             <input type="text"
@@ -19,9 +43,11 @@
                                    value=""
                                    required />
                         </p>
+                        <p id="password-match-error">Passwords do not match. Please try again.</p>
                         <p>
                         <span class="span">Password:* &nbsp; </span>
                             <input type="password"
+                                   id="password1"
                                    class = "password"
                                    name= "password"
                                    size = "25"
@@ -33,6 +59,7 @@
                         <p>
                         <span class="span">Retype Password:* &nbsp; </span> 
                             <input type="password"
+                                   id="password2"
                                    class = "password"
                                    name= "retypepassword"
                                    size = "25"
@@ -41,9 +68,19 @@
                                    value=""
                                    required />
                         </p>
-                    <?php if($environment == 'production'){ ?>
-                        <div class="g-recaptcha" data-sitekey="6LfGGJEUAAAAAChOm6ZDVpoo3ZbjdUsfwfYT6Omj"></div>
-                    <?php } ?>
+                        <p id="registration-code-error">Please enter the correct registration code.<p>
+                        <p>
+                        <span class="span">Registration Code:* &nbsp; </span> 
+                            <input type="text"
+                                   class = "password"
+                                   name= "registrationcode"
+                                   id ="registrationcode"
+                                   size = "25"
+                                   maxlength = "50"
+                                   placeholder = "Enter your registration code"
+                                   value=""
+                                   required />
+                        </p>
                        <?php 
                             //wrapped in php to hide from inspect
                             //<p>
@@ -59,7 +96,8 @@
                                name = "btnCreate"
                                class="btn-all-buttons"
                                id="btn-create-account"/>
-            </form>      
+            </form> 
+            <p style="text-align:center;margin-top:15px;">Contact <a href="mailto:kprestano@athleticprospects.com">kprestano@athleticprospects.com</a> if you need a registration code</p>     
 <?php include("assets/inc/footer.inc.php"); ?>
 
 

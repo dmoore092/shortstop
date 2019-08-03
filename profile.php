@@ -175,7 +175,7 @@
 							<li><a href="#fragment-5" class="tab-headers">Edit Site Content</a></li>
 							<li><a href="#fragment-2" class="tab-headers">Delete Profiles</a></li>
 							<li><a href="#fragment-3" class="tab-headers">Download Database</a></li>
-							<li><a href="#fragment-4" class="tab-headers">Pay For Webhosting</a></li>
+							<li><a href="#fragment-4" class="tab-headers">Pay For Web Development</a></li>
 						</ul>
 						<div id="fragment-1">
 							<h3>Blog Post</h3>
@@ -363,14 +363,7 @@
 							</form>
 						</div> <!-- end of fragment 3 -->
 						<div id="fragment-4">
-							<!-- <form action="" method='POST'> -->
-							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  									id="checkout-button-plan_FJ7HouBZeAK4zB"
-									class="btnSubmit"
-  									role="link">
-									Pay For Webhosting
-							</button>
-							<div>
+							<div id="variable-pay">
 								<form action="" method='POST'>
 									<label for="amount">Name of Feature You're Paying For:</label>
 									<input type='text'
@@ -378,7 +371,7 @@
 											name = 'featurename'
 											size = '20'
 											maxlength = '50'
-											placeholder = 'e.g. Add Player Payments'
+											placeholder = 'e.g. Blog Redesign'
 											value=''/> 
 									<label for="amount">Amount to Pay:</label>
 									<input type='text'
@@ -396,6 +389,13 @@
 											onclick=""/>
 								</form>
 							</div>
+								<!-- <form action="" method='POST'> -->
+								<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  									id="checkout-button-plan_FJ7HouBZeAK4zB"
+									class="btnSubmit"
+  									role="link">
+									Pay For Webhosting($40/mo)
+								</button>
 							<div id="error-message"></div>
 							<?php
 require_once('vendor/autoload.php');
@@ -405,7 +405,7 @@ if(isset($_POST["pay"])){
 	try{
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here: https://dashboard.stripe.com/account/apikeys
-		\Stripe\Stripe::setApiKey('sk_test_qBigmAJA2s4FoHGSuwfubFpA00EHWL7ygH');
+		\Stripe\Stripe::setApiKey('sk_live_rESgN13voLaezuatjONWTwiM00KXVZVC6n');
 		if(!empty($_POST["dollaramount"])){
 			$dollaramount = $_POST["dollaramount"] * 100;
 			$featurename = $_POST["featurename"];
@@ -436,7 +436,7 @@ if(isset($_POST["pay"])){
 
 ?>
 <script>
-		var stripe2 = Stripe('pk_test_fQSYS2NeV0puQz3wEubTT4mR00As7au9js');
+		var stripe2 = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 		stripe2.redirectToCheckout({
 			sessionId: "<?php echo $session["id"]; ?>"
 		}).then(function (result) {
@@ -448,23 +448,23 @@ if(isset($_POST["pay"])){
 ?>
 
 		<script>
-			// var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
+			var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
-			// var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
-			// checkoutButton.addEventListener('click', function () {
-			// 	stripe.redirectToCheckout({
-			// 	items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
+			var checkoutButton = document.getElementById('checkout-button-plan_FJ7HouBZeAK4zB');
+			checkoutButton.addEventListener('click', function () {
+				stripe.redirectToCheckout({
+				items: [{plan: 'plan_FJ7HouBZeAK4zB', quantity: 1}],
 
-			// 	successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-			// 	cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
-			// 	})
-			// 	.then(function (result) {
-			// 	if (result.error) {
-			// 		var displayError = document.getElementById('error-message');
-			// 		displayError.textContent = result.error.message;
-			// 	}
-			// 	});
-			// });
+				successUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				cancelUrl: window.location.protocol + '//www.athleticprospects.com/profile.php?id=2',
+				})
+				.then(function (result) {
+				if (result.error) {
+					var displayError = document.getElementById('error-message');
+					displayError.textContent = result.error.message;
+				}
+				});
+			});
 		</script>
 						</div> <!-- end of fragment 4-->
 						<div id="fragment-5">

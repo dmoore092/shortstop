@@ -1,35 +1,31 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
-<?php include("assets/inc/create_account.php"); ?>
 <?php include("assets/inc/header.inc.php");?>
+
 <script>
     function checkRegistrationForm(){
-        var passwordsMatch = "<?php echo $passwordsMatch; ?> ";
         var registrationcode = document.getElementById("registrationcode").value;
-        if(uniqueUsername == false){
-            event.preventDefault();
-            document.getElementById('username-error').style='color:red;display:block;';
-            document.getElementById('username').style='border:2px solid red;';
-        }
-        else if(registrationcode.toLowerCase() !== "elite prospects"){
+        if(registrationcode.toLowerCase() !== "elite prospects"){
             event.preventDefault();
             document.getElementById("registrationcode").style="border:2px solid red";
             document.getElementById("registration-code-error").style="display:block;";
+            return false;
         }
         else if(document.getElementById("password1").value !== document.getElementById("password2").value){
             event.preventDefault();
             document.getElementById("password1").style="border:2px solid red";
             document.getElementById("password2").style="border:2px solid red";
             document.getElementById("password-match-error").style="display:block;";
+            return false;
         }
-
-    }
+        return true;
+    } 
 </script>
         <div id="body-main">
             <form id="player-form"
                          method = "POST"
                          action= ""
-                         onsubmit = "checkRegistrationForm();" >
+                         onsubmit = "return checkRegistrationForm();" >
                         <h2>Create an Account</h2>
                         <p id="username-error">Username is taken, please choose another</p>
                         <p>
@@ -100,5 +96,4 @@
             <p style="text-align:center;margin-top:15px;">Contact <a href="mailto:kprestano@athleticprospects.com">kprestano@athleticprospects.com</a> if you need a registration code</p>     
 <?php include("assets/inc/footer.inc.php"); ?>
 
-
-
+<?php include("assets/inc/create_account.php"); ?>

@@ -75,9 +75,10 @@
                         <li><a href="<?php if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']){echo "profile.php?id=".$_SESSION['id'];}else{echo "login.php";}?>">My Profile</a></li>
                         <li><a href="about.php">About Us</a></li>
                         <li><a href="findathletes.php">Find Athletes</a></li>
-                        <!-- <li><a href="findcoaches.php">Find Coaches</a></li> -->
-                        <!-- <li><a href="services.php">Services</a></li> -->
+                       <?php // <li><a href="findcoaches.php">Find Coaches</a></li>
+                        //<li><a href="services.php">Services</a></li> ?>
                         <li><a href="register.php">Register</a></li>
+                        <li><a href="blog.php">Blog</a></li>
                     </ul><!-- end of #top-bar -->
                 </div>
             <div id="logo"><img src="/assets/img/siteLogo.png" alt="logo" id="logo-img"></div>

@@ -187,7 +187,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 						<p>
 							<label class='span'>Sport*: &nbsp; </label>
 							<select name='sport' required autocomplete="off">
-                                <option value=' '  disabled>Select Sport:</option>
+                                <option value=' ' selected disabled>Select Sport:</option>
 <?php foreach($sports as $key=>$value){ ?>
                                 <option <?php if($player->getSport() == $value){echo "selected ";}?>value=<?php echo "'".$key."'" ?> ><?php echo $value ?></option>
 <?php } ?>
@@ -461,7 +461,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							   name = 'updateUserInfo'
 							   class='btn-all-buttons'
 							   id='btnSubmit'
-							   onClick='checkMyInfo()' />
+							   onClick='' />
 				</form>
 				<a href='passwordreset.php'>Reset my password>>></a>
 <?php } else {?>

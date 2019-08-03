@@ -5,8 +5,7 @@
         //block cross-site scripting, html entities(apersand etc), trim white space
         $username  = htmlentities(strip_tags(trim($_POST["username"])));
         $password  = htmlentities(strip_tags(trim($_POST["retypepassword"])));
-        //$persontype = $_POST['persontype'];
-        if($_POST["registrationcode"] == "sportsmanship"){
+        if($_POST["registrationcode"] == strtolower("elite prospects")){
             if($_POST["password"] == $password){
                 $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
                 
@@ -25,6 +24,10 @@
                 }
                 else{
                     $uniqueUsername = false;
+                    echo "<script>
+                            document.getElementById('username-error').style='color:red;display:block;';
+                            document.getElementById('username').style='border:2px solid red;';
+                          </script>";
                 }
             }
         }       

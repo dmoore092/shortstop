@@ -1,0 +1,13 @@
+{
+    "name": "dmo/shortstop",
+    "type": "project",
+    "require": {
+        "stripe/stripe-php": "^6.41"
+    },
+    "authors": [
+        {
+            "name": "Dale Moore",
+            "email": "dmoore092@gmail.com"
+        }
+    ]
+}

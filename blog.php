@@ -1,7 +1,7 @@
 <?php include("config/pageconfig.php"); session_start();?>
 <?php include("assets/inc/header.inc.php") ?>
         <div id="body-main">   
-            <h1>Blog</h1>
+            <h1>Blog @ Athletic Prospects</h1>
             <hr />
             <div class="blog">
          <?php
@@ -86,7 +86,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
     try{
         if ($_SESSION['id'] == 1 || $_SESSION['id'] == 2) {
             if(isset($_GET['delete-post'])){
-                $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+                $mysqli = new mysqli("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
                 if($mysqli->connect_error) {
                     exit('Error connecting to database'); 
                   }
@@ -96,7 +96,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
                 $stmt = $mysqli->prepare("DELETE FROM blog_posts WHERE id = ?");
                 $stmt->bind_param("i", $_GET['delete-post']);
                 echo "<script>";
-                echo "var confirm = window.confirm('Confirm Delete Post?');";
+                echo "var confirm = window.confirm('Do you really want to delete that post?');";
                 echo "if(confirm === true){";
                         $stmt->execute();
                 echo    "window.location.href = 'blog.php';";

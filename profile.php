@@ -10,7 +10,6 @@
 <?php include("assets/inc/handle_myinfo.php");?>
 
 <?php include('assets/inc/header.inc.php'); ?>  
-
 <script src="https://js.stripe.com/v3"></script>
 
             <div id='body-main'>
@@ -20,8 +19,8 @@
 	<?php if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']): ?> 
                     <a href='myinfo.php'>Edit My Profile</a>
     <?php endif; ?>
-                <h2 id='name'><?php echo $player->getName() ?></h2>
-					<h3 id='hs'><?php echo $player->getHighschool() ?></h3>
+                <h2 id='name'><?php echo $player->getName(); ?></h2>
+					<h3 id='hs'><?php echo $player->getHighschool(); ?></h3>
 				</div>
 				<hr/>
 				<div id='profile-area'>
@@ -176,7 +175,7 @@
 							<li><a href="#fragment-5" class="tab-headers">Edit Site Content</a></li>
 							<li><a href="#fragment-2" class="tab-headers">Delete Profiles</a></li>
 							<li><a href="#fragment-3" class="tab-headers">Download Database</a></li>
-							<li><a href="#fragment-4" class="tab-headers">Pay For Webhosting</a></li>
+							<li><a href="#fragment-4" class="tab-headers">Pay For Web Development</a></li>
 						</ul>
 						<div id="fragment-1">
 							<h3>Blog Post</h3>
@@ -364,14 +363,90 @@
 							</form>
 						</div> <!-- end of fragment 3 -->
 						<div id="fragment-4">
-							<!-- <form action="" method='POST'> -->
-							<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+							<div id="variable-pay">
+								<form action="" method='POST'>
+									<label for="amount">Name of Feature You're Paying For:</label>
+									<input type='text'
+											id = 'featurename'
+											name = 'featurename'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'e.g. Blog Redesign'
+											value=''/> 
+									<label for="amount">Amount to Pay:</label>
+									<input type='text'
+											id = 'amount'
+											name = 'dollaramount'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Dollar Amount'
+											value=''/>  
+									<input type='submit'
+											value='Pay This Amount'
+											name = 'pay'
+											class='btnSubmit'
+											id="pay"
+											onclick=""/>
+								</form>
+							</div>
+								<!-- <form action="" method='POST'> -->
+								<button style="background-color:#bb0a1e;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
   									id="checkout-button-plan_FJ7HouBZeAK4zB"
 									class="btnSubmit"
   									role="link">
-									Pay For Webhosting
-							</button>
+									Pay For Webhosting($40/mo)
+								</button>
 							<div id="error-message"></div>
+							<?php
+require_once('vendor/autoload.php');
+if(isset($_POST["pay"])){
+	$dollaramount = 0;
+	$featurename = "";
+	try{
+		// Set your secret key: remember to change this to your live secret key in production
+		// See your keys here: https://dashboard.stripe.com/account/apikeys
+		\Stripe\Stripe::setApiKey('sk_live_rESgN13voLaezuatjONWTwiM00KXVZVC6n');
+		if(!empty($_POST["dollaramount"])){
+			$dollaramount = $_POST["dollaramount"] * 100;
+			$featurename = $_POST["featurename"];
+			$session = \Stripe\Checkout\Session::create([
+			'payment_method_types' => ['card'],
+			'line_items' => [[
+				'name' => $featurename,
+				'amount' => $dollaramount,
+				'currency' => 'usd',
+				'quantity' => 1,
+			]],
+			'success_url' => 'https://www.athleticprospects.com/profile.php?id=2',
+			'cancel_url' => 'https://www.athleticprospects.com/profile.php?id=2',
+			]);
+		}
+		else{
+			echo "<script>alert('Please enter a value greater than $0.50');</script>";
+		}
+		
+	}
+	catch(\Stripe\Error\InvalidRequest $e){
+		
+	}
+	catch (Exception $e) {
+		
+	} 
+	
+
+?>
+<script>
+		var stripe2 = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
+		stripe2.redirectToCheckout({
+			sessionId: "<?php echo $session["id"]; ?>"
+		}).then(function (result) {
+			//console.log('error: ' + result.error.message);
+		});
+</script>
+<?php
+}//leave this. Makes the stripe integration here work
+?>
+
 		<script>
 			var stripe = Stripe('pk_live_S2WeKKv4ANIOBSjI3FdXx5Uf00TTNsDx2j');
 
@@ -452,4 +527,8 @@
 							<p>Restricted</p>
 					</div>
 <?php endif; ?>
+
+
+
 <?php include("assets/inc/footer.inc.php"); ?>
+

@@ -23,3 +23,4 @@
                  <button type="submit" name="reset" class="btn-all-buttons" id="btn-reset">Reset</button>
             </form>
 <?php include('assets/inc/footer.inc.php'); ?>
+

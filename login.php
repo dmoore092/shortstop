@@ -28,4 +28,3 @@
 <?php include('assets/inc/password_reset_actual.php'); ?>
 <?php include('assets/inc/footer.inc.php'); ?>
 
-

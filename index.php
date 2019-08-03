@@ -1,10 +1,9 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include("classes/Player.PDO.Class.php");?>
 <?php include('assets/inc/header.inc.php'); ?>
-
         <div id="body-main">
             <div id="content">
                 <section>
-                    
                     <?php 
                         try{
                             $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');

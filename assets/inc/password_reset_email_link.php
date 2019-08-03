@@ -7,6 +7,8 @@
      require_once './PHPMailer/src/PHPMailer.php';
      require_once './PHPMailer/src/SMTP.php';
 
+     $playerDB = new PlayerDB();
+     
     if(isset($_POST['reset'])){
         $username = $playerDB->sanitize($_POST['username']);
         $username = strtolower($username);

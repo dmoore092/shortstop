@@ -5,7 +5,7 @@
         //block cross-site scripting, html entities(apersand etc), trim white space
         $username  = htmlentities(strip_tags(trim($_POST["username"])));
         $password  = htmlentities(strip_tags(trim($_POST["retypepassword"])));
-        if($_POST["registrationcode"] == strtolower("elite prospects")){
+        if(strtolower($_POST["registrationcode"]) == "elite prospects"){
             if($_POST["password"] == $password){
                 $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
                 

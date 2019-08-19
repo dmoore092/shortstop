@@ -187,7 +187,7 @@
 									enctype='multipart/form-data' >
 							<input type='text'
 									id = 'title'
-									name = 'title'
+									name = 'title'`
 									size = '20'
 									maxlength = '50'
 									placeholder = 'Title'

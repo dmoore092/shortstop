@@ -4,14 +4,14 @@
 	include("classes/Player.class.php");
 
 	/*
-	* UserDB class contains all of the methods for using PHP Data Objects to 
-	* interface with the database, specifically in relation to users.
+	* PlayerDB class contains all of the methods for using PHP Data Objects to 
+	* interface with the database, specifically in relation to players.
 	* version 11/6/2018
-	*/
+	*/ 
     class PlayerDB extends DB{
         private $dbConn;
 		/*
-		* Constructor for UserDB calls the parent constructor and obtains the connection
+		* Constructor for PlayerDB calls the parent constructor and obtains the connection
 		* using the connection accessor method. This will allow us to use methods in the parent class.
 		*/
         function __construct(){
@@ -495,7 +495,7 @@
 		}
 		//checks for duplicate username first
 		function register($username, $hashed_password, $persontype){
-			var_dump($username);
+			//var_dump($username);
 			$data = [];
 			$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 			$stmt->bindParam(1, $username, PDO::PARAM_STR);
@@ -538,6 +538,20 @@
 				}
 			}
 			
+		}
+		function getPlayerNamesForAdmin(){
+			$arr = array();
+			$stmt = $this->dbConn->prepare("SELECT id, AES_DECRYPT(`name`, '!trN8xLnaHcA@cKu') as `name` FROM players WHERE persontype = 'player'");
+			// $stmt->bindParam(1, $username, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
+            while($databaseUser = $stmt->fetch()){
+				$data[] = $databaseUser;
+			}
+			if((count($data)) == 1){
+				//var_dump($data[0]);
+			}
+			return $data;
 		}
 	} // class
 ?>

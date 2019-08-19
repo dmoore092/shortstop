@@ -1,4 +1,7 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); 
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+?>
 <?php include("classes/Player.PDO.Class.php");?>
 <?php include('assets/inc/do_login.php'); ?>
 <?php include('assets/inc/header.inc.php'); ?>
@@ -27,4 +30,3 @@
             </form>
 <?php include('assets/inc/password_reset_actual.php'); ?>
 <?php include('assets/inc/footer.inc.php'); ?>
-

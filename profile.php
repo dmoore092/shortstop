@@ -1,4 +1,4 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
@@ -173,6 +173,7 @@
 						<ul>
 							<li><a href="#fragment-1" class="tab-headers">Post A Blog</a></li>
 							<li><a href="#fragment-5" class="tab-headers">Edit Site Content</a></li>
+							<li><a href="#fragment-6" class="tab-headers">Edit a Player Profile</a></li>
 							<li><a href="#fragment-2" class="tab-headers">Delete Profiles</a></li>
 							<li><a href="#fragment-3" class="tab-headers">Download Database</a></li>
 							<li><a href="#fragment-4" class="tab-headers">Pay For Web Development</a></li>
@@ -209,6 +210,47 @@
 									id='btn-post'/>
 							</form>
 						</div> <!-- fragment 1 -->
+						<div id="fragment-6">
+							<h3>Edit Player Profile</h3>
+							<form	id='edit-player-form'
+									class='admin-panel'
+									method = 'POST'
+									action= ''
+									onsubmit = '' 
+									enctype='multipart/form-data' >
+								<select name='sport'>
+									<option value=' ' selected disabled>Select Player:</option>
+						<?php $ids = $playerDB->getPlayerNamesForAdmin(); 
+							foreach($ids as $value){
+								echo $value->getName();
+								echo "<option value='{$value->getName()}'>{$value->getName()}</option>";
+							}
+						?>
+								</select>
+							<input type='text'
+									id = 'name'
+									name = 'title'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Title'
+									value=''
+									onclick='' />
+							<input type='text'
+									id = 'tags'
+									name = 'tags'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Tags'
+									value=''
+									onclick='' />
+							<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
+							<input type='submit'
+									value='Submit New Player Details'
+									name = 'submit-player-details'
+									class='btnSubmit'
+									id='btn-post'/>
+							</form>
+						</div> <!-- fragment 6 -->
 						<div id="fragment-2">
 							<h3>Search for Player</h3>
 							<div id='form-wrapper'>

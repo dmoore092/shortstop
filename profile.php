@@ -1,4 +1,9 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); ?>
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
@@ -162,7 +167,27 @@
 <?php elseif($player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 1 || $player != null && $player->getPersonType() == 'admin' && $_SESSION['id'] == 2): ?>
 					<script>
 						window.onload = function() {
-							$( "#tabs" ).tabs();
+							var index = 'admin-active-tab';
+							//  Define friendly data store name
+							var dataStore = window.sessionStorage;
+							var oldIndex = 0;
+							//  Start magic!
+							try {
+								// getter: Fetch previous value
+								oldIndex = dataStore.getItem(index);
+							} catch(e) {}
+							$( "#tabs" ).tabs({
+								active: oldIndex,
+								activate: function(event, ui) {
+									//  Get future value
+									var newIndex = ui.newTab.parent().children().index(ui.newTab);
+									//  Set future value
+									try {
+										dataStore.setItem( index, newIndex );
+									} catch(e) {}
+								}
+							}
+							);
 							$( "#edit-tabs" ).tabs();
 						}
 					</script>
@@ -172,11 +197,11 @@
 					<div id="tabs">
 						<ul>
 							<li><a href="#fragment-1" class="tab-headers">Post A Blog</a></li>
-							<li><a href="#fragment-5" class="tab-headers">Edit Site Content</a></li>
-							<li><a href="#fragment-6" class="tab-headers">Edit a Player Profile</a></li>
-							<li><a href="#fragment-2" class="tab-headers">Delete Profiles</a></li>
-							<li><a href="#fragment-3" class="tab-headers">Download Database</a></li>
-							<li><a href="#fragment-4" class="tab-headers">Pay For Web Development</a></li>
+							<li><a href="#fragment-2" class="tab-headers">Edit Site Content</a></li>
+							<li><a href="#fragment-3" class="tab-headers">Edit a Player Profile</a></li>
+							<li><a href="#fragment-4" class="tab-headers">Delete Profiles</a></li>
+							<li><a href="#fragment-5" class="tab-headers">Download Database</a></li>
+							<li><a href="#fragment-6" class="tab-headers">Pay For Web Development</a></li>
 						</ul>
 						<div id="fragment-1">
 							<h3>Blog Post</h3>
@@ -210,7 +235,59 @@
 									id='btn-post'/>
 							</form>
 						</div> <!-- fragment 1 -->
-						<div id="fragment-6">
+						<div id="fragment-2">
+							<div id="edit-tabs">
+								<ul>
+									<li><a href="#about-us" class="tab-headers">Edit About Us</a></li>
+									<li><a href="#home-page" class="tab-headers">Edit Home Page</a></li>
+								</ul>
+								<div id="about-us">
+									<form id='edit-about-us-form'
+											class='edit-about-us'
+											method = 'POST'
+											action='about.php'
+											enctype='multipart/form-data'>
+											<h4>Section: About Us</h4>
+										<input type='text'
+											id = 'about-us-header'
+											name = 'about-us-header'
+											value='<?php echo $_SESSION['aboutUsHeader'] ?>'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Header'/>
+										<textarea name='about-us-content' form='edit-about-us-form' id='about-us-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['aboutUsText'] ?></textarea>
+										<input type='submit'
+											value='Submit "About Us" Section'
+											name = 'submit-about-us'
+											class='btnSubmit'
+											id='btn-about-us'/>
+									</form>
+								</div> <!-- end of about-us -->
+								<div id="home-page">
+									<form id='edit-home-page-form'
+											class='edit-home-page'
+											method = 'POST'
+											action= 'index.php'
+											enctype='multipart/form-data'>
+										<h4>Section: Home Page</h4>
+										<input type='text'
+											id = 'home-page-header'
+											name = 'home-page-header'
+											value='<?php echo $_SESSION['homePageHeader'] ?>'
+											size = '20'
+											maxlength = '50'
+											placeholder = 'Header' />
+										<textarea name='home-page-content' form='edit-home-page-form' id='home-page-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['homePageText'] ?></textarea>
+										<input type='submit'
+											value='Submit "Home Page" Section'
+											name = 'submit-home-page'
+											class='btnSubmit'
+											id='btn-home-page'/>
+									</form>
+								</div> <!-- end of home-page -->
+							</div> <!-- end of edit-tabs-->
+						</div> <!-- end of fragment 2-->
+						<div id="fragment-3">
 							<h3>Edit Player Profile</h3>
 							<form	id='edit-player-form'
 									class='admin-panel'
@@ -218,40 +295,317 @@
 									action= ''
 									onsubmit = '' 
 									enctype='multipart/form-data' >
-								<select name='sport'>
-									<option value=' ' selected disabled>Select Player:</option>
-						<?php $ids = $playerDB->getPlayerNamesForAdmin(); 
-							foreach($ids as $value){
-								echo $value->getName();
-								echo "<option value='{$value->getName()}'>{$value->getName()}</option>";
-							}
-						?>
-								</select>
+								<div>
+									<select name='playerid'>
+										<option value=' ' selected disabled>Select Player:</option>
+							<?php $ids = $playerDB->getPlayerNamesForAdmin(); 
+								foreach($ids as $value){
+									echo $value->getName();
+									echo "<option value='{$value->getId()}'>{$value->getName()}</option>";
+								}
+							?>
+									</select>
+									<input type='submit'
+										value='Get Player Info'
+										name = 'get-player-info'
+										class='btnSubmit'
+										id='btn-post'/>
+								</div>
+<?php
+
+if(isset($_POST['get-player-info'])){
+	$info = $playerDB->getObjectByID($_POST['playerid']);
+	//var_dump($info->getName());
+}
+?>
 							<input type='text'
 									id = 'name'
-									name = 'title'
+									name = 'name'
 									size = '20'
 									maxlength = '50'
-									placeholder = 'Title'
-									value=''
+									placeholder = 'Name'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getName();} ?>'
 									onclick='' />
 							<input type='text'
-									id = 'tags'
-									name = 'tags'
+									id = 'email'
+									name = 'email'
 									size = '20'
 									maxlength = '50'
-									placeholder = 'Tags'
-									value=''
+									placeholder = 'Email'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getEmail();} ?>'
 									onclick='' />
-							<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
+							<select name="gender" id="gender">
+								<option value="gender">gender</option>
+							</select>
+							<input type='text'
+									id = 'cellphone'
+									name = 'cellphone'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Cell Phone'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getCellPhone();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'homephone'
+									name = 'homephone'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Home Phone'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getHomePhone();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'address'
+									name = 'address'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Address'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getAddress();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'city'
+									name = 'city'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'City'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getCity();} ?>'
+									onclick='' />
+							<select name="state" id="state">
+								<option value="">State</option>
+							</select>
+							<input type='text'
+									id = 'zip'
+									name = 'Zip'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'zip'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getZip();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'highschool'
+									name = 'highschool'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'School'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getHighschool();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'gradYear'
+									name = 'gradYear'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Graduation Year'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getGradYear();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'gpa'
+									name = 'gpa'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'GPA'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getGpa();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'sat'
+									name = 'sat'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'SAT'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getSat();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'act'
+									name = 'act'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'ACT'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getAct();} ?>'
+									onclick='' />
+							<select name="sport" id="sport">
+								<option value="sport">sport</option>
+							</select>
+							<input type='text'
+									id = 'primaryPosition'
+									name = 'primaryPosition'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Primary Position'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getPrimaryPosition();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'secondaryPosition'
+									name = 'SecondaryPosition'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Secondary Position'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getSecondaryPosition();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'travelTeam'
+									name = 'travelTeam'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Travel Team'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getTravelTeam();} ?>'
+									onclick='' />
+							<select name="height" id="height">
+								<option value="height">height</option>
+							</select>
+							<input type='text'
+									id = 'weight'
+									name = 'weight'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Weight'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getWeight();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'major'
+									name = 'major'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Major'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getMajor();} ?>'
+									onclick='' />
+							<input type='text'
+									id = 'commitment'
+									name = 'commitment'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Commitment'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getCommitment();} ?>'
+									onclick='' />
+							<span class='span'>Replace Player Profile Picture: &nbsp; </span>
+							<input type='file' name='profileImage' accept='image/*'>
+							
+							<span class='span'>Upload Video ( Showcase 1 ): &nbsp; </span>
+							<input type='text' name='showcase1' id='showcase1' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $player->getShowcase1();}?>>
+							
+							<span class='span'>Upload Video ( Showcase 2 ): &nbsp; </span>
+							<input type='text' name='showcase1' id='showcase2' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $player->getShowcase2();}?>>
+							
+							<span class='span'>Upload Video ( Showcase 3 ): &nbsp; </span>
+							<input type='text' name='showcase1' id='showcase3' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $player->getShowcase3();}?>>
+							
+							<!-- <textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea> -->
+							<p class='span'>Reference 1</p>
+							<input type='text'
+									   id = 'ref1-name'
+									   name = 'ref1Name'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'First and Last Name'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1Name();;}?>'
+									    >
+							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref1-job-title'
+									   name = 'ref1JobTitle'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'Reference 1 Job Title'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1JobTitle();}?>'
+									    >
+							 <!--   <span class='span'>Email: &nbsp; </span> -->
+								<input type='email'
+									   id = 'ref1-email'
+									   name = 'ref1Email'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'example@example.con'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1Email();}?>'
+									    >
+							  <!--  <span class='span'>Phone Number: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref1-phone'
+									   name = 'ref1Phone'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'xxx-xxx-xxxx'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1Phone();}?>'
+									    >
+						<p class='span'>Reference 2</p>
+							  <!--  <span class='span'>Name: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref2-name'
+									   name = 'ref2Name'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'First and Last Name'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2Name();}?>'
+									    >
+							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref2-job-title'
+									   name = 'ref2JobTitle'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'Reference 2 Job Title'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2JobTitle();}?>'
+									    >
+							  <!--  <span class='span'>Email: &nbsp; </span> -->
+								<input type='email'
+									   id = 'ref2-email'
+									   name = 'ref2Email'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'example@example.com'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2Email();}?>'
+									    >
+							  <!--  <span class='span'>Phone Number: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref2-phone'
+									   name = 'ref2Phone'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'xxx-xxx-xxxx'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2Phone();}?>'
+									    >
+						<p class='span'>Reference 3</p>
+							 <!--   <span class='span'>Name: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref3-name'
+									   name = 'ref3Name'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'First and Last Name'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3Name();}?>'
+									    >
+							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref3-job-title'
+									   name = 'ref3JobTitle'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'Reference 3 Job Title'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3JobTitle();}?>'
+									    >
+							  <!--  <span class='span'>Email: &nbsp; </span> -->
+								<input type='email'
+									   id = 'ref3-email'
+									   name = 'ref3Email'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'example@example.com'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3Email();}?>'
+									    >
+								<!-- <span class='span'>Phone Number: &nbsp; </span> -->
+								<input type='text'
+									   id = 'ref3-phone'
+									   name = 'ref3Phone'
+									   size = '35'
+									   maxlength = '50'
+									   placeholder = 'xxx-xxx-xxxx'
+									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3Phone();}?>'
+									    >
+
 							<input type='submit'
-									value='Submit New Player Details'
-									name = 'submit-player-details'
+									value="Update This Player's Details"
+									name = 'update-player-details'
 									class='btnSubmit'
 									id='btn-post'/>
 							</form>
-						</div> <!-- fragment 6 -->
-						<div id="fragment-2">
+						</div> <!-- fragment 3 -->
+						<div id="fragment-4">
 							<h3>Search for Player</h3>
 							<div id='form-wrapper'>
 								<form   id='player-form'
@@ -394,8 +748,8 @@
 										id='btn-Submit'/>
 								</form>
 								</div> <!-- end of form-wrapper -->
-						</div> <!-- end of fragment 2 -->
-						<div id="fragment-3" >
+						</div> <!-- end of fragment 4 -->
+						<div id="fragment-5" >
 							<form action="" method='POST'>
 							<input type='submit'
 										value='Download Database'
@@ -403,8 +757,8 @@
 										class='btnSubmit'
 										id=''/>
 							</form>
-						</div> <!-- end of fragment 3 -->
-						<div id="fragment-4">
+						</div> <!-- end of fragment 5 -->
+						<div id="fragment-6">
 							<div id="variable-pay">
 								<form action="" method='POST'>
 									<label for="amount">Name of Feature You're Paying For:</label>
@@ -508,59 +862,7 @@ if(isset($_POST["pay"])){
 				});
 			});
 		</script>
-						</div> <!-- end of fragment 4-->
-						<div id="fragment-5">
-							<div id="edit-tabs">
-								<ul>
-									<li><a href="#about-us" class="tab-headers">Edit About Us</a></li>
-									<li><a href="#home-page" class="tab-headers">Edit Home Page</a></li>
-								</ul>
-								<div id="about-us">
-									<form id='edit-about-us-form'
-											class='edit-about-us'
-											method = 'POST'
-											action='about.php'
-											enctype='multipart/form-data'>
-											<h4>Section: About Us</h4>
-										<input type='text'
-											id = 'about-us-header'
-											name = 'about-us-header'
-											value='<?php echo $_SESSION['aboutUsHeader'] ?>'
-											size = '20'
-											maxlength = '50'
-											placeholder = 'Header'/>
-										<textarea name='about-us-content' form='edit-about-us-form' id='about-us-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['aboutUsText'] ?></textarea>
-										<input type='submit'
-											value='Submit "About Us" Section'
-											name = 'submit-about-us'
-											class='btnSubmit'
-											id='btn-about-us'/>
-									</form>
-								</div> <!-- end of about-us -->
-								<div id="home-page">
-									<form id='edit-home-page-form'
-											class='edit-home-page'
-											method = 'POST'
-											action= 'index.php'
-											enctype='multipart/form-data'>
-										<h4>Section: Home Page</h4>
-										<input type='text'
-											id = 'home-page-header'
-											name = 'home-page-header'
-											value='<?php echo $_SESSION['homePageHeader'] ?>'
-											size = '20'
-											maxlength = '50'
-											placeholder = 'Header' />
-										<textarea name='home-page-content' form='edit-home-page-form' id='home-page-text' style='resize:none' col='50' row='10' placeholder='Enter text here...'><?php echo $_SESSION['homePageText'] ?></textarea>
-										<input type='submit'
-											value='Submit "Home Page" Section'
-											name = 'submit-home-page'
-											class='btnSubmit'
-											id='btn-home-page'/>
-									</form>
-								</div> <!-- end of home-page -->
-							</div> <!-- end of edit-tabs-->
-						</div> <!-- end of fragment 5-->
+						</div> <!-- end of fragment 6-->
 					</div> <!-- end of #tabs -->
 				<?php include("assets/inc/admin_search.php"); ?>
 				</div><!-- end of #content -->
@@ -574,3 +876,4 @@ if(isset($_POST["pay"])){
 
 <?php include("assets/inc/footer.inc.php"); ?>
 
+<?php var_dump($info) ?>

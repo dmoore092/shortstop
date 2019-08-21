@@ -225,6 +225,7 @@
 		 * updateUser() - Takes in an associative array where the key is the field name and the value is the value to be updated for that field, then updates them
 		 */
 		function updateUser($updateArray){
+			echo "<script>alert('update array');</script>";
 			$id = '';
             foreach($updateArray as $key=>$val){
                 switch($key){

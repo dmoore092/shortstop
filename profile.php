@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 
 ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
+<?php include('assets/inc/info_arrays.php'); ?>
 <?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
 <?php include("assets/inc/populate_content_edit_forms.php"); ?>
@@ -292,15 +293,15 @@ ini_set('display_startup_errors', 1);
 							<form	id='edit-player-form'
 									class='admin-panel'
 									method = 'POST'
-									action= ''
+									action= 'profile.php?id=<?php echo $player->getId();?>'
 									onsubmit = '' 
 									enctype='multipart/form-data' >
-								<div>
+								<div id="edit-player-profile">
 									<select name='playerid'>
 										<option value=' ' selected disabled>Select Player:</option>
 							<?php $ids = $playerDB->getPlayerNamesForAdmin(); 
+								$sel = "";
 								foreach($ids as $value){
-									echo $value->getName();
 									echo "<option value='{$value->getId()}'>{$value->getName()}</option>";
 								}
 							?>
@@ -315,9 +316,19 @@ ini_set('display_startup_errors', 1);
 
 if(isset($_POST['get-player-info'])){
 	$info = $playerDB->getObjectByID($_POST['playerid']);
-	//var_dump($info->getName());
+	//$_POST['id'] = $info->getId();
 }
 ?>
+							<input type='text'
+									id = 'hiddenid'
+									name = 'id'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'id'
+									readonly
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getId();} ?>'
+									onclick='' />
+							<span class='span'>Name: &nbsp; </span>
 							<input type='text'
 									id = 'name'
 									name = 'name'
@@ -326,6 +337,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Name'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getName();} ?>'
 									onclick='' />
+							<span class='span'>Email: &nbsp; </span>
 							<input type='text'
 									id = 'email'
 									name = 'email'
@@ -334,9 +346,13 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Email'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getEmail();} ?>'
 									onclick='' />
-							<select name="gender" id="gender">
-								<option value="gender">gender</option>
+							<span class='span'>Gender: &nbsp; </span>
+							<select name='gender' >
+								<option value=' ' selected disabled>Select Gender:</option>
+								<option <?php if(isset($_POST['get-player-info']) && $info->getGender() == "Male"){echo "selected";} ?> value='Male'>Male    </option>
+								<option <?php if(isset($_POST['get-player-info']) && $info->getGender() == "Female"){echo "selected";} ?> value='Female'>Female  </option>
 							</select>
+							<span class='span'>Cell Phone: &nbsp; </span>
 							<input type='text'
 									id = 'cellphone'
 									name = 'cellphone'
@@ -345,6 +361,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Cell Phone'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getCellPhone();} ?>'
 									onclick='' />
+							<span class='span'>Home Phone: &nbsp; </span>
 							<input type='text'
 									id = 'homephone'
 									name = 'homephone'
@@ -353,6 +370,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Home Phone'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getHomePhone();} ?>'
 									onclick='' />
+							<span class='span'>Address: &nbsp; </span>
 							<input type='text'
 									id = 'address'
 									name = 'address'
@@ -361,6 +379,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Address'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getAddress();} ?>'
 									onclick='' />
+							<span class='span'>City: &nbsp; </span>
 							<input type='text'
 									id = 'city'
 									name = 'city'
@@ -369,9 +388,14 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'City'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getCity();} ?>'
 									onclick='' />
-							<select name="state" id="state">
-								<option value="">State</option>
+							<span class='span'>State: &nbsp; </span>
+							<select name='state' >
+                                <option value=' ' selected disabled>Select State:</option>
+<?php foreach($states as $value){ ?>
+                                <option <?php if(isset($_POST['get-player-info']) && $info->getState() == $value){echo "selected";} ?> value=<?php echo "'".$value."'" ?>><?php echo $value?></option>
+<?php } ?>
 							</select>
+							<span class='span'>Zip: &nbsp; </span>
 							<input type='text'
 									id = 'zip'
 									name = 'Zip'
@@ -380,6 +404,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'zip'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getZip();} ?>'
 									onclick='' />
+							<span class='span'>School: &nbsp; </span>
 							<input type='text'
 									id = 'highschool'
 									name = 'highschool'
@@ -388,6 +413,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'School'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getHighschool();} ?>'
 									onclick='' />
+							<span class='span'>Graduation Year: &nbsp; </span>
 							<input type='text'
 									id = 'gradYear'
 									name = 'gradYear'
@@ -396,6 +422,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Graduation Year'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getGradYear();} ?>'
 									onclick='' />
+							<span class='span'>GPA: &nbsp; </span>
 							<input type='text'
 									id = 'gpa'
 									name = 'gpa'
@@ -404,6 +431,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'GPA'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getGpa();} ?>'
 									onclick='' />
+							<span class='span'>SAT: &nbsp; </span>
 							<input type='text'
 									id = 'sat'
 									name = 'sat'
@@ -412,6 +440,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'SAT'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getSat();} ?>'
 									onclick='' />
+							<span class='span'>ACT: &nbsp; </span>
 							<input type='text'
 									id = 'act'
 									name = 'act'
@@ -420,9 +449,14 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'ACT'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getAct();} ?>'
 									onclick='' />
-							<select name="sport" id="sport">
-								<option value="sport">sport</option>
+							<span class='span'>Sport: &nbsp; </span>
+							<select name='sport' autocomplete="off">
+                                <option value=' ' selected disabled>Select Sport:</option>
+<?php foreach($sports as $key=>$value){ ?>
+                                <option <?php if(isset($_POST['get-player-info']) && $info->getSport() == $value){echo "selected ";}?>value=<?php echo "'".$key."'" ?> ><?php echo $value ?></option>
+<?php } ?>
 							</select>
+							<span class='span'>Primary Position: &nbsp; </span>
 							<input type='text'
 									id = 'primaryPosition'
 									name = 'primaryPosition'
@@ -431,6 +465,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Primary Position'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getPrimaryPosition();} ?>'
 									onclick='' />
+							<span class='span'>Secondary Position: &nbsp; </span>
 							<input type='text'
 									id = 'secondaryPosition'
 									name = 'SecondaryPosition'
@@ -439,6 +474,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Secondary Position'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getSecondaryPosition();} ?>'
 									onclick='' />
+							<span class='span'>Travel Team: &nbsp; </span>
 							<input type='text'
 									id = 'travelTeam'
 									name = 'travelTeam'
@@ -447,9 +483,14 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Travel Team'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getTravelTeam();} ?>'
 									onclick='' />
-							<select name="height" id="height">
-								<option value="height">height</option>
-							</select>
+							<span class='span'>Height: &nbsp; </span>
+							<select name='height'>
+                            <option value='' selected disabled>Select height:</option>
+<?php foreach($heights as $value){ ?>
+                            <option <?php if(isset($_POST['get-player-info']) && $info->getHeight() == $value){echo "selected";}?> value=<?php echo "'".$value."'" ?>><?php echo $value ?></option>
+<?php } ?>
+						</select>
+							<span class='span'>Weight: &nbsp; </span>
 							<input type='text'
 									id = 'weight'
 									name = 'weight'
@@ -458,6 +499,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Weight'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getWeight();} ?>'
 									onclick='' />
+							<span class='span'>Major: &nbsp; </span>
 							<input type='text'
 									id = 'major'
 									name = 'major'
@@ -466,6 +508,7 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'Major'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getMajor();} ?>'
 									onclick='' />
+							<span class='span'>Commitment: &nbsp; </span>
 							<input type='text'
 									id = 'commitment'
 									name = 'commitment'
@@ -478,16 +521,17 @@ if(isset($_POST['get-player-info'])){
 							<input type='file' name='profileImage' accept='image/*'>
 							
 							<span class='span'>Upload Video ( Showcase 1 ): &nbsp; </span>
-							<input type='text' name='showcase1' id='showcase1' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $player->getShowcase1();}?>>
+							<input type='text' name='showcase1' id='showcase1' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $info->getShowcase1();}?>>
 							
 							<span class='span'>Upload Video ( Showcase 2 ): &nbsp; </span>
-							<input type='text' name='showcase1' id='showcase2' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $player->getShowcase2();}?>>
+							<input type='text' name='showcase1' id='showcase2' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $info->getShowcase2();}?>>
 							
 							<span class='span'>Upload Video ( Showcase 3 ): &nbsp; </span>
-							<input type='text' name='showcase1' id='showcase3' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $player->getShowcase3();}?>>
+							<input type='text' name='showcase1' id='showcase3' class='showcase' size = '35' maxlength = '50' value=<?php if(isset($_POST['get-player-info'])){echo $info->getShowcase3();}?>>
 							
 							<!-- <textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea> -->
 							<p class='span'>Reference 1</p>
+							<span class='span'>Name: &nbsp; </span>
 							<input type='text'
 									   id = 'ref1-name'
 									   name = 'ref1Name'
@@ -496,7 +540,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'First and Last Name'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1Name();;}?>'
 									    >
-							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
+							   <span class='span'>Job Title: &nbsp; </span>
 								<input type='text'
 									   id = 'ref1-job-title'
 									   name = 'ref1JobTitle'
@@ -505,7 +549,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'Reference 1 Job Title'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1JobTitle();}?>'
 									    >
-							 <!--   <span class='span'>Email: &nbsp; </span> -->
+							   <span class='span'>Email: &nbsp; </span>
 								<input type='email'
 									   id = 'ref1-email'
 									   name = 'ref1Email'
@@ -514,7 +558,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'example@example.con'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1Email();}?>'
 									    >
-							  <!--  <span class='span'>Phone Number: &nbsp; </span> -->
+							   <span class='span'>Phone Number: &nbsp; </span>
 								<input type='text'
 									   id = 'ref1-phone'
 									   name = 'ref1Phone'
@@ -524,7 +568,7 @@ if(isset($_POST['get-player-info'])){
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef1Phone();}?>'
 									    >
 						<p class='span'>Reference 2</p>
-							  <!--  <span class='span'>Name: &nbsp; </span> -->
+							   <span class='span'>Name: &nbsp; </span>
 								<input type='text'
 									   id = 'ref2-name'
 									   name = 'ref2Name'
@@ -533,7 +577,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'First and Last Name'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2Name();}?>'
 									    >
-							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
+							   <span class='span'>Job Title: &nbsp; </span>
 								<input type='text'
 									   id = 'ref2-job-title'
 									   name = 'ref2JobTitle'
@@ -542,7 +586,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'Reference 2 Job Title'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2JobTitle();}?>'
 									    >
-							  <!--  <span class='span'>Email: &nbsp; </span> -->
+							   <span class='span'>Email: &nbsp; </span>
 								<input type='email'
 									   id = 'ref2-email'
 									   name = 'ref2Email'
@@ -551,7 +595,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'example@example.com'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2Email();}?>'
 									    >
-							  <!--  <span class='span'>Phone Number: &nbsp; </span> -->
+							   <span class='span'>Phone Number: &nbsp; </span>
 								<input type='text'
 									   id = 'ref2-phone'
 									   name = 'ref2Phone'
@@ -561,7 +605,7 @@ if(isset($_POST['get-player-info'])){
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef2Phone();}?>'
 									    >
 						<p class='span'>Reference 3</p>
-							 <!--   <span class='span'>Name: &nbsp; </span> -->
+							   <span class='span'>Name: &nbsp; </span>
 								<input type='text'
 									   id = 'ref3-name'
 									   name = 'ref3Name'
@@ -570,7 +614,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'First and Last Name'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3Name();}?>'
 									    >
-							  <!--  <span class='span'>Job Title: &nbsp; </span> -->
+							   <span class='span'>Job Title: &nbsp; </span>
 								<input type='text'
 									   id = 'ref3-job-title'
 									   name = 'ref3JobTitle'
@@ -579,7 +623,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'Reference 3 Job Title'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3JobTitle();}?>'
 									    >
-							  <!--  <span class='span'>Email: &nbsp; </span> -->
+							   <span class='span'>Email: &nbsp; </span>
 								<input type='email'
 									   id = 'ref3-email'
 									   name = 'ref3Email'
@@ -588,7 +632,7 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'example@example.com'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3Email();}?>'
 									    >
-								<!-- <span class='span'>Phone Number: &nbsp; </span> -->
+								<span class='span'>Phone Number: &nbsp; </span>
 								<input type='text'
 									   id = 'ref3-phone'
 									   name = 'ref3Phone'
@@ -597,12 +641,11 @@ if(isset($_POST['get-player-info'])){
 									   placeholder = 'xxx-xxx-xxxx'
 									   value='<?php if(isset($_POST['get-player-info'])){ echo $info->getRef3Phone();}?>'
 									    >
-
-							<input type='submit'
-									value="Update This Player's Details"
-									name = 'update-player-details'
-									class='btnSubmit'
-									id='btn-post'/>
+								<input type='submit'
+										value="Update This Player's Details"
+										name='update-player-details'
+										class='btnSubmit'
+										id='btn-post'/>
 							</form>
 						</div> <!-- fragment 3 -->
 						<div id="fragment-4">
@@ -876,4 +919,4 @@ if(isset($_POST["pay"])){
 
 <?php include("assets/inc/footer.inc.php"); ?>
 
-<?php var_dump($info) ?>
+<?php //var_dump($info) ?>

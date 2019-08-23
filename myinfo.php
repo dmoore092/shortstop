@@ -80,10 +80,10 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							<input type='tel'
 								   id = 'cellphone'
 								   name= 'cellPhone'
-								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+								   pattern='[0-9]{3}[0-9]{3}[0-9]{4}'
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'xxx-xxx-xxxx'
+								   placeholder = 'xxxxxxxxxx'
 								   value='<?php echo $player->getCellPhone();?>'
 								   required >
 						</p>
@@ -93,9 +93,9 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 								   id = 'homephone'
 								   name= 'homePhone'
 								   size = '35'
-								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+								   pattern='[0-9]{3}[0-9]{3}[0-9]{4}'
 								   maxlength = '50'
-								   placeholder = 'xxx-xxx-xxxx'
+								   placeholder = 'xxxxxxxxxx'
 								   value='<?php echo $player->getHomePhone();?>'
 								   required >
 						</p>
@@ -348,7 +348,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   name = 'ref1Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'xxx-xxx-xxxx'
+									   placeholder = 'xxxxxxxxxx'
 									   value='<?php echo $player->getRef1Phone()?>'
 									    >
 							</p>
@@ -395,7 +395,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   name = 'ref2Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'xxx-xxx-xxxx'
+									   placeholder = 'xxxxxxxxxx'
 									   value='<?php echo $player->getRef2Phone()?>'
 									    >
 							</p>
@@ -443,7 +443,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   name = 'ref3Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'xxx-xxx-xxxx'
+									   placeholder = 'xxxxxxxxxx'
 									   value='<?php echo $player->getRef3Phone()?>'
 									    >
 							</p>

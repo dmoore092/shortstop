@@ -1,5 +1,5 @@
 ZPasswordList-plaintext.txt
-assets/img/userpictures
+# assets/img/userpictures
 /.htaccess
 database/
 /.vagrant

@@ -23,8 +23,8 @@ apt-get install -y libapache2-mod-php7.3
 apt-get install -y php7.3-dom
 
 #set mysql pass
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password y#GbqXtBGcy!z3Cf'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password y#GbqXtBGcy!z3Cf'
 
 #install mysql
 apt-get install -y mysql-server

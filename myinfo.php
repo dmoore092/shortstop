@@ -36,7 +36,17 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 }
 ?>
 <?php include('assets/inc/header.inc.php'); ?>
-
+<script>
+$(document).ready(function(){
+  //$(selector).inputmask("99-9999999");  //static mask
+  $('#cellphone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+  $('#homephone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+  $('#ref1-phone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+  $('#ref2-phone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+  $('#ref3-phone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+  //$(selector).inputmask("9-a{1,3}9{1,3}"); //mask with dynamic syntax
+});
+</script>
                 <div id='body-main'>
 <?php if($player != null && $player->getPersonType() == "player"){ ?>
 					<form id='player-form'
@@ -81,10 +91,10 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							<input type='tel'
 								   id = 'cellphone'
 								   name= 'cellPhone'
-								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+								   class= "masked"
 								   size = '35'
 								   maxlength = '50'
-								   placeholder = 'xxx-xxx-xxxx'
+								   placeholder = '(xxx) xxx-xxxx'
 								   value='<?php echo $player->getCellPhone();?>'
 								   required >
 						</p>
@@ -93,10 +103,10 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 							<input type='tel'
 								   id = 'homephone'
 								   name= 'homePhone'
+								   class= "masked"
 								   size = '35'
-								   pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
 								   maxlength = '50'
-								   placeholder = 'xxx-xxx-xxxx'
+								   placeholder = '(xxx) xxx-xxxx'
 								   value='<?php echo $player->getHomePhone();?>'
 								   required >
 						</p>
@@ -349,7 +359,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   name = 'ref1Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'xxx-xxx-xxxx'
+									   placeholder = 'xxxxxxxxxx'
 									   value='<?php echo $player->getRef1Phone()?>'
 									    >
 							</p>
@@ -396,7 +406,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   name = 'ref2Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'xxx-xxx-xxxx'
+									   placeholder = 'xxxxxxxxxx'
 									   value='<?php echo $player->getRef2Phone()?>'
 									    >
 							</p>
@@ -444,7 +454,7 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
 									   name = 'ref3Phone'
 									   size = '35'
 									   maxlength = '50'
-									   placeholder = 'xxx-xxx-xxxx'
+									   placeholder = 'xxxxxxxxxx'
 									   value='<?php echo $player->getRef3Phone()?>'
 									    >
 							</p>

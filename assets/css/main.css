@@ -18,7 +18,7 @@ header{
 }
 body{
     /* background-image: url(https://cdn4.sportngin.com/attachments/background_graphic/9705/8030/siteBackground.jpg); */
-    background-image: url("/assets/img/siteBackground.jpg");
+    background-image: url("/assets/img/siteBackgroundSmall.jpg");
     background-repeat: no-repeat;
     background-color: black;  
     background-position: 50% 5%;
@@ -209,6 +209,10 @@ section, article{
     margin-bottom: 10px;
 }
 @media only screen and (min-width: 520px) {
+    body{
+        background-image: url("/assets/img/siteBackground.jpg");
+    }
+    
     .navicon {display: none;}
     #body-main, #big-login>ul, #search-container, .nav>ul{
       /*  width: 86vw; */

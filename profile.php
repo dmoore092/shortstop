@@ -289,6 +289,16 @@ ini_set('display_startup_errors', 1);
 							</div> <!-- end of edit-tabs-->
 						</div> <!-- end of fragment 2-->
 						<div id="fragment-3">
+						<script>
+							$(document).ready(function(){
+							//input masking for phone numbers
+							$('#cellphone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+							$('#homephone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+							$('#ref1-phone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+							$('#ref2-phone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+							$('#ref3-phone').inputmask({"mask": "(999) 999-9999"}); //specifying options
+							});
+						</script>
 							<h3>Edit Player Profile</h3>
 							<form	id='edit-player-form'
 									class='admin-panel'
@@ -355,7 +365,7 @@ if(isset($_POST['get-player-info'])){
 							<span class='span'>Cell Phone: &nbsp; </span>
 							<input type='text'
 									id = 'cellphone'
-									name = 'cellphone'
+									name = 'cellPhone'
 									size = '20'
 									maxlength = '50'
 									placeholder = 'Cell Phone'
@@ -364,7 +374,7 @@ if(isset($_POST['get-player-info'])){
 							<span class='span'>Home Phone: &nbsp; </span>
 							<input type='text'
 									id = 'homephone'
-									name = 'homephone'
+									name = 'homePhone'
 									size = '20'
 									maxlength = '50'
 									placeholder = 'Home Phone'
@@ -398,7 +408,7 @@ if(isset($_POST['get-player-info'])){
 							<span class='span'>Zip: &nbsp; </span>
 							<input type='text'
 									id = 'zip'
-									name = 'Zip'
+									name = 'zip'
 									size = '20'
 									maxlength = '50'
 									placeholder = 'zip'
@@ -468,7 +478,7 @@ if(isset($_POST['get-player-info'])){
 							<span class='span'>Secondary Position: &nbsp; </span>
 							<input type='text'
 									id = 'secondaryPosition'
-									name = 'SecondaryPosition'
+									name = 'secondaryPosition'
 									size = '20'
 									maxlength = '50'
 									placeholder = 'Secondary Position'

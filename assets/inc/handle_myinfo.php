@@ -1,13 +1,22 @@
 <?php 
     // Handles all form data from myinfo.php
     //goes into profile.php
-    if(isset($_POST['updateUserInfo'])) {
+    //updateUserInfo is from myinfo.php and update-player-details is from profile.php admin section
+    if(isset($_POST['updateUserInfo']) || isset($_POST['update-player-details'])) {
         //echo "update being attempted";
     echo "<meta http-equiv='refresh' content='0'>";//force page refresh
         $updateArray = array();
-        if(isset($_SESSION['id'])){
-            $myId = $_SESSION['id'];
+        if(isset($_POST['updateUserInfo'])){
             $updateArray['id'] = $_SESSION['id'];
+        }
+        if(isset($_POST['update-player-details'])){
+            //echo "<script>alert('test');</script>";
+            $updateArray['id'] = $_POST['id'];
+            //unset($_SESSION['admin-edit-player-name']);
+        }
+        //if(isset($_SESSION['id'])){
+            //$myId = $_SESSION['id'];
+            //$updateArray['id'] = $_SESSION['id'];
             if(isset($_POST['name'])){
                 //echo $_POST['name'];
                 if($playerDB->isAlphaNumeric($_POST['name']) != 0){
@@ -294,23 +303,24 @@
                     }
                     //Save the file
                     if ($uploadOk == 1){
-                    $dest='./assets/img/userpictures/'.$upload_file_name;
-                    //$dest='/var/www/html/assets/img/userpictures/'.$upload_file_name;
-                    if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
-                        //echo 'File Has Been Uploaded !';
-                        $updateArray['profileImage'] = $_FILES['profileImage']['name'];
-                    }
-                    else{
-                        //var_dump($_FILES['1111.jpg']['error']);
-                    //   echo 'File was not uploaded';
-                    }
+                        $dest='./assets/img/userpictures/'.$upload_file_name;
+                        //$dest='/var/www/html/assets/img/userpictures/'.$upload_file_name;
+                        if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $dest)){
+                            //echo 'File Has Been Uploaded !';
+                            $updateArray['profileImage'] = $_FILES['profileImage']['name'];
+                        }
+                        else{
+                            //var_dump($_FILES['1111.jpg']['error']);
+                        //   echo 'File was not uploaded';
+                        }
                     }
                 }
+                var_dump($updateArray);
                 $playerDB->updateUser($updateArray);
                 
                 //profile.php?id={$player->getId()}
                 //echo $updateArray
-                //var_dump($updateArray);
         }
-    }
+    //}
+    
 ?>

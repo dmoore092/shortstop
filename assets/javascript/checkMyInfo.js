@@ -1,6 +1,6 @@
 //alert('Ping');
 function checkMyInfo(field) {
-    alert('Ping');
+    //alert('Ping');
     switch(expression) {
         case x:
           // code block

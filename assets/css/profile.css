@@ -115,6 +115,13 @@ textarea{
 #fragment-1 h3{
     margin-bottom: 40px;
 }
+#hiddenid{
+    display: none;
+}
+#edit-player-profile{
+    border-bottom: 1px solid black;
+    margin-bottom: 25px;
+}
 @media only screen and (min-width: 520px) {
     #profile-area{
         display:flex;
@@ -193,6 +200,16 @@ textarea{
         text-align: left;
         padding: 2px;
         /* border: 2px solid black; */
+    }
+    #fragment-3{
+        border: 1px solid black;
+        border-radius: 10px;
+        width: 50%;
+        margin: auto;
+        margin-top: 10px;
+    }
+    #fragment-3 span{
+        color: #bb0a1e;
     }
 }
 @media only screen and (min-width: 1000px) {

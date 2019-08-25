@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="assets/javascript/jqueryui-1.12.1/jquery-ui.css" />
         <script type="text/javascript" src="assets/javascript/jqueryui-1.12.1/jquery-ui.js"></script>
         <script type="text/javascript" src="assets/javascript/jPaginate/src/jQuery.paginate.js"></script>
+        <script src="assets/javascript/inputmask/dist/jquery.inputmask.js"></script>
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Dale Moore">

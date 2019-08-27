@@ -463,6 +463,24 @@ if(isset($_POST['get-player-info'])){
 									placeholder = 'ACT'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getAct();} ?>'
 									onclick='' />
+									<span class='span'>Twitter: &nbsp; </span>
+							<input type='text'
+									id = 'twitter'
+									name = 'twitter'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Twitter'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getTwitter();} ?>'
+									onclick='' />
+									<span class='span'>Instagram: &nbsp; </span>
+							<input type='text'
+									id = 'instagram'
+									name = 'instagram'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Instagram'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getInstagram();} ?>'
+									onclick='' />
 							<span class='span'>Sport: &nbsp; </span>
 							<select name='sport' autocomplete="off">
                                 <option value=' ' selected disabled>Select Sport:</option>

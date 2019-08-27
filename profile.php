@@ -52,6 +52,10 @@ ini_set('display_startup_errors', 0);
 							<?php if($player->getSat() != null){ ?><li><span class='attributes'>SAT:</span> <?php echo $player->getSat() ?></li><?php } ?>
 							<?php if($player->getAct() != null){ ?><li><span class='attributes'>ACT:</span> <?php echo $player->getAct() ?></li><?php } ?>
 							<?php if($player->getMajor() != null){ ?><li><span class='attributes'>Intended Major:</span> <?php echo $player->getMajor() ?></li><?php } ?>
+			<?php if($_SESSION[id] == 1 || $_SESSION['id'] == 2){ ?>
+							<?php if($player->getInstagram() != null){ ?><li><span class='attributes'>Instagram:</span> <?php echo $player->getInstagram() ?></li><?php } ?>
+							<?php if($player->getTwitter() != null){ ?><li><span class='attributes'>Twitter:</span> <?php echo $player->getTwitter() ?></li><?php } ?>
+			<?php }?>
 						</ul>
 					</div><!-- end of .info-box -->
 				<div class='info-box'>

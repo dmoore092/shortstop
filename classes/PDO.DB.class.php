@@ -196,6 +196,8 @@
                             AES_DECRYPT(showcase2,'!trN8xLnaHcA@cKu') AS showcase2,
                             AES_DECRYPT(showcase3,'!trN8xLnaHcA@cKu') AS showcase3,
                             AES_DECRYPT(college,'!trN8xLnaHcA@cKu') AS college,
+                            AES_DECRYPT(twitter,'!trN8xLnaHcA@cKu') AS twitter,
+                            AES_DECRYPT(instagram,'!trN8xLnaHcA@cKu') AS instagram,
                             persontype FROM players WHERE id = :id";
             //$query = "SELECT AES_DECRYPT(name,'!trN8xLnaHcA@cKu'), persontype FROM players WHERE id = :id;";
             $stmt = $this->dbConn->prepare($query);

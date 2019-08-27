@@ -283,6 +283,28 @@ $(document).ready(function(){
 								    >
 						</p>
 						<p>
+						<label class='span'>Instagram: &nbsp; </label>
+							<input type='text'
+								   id = 'instagram'
+								   name= 'instagram'
+								   size = '35'
+								   maxlength = '100'
+								   placeholder = ' '
+								   value='<?php echo $player->getInstagram()?>'
+								    >
+						</p>
+						<p>
+						<label class='span'>Twitter: &nbsp; </label>
+							<input type='text'
+								   id = 'twitter'
+								   name= 'twitter'
+								   size = '35'
+								   maxlength = '100'
+								   placeholder = ' '
+								   value='<?php echo $player->getTwitter()?>'
+								    >
+						</p>
+						<p>
 						<label class='span'>Commitment: &nbsp; </label>
 							<input type='text'
 								   id = 'commitment'

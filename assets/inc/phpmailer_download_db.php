@@ -40,7 +40,7 @@
                                 'Travel Team', 'Gpa', 'Sat', 'Act', 'Major', 'Reference 1 Name', 'Reference 1 Job Title', 'Reference 1 Email', 'Reference 1 Phone', 
                                 'Reference 2 Name','Reference 2 Job Title', 'Reference 2 Email', 'Reference 2 Phone','Reference 3 Name', 'Reference 3 Job Title', 
                                 'Reference 3 Email', 'Reference 3 Phone', 'Personal Statement', 'Commitment', 'Service', 'Role', 'College', 'Twitter',
-                                'Facebook','Instagram', 'Website', 'Desired Characteristics', 'Velocty', 'Gpa Required'));  
+                                'Facebook','Instagram', 'Website', 'Desired Characteristics', 'Velocty', 'Gpa Required', 'twitter', 'instagram'));  
         
         $query = "SELECT id, 
                         AES_DECRYPT(username,'!trN8xLnaHcA@cKu') AS username,
@@ -88,7 +88,9 @@
                         AES_DECRYPT(website,'!trN8xLnaHcA@cKu') AS website, 
                         AES_DECRYPT(characteristics,'!trN8xLnaHcA@cKu') AS characteristics, 
                         AES_DECRYPT(velocity,'!trN8xLnaHcA@cKu') AS velocity, 
-                        AES_DECRYPT(gpareq,'!trN8xLnaHcA@cKu') AS gpareq 
+                        AES_DECRYPT(gpareq,'!trN8xLnaHcA@cKu') AS gpareq,
+                        AES_DECRYPT(twitter,'!trN8xLnaHcA@cKu') AS twitter,
+                        AES_DECRYPT(instagram,'!trN8xLnaHcA@cKu') AS instagram 
                     FROM players;";  
         $result = mysqli_query($conn, $query);
         while($row = mysqli_fetch_assoc($result)){  

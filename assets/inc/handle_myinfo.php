@@ -315,7 +315,7 @@
                         }
                     }
                 }
-                var_dump($updateArray);
+                //var_dump($updateArray);
                 $playerDB->updateUser($updateArray);
                 
                 //profile.php?id={$player->getId()}

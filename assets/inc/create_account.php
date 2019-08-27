@@ -10,7 +10,7 @@
                 $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
                 
                 $player = new PlayerDB();
-                var_dump($player);
+                //var_dump($player);
                 $persontype = 'player';
                 $registered = $player->register($username, $hashed_password, $persontype);
                 

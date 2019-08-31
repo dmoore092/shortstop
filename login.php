@@ -11,12 +11,12 @@ ini_set('display_startup_errors', 0);
                     action= ""
                     onsubmit = "" >
                 <h2>Login</h2>
-                <!-- <span class="span">First Name:* &nbsp; </span> -->
+                <span class="span">Email Address: &nbsp; </span>
                 <input type="text"
-                        id = "username"
-                        name= "username"
-                        placeholder = "Enter Your Username" />
-                <!-- <span class="span">First Name:* &nbsp; </span> -->
+                        id = "email"
+                        name= "email"
+                        placeholder = "Enter Your Email Address" />
+                <span class="span">Password: &nbsp; </span>
                 <input type="password"
                         class = "password"
                         name= "password"

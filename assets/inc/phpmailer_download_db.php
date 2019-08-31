@@ -43,7 +43,6 @@
                                 'Facebook','Instagram', 'Website', 'Desired Characteristics', 'Velocty', 'Gpa Required', 'twitter', 'instagram'));  
         
         $query = "SELECT id, 
-                        AES_DECRYPT(username,'!trN8xLnaHcA@cKu') AS username,
                         AES_DECRYPT(`name`,'!trN8xLnaHcA@cKu') AS `name`, 
                         AES_DECRYPT(gender,'!trN8xLnaHcA@cKu') AS gender, 
                         AES_DECRYPT(email,'!trN8xLnaHcA@cKu') AS email, 

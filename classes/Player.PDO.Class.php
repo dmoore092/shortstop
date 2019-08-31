@@ -392,9 +392,9 @@
 		 * checkPassword() - Password Reset part 1 - takes user inputted current password and checks it against the db
 		 * returns true if passwords matches, allows creation of new password. For when user already knows their current password
 		*/
-		function checkPassword($username, $currentPassword){
-			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
-			$stmt->bindParam(1, $username, PDO::PARAM_STR);
+		function checkPassword($email, $currentPassword){
+			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+			$stmt->bindParam(1, $email, PDO::PARAM_STR);
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
             while($databaseUser = $stmt->fetch()){
@@ -417,13 +417,13 @@
 		*updatePassword() called updateUser to update the users password. Is called after checkPasword();
 		*
 		*/
-		function updatePassword($username, $newPassword){
+		function updatePassword($email, $newPassword){
 			$hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
 			//echo $hashed_password;
 			try{
-                $stmt = $this->dbConn->prepare("UPDATE players SET pass = ? WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+                $stmt = $this->dbConn->prepare("UPDATE players SET pass = ? WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 				$stmt->bindParam(1, $hashed_password, PDO::PARAM_STR);
-				$stmt->bindParam(2, $username, PDO::PARAM_STR);
+				$stmt->bindParam(2, $email, PDO::PARAM_STR);
 				$stmt->execute();
 				return true;
 				//echo $stmt;
@@ -434,13 +434,13 @@
 		}
 
 		/**
-		 * login() - Takes in a possible username and password for a given user, checks them against the databas, returns a boolean if the user and password match 
+		 * login() - Takes in a possible email and password for a given user, checks them against the databas, returns a boolean if the user and password match 
 		 * and false if they don't
 		 */
-		function login($username, $password){		
+		function login($email, $password){		
 				$data = array();
-				$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
-				$stmt->bindParam(1, $username, PDO::PARAM_STR);
+				$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(email, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
+				$stmt->bindParam(1, $email, PDO::PARAM_STR);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
                 while($databaseUser = $stmt->fetch()){
@@ -449,7 +449,7 @@
 				if((count($data)) == 1){
 					$player = $data[0];
 					if(password_verify($password, $player->getPassword())){
-						$_SESSION['username'] = $player->getUsername();
+						$_SESSION['email'] = $player->getEmail();
 						//$_SESSION['role'] = $user->getRole();
 						$_SESSION['loggedIn'] = true;
 						$_SESSION['fullname'] = $player->getName();
@@ -462,15 +462,15 @@
 				return 0;
 		}
 		/**
-		 * checkTempPassExpire() - Takes in a username and password passed in from a reset email sent to the user. Checks that the user
+		 * checkTempPassExpire() - Takes in an email address and password passed in from a reset email sent to the user. Checks that the user
 		 * custom password is correct and hasn't expired, sends back whether the password can be changed or not
 		 */
-		function checkTempPassExpire($username){
+		function checkTempPassExpire($email){
 			$data = array();
 			$now  = date("Y-m-d H:i:s");
 			try{
-				$stmt = $this->dbConn->prepare("SELECT `reset`, resetExpires FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
-				$stmt->bindParam(1, $username, PDO::PARAM_STR);
+				$stmt = $this->dbConn->prepare("SELECT `reset`, resetExpires FROM players WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')"); 
+				$stmt->bindParam(1, $email, PDO::PARAM_STR);
 				$stmt->execute();
 				$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
 			}
@@ -494,16 +494,17 @@
 			}
 			return 0;
 		}
-		//checks for duplicate username first
-		function register($username, $hashed_password, $persontype){
-			//var_dump($username);
+		//checks for duplicate email first
+		function register($email, $hashed_password, $persontype){
+			//var_dump($email);
 			$data = [];
-			$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
-			$stmt->bindParam(1, $username, PDO::PARAM_STR);
+			$stmt = $this->dbConn->prepare("SELECT AES_DECRYPT(email, '!trN8xLnaHcA@cKu'), pass, id FROM players WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+			$stmt->bindParam(1, $email, PDO::PARAM_STR);
 			$stmt->execute();
 			$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
             while($databaseUser = $stmt->fetch()){
 				$data[] = $databaseUser;
+				var_dump($databaseUser->getEmail());
 			}
 			if((count($data)) >= 1){
 				return 0;
@@ -511,18 +512,18 @@
 			else{
 				$persontype = 'player';
 				$profileImage = 'black.JPG';
-				$query = "INSERT INTO players(username, pass, persontype, profileImage) VALUES
-												(AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu'), 
+				$query = "INSERT INTO players(email, pass, persontype, profileImage) VALUES
+												(AES_ENCRYPT(:email, '!trN8xLnaHcA@cKu'), 
 												:pass, 
 												'player', 
 												AES_ENCRYPT('black.JPG', '!trN8xLnaHcA@cKu'));
 												"; 
 				$stmt = $this->dbConn->prepare($query);
 				//var_dump($query);
-				$stmt->execute(array(":username"=>$username, ":pass"=>$hashed_password));
+				$stmt->execute(array(":email"=>$email, ":pass"=>$hashed_password));
 
-				$info = $this->dbConn->prepare("SELECT AES_DECRYPT(username, '!trN8xLnaHcA@cKu'), id, persontype FROM players WHERE username = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
-				$info->bindParam(1, $username, PDO::PARAM_STR);
+				$info = $this->dbConn->prepare("SELECT AES_DECRYPT(email, '!trN8xLnaHcA@cKu'), id, persontype FROM players WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
+				$info->bindParam(1, $email, PDO::PARAM_STR);
 				$info->execute();
 				$info->setFetchMode(PDO::FETCH_CLASS,"Player");
 				//var_dump($info);
@@ -531,13 +532,13 @@
 				}
 				if((count($data)) == 1){
 					$player = $data[0];
-					$_SESSION['username'] = $player->getUsername();
+					$_SESSION['email'] = $player->getEmail();
 					$_SESSION['id'] = $player->getId();
 					$_SESSION['loggedIn'] = true;
 					$_SESSION['persontype'] = $player->getPersonType();
-					return 1;	
+			 		return 1;	
 				}
-			}
+		 	}
 			
 		}
 		function getPlayerNamesForAdmin(){

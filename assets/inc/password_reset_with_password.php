@@ -3,16 +3,16 @@
 // used to reset password when person already knows their password, no email needed
     $player = new PlayerDB();
     if(isset($_POST["updatepassword"])){
-        $username = $_SESSION["username"];
+        $email = $_SESSION["email"];
         
         if($_POST['newpassword'] == $_POST['newpasswordagain']){
             if($_POST['newpassword'] != ""){
                 $currentpassword = $_POST["currentpassword"];
             
-                if($player->checkPassword($username, $currentpassword)){
+                if($player->checkPassword($email, $currentpassword)){
                     //echo "success!";
                     $newpassword = $_POST['newpassword'];
-                    $player->updatePassword($username, $newpassword);
+                    $player->updatePassword($email, $newpassword);
                 }
             }
             else{

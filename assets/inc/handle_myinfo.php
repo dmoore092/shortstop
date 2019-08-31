@@ -23,11 +23,11 @@
                     $updateArray['name'] = $playerDB->sanitize($_POST['name']);
                 }
             }
-            if(isset($_POST['username'])){
-                if($playerDB->isAlphaNumeric($_POST['username']) != 0){
-                    $updateArray['username'] = $playerDB->sanitize($_POST['username']);
-                }
-            }
+            // if(isset($_POST['email'])){
+            //     if($playerDB->isAlphaNumeric($_POST['email']) != 0){
+            //         $updateArray['email'] = $playerDB->sanitize($_POST['email']);
+            //     }
+            // }
 
             if(isset($_POST['gender'])){
             if($playerDB->isMaleOrFemale($_POST['gender']) != 0){

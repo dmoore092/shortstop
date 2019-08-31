@@ -43,6 +43,11 @@ ini_set('display_startup_errors', 0);
 						<ul>
 							<?php //only show those elements which are not null ?>
 							<?php if($player->getEmail() != null){ ?><li><span class='attributes'>Email:</span> <a href='mailto: <?php $player->getEmail() ?>'><?php echo $player->getEmail() ?></a></li><?php } ?>
+			<?php if($_SESSION[id] == 1 || $_SESSION['id'] == 2){ ?>
+							<?php if($player->getCellphone() != null){ ?><li><span class='attributes'>Cellphone:</span> <?php echo $player->getCellphone() ?></li><?php } ?>
+							<?php if($player->getHomephone() != null){ ?><li><span class='attributes'>Homephone:</span> <?php echo $player->getHomephone() ?></li><?php } ?>
+							<?php if($player->getAddress() != null){ ?><li><span class='attributes'>Address:</span> <?php echo $player->getAddress() ?></li><?php } ?>
+			<?php }?>				
 							<?php if($player->getCity() != null){ ?><li><span class='attributes'>City:</span> <?php echo $player->getCity() ?></li><?php } ?>
 							<?php if($player->getState() != null){ ?><li><span class='attributes'>State:</span> <?php echo $player->getState() ?></li><?php } ?>
 							<?php if($player->getZip() != null){ ?><li><span class='attributes'>Zip:</span> <?php echo $player->getZip() ?></li><?php } ?>

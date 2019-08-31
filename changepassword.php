@@ -8,10 +8,10 @@
             <hr/>
             <form id="player-form"
                     method = "POST"
-                    action= "login.php?uname=<?php echo $username?>"
+                    action= "login.php?email=<?php echo $email?>"
                     onsubmit = "" >   
                 <h3>
-                    Username: <?php echo $username ?>
+                    Email Address: <?php echo $email ?>
                 </h3>
                 <p>
                 <span class="span">Password:* &nbsp; </span>

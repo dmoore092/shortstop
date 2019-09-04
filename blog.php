@@ -19,6 +19,7 @@ ini_set('display_startup_errors', 1);
                     $canDelete = true;
                 }
             }
+            //rewrite this section. Get rid of echo'd code, replace mysqli
             try{
                 $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
                 //echo "Connected successfully"; 
@@ -28,18 +29,23 @@ ini_set('display_startup_errors', 1);
                     if($canDelete == true){
                         $postid = $row['id'];
                         // echo "<form action='blog.php'><input type='submit' name='delete-post' value='$postid'></form><h3>{$row['title']}</h3>";
-                        echo "<div class=\"post\"><p><form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
+                        echo "<div class=\"post\"><form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
                     }
                     else{
                         echo "<div class=\"post\"><h3>{$row['title']}</h3>";
                     } 
-                    echo "<h6>By Keith Prestano</h6>";
+                    echo "<h6>By {$row['author']}</h6>";
                     echo "<h6>{$row['post_date']}</h6>";
-                    echo "<p><img src='assets/img/blogpictures/{$row['post_image']}' alt='blog picture' id='blog-pic'></p>";
-                    echo "<p><iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='{$row['youtube_link']}'></iframe></p>";
-                    echo "<p>{$row['text']}</p>";
-                    echo "<div><p>Tags: {$row['tags']}</p></div>";
-                    echo "<hr></p></div>";
+                    if($row['post_image'] != ""){
+                        echo "<img src='assets/img/blogpictures/{$row['post_image']}' alt='blog picture' id='blog-pic'>";
+                    }
+                    echo "<p id='post'>".nl2br($row['text'])."</p>";
+                    echo "<div class='clear'></div>";
+                    if($row['youtube_link'] != NULL){
+                        echo "<p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='{$row['youtube_link']}'></iframe></p>";
+                    }
+                    echo "<div><p>Tags: {$row['tags']}</p>";
+                    echo "<hr></div>";
                 } 
                 mysqli_close($conn);
             }
@@ -71,7 +77,7 @@ ini_set('display_startup_errors', 1);
 <?php
  //posting a blog"
  if(isset($_POST['submit-post'])){
-   //echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+   echo "<meta http-equiv='refresh' content='0'>";//force page refresh
     $uploadOk = 1;
     if (is_uploaded_file($_FILES['blogImage']['tmp_name'])){
         //First, Validate the file name
@@ -129,7 +135,7 @@ ini_set('display_startup_errors', 1);
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli->set_charset("utf8mb4");
 
-        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image) VALUES(?, ?, ?, NOW(), ?);");
+        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image, youtube_link) VALUES(?, ?, ?, NOW(), ?, ?);");
         $stmt->bind_param("sssss", $_POST["title"], $_POST["post"], $_POST["tags"], $_FILES['blogImage']['name'], $saveUrl);
         $stmt->execute();
         $stmt->close();

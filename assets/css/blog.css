@@ -32,3 +32,10 @@ button{
 p{
     clear: both;
 }
+#blog-pic{
+    max-width: 100%;
+    max-height: auto;
+}
+@media only screen and (min-width: 520px) {
+    
+}

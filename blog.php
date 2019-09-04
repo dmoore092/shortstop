@@ -1,4 +1,11 @@
-<?php include("config/pageconfig.php"); session_start();?>
+<?php include("config/pageconfig.php"); session_start();
+
+error_reporting(E_ALL); 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+?>
 <?php include("assets/inc/header.inc.php") ?>
         <div id="body-main">   
             <h1>Blog @ Athletic Prospects</h1>
@@ -28,6 +35,8 @@
                     } 
                     echo "<h6>By Keith Prestano</h6>";
                     echo "<h6>{$row['post_date']}</h6>";
+                    echo "<p><img src='assets/img/blogpictures/{$row['post_image']}' alt='blog picture' id='blog-pic'></p>";
+                    echo "<p><iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='{$row['youtube_link']}'></iframe></p>";
                     echo "<p>{$row['text']}</p>";
                     echo "<div><p>Tags: {$row['tags']}</p></div>";
                     echo "<hr></p></div>";
@@ -62,22 +71,71 @@
 <?php
  //posting a blog"
  if(isset($_POST['submit-post'])){
-    echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+   //echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+    $uploadOk = 1;
+    if (is_uploaded_file($_FILES['blogImage']['tmp_name'])){
+        //First, Validate the file name
+        if(empty($_FILES['blogImage']['name'])){
+            echo " File name is empty! ";
+            $uploadOk = 0;
+            exit;
+        }
+        $upload_file_name = $_FILES['blogImage']['name'];
+        //Too long file name?
+        if(strlen ($upload_file_name)>100){
+            echo " too long file name ";
+            $uploadOk = 0;
+        }
+        $check = getimagesize($_FILES["blogImage"]["tmp_name"]);
+        if($check !== false) {
+            //echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+        //replace any non-alpha-numeric cracters in th file name
+        $upload_file_name = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $upload_file_name);
+        //set a limit to the file upload size
+        if ($_FILES['blogImage']['size'] > 1000000){
+            echo " File is too large ";
+            $uploadOk = 0;        
+        }
+        //Save the file
+        if ($uploadOk == 1){
+            $dest='./assets/img/blogpictures/'.$upload_file_name;
+            if (move_uploaded_file($_FILES['blogImage']['tmp_name'], $dest)){
+                echo 'File Has Been Uploaded !';
+            }
+            else{
+                //var_dump($_FILES['1111.jpg']['error']);
+               echo 'File was not uploaded';
+            }
+        }
+    }
+    if(isset($_POST['blog-youtube'])){
+        if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $_POST['blog-youtube'], $match)) {
+            $video_id = $match[1];
+            $saveUrl = "https://www.youtube.com/embed/".$video_id;
+            //return $saveUrl;
+        }
+    }
+
     try{
-        $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+        $mysqli = new mysqli("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
         if($mysqli->connect_error) {
             exit('Error connecting to database'); 
           }
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli->set_charset("utf8mb4");
 
-        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date) VALUES(?, ?, ?, NOW());");
-        $stmt->bind_param("sss", $_POST["title"], $_POST["post"], $_POST["tags"]);
+        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image) VALUES(?, ?, ?, NOW(), ?);");
+        $stmt->bind_param("sssss", $_POST["title"], $_POST["post"], $_POST["tags"], $_FILES['blogImage']['name'], $saveUrl);
         $stmt->execute();
         $stmt->close();
     }
     catch(exception $e){
-        //echo "Connection failed: " . $e->getMessage();
+        echo "Connection failed: " . $e->getMessage();
     } 
  }
 
@@ -112,3 +170,4 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
     } 
  }
 ?>
+

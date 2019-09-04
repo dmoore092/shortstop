@@ -80,7 +80,7 @@ ini_set('display_startup_errors', 0);
 				
 	<?php if ($player->getShowcase1() != null || $player->getShowcase2() != null || $player->getShowcase3() != null){ ?>
 				<hr/>
-				<h3>Videos</h3>	
+				<h3>Videos</h3>
 				<div id='videos'>	
 		<?php if($player->getShowcase1() != null){ ?>
 					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase1() ?>'></iframe>
@@ -221,28 +221,34 @@ ini_set('display_startup_errors', 0);
 									action= 'blog.php'
 									onsubmit = '' 
 									enctype='multipart/form-data' >
-							<input type='text'
-									id = 'title'
-									name = 'title'`
-									size = '20'
-									maxlength = '50'
-									placeholder = 'Title'
-									value=''
-									onclick='' />
-							<input type='text'
-									id = 'tags'
-									name = 'tags'
-									size = '20'
-									maxlength = '50'
-									placeholder = 'Tags'
-									value=''
-									onclick='' />
-							<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
-							<input type='submit'
-									value='Submit Post'
-									name = 'submit-post'
-									class='btnSubmit'
-									id='btn-post'/>
+								<span class='span'>Title: &nbsp; </span>
+								<input type='text'
+										id = 'title'
+										name = 'title'`
+										size = '20'
+										maxlength = '50'
+										placeholder = ''
+										value=''
+										onclick='' />
+								<span class='span'>Tags: &nbsp; </span>
+								<input type='text'
+										id = 'tags'
+										name = 'tags'
+										size = '20'
+										maxlength = '50'
+										placeholder = ''
+										value=''
+										onclick='' />
+								<span class='span'>YouTube Video Link: &nbsp; </span>
+								<input type='text' name='blog-youtube' id='blog-youtube' class='showcase' size = '35' maxlength = '50' >
+								<span class='span'>Upload Blog Image: &nbsp; </span>
+								<input type='file' name='blogImage' accept='image/*'>
+								<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
+								<input type='submit'
+										value='Submit Post'
+										name = 'submit-post'
+										class='btnSubmit'
+										id='btn-post'/>
 							</form>
 						</div> <!-- fragment 1 -->
 						<div id="fragment-2">

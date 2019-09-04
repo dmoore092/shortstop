@@ -272,6 +272,7 @@
                 $updateArray['satactreq'] = $playerDB->sanitize($_POST['satactreq']);
             }
             //move profileImage to server folder
+            //this function is duplicated in blog.php. Rewrite this into a general function
             $uploadOk = 1;
             if (is_uploaded_file($_FILES['profileImage']['tmp_name'])){ 
                 //First, Validate the file name

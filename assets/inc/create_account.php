@@ -41,7 +41,7 @@ require_once './PHPMailer/src/SMTP.php';
                         //Recipients
                         $mail->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
                         $mail->addAddress('dmoore092@gmail.com', 'Dale');     // Add a recipient
-                        //$mail->addAddress('kprestano@athleticprospects.com', 'Keith'); // Name is optional
+                        $mail->addAddress('kprestano@athleticprospects.com', 'Keith'); // Name is optional
                         
                         //$mail->addReplyTo('info@example.com', 'Information');
                         //$mail->addCC('cc@example.com');

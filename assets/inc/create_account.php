@@ -67,8 +67,8 @@ require_once './PHPMailer/src/SMTP.php';
                 else{
                     $uniqueEmail = false;
                     echo "<script>
-                            document.getElementById('username-error').style='color:red;display:block;';
-                            document.getElementById('username').style='border:2px solid red;';
+                            document.getElementById('email-error').style='color:red;display:block;';
+                            document.getElementById('email').style='border:2px solid red;';
                           </script>";
                 }
             }

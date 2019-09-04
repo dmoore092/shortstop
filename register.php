@@ -26,7 +26,7 @@
                          action= ""
                          onsubmit = "return checkRegistrationForm();" >
                         <h2>Create an Account</h2>
-                        <p id="username-error">That email is already in use, please log in</p>
+                        <p id="email-error">That email is already in use, please log in</p>
                         <p>
                             <span class="span">Email:* &nbsp; </span>
                             <input type="text"

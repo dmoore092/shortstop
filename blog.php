@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-
+$canDelete = false;
 ?>
 <?php include("assets/inc/header.inc.php") ?>
         <div id="body-main">   
@@ -25,35 +25,40 @@ ini_set('display_startup_errors', 1);
                 //echo "Connected successfully"; 
                 $query = "SELECT * FROM blog_posts ORDER BY id DESC;";
                 $result = mysqli_query($conn, $query);
-                while($row = mysqli_fetch_assoc($result)){
-                    if($canDelete == true){
-                        $postid = $row['id'];
-                        // echo "<form action='blog.php'><input type='submit' name='delete-post' value='$postid'></form><h3>{$row['title']}</h3>";
-                        echo "<div class=\"post\"><form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
-                    }
-                    else{
-                        echo "<div class=\"post\"><h3>{$row['title']}</h3>";
-                    } 
-                    echo "<h6>By {$row['author']}</h6>";
-                    echo "<h6>{$row['post_date']}</h6>";
-                    if($row['post_image'] != ""){
-                        echo "<img src='assets/img/blogpictures/{$row['post_image']}' alt='blog picture' id='blog-pic'>";
-                    }
-                    echo "<p id='post'>".nl2br($row['text'])."</p>";
-                    echo "<div class='clear'></div>";
-                    if($row['youtube_link'] != NULL){
-                        echo "<p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='{$row['youtube_link']}'></iframe></p>";
-                    }
-                    echo "<div><p>Tags: {$row['tags']}</p>";
-                    echo "<hr></div>";
-                } 
+        ?>
+        <?php while($row = mysqli_fetch_assoc($result)){ ?>
+                <div class="post">
+            <?php if($canDelete == true){ ?>
+                <?php $postid = $row['id']; ?>
+                    <form action='blog.php' >
+                        <button name='delete-post' value=<?php echo $postid ?>>Delete Post</button>
+                    </form>
+            <?php } ?> 
+                    <div class="post-header">
+                        <h3><?php echo $row['title']?></h3>
+                        <h6>By <?php echo $row['author']?></h6>
+                        <h6><?php echo $row['post_date']?></h6>
+                    </div>
+                    <!-- <div class="clear"></div> -->
+        <?php if($row['post_image'] != ""){ ?>
+                    <img src='assets/img/blogpictures/<?php echo $row['post_image']?>' alt='blog picture' class='blog-pic'>
+        <?php } ?>
+                    <p class='text'> <?php echo nl2br($row['text']) ?></p>
+        <?php if($row['youtube_link'] != NULL){ ?>
+                    <p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='<?php echo $row['youtube_link'] ?>'></iframe></p>
+        <?php } ?>
+                    <!-- <div> -->
+                        <p>Tags: <?php echo $row['tags'] ?></p>
+                        <hr>
+                    </div>
+        <?php } 
                 mysqli_close($conn);
             }
             catch(exception $e){
                 //echo "Connection failed: " . $e->getMessage();
             } 
         ?>
-        </div> <!-- end of .pagination -->
+        </div> <!-- end of .blog -->
         <script>
             $(document).ready(function(){
                //alert('ready');

@@ -28,13 +28,15 @@ button{
     padding: 15px 30px;
     border-radius: 5px;
     float: right;
+    margin-bottom: 20px;
 }
-p{
+.clear{
     clear: both;
 }
-#blog-pic{
-    max-width: auto;
-    max-height: 300px;
+.blog-pic{
+    max-width: 100%;
+    height: auto;
+    border: 1px solid black;
 }
 #frame-container{
     position: relative;
@@ -50,14 +52,14 @@ p{
     border: 0;
 }
 @media only screen and (min-width: 520px) {
-    img{
-        float: left;        
+    .blog-pic{
+        max-width: 300px;
+        float: left;
+        margin: 20px 25px 25px 0;
+        
     }
-    #post{
-        border: 2px solid red;
-        float: right;
-    }
-    .clear::after{
-        clear: both;
+    .post-header{
+        /* float: right; */
+        /* border: 2px solid black; */
     }
 }

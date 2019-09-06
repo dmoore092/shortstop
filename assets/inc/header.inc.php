@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141642555-3"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-141642555-3');
+        </script>
+
+
         <title><?php echo $TITLE ?> | Athletic Prospects</title>
         <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
         <link rel="stylesheet" type="text/css" href="assets/css/footer.css" />

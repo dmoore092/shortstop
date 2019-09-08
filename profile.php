@@ -226,7 +226,6 @@ ini_set('display_startup_errors', 0);
 										id = 'title'
 										name = 'title'`
 										size = '20'
-										maxlength = '50'
 										placeholder = ''
 										value=''
 										onclick='' />
@@ -235,7 +234,6 @@ ini_set('display_startup_errors', 0);
 										id = 'tags'
 										name = 'tags'
 										size = '20'
-										maxlength = '50'
 										placeholder = ''
 										value=''
 										onclick='' />

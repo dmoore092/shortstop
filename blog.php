@@ -82,9 +82,8 @@ $canDelete = false;
 <?php
  //posting a blog"
  if(isset($_POST['submit-post'])){
-   echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+   //echo "<meta http-equiv='refresh' content='0'>";//force page refresh
     $uploadOk = 1;
-    mysql_real_escape_string($_POST['text']);
 
     if (is_uploaded_file($_FILES['blogImage']['tmp_name'])){
         //First, Validate the file name
@@ -142,12 +141,13 @@ $canDelete = false;
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli->set_charset("utf8mb4");
 
+        $title = mysqli_real_escape_string($mysqli, $_POST['title']);
+        $tags = mysqli_real_escape_string($mysqli, $_POST['tags']);
+        $post = mysqli_real_escape_string($mysqli, $_POST['post']);
+        $image = mysqli_real_escape_string($mysqli, $_FILES['blogImage']['name']);
+
         $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image, youtube_link) VALUES(?, ?, ?, NOW(), ?, ?);");
-        $stmt->bind_param("sssss", mysql_real_escape_string($_POST['title']), 
-                                    mysql_real_escape_string($_POST["post"]), 
-                                    mysql_real_escape_string($_POST["tags"]), 
-                                    mysql_real_escape_string($_FILES['blogImage']['name']), 
-                                    mysql_real_escape_string($saveUrl));
+        $stmt->bind_param("sssss", $title, $post, $tags, $image, $saveUrl);
         $stmt->execute();
         $stmt->close();
     }

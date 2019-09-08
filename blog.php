@@ -35,7 +35,7 @@ $canDelete = false;
                     </form>
             <?php } ?> 
                     <div class="post-header">
-                        <h3><?php echo stripslashes($row['title'])?></h3>
+                        <h3><?php echo $row['title']?></h3>
                         <h6>By <?php echo $row['author']?></h6>
                         <h6><?php echo $row['post_date']?></h6>
                     </div>
@@ -43,7 +43,7 @@ $canDelete = false;
         <?php if($row['post_image'] != ""){ ?>
                     <img src='assets/img/blogpictures/<?php echo $row['post_image']?>' alt='blog picture' class='blog-pic'>
         <?php } ?>
-                    <p class='text'> <?php echo stripslashes(nl2br($row['text'])) ?></p>
+                    <p class='text'> <?php echo nl2br($row['text']) ?></p>
         <?php if($row['youtube_link'] != NULL){ ?>
                     <p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='<?php echo $row['youtube_link'] ?>'></iframe></p>
         <?php } ?>
@@ -82,7 +82,7 @@ $canDelete = false;
 <?php
  //posting a blog"
  if(isset($_POST['submit-post'])){
-   //echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+   echo "<meta http-equiv='refresh' content='0'>";//force page refresh
     $uploadOk = 1;
 
     if (is_uploaded_file($_FILES['blogImage']['tmp_name'])){
@@ -141,10 +141,11 @@ $canDelete = false;
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli->set_charset("utf8mb4");
 
-        $title = mysqli_real_escape_string($mysqli, $_POST['title']);
-        $tags = mysqli_real_escape_string($mysqli, $_POST['tags']);
-        $post = mysqli_real_escape_string($mysqli, $_POST['post']);
-        $image = mysqli_real_escape_string($mysqli, $_FILES['blogImage']['name']);
+        $title = htmlentities($_POST['title']);
+        $tags = htmlentities($_POST['tags']);
+        $post = htmlentities($_POST['post']);
+        $image = $_FILES['blogImage']['name'];
+        var_dump($post);
 
         $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image, youtube_link) VALUES(?, ?, ?, NOW(), ?, ?);");
         $stmt->bind_param("sssss", $title, $post, $tags, $image, $saveUrl);

@@ -35,7 +35,7 @@ $canDelete = false;
                     </form>
             <?php } ?> 
                     <div class="post-header">
-                        <h3><?php echo $row['title']?></h3>
+                        <h3><?php echo stripslashes($row['title'])?></h3>
                         <h6>By <?php echo $row['author']?></h6>
                         <h6><?php echo $row['post_date']?></h6>
                     </div>
@@ -43,7 +43,7 @@ $canDelete = false;
         <?php if($row['post_image'] != ""){ ?>
                     <img src='assets/img/blogpictures/<?php echo $row['post_image']?>' alt='blog picture' class='blog-pic'>
         <?php } ?>
-                    <p class='text'> <?php echo nl2br($row['text']) ?></p>
+                    <p class='text'> <?php echo stripslashes(nl2br($row['text'])) ?></p>
         <?php if($row['youtube_link'] != NULL){ ?>
                     <p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='<?php echo $row['youtube_link'] ?>'></iframe></p>
         <?php } ?>

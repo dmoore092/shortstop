@@ -1,9 +1,9 @@
 <?php include("config/pageconfig.php"); session_start();
 
-error_reporting(E_ALL); 
+error_reporting(0); 
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 $canDelete = false;
 ?>
 <?php include("assets/inc/header.inc.php") ?>

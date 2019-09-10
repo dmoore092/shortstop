@@ -204,6 +204,19 @@ ini_set('display_startup_errors', 0);
 					
 					<div id='content'>
 					<h2>Administration Panel</h2>
+					<script>
+						tinymce.init({
+							selector: 'textarea',
+							height: 600,
+							plugins: ' link advlist lists powerpaste autolink media mediembed hr image preview wordcount',
+							toolbar: 'link numlist bullist media image preview wordcount',
+							mediaembed_max_width: 450,
+							browser_spellcheck : true,
+							toolbar_drawer: 'floating',
+							tinycomments_mode: 'embedded'//,
+							//tinycomments_author: 'Author name'
+						});
+					</script>
 					<div id="tabs">
 						<ul>
 							<li><a href="#fragment-1" class="tab-headers">Post A Blog</a></li>
@@ -243,7 +256,7 @@ ini_set('display_startup_errors', 0);
 								<input type='text' name='blog-youtube' id='blog-youtube' class='showcase' size = '35' maxlength = '50' >
 								<span class='span'>Upload Blog Image: &nbsp; </span>
 								<input type='file' name='blogImage' accept='image/*'>
-								<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
+								<textarea name='post' form='blog-form' col='50' row='30' style='resize:none' placeholder='Enter text here...'></textarea>
 								<input type='submit'
 										value='Submit Post'
 										name = 'submit-post'

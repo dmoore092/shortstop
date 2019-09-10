@@ -141,9 +141,12 @@ $canDelete = false;
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli->set_charset("utf8mb4");
 
-        $title = htmlentities($_POST['title']);
-        $tags = htmlentities($_POST['tags']);
-        $post = htmlentities($_POST['post']);
+        // $title = htmlentities($_POST['title']);
+        // $tags = htmlentities($_POST['tags']);
+        // $post = htmlentities($_POST['post']);
+        $title = $_POST['title'];
+        $tags = $_POST['tags'];
+        $post = $_POST['post'];
         $image = $_FILES['blogImage']['name'];
         var_dump($post);
 

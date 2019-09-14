@@ -208,8 +208,8 @@ ini_set('display_startup_errors', 0);
 						tinymce.init({
 							selector: 'textarea',
 							height: 600,
-							plugins: ' link advlist lists powerpaste autolink media mediembed hr image preview wordcount',
-							toolbar: 'link numlist bullist media image preview wordcount',
+							plugins: ' link advlist lists autolink media mediembed hr image preview wordcount',
+							toolbar: 'link bullist media image preview wordcount',
 							mediaembed_max_width: 450,
 							browser_spellcheck : true,
 							toolbar_drawer: 'floating',

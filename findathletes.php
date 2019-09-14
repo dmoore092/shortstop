@@ -4,7 +4,7 @@
       $name = "";
       $position = "";
       $school = "";
-      $playerDB = new PlayerDB();?>
+      $playerPDO = new PlayerPDO();?>
 
 <?php include("assets/inc/header.inc.php"); ?>
 

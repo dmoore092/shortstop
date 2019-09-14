@@ -1,13 +1,14 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(0); 
+<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+include 'assets/inc/autoloader.inc.php';
 
 ?>
-<?php include_once ("classes/Player.PDO.Class.php"); ?>
-<?php include('assets/inc/info_arrays.php'); ?>
-<?php $playerDB = new PlayerDB; $player = $playerDB->getObjectByID($_GET['id']); ?>
 
+<?php include('assets/inc/info_arrays.php'); ?>
+<?php $playerPDO = new PlayerPDO; $player = $playerPDO->getObjectByID($_GET['id']); ?>
+	
 <?php include("assets/inc/populate_content_edit_forms.php"); ?>
 <?php include("assets/inc/phpmailer_download_db.php"); ?>
 <?php include("assets/inc/phpmailer_report_profile.php"); ?>
@@ -337,7 +338,7 @@ ini_set('display_startup_errors', 0);
 								<div id="edit-player-profile">
 									<select name='playerid'>
 										<option value=' ' selected disabled>Select Player:</option>
-							<?php $ids = $playerDB->getPlayerNamesForAdmin(); 
+							<?php $ids = $playerPDO->getPlayerNamesForAdmin(); 
 								$sel = "";
 								foreach($ids as $value){
 									echo "<option value='{$value->getId()}'>{$value->getName()}</option>";
@@ -353,7 +354,7 @@ ini_set('display_startup_errors', 0);
 <?php
 
 if(isset($_POST['get-player-info'])){
-	$info = $playerDB->getObjectByID($_POST['playerid']);
+	$info = $playerPDO->getObjectByID($_POST['playerid']);
 	//$_POST['id'] = $info->getId();
 }
 ?>
@@ -974,5 +975,3 @@ if(isset($_POST["pay"])){
 
 
 <?php include("assets/inc/footer.inc.php"); ?>
-
-<?php //var_dump($info) ?>

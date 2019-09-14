@@ -6,7 +6,7 @@
         $email = htmlentities(strip_tags(trim($_POST["email"])));//$_POST["email"];
         $password = htmlentities(strip_tags(trim($_POST["password"])));//$_POST["password"];
 
-        $player = new PlayerDB();
+        $player = new PlayerPDO();
         //player will equals (0 || false) || (1 || true)
         $isLoggedIn = $player->login($email, $password);
         //var_dump($isLoggedIn);

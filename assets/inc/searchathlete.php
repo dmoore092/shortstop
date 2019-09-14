@@ -1,11 +1,11 @@
 <?php
 //goes in findathletes.php
-$name       = $playerDB->sanitize($_POST['name']);
+$name       = $playerPDO->sanitize($_POST['name']);
 $sport      = $_POST['sport'] = isset($_POST['sport']) ? $_POST['sport'] : '';
 $state      = $_POST['state'] = isset($_POST['state']) ? $_POST['state'] : '';
 $class      = $_POST['class'] = isset($_POST['class']) ? $_POST['class'] : '';
-$position   = $playerDB->sanitize($_POST['position']);
-$school     = $playerDB->sanitize($_POST['school']);
+$position   = $playerPDO->sanitize($_POST['position']);
+$school     = $playerPDO->sanitize($_POST['school']);
 $gpa        = $_POST['gpa'] = isset($_POST['gpa']) ? $_POST['gpa'] : '';
 
 $arr = array();
@@ -39,9 +39,9 @@ else{
 }
 
 if(isset($_POST['search-athlete'])){
-    //$data = $playerDB->searchPlayers($srch);
-    $data = $playerDB->getPlayersByFindAthleteSearch($query);
-    echo $playerDB->getPlayersAsTable($data);
-    echo $playerDB->getPlayers($data);
+    //$data = $playerPDO->searchPlayers($srch);
+    $data = $playerPDO->getPlayersByFindAthleteSearch($query);
+    echo $playerPDO->getPlayersAsTable($data);
+    echo $playerPDO->getPlayers($data);
 }
 ?>

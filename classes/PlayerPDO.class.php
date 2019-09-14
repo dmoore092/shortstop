@@ -1,14 +1,10 @@
 <?php 
-    require_once ("classes/PDO.DB.class.php");
-
-	include("classes/Player.class.php");
-
 	/*
 	* PlayerDB class contains all of the methods for using PHP Data Objects to 
 	* interface with the database, specifically in relation to players.
 	* version 11/6/2018
 	*/ 
-    class PlayerDB extends DB{
+    class PlayerPDO extends Database{
         private $dbConn;
 		/*
 		* Constructor for PlayerDB calls the parent constructor and obtains the connection
@@ -31,7 +27,7 @@
 						$stmt = $this->dbConn->prepare("SELECT id, AES_DECRYPT(name, '!trN8xLnaHcA@cKu'), AES_DECRYPT(highschool, '!trN8xLnaHcA@cKu'), AES_DECRYPT(gradYear, '!trN8xLnaHcA@cKu'), AES_DECRYPT(sport, '!trN8xLnaHcA@cKu'), AES_DECRYPT(primaryposition, '!trN8xLnaHcA@cKu') FROM players WHERE name LIKE AES_DECRYPT(:name, '!trN8xLnaHcA@cKu') and persontype = 'player'"); 
 						$stmt->bindParam(":name", $name, PDO::PARAM_STR, 150);    
 						$stmt->execute();
-						$stmt->setFetchMode(PDO::FETCH_CLASS,"Players");
+						$stmt->setFetchMode(PDO::FETCH_CLASS,"Player");
 						while($databaseProjects = $stmt->fetch()){
 								$data[] = $databaseProjects;
 						}
@@ -388,10 +384,14 @@
                 }
 			}
 		}
-		/** 
+
+		/**
 		 * checkPassword() - Password Reset part 1 - takes user inputted current password and checks it against the db
 		 * returns true if passwords matches, allows creation of new password. For when user already knows their current password
-		*/
+		 * @param $email
+		 * @param $currentPassword
+		 * @return bool
+		 */
 		function checkPassword($email, $currentPassword){
 			$stmt = $this->dbConn->prepare("SELECT pass FROM players WHERE email = AES_ENCRYPT(?, '!trN8xLnaHcA@cKu')");
 			$stmt->bindParam(1, $email, PDO::PARAM_STR);
@@ -481,7 +481,7 @@
 				$data[] = $databaseUser;
 			}
 			if((count($data)) == 1){
-				$player = $data[0];
+				@$data[0];
 				//var_dump(get_class_methods($player));
 				$passwordExpire = $player->getResetExpires();
 				if($now < $passwordExpire){

@@ -1,7 +1,7 @@
 <?php 
 //goes into passwordreset.php
 // used to reset password when person already knows their password, no email needed
-    $player = new PlayerDB();
+    $player = new PlayerPDO();
     if(isset($_POST["updatepassword"])){
         $email = $_SESSION["email"];
         

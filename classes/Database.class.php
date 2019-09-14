@@ -5,7 +5,7 @@
 	* version 11/8/2018
 	*/
     
-    class DB{
+    class Database{
         private $dbConn;
         /**
          * __construct() - creates a new PDO database object and opens a connection.
@@ -198,7 +198,7 @@
             $stmt = $this->dbConn->prepare($query);
             $stmt->bindParam(":id", $id);
             $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_CLASS, 'player');
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Player');
             $object = $stmt->fetch();
             //var_dump($object);
             return $object;

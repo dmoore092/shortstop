@@ -1,4 +1,11 @@
-<?php include("config/pageconfig.php"); session_start();?>
+<?php include("config/pageconfig.php"); session_start();
+
+error_reporting(0); 
+
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+$canDelete = false;
+?>
 <?php include("assets/inc/header.inc.php") ?>
         <div id="body-main">   
             <h1>Blog @ Athletic Prospects</h1>
@@ -12,33 +19,46 @@
                     $canDelete = true;
                 }
             }
+            //rewrite this section. Get rid of echo'd code, replace mysqli
             try{
                 $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
                 //echo "Connected successfully"; 
                 $query = "SELECT * FROM blog_posts ORDER BY id DESC;";
                 $result = mysqli_query($conn, $query);
-                while($row = mysqli_fetch_assoc($result)){
-                    if($canDelete == true){
-                        $postid = $row['id'];
-                        // echo "<form action='blog.php'><input type='submit' name='delete-post' value='$postid'></form><h3>{$row['title']}</h3>";
-                        echo "<div class=\"post\"><p><form action='blog.php' ><button name='delete-post' value='$postid'>Delete Post</button></form><h3>{$row['title']}</h3>";
-                    }
-                    else{
-                        echo "<div class=\"post\"><h3>{$row['title']}</h3>";
-                    } 
-                    echo "<h6>By Keith Prestano</h6>";
-                    echo "<h6>{$row['post_date']}</h6>";
-                    echo "<p>{$row['text']}</p>";
-                    echo "<div><p>Tags: {$row['tags']}</p></div>";
-                    echo "<hr></p></div>";
-                } 
+        ?>
+        <?php while($row = mysqli_fetch_assoc($result)){ ?>
+                <div class="post">
+            <?php if($canDelete == true){ ?>
+                <?php $postid = $row['id']; ?>
+                    <form action='blog.php' >
+                        <button name='delete-post' value=<?php echo $postid ?>>Delete Post</button>
+                    </form>
+            <?php } ?> 
+                    <div class="post-header">
+                        <h3><?php echo $row['title']?></h3>
+                        <h6>By <?php echo $row['author']?></h6>
+                        <h6><?php echo $row['post_date']?></h6>
+                    </div>
+                    <!-- <div class="clear"></div> -->
+        <?php if($row['post_image'] != ""){ ?>
+                    <img src='assets/img/blogpictures/<?php echo $row['post_image']?>' alt='blog picture' class='blog-pic'>
+        <?php } ?>
+                    <p class='text'> <?php echo nl2br($row['text']) ?></p>
+        <?php if($row['youtube_link'] != NULL){ ?>
+                    <p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='<?php echo $row['youtube_link'] ?>'></iframe></p>
+        <?php } ?>
+                    <!-- <div> -->
+                        <p>Tags: <?php echo $row['tags'] ?></p>
+                        <hr>
+                    </div>
+        <?php } 
                 mysqli_close($conn);
             }
             catch(exception $e){
                 //echo "Connection failed: " . $e->getMessage();
             } 
         ?>
-        </div> <!-- end of .pagination -->
+        </div> <!-- end of .blog -->
         <script>
             $(document).ready(function(){
                //alert('ready');
@@ -62,22 +82,81 @@
 <?php
  //posting a blog"
  if(isset($_POST['submit-post'])){
-    echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+   echo "<meta http-equiv='refresh' content='0'>";//force page refresh
+    $uploadOk = 1;
+
+    if (is_uploaded_file($_FILES['blogImage']['tmp_name'])){
+        //First, Validate the file name
+        if(empty($_FILES['blogImage']['name'])){
+            echo " File name is empty! ";
+            $uploadOk = 0;
+            exit;
+        }
+        $upload_file_name = $_FILES['blogImage']['name'];
+        //Too long file name?
+        if(strlen ($upload_file_name)>100){
+            echo " too long file name ";
+            $uploadOk = 0;
+        }
+        $check = getimagesize($_FILES["blogImage"]["tmp_name"]);
+        if($check !== false) {
+            //echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+        //replace any non-alpha-numeric cracters in th file name
+        $upload_file_name = preg_replace("/[^A-Za-z0-9 \.\-_]/", '', $upload_file_name);
+        //set a limit to the file upload size
+        if ($_FILES['blogImage']['size'] > 1000000){
+            echo " File is too large ";
+            $uploadOk = 0;        
+        }
+        //Save the file
+        if ($uploadOk == 1){
+            $dest='./assets/img/blogpictures/'.$upload_file_name;
+            if (move_uploaded_file($_FILES['blogImage']['tmp_name'], $dest)){
+                echo 'File Has Been Uploaded !';
+            }
+            else{
+                //var_dump($_FILES['1111.jpg']['error']);
+               echo 'File was not uploaded';
+            }
+        }
+    }
+    if(isset($_POST['blog-youtube'])){
+        if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $_POST['blog-youtube'], $match)) {
+            $video_id = $match[1];
+            $saveUrl = "https://www.youtube.com/embed/".$video_id;
+            //return $saveUrl;
+        }
+    }
+
     try{
-        $mysqli = new mysqli("127.0.0.1", "root", "root", "sports");
+        $mysqli = new mysqli("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
         if($mysqli->connect_error) {
             exit('Error connecting to database'); 
           }
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli->set_charset("utf8mb4");
 
-        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date) VALUES(?, ?, ?, NOW());");
-        $stmt->bind_param("sss", $_POST["title"], $_POST["post"], $_POST["tags"]);
+        // $title = htmlentities($_POST['title']);
+        // $tags = htmlentities($_POST['tags']);
+        // $post = htmlentities($_POST['post']);
+        $title = $_POST['title'];
+        $tags = $_POST['tags'];
+        $post = $_POST['post'];
+        $image = $_FILES['blogImage']['name'];
+        var_dump($post);
+
+        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image, youtube_link) VALUES(?, ?, ?, NOW(), ?, ?);");
+        $stmt->bind_param("sssss", $title, $post, $tags, $image, $saveUrl);
         $stmt->execute();
         $stmt->close();
     }
     catch(exception $e){
-        //echo "Connection failed: " . $e->getMessage();
+        echo "Connection failed: " . $e->getMessage();
     } 
  }
 
@@ -112,3 +191,4 @@ if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
     } 
  }
 ?>
+

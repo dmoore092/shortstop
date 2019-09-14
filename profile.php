@@ -1,7 +1,7 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); 
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); 
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 
 ?>
 <?php include_once ("classes/Player.PDO.Class.php"); ?>
@@ -43,6 +43,11 @@ ini_set('display_startup_errors', 1);
 						<ul>
 							<?php //only show those elements which are not null ?>
 							<?php if($player->getEmail() != null){ ?><li><span class='attributes'>Email:</span> <a href='mailto: <?php $player->getEmail() ?>'><?php echo $player->getEmail() ?></a></li><?php } ?>
+			<?php if($_SESSION[id] == 1 || $_SESSION['id'] == 2){ ?>
+							<?php if($player->getCellphone() != null){ ?><li><span class='attributes'>Cellphone:</span> <?php echo $player->getCellphone() ?></li><?php } ?>
+							<?php if($player->getHomephone() != null){ ?><li><span class='attributes'>Homephone:</span> <?php echo $player->getHomephone() ?></li><?php } ?>
+							<?php if($player->getAddress() != null){ ?><li><span class='attributes'>Address:</span> <?php echo $player->getAddress() ?></li><?php } ?>
+			<?php }?>				
 							<?php if($player->getCity() != null){ ?><li><span class='attributes'>City:</span> <?php echo $player->getCity() ?></li><?php } ?>
 							<?php if($player->getState() != null){ ?><li><span class='attributes'>State:</span> <?php echo $player->getState() ?></li><?php } ?>
 							<?php if($player->getZip() != null){ ?><li><span class='attributes'>Zip:</span> <?php echo $player->getZip() ?></li><?php } ?>
@@ -52,6 +57,10 @@ ini_set('display_startup_errors', 1);
 							<?php if($player->getSat() != null){ ?><li><span class='attributes'>SAT:</span> <?php echo $player->getSat() ?></li><?php } ?>
 							<?php if($player->getAct() != null){ ?><li><span class='attributes'>ACT:</span> <?php echo $player->getAct() ?></li><?php } ?>
 							<?php if($player->getMajor() != null){ ?><li><span class='attributes'>Intended Major:</span> <?php echo $player->getMajor() ?></li><?php } ?>
+			<?php if($_SESSION[id] == 1 || $_SESSION['id'] == 2){ ?>
+							<?php if($player->getInstagram() != null){ ?><li><span class='attributes'>Instagram:</span> <?php echo $player->getInstagram() ?></li><?php } ?>
+							<?php if($player->getTwitter() != null){ ?><li><span class='attributes'>Twitter:</span> <?php echo $player->getTwitter() ?></li><?php } ?>
+			<?php }?>
 						</ul>
 					</div><!-- end of .info-box -->
 				<div class='info-box'>
@@ -71,7 +80,7 @@ ini_set('display_startup_errors', 1);
 				
 	<?php if ($player->getShowcase1() != null || $player->getShowcase2() != null || $player->getShowcase3() != null){ ?>
 				<hr/>
-				<h3>Videos</h3>	
+				<h3>Videos</h3>
 				<div id='videos'>	
 		<?php if($player->getShowcase1() != null){ ?>
 					<iframe id='ytplayer' allowfullscreen type='text/html' width='300' height='250' src='<?php echo $player->getShowcase1() ?>'></iframe>
@@ -195,6 +204,19 @@ ini_set('display_startup_errors', 1);
 					
 					<div id='content'>
 					<h2>Administration Panel</h2>
+					<script>
+						tinymce.init({
+							selector: 'textarea',
+							height: 600,
+							plugins: ' link advlist lists autolink media mediembed hr image preview wordcount',
+							toolbar: 'link bullist media image preview wordcount',
+							mediaembed_max_width: 450,
+							browser_spellcheck : true,
+							toolbar_drawer: 'floating',
+							tinycomments_mode: 'embedded'//,
+							//tinycomments_author: 'Author name'
+						});
+					</script>
 					<div id="tabs">
 						<ul>
 							<li><a href="#fragment-1" class="tab-headers">Post A Blog</a></li>
@@ -212,28 +234,34 @@ ini_set('display_startup_errors', 1);
 									action= 'blog.php'
 									onsubmit = '' 
 									enctype='multipart/form-data' >
-							<input type='text'
-									id = 'title'
-									name = 'title'`
-									size = '20'
-									maxlength = '50'
-									placeholder = 'Title'
-									value=''
-									onclick='' />
-							<input type='text'
-									id = 'tags'
-									name = 'tags'
-									size = '20'
-									maxlength = '50'
-									placeholder = 'Tags'
-									value=''
-									onclick='' />
-							<textarea name='post' form='blog-form' col='50' row='10' style='resize:none' placeholder='Enter text here...'></textarea>
-							<input type='submit'
-									value='Submit Post'
-									name = 'submit-post'
-									class='btnSubmit'
-									id='btn-post'/>
+								<span class='span'>Title: &nbsp; </span>
+								<input type='text'
+										id = 'title'
+										name = 'title'`
+										size = '20'
+										maxlength = ''
+										placeholder = ''
+										value=''
+										onclick='' />
+								<span class='span'>Tags: &nbsp; </span>
+								<input type='text'
+										id = 'tags'
+										name = 'tags'
+										size = '20'
+										maxlength = ''
+										placeholder = ''
+										value=''
+										onclick='' />
+								<span class='span'>YouTube Video Link: &nbsp; </span>
+								<input type='text' name='blog-youtube' id='blog-youtube' class='showcase' size = '35' maxlength = '50' >
+								<span class='span'>Upload Blog Image: &nbsp; </span>
+								<input type='file' name='blogImage' accept='image/*'>
+								<textarea name='post' form='blog-form' col='50' row='30' style='resize:none' placeholder='Enter text here...'></textarea>
+								<input type='submit'
+										value='Submit Post'
+										name = 'submit-post'
+										class='btnSubmit'
+										id='btn-post'/>
 							</form>
 						</div> <!-- fragment 1 -->
 						<div id="fragment-2">
@@ -458,6 +486,24 @@ if(isset($_POST['get-player-info'])){
 									maxlength = '50'
 									placeholder = 'ACT'
 									value='<?php if(isset($_POST['get-player-info'])){echo $info->getAct();} ?>'
+									onclick='' />
+									<span class='span'>Twitter: &nbsp; </span>
+							<input type='text'
+									id = 'twitter'
+									name = 'twitter'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Twitter'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getTwitter();} ?>'
+									onclick='' />
+									<span class='span'>Instagram: &nbsp; </span>
+							<input type='text'
+									id = 'instagram'
+									name = 'instagram'
+									size = '20'
+									maxlength = '50'
+									placeholder = 'Instagram'
+									value='<?php if(isset($_POST['get-player-info'])){echo $info->getInstagram();} ?>'
 									onclick='' />
 							<span class='span'>Sport: &nbsp; </span>
 							<select name='sport' autocomplete="off">

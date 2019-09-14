@@ -1,4 +1,4 @@
-<!-- sends a password reset link to the email of the username -->
+<!-- sends a password reset link to the email of the user -->
 <?php 
     //goes into index.php
      use PHPMailer\PHPMailer\PHPMailer;
@@ -10,46 +10,45 @@
      $playerDB = new PlayerDB();
      
     if(isset($_POST['reset'])){
-        $username = $playerDB->sanitize($_POST['username']);
-        $username = strtolower($username);
+        $email = $playerDB->sanitize($_POST['email']);        
+        $email = strtolower($email);
         $fieldname = "email";
-        // $data = $playerDB->getPlayersByFindAthleteSearch($query);
-        $playerDB->insertResetToken($username);
+        $playerDB->insertResetToken($email);
         
-        $result = $playerDB->getFieldByUsername($fieldname, $username);
-        //var_dump($result);
+        $result = $playerDB->getFieldByEmail($fieldname, $email);
+        var_dump($result);
         $recipientAddr = $result["email"];
         $recipientName = $result["name"];
         $recipientId   = $result["id"];
         $recipientCode = $result["reset"];
 
-        $email = new PHPMailer(true); 
-        $email->SMTPDebug = 2;                                 // Enable verbose debug output
-        $email->isSMTP();                                      // Set mailer to use SMTP
+        $mail = new PHPMailer(true); 
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
         //header('Content-Type: text/csv; charset=utf-8');
-        $email->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-        $email->SMTPAuth = true;                               // Enable SMTP authentication
-        $email->Username = 'athleticprospects1@gmail.com';                 // SMTP username
-        $email->Password = 'Webm@ster1';                           // SMTP password
-        $email->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
-        $email->Port = 465;                                    // TCP port to connect to
-        $email->SMTPDebug = false; 
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'athleticprospects1@gmail.com';                 // SMTP username
+        $mail->Password = 'Webm@ster1';                           // SMTP password
+        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 465;                                    // TCP port to connect to
+        $mail->SMTPDebug = false; 
         //Recipients
-        $email->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
-        $email->addAddress($recipientAddr, $recipientName);     // Add a recipient
+        $mail->setFrom('webmaster@athleticprospects.com', 'Athletic Prospects');
+        $mail->addAddress($recipientAddr, $recipientName);     // Add a recipient
         
         
 
         //Content
-        $email->isHTML(true);                                  // Set email format to HTML
-        $email->Subject = 'Reset Your Password';
-        $email->Body    = "Someone has requested to reset your password. If this wasn't you, someone is trying to access your account.
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Reset Your Password';
+        $mail->Body    = "Someone has requested to reset your password. If this wasn't you, someone is trying to access your account.
                             <br>
-                            <a href=\"http://www.athleticprospects.com/changepassword.php?id=".$recipientId."&uname=".$username."&reset=".$recipientCode."\">Click Here</a> to reset your password.";
+                            <a href=\"http://www.athleticprospects.com/changepassword.php?id=".$recipientId."&email=".$email."&reset=".$recipientCode."\">Click Here</a> to reset your password.";
         //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         
         try{
-            $email->send();
+            $mail->send();
             //echo 'Message has been sent';
         } 
         catch (Exception $e) {

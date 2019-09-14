@@ -108,7 +108,7 @@ ul{
    /* border: 2px solid black; */
     border-radius: 5px;   
 }
-#username, .password{ /*login.php*/
+#email, .password{ /*login.php*/
     height: 30px;
     border-radius: 5px;
     font-size: 1.4em;

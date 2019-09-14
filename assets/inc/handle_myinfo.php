@@ -23,11 +23,11 @@
                     $updateArray['name'] = $playerDB->sanitize($_POST['name']);
                 }
             }
-            if(isset($_POST['username'])){
-                if($playerDB->isAlphaNumeric($_POST['username']) != 0){
-                    $updateArray['username'] = $playerDB->sanitize($_POST['username']);
-                }
-            }
+            // if(isset($_POST['email'])){
+            //     if($playerDB->isAlphaNumeric($_POST['email']) != 0){
+            //         $updateArray['email'] = $playerDB->sanitize($_POST['email']);
+            //     }
+            // }
 
             if(isset($_POST['gender'])){
             if($playerDB->isMaleOrFemale($_POST['gender']) != 0){
@@ -272,6 +272,7 @@
                 $updateArray['satactreq'] = $playerDB->sanitize($_POST['satactreq']);
             }
             //move profileImage to server folder
+            //this function is duplicated in blog.php. Rewrite this into a general function
             $uploadOk = 1;
             if (is_uploaded_file($_FILES['profileImage']['tmp_name'])){ 
                 //First, Validate the file name
@@ -315,7 +316,7 @@
                         }
                     }
                 }
-                var_dump($updateArray);
+                //var_dump($updateArray);
                 $playerDB->updateUser($updateArray);
                 
                 //profile.php?id={$player->getId()}

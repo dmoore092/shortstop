@@ -65,7 +65,7 @@ $id = 26;
                 //var_dump($key);
                 //var_dump($value);
                 $query = "UPDATE players SET $key = '$value' WHERE id = $id";
-                var_dump($query);
+                //var_dump($query);
                 $result = mysqli_query($remote, $query);
                 //var_dump($result);
             }

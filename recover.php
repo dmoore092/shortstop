@@ -11,12 +11,13 @@
                   onsubmit = "alert('You Password Has Been Reset. Please Check Your Email.');" >
                 <h2>Reset My Password</h2>
                 <p>
+                <span class="span">Email Address: &nbsp; </span>
                     <input type="text"
-                            id = "username"
-                            name= "username"
+                            id = "email"
+                            name= "email"
                             size = "25"
                             maxlength = "150"
-                            placeholder = "Enter Your Username"
+                            placeholder = "Enter Your Email Address"
                             value=""
                             onclick="" />
                 </p>

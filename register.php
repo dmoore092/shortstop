@@ -26,15 +26,15 @@
                          action= ""
                          onsubmit = "return checkRegistrationForm();" >
                         <h2>Create an Account</h2>
-                        <p id="username-error">Username is taken, please choose another</p>
+                        <p id="email-error">That email is already in use, please log in</p>
                         <p>
-                            <span class="span">Username:* &nbsp; </span>
+                            <span class="span">Email:* &nbsp; </span>
                             <input type="text"
-                                   id = "username"
-                                   name= "username"
+                                   id = "email"
+                                   name= "email"
                                    size = "25"
                                    maxlength = "150"
-                                   placeholder = "Choose a username"
+                                   placeholder = "Enter your email address"
                                    value=""
                                    required />
                         </p>

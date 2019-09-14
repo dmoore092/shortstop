@@ -10,7 +10,7 @@
 #player-form input, #player-form button{
     margin-bottom: 10px;
 }
-#username, .password{
+#email, .password{
     display: block;
     height: 30px;
     width: 100%;
@@ -26,16 +26,15 @@
     border-radius:0;
     width: 100%;
 }
-#registration-code-error, #username-error, #password-match-error{
+span{
+    color: #bb0a1e;
+}
+#registration-code-error, #email-error, #password-match-error{
     color: red;
     display: none;
 }
 @media only screen and (min-width: 520px) {
     #player-form{
         max-width: 300px;
-    }
-    .g-recaptcha{
-        transform:scale(1); 
-        -webkit-transform:scale(1); 
     }
 }

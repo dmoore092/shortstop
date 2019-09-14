@@ -14,7 +14,7 @@
 
         $query = "SELECT firstName, lastName, email, cellPhone, homePhone, address, city, state, zip, highschool, height, weight, gradyear, sport, primaryPosition, secondaryPosition, travelTeam, gpa, sat, act, ref1FirstName, ref1LastName, ref1Jobtitle, ref1Email, ref1Phone, ref2FirstName, ref2LastName, ref2Jobtitle, ref2Email, ref2Phone, ref3FirstName, ref3LastName, ref3Jobtitle, ref3Email, ref3Phone, persStatement, service
                     FROM players
-                    WHERE username = '".$_SESSION["username"]."';"; 
+                    WHERE email = '".$_SESSION["email"]."';"; 
         
        // var_dump($query);
         $result = mysqli_query($mysqli, $query);
@@ -186,11 +186,8 @@
                             ref3Phone = '$ref3Phone', 
                             persStatement = '$persStatement', 
                             service  = '$service'
-                            WHERE username = '" . $_SESSION["username"] . "';";
-                            
-                //THIS WORKS
-                //$_SESSION["username"] = "ddave";
-                //$query = "INSERT INTO players(firstname)VALUES('dave')WHERE username = '" . $_SESSION["username"] . "';";
+                            WHERE email = '" . $_SESSION["email"] . "';";
+
 
                 $_SESSION["query"] = "weight = ".$weight;
                 $result = mysqli_query($mysqli, $query);

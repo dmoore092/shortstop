@@ -82,18 +82,16 @@
         }
 
         /**
-         * getFieldByUsername() - Returns a specific entry from players 
+         * getFieldByEmail() - Returns a specific entry from players 
          */
-        function getFieldByUsername($fieldname, $username){
-            // var_dump($fieldname);
-            // var_dump($username);
+        function getFieldByEmail($fieldname, $email){
             //$data = array();
             $data = "";
             try{
-                $query = "SELECT id, AES_DECRYPT($fieldname, '!trN8xLnaHcA@cKu') AS $fieldname, AES_DECRYPT(name, '!trN8xLnaHcA@cKu') AS `name`, `reset` FROM players WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu')";
+                $query = "SELECT id, AES_DECRYPT($fieldname, '!trN8xLnaHcA@cKu') AS $fieldname, AES_DECRYPT(name, '!trN8xLnaHcA@cKu') AS `name`, `reset` FROM players WHERE email = AES_ENCRYPT(:email, '!trN8xLnaHcA@cKu')";
                 $stmt = $this->dbConn->prepare($query);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $stmt->bindParam(":username", $username);
+                $stmt->bindParam(":email", $email);
                 $stmt->execute();
                 // while($item = $stmt->fetch()){
                 //     $data[] = $item;
@@ -109,18 +107,16 @@
         /**
          * creates a random string and puts in into db, along with a timestamp
          */
-        function insertResetToken($username){
-            //var_dump($username);
+        function insertResetToken($email){
             $string = '';
             $characters = "23456789ABCDEFHJKLMNPRTVWXYZabcdefghijklmnopqrstuvwxyz";
             for ($p = 0; $p < 20; $p++) {
                 $string .= $characters[mt_rand(0, strlen($characters)-1)];
             }
-
             try{
                 //$deleteToken = "DELETE FROM players WHERE resetExpires < NOW()";
-                $insertToken = "UPDATE players SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');
-                                UPDATE players SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE username = AES_ENCRYPT('$username', '!trN8xLnaHcA@cKu');";
+                $insertToken = "UPDATE players SET resetExpires = DATE_SUB(CURDATE(), INTERVAL 1 DAY) WHERE resetExpires < CURDATE() AND email = AES_ENCRYPT('$email', '!trN8xLnaHcA@cKu');
+                                UPDATE players SET reset = :reset, resetExpires = DATE_ADD(CURDATE(), INTERVAL 2 DAY) WHERE email = AES_ENCRYPT('$email', '!trN8xLnaHcA@cKu');";
                 $stmt = $this->dbConn->prepare($insertToken);
                 $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $stmt->bindParam(":reset", $string);
@@ -155,7 +151,6 @@
         function getObjectByID($id){
             $object = null;
             $query = "SELECT id, 
-                            AES_DECRYPT(username,'!trN8xLnaHcA@cKu') AS username,
                             AES_DECRYPT(`name`,'!trN8xLnaHcA@cKu') AS `name`,
                             AES_DECRYPT(gender,'!trN8xLnaHcA@cKu') AS gender,
                             AES_DECRYPT(email,'!trN8xLnaHcA@cKu') AS email,
@@ -196,6 +191,8 @@
                             AES_DECRYPT(showcase2,'!trN8xLnaHcA@cKu') AS showcase2,
                             AES_DECRYPT(showcase3,'!trN8xLnaHcA@cKu') AS showcase3,
                             AES_DECRYPT(college,'!trN8xLnaHcA@cKu') AS college,
+                            AES_DECRYPT(twitter,'!trN8xLnaHcA@cKu') AS twitter,
+                            AES_DECRYPT(instagram,'!trN8xLnaHcA@cKu') AS instagram,
                             persontype FROM players WHERE id = :id";
             //$query = "SELECT AES_DECRYPT(name,'!trN8xLnaHcA@cKu'), persontype FROM players WHERE id = :id;";
             $stmt = $this->dbConn->prepare($query);
@@ -207,11 +204,11 @@
             return $object;
         }
 
-        function getObjectByUsername($table, $className, $username){
+        function getObjectByEmail($table, $className, $email){
             $object = null;
-            $query = "SELECT * FROM $table WHERE username = AES_ENCRYPT(:username, '!trN8xLnaHcA@cKu');";
+            $query = "SELECT * FROM $table WHERE email = AES_ENCRYPT(:email, '!trN8xLnaHcA@cKu');";
             $stmt = $this->dbConn->prepare($query);
-            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":email", $email);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, $className);
             $object = $stmt->fetch();

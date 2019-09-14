@@ -1,6 +1,6 @@
-<?php include("config/pageconfig.php"); session_start(); error_reporting(E_ALL); 
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+<?php include("config/pageconfig.php"); session_start(); error_reporting(0); 
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
 ?>
 <?php include("classes/Player.PDO.Class.php");?>
 <?php include('assets/inc/do_login.php'); ?>
@@ -11,12 +11,12 @@ ini_set('display_startup_errors', TRUE);
                     action= ""
                     onsubmit = "" >
                 <h2>Login</h2>
-                <!-- <span class="span">First Name:* &nbsp; </span> -->
+                <span class="span">Email Address: &nbsp; </span>
                 <input type="text"
-                        id = "username"
-                        name= "username"
-                        placeholder = "Enter Your Username" />
-                <!-- <span class="span">First Name:* &nbsp; </span> -->
+                        id = "email"
+                        name= "email"
+                        placeholder = "Enter Your Email Address" />
+                <span class="span">Password: &nbsp; </span>
                 <input type="password"
                         class = "password"
                         name= "password"

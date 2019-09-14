@@ -7,13 +7,13 @@
         if($_POST["password"] == $_POST['retypepassword']){
             if($_POST['password'] != ""){
                 $newpassword = $_POST['password'];
-                $result = $playerDB->checkTempPassExpire($_GET['uname']);
+                $result = $playerDB->checkTempPassExpire($_GET['email']);
                 //everything is ready for password change
                 if($result == 1){
                     //echo "ready to change password, call updatePassword()";
                     $player = new PlayerDB();
                     //password is hashed in updatePassword, not here
-                    $player->updatePassword($_GET['uname'], $newpassword);
+                    $player->updatePassword($_GET['email'], $newpassword);
                 }
             }
             else{

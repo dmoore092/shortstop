@@ -7,7 +7,7 @@
     if(isset($_GET['reset'])){
         $resetpassword = $_GET['reset'];
     };
-    if(isset($_GET['uname'])){
-        $username = $_GET['uname'];
+    if(isset($_GET['email'])){
+        $email = $_GET['email'];
     };
 ?>

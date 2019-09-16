@@ -4,3 +4,4 @@ ZPasswordList-plaintext.txt
 database/
 /.vagrant
 .DS_Store
+tests

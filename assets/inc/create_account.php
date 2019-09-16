@@ -16,7 +16,7 @@ require_once './PHPMailer/src/SMTP.php';
             if($_POST["password"] == $password){
                 $hashed_password = password_hash($_POST["retypepassword"], PASSWORD_DEFAULT);
                 
-                $player = new PlayerDB();
+                $player = new PlayerPDO();
                 $persontype = 'player';
                 $registered = $player->register($email, $hashed_password, $persontype);
                 

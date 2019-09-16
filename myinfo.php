@@ -3,11 +3,11 @@
 <?php include('assets/inc/info_arrays.php'); ?>
 <?php 
 
-$playerDB = new PlayerDB; 
-$player = $playerDB->getObjectByID($_SESSION['id']);
+$playerPDO = new PlayerPDO;
+$player = $playerPDO->getObjectByID($_SESSION['id']);
 if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {
     if (isset($_GET['logout'])) {
-        $playerDB->logout();
+        $playerPDO->logout();
     }
 }
 ?>

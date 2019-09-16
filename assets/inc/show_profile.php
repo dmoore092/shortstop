@@ -1,6 +1,6 @@
 <?php
     //goes into profile.php
-    $playerDB = new PlayerDB();
+    $playerPDO = new PlayerPDO();
     $id=$_GET['id'];
     $showAdmin = false;
 
@@ -17,16 +17,16 @@
         //echo "logged in set";
         if ($_SESSION['id'] == $_GET['id']) {  
             //player is logged in, show profile with edit button for myinfo.php
-            echo $playerDB->getMyInfo($id, $showAdmin);
+            echo $playerPDO->getMyInfo($id, $showAdmin);
             echo "<script>document.getElementById('edit-img').style.display='inline-block'</script>";
         }
         else{
             //player is logged in, but viewing other profiles
-            echo $playerDB->getMyInfo($id, $showAdmin);
+            echo $playerPDO->getMyInfo($id, $showAdmin);
         } 
     }
     else {
         //person is not logged in, can see profiles
-        echo $playerDB->getMyInfo($id, $showAdmin);
+        echo $playerPDO->getMyInfo($id, $showAdmin);
     }
 ?>

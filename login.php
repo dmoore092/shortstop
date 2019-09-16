@@ -2,7 +2,8 @@
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 ?>
-<?php include("classes/Player.PDO.Class.php");?>
+<?php include 'assets/inc/autoloader.inc.php';?>
+
 <?php include('assets/inc/do_login.php'); ?>
 <?php include('assets/inc/header.inc.php'); ?>
         <div id="body-main">

@@ -3,12 +3,12 @@
     include_once ("classes/Player.PDO.Class.php");
     include("assets/inc/header.inc.php");
 
-    $playerDB = new PlayerDB();
+    $playerPDO = new PlayerPDO();
 
-    $data = $playerDB->getPlayersByRole('coach');
-    //$data = $playerDB->getPlayersByGender('female');
+    $data = $playerPDO->getPlayersByRole('coach');
+    //$data = $playerPDO->getPlayersByGender('female');
     //var_dump($data);
-    echo $playerDB->getPlayersAsTable($data);
+    echo $playerPDO->getPlayersAsTable($data);
 
     include("assets/inc/footer.inc.php");
 ?>

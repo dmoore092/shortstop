@@ -1,5 +1,8 @@
 <?php include("config/pageconfig.php"); session_start(); error_reporting(0); ?>
-<?php include_once ("classes/Player.PDO.Class.php"); ?>
+
+<?php //include_once ("classes/Player.PDO.Class.php");
+include 'assets/inc/autoloader.inc.php'; ?>
+
 <?php include("assets/inc/header.inc.php");?>
 <script>
     function checkRegistrationForm(){

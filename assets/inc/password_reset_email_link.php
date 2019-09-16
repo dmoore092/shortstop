@@ -7,15 +7,15 @@
      require_once './PHPMailer/src/PHPMailer.php';
      require_once './PHPMailer/src/SMTP.php';
 
-     $playerDB = new PlayerDB();
+     $playerPDO = new PlayerPDO();
      
     if(isset($_POST['reset'])){
-        $email = $playerDB->sanitize($_POST['email']);        
+        $email = $playerPDO->sanitize($_POST['email']);
         $email = strtolower($email);
         $fieldname = "email";
-        $playerDB->insertResetToken($email);
+        $playerPDO->insertResetToken($email);
         
-        $result = $playerDB->getFieldByEmail($fieldname, $email);
+        $result = $playerPDO->getFieldByEmail($fieldname, $email);
         var_dump($result);
         $recipientAddr = $result["email"];
         $recipientName = $result["name"];

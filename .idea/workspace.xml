@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd4c49af-9fef-46db-a247-5220fb77b1d9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/css/blog.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/blog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog.php" beforeDir="false" afterPath="$PROJECT_DIR$/blog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/admin_search.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/admin_search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/create_account.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/create_account.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/delete_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/delete_profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/do_login.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/do_login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/password_reset_actual.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/password_reset_actual.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/password_reset_email_link.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/password_reset_email_link.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/password_reset_with_password.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/password_reset_with_password.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/recover_redirect.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/recover_redirect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/inc/show_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/assets/inc/show_profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/PDO.DB.class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Player.PDO.Class.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/findathletes.php" beforeDir="false" afterPath="$PROJECT_DIR$/findathletes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/findcoaches.php" beforeDir="false" afterPath="$PROJECT_DIR$/findcoaches.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myinfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/myinfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results.php" beforeDir="false" afterPath="$PROJECT_DIR$/results.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +48,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="SQL Dialects" />
   </component>
   <component name="RunDashboard">
@@ -61,6 +78,7 @@
       <workItem from="1562555222994" duration="327000" />
       <workItem from="1562555693775" duration="752000" />
       <workItem from="1567608400362" duration="713000" />
+      <workItem from="1568475852025" duration="1056000" />
     </task>
     <servers />
   </component>
@@ -72,7 +90,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

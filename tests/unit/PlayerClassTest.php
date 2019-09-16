@@ -16,7 +16,7 @@ class PlayerClassTest extends TestCase{
         return $this->conn;
     }
     public function testIdCanBeGot(){
-        $player = new PlayerDB();
+        $player = new PlayerPDO();
         $player->$Id=1;
         $this->assertTrue($player->getId(), 1);
     }

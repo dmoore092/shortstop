@@ -1,9 +1,9 @@
 <?php include("config/pageconfig.php"); session_start();
 
-error_reporting(0); 
+error_reporting(E_ALL); 
 
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+ini_set('display_errors', E_ALL);
+ini_set('display_startup_errors', E_ALL);
 $canDelete = false;
 ?>
 <?php include("assets/inc/header.inc.php") ?>
@@ -21,10 +21,11 @@ $canDelete = false;
             }
             //rewrite this section. Get rid of echo'd code, replace mysqli
             try{
-                $conn = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
+                $connection = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports');
                 //echo "Connected successfully"; 
-                $query = "SELECT * FROM blog_posts ORDER BY id DESC;";
-                $result = mysqli_query($conn, $query);
+                $query = "SELECT * FROM blog_posts
+                 ORDER BY id DESC;";
+                $result = mysqli_query($connection, $query);
         ?>
         <?php while($row = mysqli_fetch_assoc($result)){ ?>
                 <div class="post">
@@ -48,14 +49,19 @@ $canDelete = false;
                     <p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='<?php echo $row['youtube_link'] ?>'></iframe></p>
         <?php } ?>
                     <!-- <div> -->
+                        <audio controls>
+                            <!-- <source src="horse.ogg" type="audio/ogg"> -->
+                            <source src='/assets/audio/<?php echo $row['podcast'] . ".mp3" ?>' type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio> 
                         <p>Tags: <?php echo $row['tags'] ?></p>
                         <hr>
                     </div>
         <?php } 
-                mysqli_close($conn);
+                mysqli_close($connection);
             }
             catch(exception $e){
-                //echo "Connection failed: " . $e->getMessage();
+                echo "Connection failed: " . $e->getMessage();
             } 
         ?>
         </div> <!-- end of .blog -->
@@ -132,7 +138,33 @@ $canDelete = false;
             //return $saveUrl;
         }
     }
-
+    if(is_uploaded_file($_FILES['podcast']['tmp_name'])){
+        $fileName = $_FILES['podcast']['name'];
+        $tmpName = $_FILES['podcast']['tmp_name'];
+        $fileSize = $_FILES['podcast']['size'];
+        $fileType = $_FILES['podcast']['type'];
+        var_dump($filetype);
+        if ($fileType != 'audio/mpeg' && $fileType != 'audio/mpeg3' && $fileType != 'audio/mp3' && $fileType != 'audio/x-mpeg' && $fileType != 'audio/x-mp3' && $fileType != 'audio/x-mpeg3' && $fileType != 'audio/x-mpg' && $fileType != 'audio/x-mpegaudio' && $fileType != 'audio/x-mpeg-3') {
+            echo('<script>alert("Error! File needs to be an mp3.")</script>');
+        } else if ($fileSize > '10485760') {
+            echo('<script>alert("File should not be more than 10mb")</script>');
+        }else{
+            // // get the file extension first
+            $ext = substr(strrchr($fileName, "."), 1); 
+        
+            // make the random file name
+            $randName = md5(rand() * time());
+        
+            // and now we have the unique file name for the upload file
+            $dest='./assets/audio/'. $randName . '.' . $ext;
+        
+            $result = move_uploaded_file($tmpName, $dest);
+            if (!$result) {
+                echo "<script>alert('Error Uploading File')</script>";
+                exit;
+            }
+        }
+    }
     try{
         $mysqli = new mysqli("127.0.0.1", "root", "y#GbqXtBGcy!z3Cf", "sports");
         if($mysqli->connect_error) {
@@ -148,10 +180,11 @@ $canDelete = false;
         $tags = $_POST['tags'];
         $post = $_POST['post'];
         $image = $_FILES['blogImage']['name'];
-        var_dump($post);
+        $podcast = $randName;
+        //var_dump($post);
 
-        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image, youtube_link) VALUES(?, ?, ?, NOW(), ?, ?);");
-        $stmt->bind_param("sssss", $title, $post, $tags, $image, $saveUrl);
+        $stmt = $mysqli->prepare("INSERT INTO blog_posts(title, text, tags, post_date, post_image, youtube_link, podcast) VALUES(?, ?, ?, NOW(), ?, ?, ?);");
+        $stmt->bind_param("ssssss", $title, $post, $tags, $image, $saveUrl, $podcast);
         $stmt->execute();
         $stmt->close();
     }

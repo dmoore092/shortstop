@@ -6,6 +6,7 @@
     $rssfeed .= '<channel>';
     $rssfeed .= '<title>Change This Title</title>';
     $rssfeed .= '<link>https://www.athleticprospects.com</link>';
+    $rssfeed .= "<author>Athletic Prospects</author>";
     $rssfeed .= '<description>Athletic Prospects RSS feed</description>';
     $rssfeed .= "<itunes:owner>";
     $rssfeed .= "<itunes:name>keith Prestano</itunes:name>";
@@ -27,6 +28,7 @@
 
         $rssfeed .= '<item>';
         $rssfeed .= '<title>' . $title . '</title>';
+        $rssfeed .= "<author>Keith Prestano</author>";
         $rssfeed .= '<description>' . $description . '</description>';
         $rssfeed .= "<link>https://www.athleticprospects.com</link>";
         $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($post_date)) . '</pubDate>';

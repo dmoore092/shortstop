@@ -16,8 +16,8 @@
     $rssfeed .= "<itunes:image href='https://www.athleticprospects.com/assets/img/podcastImage.jpg' />";
     $rssfeed .= "<itunes:category text='Sports'><itunes:category text='Baseball'/></itunes:category>";
     $rssfeed .= "<itunes:explicit>false</itunes:explicit>";
-    //$rssfeed .= '<language>en-us</language>';
-    //$rssfeed .= '<copyright>Copyright (C) 2019 athleticprospects.com</copyright>';
+    $rssfeed .= '<language>en-us</language>';
+    $rssfeed .= '<copyright>Copyright (C) 2019 athleticprospects.com</copyright>';
  
     $connection = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports')
         or die('Could not connect to database');

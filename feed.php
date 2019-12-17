@@ -13,7 +13,7 @@
     $rssfeed .= "<itunes:name>Athletic Prospects</itunes:name>";
     $rssfeed .= "<itunes:email>kprestano@athleticprospects.com</itunes:email>";
     $rssfeed .= "</itunes:owner>";
-    $rssfeed .= "<itunes:image href='/assets/img/podcastImage.jpg' />";
+    $rssfeed .= "<itunes:image href='https://www.athleticprospects.com/assets/img/podcastImage.jpg' />";
     $rssfeed .= "<itunes:category text='Sports'><itunes:category text='Baseball'/></itunes:category>";
     $rssfeed .= "<itunes:explicit>false</itunes:explicit>";
     //$rssfeed .= '<language>en-us</language>';

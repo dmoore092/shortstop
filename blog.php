@@ -47,16 +47,18 @@ $canDelete = false;
                     <p class='text'> <?php echo nl2br($row['text']) ?></p>
         <?php if($row['youtube_link'] != NULL){ ?>
                     <p id='frame-container'><iframe id='ytplayer' allowfullscreen type='text/html' src='<?php echo $row['youtube_link'] ?>'></iframe></p>
-        <?php } ?>
+        <?php } if($row['podcast'] != null ){?>
                     <!-- <div> -->
                         <audio controls>
                             <!-- <source src="horse.ogg" type="audio/ogg"> -->
                             <source src='/assets/audio/<?php echo $row['podcast'] . ".mp3" ?>' type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio> 
+                <?php  } ?>
                         <p>Tags: <?php echo $row['tags'] ?></p>
                         <hr>
                     </div>
+                    
         <?php } 
                 mysqli_close($connection);
             }
@@ -187,9 +189,9 @@ $canDelete = false;
         $stmt->bind_param("ssssss", $title, $post, $tags, $image, $saveUrl, $podcast);
         $stmt->execute();
         $stmt->close();
-
-        $stmt1 = $mysqli->prepare("INSERT INTO podcasts(title, text, image, podcast, post_date) VALUES(?, ?, ?, ?, NOW());");
-        $stmt1->bind_param("ssss", $title, $post, $image, $podcast);
+        
+        $stmt1 = $mysqli->prepare("INSERT INTO podcasts(image, title, description, podcast, post_date) VALUES(?, ?, ?, ?, NOW());");
+        $stmt1->bind_param("ssss", $image, $title, $post, $podcast);
         $stmt1->execute();
         $stmt1->close();
     }

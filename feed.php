@@ -13,7 +13,7 @@
     $connection = mysqli_connect('127.0.0.1', 'root', 'y#GbqXtBGcy!z3Cf', 'sports')
         or die('Could not connect to database');
  
-    $query = "SELECT * FROM blog_posts ORDER BY id DESC";
+    $query = "SELECT * FROM podcasts ORDER BY id DESC";
     $result = mysqli_query($connection, $query) or die ("Error");
  
     while($row = mysqli_fetch_array($result)) {
@@ -21,7 +21,7 @@
  
         $rssfeed .= '<item>';
         $rssfeed .= '<title>' . $title . '</title>';
-        $rssfeed .= '<description>' . $text . '</description>';
+        $rssfeed .= '<description>' . $description . '</description>';
         $rssfeed .= "<link>https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3</link>";
         $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($post_date)) . '</pubDate>';
         $rssfeed .= "<guid>https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3</guid>";

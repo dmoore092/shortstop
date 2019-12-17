@@ -22,7 +22,7 @@
         $rssfeed .= '<item>';
         $rssfeed .= '<title>' . $title . '</title>';
         $rssfeed .= '<description>' . $description . '</description>';
-        $rssfeed .= "<itunes:owner><itunes:name>keith Prestano</itunes:name><itunes:email>kprestano@athleticprospects.com</itune:email></itunes:owner>";
+        $rssfeed .= "<itunes:owner><itunes:name>keith Prestano</itunes:name><itunes:email>kprestano@athleticprospects.com</itunes:email></itunes:owner>";
         $rssfeed .= "<itunes:image href='/assets/img/black.JPG' />";
         $rssfeed .= "<itunes:category text='sports'/>";
         $rssfeed .= "<link>https://www.athleticprospects.com</link>";

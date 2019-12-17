@@ -8,7 +8,7 @@
     $rssfeed .= '<link>https://www.athleticprospects.com</link>';
     $rssfeed .= "<itunes:author>Athletic Prospects</itunes:author>";
     $rssfeed .= '<description>Athletic Prospects RSS feed</description>';
-    $rssfeed .= "<itunes:type>serial</itunes:type>";
+    $rssfeed .= "<itunes:type>episodic</itunes:type>";
     $rssfeed .= "<itunes:owner>";
     $rssfeed .= "<itunes:name>Athletic Prospects</itunes:name>";
     $rssfeed .= "<itunes:email>kprestano@athleticprospects.com</itunes:email>";

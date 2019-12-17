@@ -8,7 +8,7 @@
     $rssfeed .= '<link>https://www.athleticprospects.com</link>';
     $rssfeed .= "<itunes:author>Athletic Prospects</itunes:author>";
     $rssfeed .= '<description>Athletic Prospects RSS feed</description>';
-    $rssfeed .= "<itunes:type>episodic</itunes:type>";
+    //$rssfeed .= "<itunes:type>episodic</itunes:type>";
     $rssfeed .= "<itunes:owner>";
     $rssfeed .= "<itunes:name>Athletic Prospects</itunes:name>";
     $rssfeed .= "<itunes:email>kprestano@athleticprospects.com</itunes:email>";
@@ -30,8 +30,8 @@
 
         $episodeCount = 1;
         $rssfeed .= '<item>';
-        $rssfeed .= "<itunes:episodeType>full</itunes:episodeType>";
-        $rssfeed .= "<itunes:episode>". $episodeCount ."</itunes:episode>";
+        //$rssfeed .= "<itunes:episodeType>full</itunes:episodeType>";
+        //$rssfeed .= "<itunes:episode>". $episodeCount ."</itunes:episode>";
         $rssfeed .= '<itunes:title>' . $title . '</itunes:title>';
         $rssfeed .= "<author>Keith Prestano</author>";
         $rssfeed .= '<description>' . $description . '</description>';

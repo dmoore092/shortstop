@@ -12,7 +12,7 @@
     $rssfeed .= "<itunes:name>keith Prestano</itunes:name>";
     $rssfeed .= "<itunes:email>kprestano@athleticprospects.com</itunes:email>";
     $rssfeed .= "</itunes:owner>";
-    $rssfeed .= "<itunes:image href='/assets/img/black.JPG' />";
+    $rssfeed .= "<itunes:image href='/assets/img/podcastImage.jpg' />";
     $rssfeed .= "<itunes:category text='sports'/>";
     $rssfeed .= '<language>en-us</language>';
     $rssfeed .= '<copyright>Copyright (C) 2019 athleticprospects.com</copyright>';

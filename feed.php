@@ -24,6 +24,7 @@
         $rssfeed .= '<description>' . $description . '</description>';
         $rssfeed .= "<link>https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3</link>";
         $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($post_date)) . '</pubDate>';
+        $rssfeed .= "<enclosure url='https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3' length='' type='audio/mpeg' />";
         $rssfeed .= "<guid>https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3</guid>";
         $rssfeed .= '</item>';
     }

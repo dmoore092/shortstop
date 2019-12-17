@@ -256,6 +256,8 @@ ini_set('display_startup_errors', 0);
 								<input type='text' name='blog-youtube' id='blog-youtube' class='showcase' size = '35' maxlength = '50' >
 								<span class='span'>Upload Blog Image: &nbsp; </span>
 								<input type='file' name='blogImage' accept='image/*'>
+								<span class='span'>Upload Podcast File: &nbsp; </span>
+								<input type="file" name='podcast' />
 								<textarea name='post' form='blog-form' col='50' row='30' style='resize:none' placeholder='Enter text here...'></textarea>
 								<input type='submit'
 										value='Submit Post'

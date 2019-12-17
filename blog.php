@@ -187,6 +187,11 @@ $canDelete = false;
         $stmt->bind_param("ssssss", $title, $post, $tags, $image, $saveUrl, $podcast);
         $stmt->execute();
         $stmt->close();
+
+        $stmt1 = $mysqli->prepare("INSERT INTO podcasts(title, text, image, podcast, post_date) VALUES(?, ?, ?, ?, NOW());");
+        $stmt1->bind_param("ssss", $title, $post, $image, $podcast);
+        $stmt1->execute();
+        $stmt1->close();
     }
     catch(exception $e){
         echo "Connection failed: " . $e->getMessage();

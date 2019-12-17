@@ -8,7 +8,7 @@
     $rssfeed .= '<link>https://www.athleticprospects.com</link>';
     $rssfeed .= "<itunes:author>Athletic Prospects</itunes:author>";
     $rssfeed .= '<description>Athletic Prospects RSS feed</description>';
-    //$rssfeed .= "<itunes:type>serial</itunes:type>";
+    $rssfeed .= "<itunes:type>serial</itunes:type>";
     $rssfeed .= "<itunes:owner>";
     $rssfeed .= "<itunes:name>Athletic Prospects</itunes:name>";
     $rssfeed .= "<itunes:email>kprestano@athleticprospects.com</itunes:email>";
@@ -28,7 +28,9 @@
     while($row = mysqli_fetch_array($result)) {
         extract($row);
 
+        $episodeCount = 1;
         $rssfeed .= '<item>';
+        $rssfeed .= "<itunes:episode>". $episodeCount ."</itunes:episode>";
         $rssfeed .= '<itunes:title>' . $title . '</itunes:title>';
         $rssfeed .= "<author>Keith Prestano</author>";
         $rssfeed .= '<description>' . $description . '</description>';
@@ -38,6 +40,7 @@
         $rssfeed .= "<enclosure url='https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3' length='". $filesize ."' type='audio/mpeg' />";
         $rssfeed .= "<guid>https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3</guid>";
         $rssfeed .= '</item>';
+        $episodeCount++;
     }
  
     $rssfeed .= '</channel>';

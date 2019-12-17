@@ -30,7 +30,7 @@
         //$rssfeed .= "<itunes:category text='sports'/>";
         $rssfeed .= "<link>https://www.athleticprospects.com</link>";
         $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($post_date)) . '</pubDate>';
-        $rssfeed .= "<itunes:explicit>no</itunes:explicit>";
+        //$rssfeed .= "<itunes:explicit>no</itunes:explicit>";
         $rssfeed .= "<enclosure url='https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3' length='". $filesize ."' type='audio/mpeg' />";
         $rssfeed .= "<guid>https://www.athleticprospects.com/assets/audio/" . $podcast . ".mp3</guid>";
         $rssfeed .= '</item>';

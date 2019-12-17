@@ -30,6 +30,7 @@
 
         $episodeCount = 1;
         $rssfeed .= '<item>';
+        $rssfeed .= "<itunes:episodeType>full</itunes:episodeType>";
         $rssfeed .= "<itunes:episode>". $episodeCount ."</itunes:episode>";
         $rssfeed .= '<itunes:title>' . $title . '</itunes:title>';
         $rssfeed .= "<author>Keith Prestano</author>";

@@ -31,7 +31,7 @@
         $episodeCount = 1;
         $rssfeed .= '<item>';
         //$rssfeed .= "<itunes:episode>". $episodeCount ."</itunes:episode>";
-        //$rssfeed .= '<itunes:title>' . $title . '</itunes:title>';
+        $rssfeed .= '<title>' . $title . '</title>';
         $rssfeed .= "<author>Keith Prestano</author>";
         $rssfeed .= '<description>' . $description . '</description>';
         $rssfeed .= "<link>https://www.athleticprospects.com</link>";

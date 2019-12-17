@@ -190,8 +190,8 @@ $canDelete = false;
         $stmt->execute();
         $stmt->close();
         
-        $stmt1 = $mysqli->prepare("INSERT INTO podcasts(image, title, description, podcast, post_date) VALUES(?, ?, ?, ?, NOW());");
-        $stmt1->bind_param("ssss", $image, $title, $post, $podcast);
+        $stmt1 = $mysqli->prepare("INSERT INTO podcasts(image, title, description, podcast, post_date, filesize) VALUES(?, ?, ?, ?, NOW(), ?);");
+        $stmt1->bind_param("sssss", $image, $title, $post, $podcast, $_FILES['podcast']['size']);
         $stmt1->execute();
         $stmt1->close();
     }
